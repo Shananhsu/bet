@@ -1,9 +1,9 @@
 資料庫： `blackjack`
 ----------------------------------------------------------
 
--- 資料表結構 `records`
+-- 資料表結構 `blackjack_records`
 
-CREATE TABLE `records` (
+CREATE TABLE `blackjack_records` (
   `id` int(100) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `account` varchar(999) DEFAULT NULL,
   `bets` varchar(999) DEFAULT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE `records` (
   `status` varchar(999) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `records` (`id`, `account`, `bets`, `moneyBefore`, `result`, `betTime`, `moneyAfter`, `dealerCards`, `playerCards`, `gameType`, `status`) VALUES
+INSERT INTO `blackjack_records` (`id`, `account`, `bets`, `moneyBefore`, `result`, `betTime`, `moneyAfter`, `dealerCards`, `playerCards`, `gameType`, `status`) VALUES
 (1, '30678', NULL, NULL, NULL, NULL, '100000', NULL, NULL, NULL, NULL),
 (2, '30966', NULL, NULL, NULL, NULL, '5000000', NULL, NULL, NULL, NULL),
 (3, '30966', '10000', '4990000', NULL, '2021/4/22 下午6:32:28', '4980000', NULL, NULL, '21點', NULL);

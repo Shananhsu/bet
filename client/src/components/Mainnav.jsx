@@ -31,7 +31,7 @@ class Mainnav extends Component {
                                 <a className="on" href="/">首頁</a>
                             </li>
                             <li>
-                                <a className="game" href="/" onMouseEnter={this.handleHover} > 真人一館</a>
+                                <a className="game" href="/gamelink" onMouseEnter={this.handleHover} > 真人一館</a>
                             </li>
 
                             <li>

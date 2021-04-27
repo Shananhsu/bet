@@ -10,7 +10,7 @@ class LoginPage extends Component {
 
             <React.Fragment>
                 <Header />
-                 {/* 旋轉木馬 */}
+                
                 <LoginMain />
                 <Footer />
             </React.Fragment>

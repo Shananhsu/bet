@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import Axios from "axios";
 
 export default function RegisterForm(props) {
+    
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (data) => {
         // 獲取帳號密碼

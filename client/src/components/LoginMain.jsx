@@ -69,13 +69,15 @@ export default function LoginMain(props) {
 
 
     return (
-        <section className="hero is-success is-fullheight">
+       
+        // <section className="hero is-success is-fullheight">
+        <section className=" is-success is-fullheight" style = {{"backgroundColor":"honeydew"}}>
             <div className="hero-body">
                 <div className="container has-text-centered">
                     <div className="column is-4 is-offset-4">
-                        <h3 className="title has-text-black">Login</h3>
+                        <h3 className="title has-text-black">登入會員</h3>
                         <hr className="login-hr" />
-                        <p className="subtitle has-text-black">Please login to proceed.</p>
+                        <p className="subtitle has-text-black">請輸入登入資訊</p>
                         <div className="box">
                             <figure className="avatar">
                                 <img src="images/logo/logo.png" />
@@ -126,14 +128,14 @@ export default function LoginMain(props) {
                         </div>
                         <p className="has-text-grey">
                             <a href="../">Sign Up</a> &nbsp;·&nbsp;
-            <a href="../">Forgot Password</a> &nbsp;·&nbsp;
-            <a href="../">Need Help?</a>
+            <a href="../">Forgot Password</a> &nbsp;&nbsp;
+            {/* <a href="../">Need Help?</a> */}
                         </p>
                     </div>
                 </div>
             </div>
-        </section>
-
+         </section>
+     
     )
 
 }

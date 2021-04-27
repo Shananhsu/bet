@@ -10,6 +10,7 @@ class RegisterPage extends Component {
         return (
             <React.Fragment>
                 <Header />
+    
                 <RegisterForm />
                 <Footer />
             </React.Fragment>
