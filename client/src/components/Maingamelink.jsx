@@ -22,7 +22,7 @@ class Maingamelink extends Component {
                                 <img src="/images/gamelink/dragondoor.png" />射龍門
                             </a>
 
-                            <a className="col-sm-3 col-xs-6 game" href="./games/fish/index.html"
+                            <a className="col-sm-3 col-xs-6 game" href="./games/fish/fishShooter.html"
                                 target="game" data-category="" data-sub_category="">
                                 <img src="/images/gamelink/fish.jpg" />捕魚遊戲
                             </a>
