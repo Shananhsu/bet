@@ -27,9 +27,9 @@ class MemberState extends Component {
                                 <div className="auth" style={{ "float": "right" }}>
                                     <div>
                                         <div style={{ "width": "300px", "float": "left" }}>
-                                            <a className="btn btn-sm btn-danger glyphicon glyphicon-log-out" href="/logout"
+                                            <a className="btn btn-sm btn-danger glyphicon glyphicon-log-out " href=""
                                                 style={{ "marginTop": "4px" }}></a>
-                                            <a className="btn btn-sm btn-primary  glyphicon glyphicon-home" href="/memberinfo"
+                                            <a className="btn btn-sm btn-primary membercenter glyphicon glyphicon-home" href="/memberinfo"
                                                 style={{ "marginTop": "4px" }}> 會員中心</a>
                                         </div>
                                     </div>
