@@ -307,8 +307,8 @@ app.get("/tiger/results", function (request, response) {
     
 })
 
-
-app.post("/tiger/results", function (request, response) {
+//寫入遊戲紀錄
+app.post("/tiger/addresults", function (request, response) {
 
 	connection.query(
 		"insert into tiger_results set UserID = 1, BetTime = ?,Lay='All',Stake=?,AccountBalBE=?,GameResult=?,NetWin=?,AccountBalAF=? ", 
@@ -325,8 +325,8 @@ app.post("/tiger/results", function (request, response) {
 	response.send("row inserted.");
     
 })
-
-app.get('/tiger/results', function (req, res) {
+//tiger後台
+app.get('/tiger/gameresults', function (req, res) {
 	res.send(render('./public/results.html'));
   })
 

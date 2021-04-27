@@ -211,7 +211,7 @@ var slotMachine = function (el, options, track) {
                 console.log(typeof(bettime))
                 $.ajax({ //更新帳戶餘額
                     type: "put",
-                    url: "/game/user",
+                    url: "/tiger/user",
                     data: {
                         UserWallet: endBal
                     }
@@ -219,7 +219,7 @@ var slotMachine = function (el, options, track) {
 
                 $.ajax({ //將遊戲結果寫入db
                     type: "post",
-                    url: "/game/results",
+                    url: "/tiger/addresults",
                     data: {
                         BetTime: bettime.toLocaleString('zh-TW', { hour12: false }), //下注時間
                         Stake: bet, //投注金額

@@ -17,7 +17,7 @@
 
             <div class="col-sm-12">
                 <table class="table">
-                    {{testData}}
+                    
                     <thead>
                       <tr>
                         <th scope="col">#</th>
@@ -41,18 +41,6 @@
                         <td>{{resultItem.NetWin}}</td>
                         <td>{{resultItem.AccountBalAF}}</td>
                       </tr>
-                      <!-- <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                      </tr> -->
                     </tbody>
                   </table>
             </div>
@@ -68,9 +56,6 @@
             data: {
                 testData: 'OK',
                 resultList: []
-                // [   {newsId:1,ymd: "2021-04-01", title: "News 4/1" },
-                //     {newsId:2,ymd: "2021-04-02", title: "News 4/2" },
-                //     {newsId:3,ymd: "2021-04-03", title: "News 4/3" }]
             },
             created: function () {
                 $.ajax({
