@@ -22,7 +22,7 @@ function showTime() {
 }
 
 //準備撲克牌
-const pokerSuit = ["黑桃", "紅心", "方塊", "梅花"];
+const pokerSuit = ["Spades", "Heart", "Cube", "Plum"];
 // console.log(pokerSuit);
 
 //準備 A 到 K
