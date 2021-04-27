@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21點</title>
+    <link rel="stylesheet" type="text/css" href="./css/blackjack.css">
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <!-- bootstrap -->
+    <!-- jQuery -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <div id="dealer"><img src="./img/dealer.png" alt=""></div>
+    <div id="deal"><img src="./img/deal.png" alt=""></div>
+    <div id="choose">
+        請選擇
+        <button onclick="one()">1</button>
+        <button onclick="eleven()">11</button>
+    </div>
+
+
+    <div id="winRate">
+        <div id="winB">
+            <p>勝率</p>
+        </div>
+        <div>
+            <p id="rate"></p>
+        </div>
+    </div>
+
+    <!-- points -->
+    <div id="dpp">
+        <div id="dlb">
+            <p>莊家點數</p>
+        </div>
+        <div>
+            <p id="dealerP">0</p>
+        </div>
+    </div>
+    <div id="ppp">
+        <div id="prb">
+            <p>玩家點數</p>
+        </div>
+        <div>
+            <p id="playerP">0</p>
+        </div>
+    </div>
+
+
+    <div id="gameRecord">
+        <table>
+            <tr>
+                <th colspan="10">遊戲紀錄</th>
+            </tr>
+            <tr>
+                <th>01</th>
+                <th>02</th>
+                <th>03</th>
+                <th>04</th>
+                <th>05</th>
+                <th>06</th>
+                <th>07</th>
+                <th>08</th>
+                <th>09</th>
+                <th>10</th>
+            </tr>
+            <tr>
+                <td class="whoWin"></td>
+            </tr>
+            <tr>
+                <th>11</th>
+                <th>12</th>
+                <th>13</th>
+                <th>14</th>
+                <th>15</th>
+                <th>16</th>
+                <th>17</th>
+                <th>18</th>
+                <th>19</th>
+                <th>20</th>
+            </tr>
+            <tr>
+                <td class="whoWin"></td>
+            </tr>
+            <tr>
+                <th>21</th>
+                <th>22</th>
+                <th>23</th>
+                <th>24</th>
+                <th>25</th>
+                <th>26</th>
+                <th>27</th>
+                <th>28</th>
+                <th>29</th>
+                <th>30</th>
+            </tr>
+            <tr>
+                <td class="whoWin"></td>
+            </tr>
+            <tr>
+                <th>31</th>
+                <th>32</th>
+                <th>33</th>
+                <th>34</th>
+                <th>35</th>
+                <th>36</th>
+                <th>37</th>
+                <th>38</th>
+                <th>39</th>
+                <th>40</th>
+            </tr>
+            <tr>
+                <td class="whoWin"></td>
+            </tr>
+            <tr>
+                <th>41</th>
+                <th>42</th>
+                <th>43</th>
+                <th>44</th>
+                <th>45</th>
+                <th>46</th>
+                <th>47</th>
+                <th>48</th>
+                <th>49</th>
+                <th>50</th>
+            </tr>
+            <tr>
+                <td class="whoWin"></td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- 撲克牌 -->
+    <div id="cardback"><img id="cb" src="img/cards/bc1.jpg" alt=""></div>
+    <div id="dealerscards"></div>
+    <div id="playerscards"></div>
+
+    <!-- button -->
+    <div>
+        <button id="gameStart">開始遊戲</button>
+        <button id="add">加牌</button>
+        <button id="openc">出牌</button>
+        <button id="restart">重新開局</button>
+    </div>
+
+    <div class="row" id="foot">
+        <div class="col-1">
+            會員編號
+        </div>
+        <div class="col-1">
+            <p id="account">{{temp.account}}</p>
+            <!-- {{temp.account}} -->
+        </div>
+        <div class="col-1">
+            錢包
+        </div>
+        <div class="col-1">
+            <p id="point">{{temp.moneyAfter}}</p>
+            <!-- {{temp.moneyAfter}} -->
+        </div>
+        <div class="col-5">
+            <img id="d50" src="img/chips/50.png" onclick="add50()" alt="">
+            <img id="d100" src="img/chips/100.png" onclick="add100()" alt="">
+            <img id="d500" src="img/chips/500.png" onclick="add500()" alt="">
+            <img id="d1000" src="img/chips/1000.png" onclick="add1000()" alt="">
+            <img id="d5000" src="img/chips/5000.png" onclick="add5000()" alt="">
+        </div>
+        <div class="col-1">
+            <div id="app">
+                <span>NT</span>
+                <span id="money">0</span>
+            </div>
+        </div>
+        <div class="col-2">
+            <button id="readyc" class="OK">確認</button>
+            <button class="OK">重複</button>
+            <button id="resetc" class="OK">取消</button>
+        </div>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: "#foot",
+            data: { temp: [] }
+            , created() {
+                axios.get("/fetch")
+                    .then((e) => { app.temp = e.data })
+            }
+        })
+
+
+    </script>
+    <script>
+        for (i = 0; i < document.getElementsByClassName("whoWin").length; i++) {
+            switch (document.getElementsByClassName("whoWin")[i].innerText) {
+                case '贏':
+                    document.getElementsByClassName("whoWin")[i].style = "color:red";
+                    break;
+                case '輸':
+                    document.getElementsByClassName("whoWin")[i].style = "color:green";
+                    break;
+                case '和':
+                    document.getElementsByClassName("whoWin")[i].style = "color:white";
+                    break;
+            }
+        }
+        if (rate.innerText === 'NA%') {
+            rate.innerText = '0%';
+        }
+    </script>
+
+
+    <script src="./js/blackjack.js"></script>
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,281 @@
+/* 初始化 margin padding */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* 第一張撲克牌 */
+
+#gameShowcards {
+  display: flex;
+  width: 50%;
+  height: 40%;
+  left: 0px;
+}
+
+/* 第一張撲克牌的圖檔 */
+
+#gameShowcards > div > img {
+  width: 172px;
+  height: 256px;
+}
+
+/* 撲克牌區域左右對稱排列 */
+
+#gameShowcards > div {
+  margin: auto;
+}
+
+/* 顯示遊戲資訊 */
+
+#sddGamearea {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+/* 設定機率區寬度 */
+
+#gameProbability {
+  width: 25%;
+}
+
+/* 遊戲開獎結果 */
+#sddShowGameHistory {
+  width: 25%;
+}
+
+/* 遊戲資訊區_射龍門 */
+
+#sddNavabar {
+  width: 25%;
+}
+
+/* 遊戲機率區_射中 */
+
+#sddWinp {
+  display: flex;
+  color: red;
+}
+
+/* 旋轉機率_第一個 */
+
+#p1Marquee {
+  height: 22px;
+  width: 10%;
+  text-align: center;
+  color: red;
+}
+
+/* 遊戲機率區_射偏 */
+
+#sddLosep {
+  display: flex;
+  color: red;
+}
+
+/* 旋轉機率_第二個 */
+
+#p2Marquee {
+  height: 22px;
+  width: 10%;
+  text-align: center;
+  color: red;
+}
+
+/* 遊戲機率區_撞柱 */
+
+#sddLosebig {
+  display: flex;
+  color: red;
+}
+
+/* 旋轉機率_第三個 */
+
+#p3Marquee {
+  height: 22px;
+  width: 10%;
+  text-align: center;
+  color: red;
+}
+
+/* 投注區域_第一區 */
+
+#sddBetsuit_1 {
+  display: flex;
+  width: 100%;
+}
+
+/* 投注區域_第一區_滑鼠經過時變色 */
+
+#sddBetsuit_1 > div:hover {
+  background-color: yellow;
+}
+
+/* 投注區域_花色_黑桃 */
+
+#sddSpades {
+  width: 20%;
+  height: 150px;
+  text-align: center;
+}
+
+/* 投注區域_花色_黑桃_圖檔 */
+
+#sddSpades > img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* 投注區域_花色_紅心 */
+
+#sddHeart {
+  width: 20%;
+  height: 150px;
+  text-align: center;
+}
+
+/* 投注區域_花色_紅心_圖檔 */
+
+#sddHeart > img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* 投注區域_第二區 */
+
+#sddBetsuit_2 {
+  display: flex;
+  width: 100%;
+}
+
+/* 投注區域_第一區_滑鼠經過時變色 */
+
+#sddBetsuit_2 > div:hover {
+  background-color: yellow;
+}
+
+/* 投注區域_花色_方塊 */
+
+#sddCube {
+  width: 20%;
+  height: 150px;
+  text-align: center;
+}
+
+/* 投注區域_花色_梅花 */
+
+#sddPlum {
+  width: 20%;
+  height: 150px;
+  text-align: center;
+}
+
+/* 投注區域_花色_方塊_圖檔 */
+
+#sddCube > img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* 投注區域_花色_梅花_圖檔 */
+
+#sddPlum > img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* 投注區域_大小_大 */
+
+#sddBetbig {
+  width: 20%;
+  text-align: center;
+}
+
+/* 投注區域_大小_小 */
+
+#sddBetsmall {
+  width: 20%;
+  text-align: center;
+}
+
+/* 投注區域_Lucky 7 */
+
+#sddBet7 {
+  width: 20%;
+  text-align: center;
+}
+
+/* 投注區域_單雙_單 */
+
+#sddBetodd {
+  width: 20%;
+  text-align: center;
+}
+
+/* 投注區域_射龍門 */
+
+#sddBetsdd {
+  width: 20%;
+  text-align: center;
+}
+
+/* 投注區域_單雙_雙 */
+
+#sddBeteven {
+  width: 20%;
+  text-align: center;
+}
+
+/* 籌碼區域 */
+
+#sddBetchip {
+  width: 100%;
+  display: flex;
+}
+
+/* 滑鼠經過籌碼區域時變色 */
+
+#sddBetchip > div:hover {
+  background-color: yellow;
+}
+
+#sddGamemenu {
+  width: 100%;
+  display: flex;
+  background-color: black;
+  height: 30px;
+}
+
+#sddGamemenu > div {
+  color: whitesmoke;
+  font-size: larger;
+  width: 25%;
+  /* border-style: solid;
+    border-width: 1px; */
+}
+
+#showBettotal_1 {
+  display: flex;
+  width: 100%;
+  height: 50px;
+}
+
+#showBettotal_1>div{
+    width: 20%;
+    text-align: center;
+    line-height: 50px;
+}
+
+#showBettotal_2 {
+    display: flex;
+    width: 100%;
+    height: 50px;
+  }
+  
+  #showBettotal_2>div{
+      width: 20%;
+      text-align: center;
+      line-height: 50px;
+  }

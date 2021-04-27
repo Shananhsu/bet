@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>妞妞</title>
+    <link rel="stylesheet" type="text/css" href="./css/niuniu.css">
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <!-- bootstrap -->
+    <!-- jQuery -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <!-- points -->
+    <div id="dpp">
+        <div id="dlb">
+            <p>莊家點數</p>
+        </div>
+        <div>
+            <p id="dealerP">0</p>
+        </div>
+    </div>
+    <div id="ppp">
+        <div id="prb">
+            <p>玩家點數</p>
+        </div>
+        <div>
+            <p id="playerP">0</p>
+        </div>
+    </div>
+
+    <!-- cards -->
+    <div id="dealerscards">
+        <div id="dc1"></div>
+        <div id="dc2"></div>
+        <div id="dc3"></div>
+        <div id="dc4"></div>
+        <div id="dc5"></div>
+    </div>
+    <div id="playerscards">
+        <div id="pc1" class="choose"></div>
+        <div id="pc2" class="choose"></div>
+        <div id="pc3" class="choose"></div>
+        <div id="pc4" class="choose"></div>
+        <div id="pc5" class="choose"></div>
+    </div>
+    <!-- 牌分兩堆 -->
+    <!-- <div id="dealerFinal">
+
+    </div>
+    <div id="playerFinal">
+
+    </div> -->
+
+    <!-- button -->
+    <div>
+        <button id="back">後台</button>
+        <button id="gameStart">開始遊戲</button>
+        <button id="openc">出牌</button>
+        <button id="restart">重新開局</button>
+    </div>
+
+    <!-- footer -->
+    <div class="row" id="foot">
+        <div class="col-1">
+            會員編號
+        </div>
+        <div class="col-1">
+            <p id="account">{{temp.account}}</p>
+        </div>
+        <div class="col-1">
+            錢包
+        </div>
+        <div class="col-1">
+            <p id="point">{{temp.moneyAfter}}</p>
+            <!-- {{temp.moneyAfter}} -->
+        </div>
+        <div class="col-5">
+            <img id="d50" src="img/chips/50.png" onclick="add50()" alt="">
+            <img id="d100" src="img/chips/100.png" onclick="add100()" alt="">
+            <img id="d500" src="img/chips/500.png" onclick="add500()" alt="">
+            <img id="d1000" src="img/chips/1000.png" onclick="add1000()" alt="">
+            <img id="d5000" src="img/chips/5000.png" onclick="add5000()" alt="">
+        </div>
+        <div class="col-1">
+            <div id="app">
+                <span>NT</span>
+                <span id="money">0</span>
+            </div>
+        </div>
+        <div class="col-2">
+            <button id="readyc" class="OK">確認</button>
+            <button class="OK">重複</button>
+            <button id="resetc" class="OK">取消</button>
+        </div>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: "#foot",
+            data: {
+                temp: []
+            },
+            created() {
+                axios.get("/fetch")
+                    .then((e) => { app.temp = e.data })
+                    .catch((err) => { console.log(err) })
+            }
+        })
+    </script>
+    <script src="./js/niuniu.js"></script>
+</body>
+
+</html>

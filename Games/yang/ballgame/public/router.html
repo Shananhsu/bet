@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>SddBank</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<style>
+    #sddContainer {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+<body>
+
+    
+
+    <div id="sddContainer" class="container">
+        <table class="row-bg-4 table table-dark table-hover">
+            <thead>
+                <tr>
+                    <th>序號</th>
+                    <th>會員帳號</th>
+                    <th>遊戲時間</th>
+                    <th>投注項目</th>
+                    <th>投注金額</th>
+                    <th>投注前餘額</th>
+                    <th>輸贏結果</th>
+                    <th>投注後餘額</th>
+                </tr>
+            </thead>
+            <tbody id="gamehistory">
+                <tr v-for="(history, index) in newsList">
+                    <td>{{history.id}}</td>
+                    <td>{{history.account}}</td>
+                    <td>{{history.time}}</td>
+                    <td>{{history.betproject}}</td>
+                    <td>{{history.betmoney}}</td>
+                    <td>{{history.beforemoney}}</td>
+                    <td>{{history.betresult}}</td>
+                    <td>{{history.aftermoney}}</td>
+
+                 
+                </tr>
+                <!-- <tr>
+                    <td>{{newsList.id}}</td>
+                    <td>{{newsList.sddPlayerAccount}}</td>
+                    <td>{{newsList.sddPlayerBetMoney}}</td>
+                </tr> -->
+            </tbody>
+        </table>
+    </div>
+    <script>
+
+        var newsApp = new Vue({
+            el: "#gamehistory",
+            data: {
+                newsList: [
+                    // {
+                    //     id: 1,
+                    //     sddPlayerId: 1,
+                    //     sddPlayerAccount: "Mepunk",
+                    //     sddPlayerBetTime: "2021/4/22 上午11:57:02 【星期四】",
+                    //     sddPlayerBetProject: "\n 黑桃： 500,\n 大點： 500,\n 中七： 500,\n 小點： 500,\n 愛心： 500,\n 方塊： 500,\n 單數： 500,\n 龍門： 100,\n 雙數： 500,\n 梅花： 500,",
+                    //     sddPlayerBetMoney: "4600",
+                    //     sddPlayerMoneyBefore: "10000",
+                    //     sddGameResult: "幸運七：沒中,\n 射龍門：沒射過,\n 中獎花色：梅花,\n 中獎大小：中小,\n 中獎單雙：中雙,",
+                    //     sddPlayerBetResult: "-725",
+                    //     sddPlayerMoneyAfter: "9275"
+                    // },
+                    // {
+                    //     id: 2,
+                    //     sddPlayerId: 1,
+                    //     sddPlayerAccount: "Mepunk",
+                    //     sddPlayerBetTime: "2021/4/22 上午11:60:02 【星期四】",
+                    //     sddPlayerBetProject: "\n 黑桃： 500,\n 大點： 500,\n 中七： 500,\n 小點： 500,\n 愛心： 500,\n 方塊： 500,\n 單數： 500,\n 龍門： 100,\n 雙數： 500,\n 梅花： 500,",
+                    //     sddPlayerBetMoney: "5000",
+                    //     sddPlayerMoneyBefore: "10000",
+                    //     sddGameResult: "幸運七：沒中,\n 射龍門：沒射過,\n 中獎花色：梅花,\n 中獎大小：中小,\n 中獎單雙：中雙,",
+                    //     sddPlayerBetResult: "-725",
+                    //     sddPlayerMoneyAfter: "9275"
+                    // },
+                    // {
+                    //     id: 3,
+                    //     sddPlayerId: 1,
+                    //     sddPlayerAccount: "Mepunk",
+                    //     sddPlayerBetTime: "2021/4/22 上午11:60:02 【星期四】",
+                    //     sddPlayerBetProject: "\n 黑桃： 500,\n 大點： 500,\n 中七： 500,\n 小點： 500,\n 愛心： 500,\n 方塊： 500,\n 單數： 500,\n 龍門： 100,\n 雙數： 500,\n 梅花： 500,",
+                    //     sddPlayerBetMoney: "5000",
+                    //     sddPlayerMoneyBefore: "10000",
+                    //     sddGameResult: "幸運七：沒中,\n 射龍門：沒射過,\n 中獎花色：梅花,\n 中獎大小：中小,\n 中獎單雙：中雙,",
+                    //     sddPlayerBetResult: "-725",
+                    //     sddPlayerMoneyAfter: "9275"
+                    // },
+                ]
+            },
+            created() { 
+                axios.get("/admin")
+                .then((e) => {newsApp.newsList = e.data})
+                // .then((e)=>{console.log(e.data)})
+                .catch((err) => {console.log(err)})
+            }
+
+            // mounted() {
+            //     axios
+            //     .get("/admin")
+            //     .then(res => {newsApp.newsList = res.data})
+            //     .catch(req => (console.log("err")))
+            // }
+        });
+        
+        // axios({
+        //     method: "get",
+        //     url: "/admin",
+        //     parmas: {
+        //         id,
+        //         sddPlayerId,
+        //         sddPlayerAccount,
+        //         sddPlayerBetTime,
+        //         sddPlayerBetProject,
+        //         sddPlayerBetMoney,
+        //         sddPlayerMoneyBefore,
+        //         sddGameResult,
+        //         sddPlayerBetResult,
+        //         sddPlayerMoneyAfter
+        //     }.then((res => { alert(res.data) }))
+        // })
+
+        // id: 1,
+        //         sddPlayerId: 1,
+        //         sddPlayerAccount: "Mepunk",
+        //         sddPlayerBetTime: "2021/4/22 上午11:57:02 【星期四】",
+        //         sddPlayerBetProject: "\n 黑桃： 500,\n 大點： 500,\n 中七： 500,\n 小點： 500,\n 愛心： 500,\n 方塊： 500,\n 單數： 500,\n 龍門： 100,\n 雙數： 500,\n 梅花： 500,",
+        //         sddPlayerBetMoney: "4600",
+        //         sddPlayerMoneyBefore: "10000",
+        //         sddGameResult: "幸運七：沒中,\n 射龍門：沒射過,\n 中獎花色：梅花,\n 中獎大小：中小,\n 中獎單雙：中雙,",
+        //         sddPlayerBetResult: "-725",
+        //         sddPlayerMoneyAfter: "9275"
+    </script>
+</body>
+
+</html>

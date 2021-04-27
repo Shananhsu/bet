@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+    
+<!-- <h1>
+    TESTTESTTEST
+
+ 
+</h1> -->
+
+<table class="table table-striped">
+
+<thead>
+    <th>會員編號</th>
+    <th>會員帳號</th>
+    <th>遊戲時間</th>
+    <th>投注項目</th>
+    <th>投注金額</th>
+    <th>錢包餘額</th>
+    <th>中獎資訊</th>
+    <th>輸贏結果</th>
+    <th>結算餘額</th>
+    <th>命中的魚</th>
+    <th>擊殺的魚</th>
+    <th>賭局結束時間</th>
+</thead>
+<tbody>
+    <% rows.forEach((item,index) =>{ %>
+    <tr>
+        <td><%= item.memberId %></td>
+        <td><%= item.memberName %></td>
+        <td><%= item.betBeginTime %></td>
+        <td><%= item.betType %></td>
+        <td><%= item.betMoney %></td>
+        <td><%= item.memberWalletBefore %></td>
+        <td><%= item.gameIncome %></td>
+        <td><%= item.betResult %></td>
+        <td><%= item.memberWallet %></td>
+        <td><%= item.fishHited %></td>
+        <td><%= item.fishKilled %></td>
+        <td><%= item.betOverTime %></td>        
+    </tr>
+    <% })%>
+</tbody>
+
+</table>
+
+
+
+
+</body>
+</html>

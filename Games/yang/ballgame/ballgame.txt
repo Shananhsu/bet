@@ -1,0 +1,66 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.4
+-- https://www.phpmyadmin.net/
+--
+-- 主機： 127.0.0.1
+-- 產生時間： 2021-04-26 08:04:14
+-- 伺服器版本： 10.4.17-MariaDB
+-- PHP 版本： 8.0.2
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+--
+-- 資料庫： `game`
+--
+CREATE DATABASE IF NOT EXISTS `game` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `game`;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `ball`
+--
+
+DROP TABLE IF EXISTS `ball`;
+CREATE TABLE `ball` (
+  `id` int(255) NOT NULL,
+  `member` varchar(256) NOT NULL,
+  `account` varchar(256) NOT NULL,
+  `time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `betproject` varchar(256) NOT NULL,
+  `betmoney` varchar(256) NOT NULL,
+  `beforemoney` varchar(256) NOT NULL,
+  `gameresult` varchar(256) NOT NULL,
+  `betresult` varchar(256) NOT NULL,
+  `aftermoney` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- 傾印資料表的資料 `ball`
+--
+
+INSERT INTO `ball` (`id`, `member`, `account`, `time`, `betproject`, `betmoney`, `beforemoney`, `gameresult`, `betresult`, `aftermoney`) VALUES
+(181, '', 'lolicon', '2021-04-25 09:08:00', '', '1000', '50000', '', '', '48000');
+
+--
+-- 已傾印資料表的索引
+--
+
+--
+-- 資料表索引 `ball`
+--
+ALTER TABLE `ball`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
+--
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `ball`
+--
+ALTER TABLE `ball`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
+COMMIT;
