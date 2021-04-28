@@ -39,7 +39,7 @@ class Mainnav extends Component {
                             </li>
 
                             <li>
-                                <a className="game" href="/">優惠活動</a>
+                                <a className="game" href="/bonus">優惠活動</a>
                             </li>
                             <li>
                                 <a className="game linePicture" target="game" href="">

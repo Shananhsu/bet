@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import GamePage from "./pages/GamePage";
+import Bonus from "./pages/Bonus";
 
 //函數型組件
 var Router = () => (
@@ -20,7 +21,8 @@ var Router = () => (
             <Route path = "/register" component={RegisterPage}  />
             {/* 遊戲頁面 */}
             <Route path = "/gamelink" component={GamePage}  />
-
+            {/* 紅利頁面 */}
+            <Route path = "/bonus" component={Bonus}  />
             <Route component={NotFound} />
         </Switch>
     </BrowserRouter>
