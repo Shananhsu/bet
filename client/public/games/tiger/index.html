@@ -67,6 +67,9 @@
             <input id="bet" type="text" placeholder="1" value="10">
             <button class="btn btn-success btn-lg" id="add">+</button>
             本局贏得獎金<span id="jackpot">0</span>
+            <div>
+                <button v-on:click="handleResult" type="button" class="btn btn-primary btn-lg" id="btn">遊戲結果</button>
+            </div>
         </div>
         <canvas id="myCanvas"></canvas>
         <audio loop id="ingSound" src="./sounds/sloting.mp3" preload="metadata"></audio>
@@ -122,6 +125,10 @@
                             }
                         });
                     }
+                },
+                handleResult(){
+                    location.href="results.html";
+                    
                 }
             }
         })

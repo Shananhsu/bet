@@ -7,7 +7,7 @@
             ctx.lineWidth = 5;
             ctx.moveTo(1, rwdH * 0.5)
             ctx.lineTo(rwdW, rwdH * 0.5);
-            ctx.strokeStyle = "blue";
+            ctx.strokeStyle = "aqua";
             ctx.stroke();
         }
 
@@ -16,7 +16,7 @@
             ctx.lineWidth = 5;
             ctx.moveTo(1, (rwdH * 0.17))
             ctx.lineTo(rwdW, (rwdH * 0.17));
-            ctx.strokeStyle = "red";
+            ctx.strokeStyle = "aqua";
             ctx.stroke();
         }
 
@@ -25,7 +25,7 @@
             ctx.lineWidth = 5;
             ctx.moveTo(0, rwdH * 0.825)
             ctx.lineTo(rwdW, rwdH * 0.825);
-            ctx.strokeStyle = "lightgreen";
+            ctx.strokeStyle = "aqua";
             ctx.stroke();
         }
 
@@ -38,7 +38,7 @@
             ctx.lineTo(rwdW * 0.5, rwdH * 0.825);
             ctx.lineTo(rwdW * 0.9, rwdH * 0.17);
             ctx.lineTo(rwdW, rwdH * 0.17);
-            ctx.strokeStyle = "yellow";
+            ctx.strokeStyle = "aqua";
             ctx.stroke();
         }
 
