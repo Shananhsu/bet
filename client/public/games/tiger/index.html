@@ -45,7 +45,7 @@
     <div class="panel panel-primary container" style="position: relative;">
 
         <div id="main" class="panel-body ">
-            {{testData}}
+           
             <div class="slotwrapper">
                 <ul class="ring" id="ring1" style="top:0px">
                 </ul>
@@ -60,8 +60,7 @@
             </div>
 
             <div>
-                <button v-on:click="handleBet" type="button" class="btn btn-success btn-lg" id="btn">Start
-                    Spin!</button>
+                <button v-on:click="handleBet" type="button" class="btn btn-success btn-lg" id="btn">開始</button>
             </div>
             <p id="result">{{userwallet}}</p>
             <button class="btn btn-success btn-lg" id="less">-</button>
@@ -188,7 +187,7 @@
             return count;
         }
     //    screenshot();
-        $('#btn').on('click', function () {
+        // $('#btn').on('click', function () {
             // slotR = [];
             // var score = parseFloat($("#result").text()).toFixed(2);
             // var bet = parseFloat($('#bet').val());
@@ -207,7 +206,7 @@
             //     $('.slotwrapper ul').playSpin();
             //     ingSound.play();
             // }
-        });
+        // });
         //將遊戲結果截圖
         // function screenshot() {
         //     html2canvas(document.getElementById('#slotresult')).then(function (canvas) {
