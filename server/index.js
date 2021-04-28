@@ -1,5 +1,6 @@
 const express = require('express');
 
+
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session =require("express-session");
@@ -278,7 +279,7 @@ app.post("/dragonshoot/PostGameStart", function (req, res) {
 ////////////tiger///////////////
 app.get("/tiger/user", function (request, response) {
 
-	connection.query('select * from tiger_users', 
+	db.query('select * from tiger_users', 
 		'',
 		function(err, rows) {
 			if (err)	{
@@ -293,7 +294,7 @@ app.get("/tiger/user", function (request, response) {
 })
 app.get("/tiger/results", function (request, response) {
 
-	connection.query('select * from results', 
+	db.query('select * from tiger_results', 
 		[],
 		function(err, rows) {
 			if (err)	{
@@ -310,7 +311,7 @@ app.get("/tiger/results", function (request, response) {
 //寫入遊戲紀錄
 app.post("/tiger/addresults", function (request, response) {
 
-	connection.query(
+	db.query(
 		"insert into tiger_results set UserID = 1, BetTime = ?,Lay='All',Stake=?,AccountBalBE=?,GameResult=?,NetWin=?,AccountBalAF=? ", 
 			[
 				request.body.BetTime, 
@@ -332,7 +333,7 @@ app.get('/tiger/gameresults', function (req, res) {
 
 app.put("/tiger/user", function (request, response) {
 
-	connection.query(
+	db.query(
 		"update users set UserWallet = ? where UserId =1 " ,
 		    
 			[
@@ -345,30 +346,19 @@ app.put("/tiger/user", function (request, response) {
 
 
 /////////fish///////////
-
-
+const render = require('ejs');//----------------
+app.set('view engine', 'ejs');
 
 // 將捕魚機傳來的資料送到資料庫
-app.post("/uploadBetRecord", function (req, res) {
+app.post("/fishShooter/uploadBetRecord", function (req, res) {
 
-    let mysql = require('mysql')
-    let conn = mysql.createConnection({
-        user: "root",
-        password: "",
-        host: '127.0.0.1',
-        port: 3306,
-        database: 'fishshooter'
-    });
+    db.connect();
 
-    conn.connect();
-
-    sql = `insert into betrecord
-    values(
-        ?
-        )`
+    sql = `insert into fishshooter_betrecord
+    values(?)`
     data = [req.body.betRecord];
 
-    conn.query(
+    db.query(
         sql,
         data,
         function () {
@@ -378,18 +368,6 @@ app.post("/uploadBetRecord", function (req, res) {
 })
 
 
-// 簡易後台 檢視捕魚機下注紀錄
-app.get("/fishShooter/betrecord", function (req, res) {
-    conn.query(
-        "select * from betrecord",
-        function (err, rows) {
-            res.render("fishShooter/betRecord", { rows: rows })
-            // console.log(rows);
-        }
-    )
-
-})
-
 // 有做出分頁功能的簡易後台 檢視捕魚機下注紀錄
 
 app.get("/fishShooter/page/:page([0-9]+)", function (req, res) {
@@ -398,9 +376,11 @@ app.get("/fishShooter/page/:page([0-9]+)", function (req, res) {
 
     let nums_per_page = 6;
     let offset = (page - 1) * nums_per_page;
-    let sql = `SELECT * FROM betrecord LIMIT ${offset},${nums_per_page};
-    SELECT COUNT(*) AS COUNT FROM betrecord;`;
-    conn.query(sql, function (err, data) {
+    let sql = `SELECT * FROM fishshooter_betrecord LIMIT ${offset},${nums_per_page};
+    SELECT COUNT(*) AS COUNT FROM fishshooter_betrecord;`;
+    console.log(sql)
+
+    db.query(sql, function (err, data) {
         if (err) {
             console.log(err);
         }
@@ -412,7 +392,7 @@ app.get("/fishShooter/page/:page([0-9]+)", function (req, res) {
             return
         }
 
-        res.render('fishShooter/betRecord_page', {
+        res.render('/fishShooter/betRecord_page', {
             rows: data[0],
             curr_page: page,
             total_nums: data[1][0].COUNT,
@@ -458,7 +438,7 @@ app.post("/billiard/gameafter",function(req,res){
   var postgameresult = req.body.postgameresult;
 
 db.query(
-  "UPDATE billiard_ball SET aftermoney = ?, gameresult = ? WHERE id IN (SELECT a.maxID FROM (SELECT max(id) maxID FROM ball) a) ",
+  "UPDATE billiard_ball SET aftermoney = ?, gameresult = ? WHERE id IN (SELECT a.maxID FROM (SELECT max(id) maxID FROM billiard_ball) a) ",
   [postaftermoney,postgameresult],
   function(err,result){
     if(err){

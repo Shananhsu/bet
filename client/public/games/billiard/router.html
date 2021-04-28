@@ -108,7 +108,7 @@
                 ]
             },
             created() { 
-                axios.get("http://localhost:3001/biliard/admin")
+                axios.get("http://localhost:3001/billiard/admin")
                 .then((e) => {newsApp.newsList = e.data})
                 // .then((e)=>{console.log(e.data)})
                 .catch((err) => {console.log(err)})

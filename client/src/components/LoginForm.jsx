@@ -128,7 +128,9 @@ class LoginForm extends Component {
                                                             {/* <img id="captcha" src="images/logo/passpic.png" /> */}
                                                             <button
                                                                 type="submit"
-                                                                className="btn btn-sm btn-primary login" href = "/">登入</button>
+                                                                className="btn btn-sm btn-primary login" href = "/">
+                                                                    <span className = "glyphicon glyphicon-user"> 登入</span>
+                                                                     </button>
                                                         </div>
                                                     </div>
                                                     <div className="col-xs-1" style ={{"marginLeft":"10px"}}>
@@ -140,7 +142,7 @@ class LoginForm extends Component {
                                                             data-title="註冊"
                                                         >
                                                             <span
-                                                                className="glyphicon glyphicon-pencil"></span>註冊 </a>
+                                                                className="glyphicon glyphicon-pencil"> 註冊</span></a>
                                                     </div>
                                                 </div>
                                                 {/* <div
