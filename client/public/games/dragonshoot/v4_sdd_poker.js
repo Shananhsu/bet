@@ -22,6 +22,7 @@ function showTime() {
 }
 
 //準備撲克牌
+// 中改英文 不然爆圖
 const pokerSuit = ["Spades", "Heart", "Cube", "Plum"];
 // console.log(pokerSuit);
 
