@@ -112,9 +112,9 @@ Game_Singleton.prototype.startNewGame = function(){
     function Gameover(){
       
         setTimeout(function(){alert("gg");
-            }, 3150);
+            }, 30150);
         
-       setInterval('window.history.go(0);',3150);
+       setInterval('window.history.go(0);',30150);
 
            
            
@@ -126,7 +126,7 @@ Game_Singleton.prototype.startNewGame = function(){
             axios.post("http://localhost:3001/biliard/gameafter",{
                 postaftermoney:moneyplay,
                 postgameresult:"輸了呦"
-            });}, 3000); 
+            });}, 30000); 
         }
 
         Gameover();

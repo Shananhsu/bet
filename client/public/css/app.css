@@ -1891,3 +1891,40 @@ body.modal-open {
 #sf-lobby-00001 .game > img {
     width: 100%;
 }
+
+
+
+
+/* 紅利 */
+#promotions {
+    padding: 35px;
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+}
+
+#promotions img {
+    width: 100%;
+    border-radius: 15px;
+}
+
+#promotions .title {
+    margin-top: 10px;
+    padding: 5px;
+    border: 1px solid #fff;
+    box-shadow: 1px 1px 3px 0 rgba(0, 12, 105, 0.28);
+    position: relative;
+    border-radius: 15px;
+    background: #fff;
+    z-index: 99;
+}
+
+#promotions .content {
+    display: none;
+    position: relative;
+    top: -28px;
+    padding: 5px;
+    border: 1px solid #fff;
+    box-shadow: 1px 1px 3px 0 rgba(0, 12, 105, 0.28);
+    border-radius: 15px;
+}
