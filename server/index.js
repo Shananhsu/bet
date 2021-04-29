@@ -297,6 +297,7 @@ app.get("/tiger/user", function (request, response) {
 	);
     
 })
+//取得tiger遊戲結果
 app.get("/tiger/results", function (request, response) {
 
 	db.query('select * from tiger_results', 
@@ -317,15 +318,21 @@ app.get("/tiger/results", function (request, response) {
 app.post("/tiger/addresults", function (request, response) {
 
 	db.query(
-		"insert into tiger_results set UserID = 1, BetTime = ?,Lay='All',Stake=?,AccountBalBE=?,GameResult=?,NetWin=?,AccountBalAF=? ", 
+		// "insert into tiger_results set UserID = 1, BetTime = ?,Lay='All',Stake=?,AccountBalBE=?,GameResult=?,NetWin=?,AccountBalAF=? "
+    "insert into results set betTime = ?,account='steven',gameType='拉霸',object='All',bets=?,moneyBefore=?,status=?,result=?,moneyAfter=? ", 
 			[
-				request.body.BetTime, 
-				request.body.Stake,
-				request.body.AccountBalBE,
-				request.body.GameResult,
-				request.body.NetWin,
-				request.body.AccountBalAF
-
+				// request.body.BetTime, 
+				// request.body.Stake,
+				// request.body.AccountBalBE,
+				// request.body.GameResult,
+				// request.body.NetWin,
+				// request.body.AccountBalAF
+        request.body.betTime, 
+				request.body.bets,
+				request.body.moneyBefore,
+				request.body.status,
+				request.body.result,
+				request.body.moneyAfter
 			]);
 			// console.log(request)
 	response.send("row inserted.");
