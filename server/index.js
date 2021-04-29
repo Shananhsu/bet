@@ -32,7 +32,7 @@ const db = mysql.createPool({
 app.use(express.json());
 app.use(cors({
     origin : ["http://localhost:3000"] ,
-    methods : ["GET","POST"],
+    methods : ["GET","POST","PUT"],
     credentials :true
 }));
 app.use(cookieParser());
@@ -69,15 +69,18 @@ app.post("/api/register",(req,res)=>{
     const address = req.body.address;
     const phone = req.body.phone;
     const email = req.body.email;
-   
-    const sqlregister = "insert into  member_information ( account  ,password ,name ,address ,phone ,email ) values(?,?,?,?,?,?) "
+    const risk_level = "D"
+    const register_time = new Date()
+    const sqlregister = "insert into  member_information ( account  ,password ,name ,address ,phone ,email,risk_level,register_time,identifyID ) values(?,?,?,?,?,?,?,?,?) "
+    const identifyID = 0
+
     bcrypt.hash(password,saltRounds , (err,hash)=>{
         if (err) {
             console.log(err)
         }
 
         db.query(sqlregister,
-            [account  ,hash ,username ,address ,phone ,email], (err,result)=>{
+            [account  ,hash ,username ,address ,phone ,email,risk_level,register_time,identifyID], (err,result)=>{
             if(err) {
                 res.send({
                   status: 'FAILURE',
@@ -157,9 +160,11 @@ app.post("/api/login",(req,res)=>{
 
 })
 // 登出
-app.get('/logout', function(req, res) {
-    req.session.destroy();
-    res.redirect('/');
+app.get('/api/logout', function(req, res) {
+  req.session.destroy(function(err){ 
+        // res.redirect('/');
+  });
+  res.send({"true":true})
 });
 
 
@@ -378,7 +383,7 @@ app.get("/fishShooter/page/:page([0-9]+)", function (req, res) {
     let offset = (page - 1) * nums_per_page;
     let sql = `SELECT * FROM fishshooter_betrecord LIMIT ${offset},${nums_per_page};
     SELECT COUNT(*) AS COUNT FROM fishshooter_betrecord;`;
-    console.log(sql)
+    // console.log(sql)
 
     db.query(sql, function (err, data) {
         if (err) {

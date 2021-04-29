@@ -21,6 +21,7 @@ export default function LoginMain(props) {
     const history = useHistory();
 
     function handleLoginPass() {
+        
         history.push("/");
     }
 
