@@ -1,4 +1,4 @@
-import React, { Component ,useEffect,useState} from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { withRouter } from "react-router-dom";
 import Logo from './Logo';
@@ -37,9 +37,11 @@ const Header = props => {
                     <Mainnav />
                 </div>
 
-                {/* { account ? (<MemberState account = {account} balance={balance}/>) */}
-                { account ? (<MemberState account = {account} balance={balance} props={props}/>)
-                :(< LoginForm />)}
+
+                {/* {account ? (<MemberState account={account} balance={balance} props={props} />)
+                    : (< LoginForm />)} */}
+                <MemberState account={"1234"} balance={9999999} props={props} />
+
 
             </div>
         </React.Fragment >
@@ -48,4 +50,4 @@ const Header = props => {
 }
 // }
 
-export default withRouter (Header);
+export default withRouter(Header);

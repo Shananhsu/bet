@@ -1,8 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { withRouter, useHistory } from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import Axios from "axios";
-
+import $ from "jquery";
+import { ReactDOM } from "react-dom"
+import Modal from "./Modal";
+import Memberbanner from './memberhome/Memberbanner';
 
 const MemberState = (props) => {
     // constructor (){
@@ -18,7 +21,7 @@ const MemberState = (props) => {
             props.props.history.go(0);
         })
     }
-
+    const [isModalOpen, toggleModal] = useState(false);
 
     return (
         <React.Fragment>
@@ -36,15 +39,19 @@ const MemberState = (props) => {
                                     <div style={{ "width": "300px", "float": "left" }}>
                                         <a className="btn btn-sm btn-danger glyphicon glyphicon-log-out " onClick={logoutButtonClick}
                                             style={{ "marginTop": "4px" }}></a>
-                                        <a className="btn btn-sm btn-primary membercenter glyphicon glyphicon-home" href="/memberinfo"
+                                        {/* <a className="btn btn-sm btn-primary membercenter glyphicon glyphicon-home" href="/memberinfo" */}
+                                        <a className="btn btn-sm btn-primary membercenter glyphicon glyphicon-home" onClick={() => toggleModal(!isModalOpen)}
                                             style={{ "marginTop": "4px" }}> 會員中心</a>
+                                        <Modal isOpen={isModalOpen} toggle={toggleModal}>
+                                            <Memberbanner props={props} />
+                                        </Modal>
                                     </div>
                                 </div>
                                 <div className="info"
                                     style={{ "float": "right", "marginLeft": "150px", "marginTop": "-24px" }}>
                                     <b>您好,
                                             <a href="/" >
-                                                {/* {console.log(props)} */}
+                                            {/* {console.log(props)} */}
                                             {props.account}
                                         </a>
                                     </b> |
@@ -63,8 +70,12 @@ const MemberState = (props) => {
                 </div>
             </div>
 
-        </React.Fragment>
+
+        </React.Fragment >
     );
 }
+
+
+
 
 export default MemberState;

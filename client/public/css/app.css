@@ -1210,7 +1210,7 @@ a.yb:hover {
     position: absolute;
     top: 200px;
     right: 0px;
-    z-index: 999;
+    z-index: 20;
 }
 
 .tab-inner ul li {
