@@ -41,7 +41,7 @@
 
 <body>
 
-    <audio id="cannonSound" src="./sound/bomb.mp3" ></audio>
+    <audio id="cannonSound" src="./sound/bomb.mp3"></audio>
 
 
     <script>
@@ -49,9 +49,12 @@
 
             // 匯入會員帳號與會員編號
             let memberId = "0005"
-            let memberAcc = "會員帳號"
+            let account = "Stevan"
             // 匯入會員錢包，moneyBag會在新建amm時用作引數
             let memberMoneyBag = 200
+
+
+            // 以上幾個資料需要等登入系統做好才能從cookie或session抓資料庫的資料
 
 
             // 建立遊戲區域
@@ -116,7 +119,7 @@
                     // 要傳到資料庫的資料-----------
 
                     this.date = new Date();//砲彈發射時間
-                    this.firedTime = `${this.date.getFullYear()}/${this.date.getMonth() + 1}/${this.date.getDate()}  ${this.date.getHours()}:${this.date.getMinutes()}:${this.date.getSeconds()}` //砲彈發射時間
+                    this.firedTime = `${this.date.getFullYear()}/${this.date.getMonth() + 1}/${this.date.getDate()}  ${this.date.getHours()}:${this.date.getMinutes()}:${this.date.getSeconds()}` //砲彈發射時間                    
                     this.fishHited = [] //擊中的魚
                     this.fishKilled = [] //擊殺的魚
                     this.scoreGeted = 0;
@@ -219,7 +222,7 @@
                     this.memberMoneyBagUpdate = memberMoneyBag + this.income
                     this.date = new Date();
                     this.betOverTime = `${this.date.getFullYear()}/${this.date.getMonth() + 1}/${this.date.getDate()}  ${this.date.getHours()}:${this.date.getMinutes()}:${this.date.getSeconds()}`
-
+                    // this.betOverTime = this.date
                     //  this.fishHited 是 [] 的時候
                     //  this.fishHited 為true
                     //  this.fishHited == [] 為false
@@ -232,9 +235,9 @@
 
                     let betRecord = {
                         betRecord: [
-                            memberId, memberAcc,
-                            this.firedTime, this.shellsType, this.cost,
-                            memberMoneyBag,
+                            memberId, account,
+                            this.firedTime , "捕魚機", this.shellsType,
+                            this.cost, memberMoneyBag,
                             this.scoreGeted, this.income, this.memberMoneyBagUpdate,
                             this.fishHited, this.fishKilled,
                             this.betOverTime
@@ -826,6 +829,10 @@
                     this.text = tex; // 文字內容
 
                     this.fontFamily = 'Comic Sans MS' // 字型
+                    if(type=="textBtn"){
+                        this.textAlign="center";
+                    }else(this.textAlign="start")
+                    
 
 
                     // type num代表數字 btn代表按鈕
@@ -875,7 +882,7 @@
                     ctx.save();
                     ctx.font = this.fontSize + " " + this.fontFamily
                     ctx.textBaseline = "middle"
-                    ctx.textAlign = "center"
+                    ctx.textAlign = this.textAlign
                     ctx.fillStyle = this.color;
                     ctx.fillText(this.text, this.x, this.y)
                     ctx.restore()
@@ -883,14 +890,16 @@
             } // textObj
 
             class GameButton {
-                constructor(type, x, y, width, height, img, text) {
+                constructor(type, x, y, width, height, img, text, key, cost) {
                     this.type = type;
-                    this.img = img
                     this.x = x;
                     this.y = y;
                     this.width = width;
                     this.height = height;
+                    this.img = img;
                     this.text = text;
+                    this.key = key;
+                    this.cost= cost;
 
                     this.color = "gray";
                     this.fontSize = "25px";
@@ -905,10 +914,10 @@
                     ctx.fillRect(this.width / -2, this.height / -2, this.width, this.height)
 
                     ctx.fillStyle = "white"
-                    ctx.fillRect(this.width / -2, this.height / -2 + 100, this.width, 50)
+                    ctx.fillRect(this.width / -2, this.height / -2 + 70, this.width, 80)
 
                     if (this.type == "shellBtn") {
-                        ctx.drawImage(this.img, this.width / -2 + 10, this.height / -2 + 10, 80, 80)
+                        ctx.drawImage(this.img, this.width / -2 + 25 , this.height / -2 + 10, 50, 50)
                     }
 
 
@@ -916,7 +925,10 @@
                     ctx.fillStyle = "black";
                     ctx.textBaseline = "middle"
                     ctx.textAlign = "center"
-                    ctx.fillText(this.text, 0, 53)
+                    ctx.fillText(this.text, 0, 23)
+                    ctx.fillText(`費用:${this.cost}`, -13, 53)
+                    ctx.fillText(this.key,40,-15)
+            
 
                     ctx.restore(); //回復canvas狀態
                 } // reNew
@@ -1014,23 +1026,25 @@
             let startBtn = new textObj("textBtn", canvas.width / 2, canvas.height / 2, "100px", "white", "START");
             startBtn.actived = true
             startBtn.reNew();
-            // 暫停按鈕
-            let pauseBtn = new textObj("textBtn", 1820, 1050, "50px", "white", "PAUSE")
-            // 砲彈選擇按鈕
+  
+            //查看下注紀錄按鈕
+            let recoredBtn = new textObj("textBtn", 1800, 950, "50px", "white", "下注紀錄")
+            let infoBtn = new textObj("textBtn", 1800, 1030, "50px", "white", "遊戲說明")
 
-            let shell01Btn = new GameButton("shellBtn", 100, canvas.height - 90, 100, 150, shell01Img, "標準砲彈")
-            shell01Btn.color = "red"
-            let shell02Btn = new GameButton("shellBtn", 200 + 10, canvas.height - 90, 100, 150, shell02Img, "貫穿砲彈")
-            let shell03Btn = new GameButton("shellBtn", 300 + 20, canvas.height - 90, 100, 150, shell03Img, "彈跳砲彈")
+
+            // 砲彈選擇按鈕
+            let shell01Btn = new GameButton("shellBtn", 100, canvas.height - 90, 100, 150, shell01Img, "標準砲彈", 1, 1)
+            shell01Btn.color = "red" //遊戲開始時預設的砲彈，要改顏色表示選中
+            let shell02Btn = new GameButton("shellBtn", 200 + 10, canvas.height - 90, 100, 150, shell02Img, "貫穿砲彈", 2, 5)
+            let shell03Btn = new GameButton("shellBtn", 300 + 20, canvas.height - 90, 100, 150, shell03Img, "彈跳砲彈", 3, 8)
             let shellBtnArr = [shell01Btn, shell02Btn, shell03Btn];
 
             // 純文字
-            // let score = new textObj("num", 50, 1050, "50px", "white", 0); // 總分數已不需要再顯示了，先註解掉
-            // amm最後的引數代表彈藥量
+            // amm最後的引數代表彈藥量，也就是錢包餘額，分開處理
             // amm是一個物件而非一個值，應該不適合直接代入會員錢包
-            let amm = new textObj("num", 1320, 1050, "50px", "black", memberMoneyBag);
-            let ammTitle = new textObj("txt", 1150, 1050, "50px", "black", "會員錢包");
-            let memberIdText = new textObj("txt", 700, 1050, "50px", "black", `會員帳號:${memberId}`);
+            let memberIdText = new textObj("txt", 1050, 950, "50px", "black", `會員帳號:${account}`);
+            let ammTitle = new textObj("txt", 1050, 1030, "50px", "black", "錢包餘額:");
+            let amm = new textObj("num", 1270, 1030, "50px", "black", memberMoneyBag);
             let gameover = new textObj("num", canvas.width / 2, canvas.height / 2, '100px', 'white', 'GAMEOVER')
 
 
@@ -1088,7 +1102,9 @@
             function gameRuning() {
                 clearArea();
                 ctxFrames += 1;
-                pauseBtn.reNew();
+          
+                infoBtn.reNew();
+                recoredBtn.reNew();
                 cannon1.reNew();
                 // score.reNew(); // 總分數已不需要再顯示了，先註解掉
                 ammTitle.reNew();
@@ -1247,9 +1263,9 @@
                 if (startBtn.actived) {
                     gameStart();
                 }
-                if (pauseBtn) {
-                    gamePause();
-                }
+           
+                seeRecord();
+                seeInfo();
             });
 
             // mousedown 事件用的函式----------------
@@ -1267,29 +1283,39 @@
                 }
             }
 
-            function gamePause() { //遊戲暫停
+        
+
+            function seeRecord() { //遊戲暫停
                 if (
-                    (cx > pauseBtn.edgeRight) ||
-                    (cx < pauseBtn.edgeLeft) ||
-                    (cy > pauseBtn.edgeBottom) ||
-                    (cy < pauseBtn.edgeTop)
+                    (cx > recoredBtn.edgeRight) ||
+                    (cx < recoredBtn.edgeLeft) ||
+                    (cy > recoredBtn.edgeBottom) ||
+                    (cy < recoredBtn.edgeTop)
                 ) {
                     return
                 } else {
-                    if (overCountdown.countdownTime <= 0) return // 如果遊戲倒數計時<=0 就不跑後面的東西
-                    // cancelAnimationFrame是怎麼停的?，是純粹跑完這一次就不跑了還是程式跑到一半停止?
-                    cancelAnimationFrame(startBtn.startID)
-                    startBtn.actived = true
-                    startBtn.reNew();
-
+                    window.open('./fishRecord.html')
                 }
             }
-            // mousedown 事件用的函式----------------------
+            function seeInfo() { //遊戲暫停
+                if (
+                    (cx > infoBtn.edgeRight) ||
+                    (cx < infoBtn.edgeLeft) ||
+                    (cy > infoBtn.edgeBottom) ||
+                    (cy < infoBtn.edgeTop)
+                ) {
+                    return
+                } else {
+                    window.open('./fishInfo.html')
+                }
+            }
+
+            // 上面是mousedown 事件用的函式----------------------
 
             $(window).on({ //離開視窗時暫停
                 "blur": function () {
                     if (overCountdown.countdownTime <= 0) return // 如果遊戲倒數計時<=0 就不跑後面的東西
-                    // window在blur的狀態似乎不能跑其他函式，因此不能執行gamePause而要把gamePause的內容寫進來
+                 
                     window.cancelAnimationFrame(startBtn.startID)
                     startBtn.actived = true
                     startBtn.reNew();

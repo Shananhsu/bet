@@ -39,6 +39,7 @@ const Header = props => {
                 { account ? (<MemberState account = {account} balance={balance}/>)
                 :(< LoginForm />)}
 
+
             </div>
         </React.Fragment >
 
