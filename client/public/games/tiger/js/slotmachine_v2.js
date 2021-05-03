@@ -131,14 +131,14 @@ var slotMachine = function (el, options, track) {
 
         var finalPos = -((slot.liHeight * slot.options.endNum) - slot.liHeight) % 1380; //停止位置
 
-        var finalSpeed = 500; //捲動速度
+        var finalSpeed = fp; //捲動速度
 
         slot.$el
             .css('top', -slot.listHeight)
             .animate({
                 'top': finalPos
             }, finalSpeed, slot.options.easing, function () {
-                console.log(slot.liCount)
+                //console.log(slot.liCount)
 
                 if (slot.liCount > 7) { //移除過多圖片(因圖片會不斷複製
                     for (i = 0; i < 7; i++) {
@@ -147,30 +147,15 @@ var slotMachine = function (el, options, track) {
                         }
                     }
                 }
-
                 slot.endAnimation(slot.options.endNum);
                 if ($.isFunction(slot.options.onEnd)) {
                     slot.options.onEnd(slot.options.endNum);
                 }
-
-                // onFinish is every element is finished animation
-                // if (startSeqs['mainSeq' + track.mainSeq]['totalSpinning'] == 0) {
-                //     var totalNum = '';
-                //     $.each(startSeqs['mainSeq' + track.mainSeq], function (index, subSeqs) {
-                //         if (typeof subSeqs == 'object') {
-                //             totalNum += subSeqs['endNum'].toString();
-
-                //         }
-                //     });
-                //     if ($.isFunction(slot.options.onFinish)) {
-                //         slot.options.onFinish(totalNum);
-                //     }
-                // }
             });
         var temp = finCount % 5;
         setTimeout(function () {
             endSound.play() //每停止一條 播放一次
-        }, 200)
+        }, fp*2/5)
 
         if (temp != 0) {
 
@@ -181,19 +166,12 @@ var slotMachine = function (el, options, track) {
                 winTotal = 0;
                 var index = [];
                 var startBal = parseFloat($("#result").text()); //遊戲前餘額
-                console.log(startBal)
+                var bet = parseFloat($('#bet').val());
+                //console.log(startBal)
                 for (i = 0; i < tempcss.length; i++) { //計算滾動停止時的index
                     index[i] = Math.floor(Math.abs(parseInt(tempcss[i].style.top) / 200))
                 }
-                resultIndex(slotR, index); //取得結果
-                // console.log(ary[0][slotR[0]] + "," + ary[1][slotR[1]] + "," + ary[2][slotR[2]] + "," + ary[3][slotR[3]] + "," + ary[4][slotR[4]]);
-                // console.log(ary[0][slotR[5]] + "," + ary[1][slotR[6]] + "," + ary[2][slotR[7]] + "," + ary[3][slotR[8]] + "," + ary[4][slotR[9]]);
-                // console.log(ary[0][slotR[10]] + "," + ary[1][slotR[11]] + "," + ary[2][slotR[12]] + "," + ary[3][slotR[13]] + "," + ary[4][slotR[14]]);
-                // gameRA =ary[0][slotR[0]] + "," + ary[1][slotR[1]] + "," + ary[2][slotR[2]] + "," + ary[3][slotR[3]] + "," + ary[4][slotR[4]]+ "," +
-                // ary[0][slotR[5]] + "," + ary[1][slotR[6]] + "," + ary[2][slotR[7]] + "," + ary[3][slotR[8]] + "," + ary[4][slotR[9]]+ "," +
-                // ary[0][slotR[10]] + "," + ary[1][slotR[11]] + "," + ary[2][slotR[12]] + "," + ary[3][slotR[13]] + "," + ary[4][slotR[14]];
-                
-                
+                resultIndex(slotR, index); //取得結果         
                 bonusCacl(slotR, score);
                 console.log(gameRA)
                 // console.log(gameRA)
@@ -206,12 +184,11 @@ var slotMachine = function (el, options, track) {
                     console.log("This game lost:" + bet)
                 }
                 var endBal = parseFloat($("#result").text());
-                //var bettimeS=bettime.getFullYear()+"/"+bettime.getMonth()+1+"/"+bettime.getDate()+" "+
                 console.log(endBal)
                 console.log((bettime))
                 $.ajax({ //更新帳戶餘額
                     type: "put",
-                    url: "http://localhost:3001/tiger/user",
+                    url: "/game/user",
                     data: {
                         UserWallet: endBal
                     }
@@ -219,24 +196,22 @@ var slotMachine = function (el, options, track) {
 
                 $.ajax({ //將遊戲結果寫入db
                     type: "post",
-                    url: "http://localhost:3001/tiger/addresults",
+                    url: "/game/addresults",
                     data: {
-                        BetTime: bettime, //下注時間
-                        Stake: bet, //投注金額
-                        AccountBalBE: startBal + bet, //遊戲前餘額
-                        GameResult:gameRA.toString(),//遊戲結果
-                        NetWin: endBal - (startBal + bet), //淨獲利
-                        AccountBalAF: endBal //遊戲後餘額
+                        betTime: bettime, //下注時間
+                        bets: bet*50, //投注金額
+                        moneyBefore: startBal + (bet*50), //遊戲前餘額
+                        status:gameRA.toString(),//遊戲結果
+                        result: endBal - (startBal + (bet*50)), //淨獲利
+                        moneyAfter: endBal //遊戲後餘額
                     }
                 })
                 setTimeout(function () { //清除canvas畫布
                     ctx.clearRect(0, 0, rwdW, rwdH);
                     $("#btn").removeAttr("disabled");
-                }, 1000)
+                }, fp*2)
 
-            }, 1000);
-            //slot.loopCount = 0;
-
+            }, fp*2);
             return slotR;
         }
 

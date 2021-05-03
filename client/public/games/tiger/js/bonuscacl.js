@@ -1,16 +1,17 @@
 var score = parseFloat($("#result").text());
-var bet = parseFloat($('#bet').val());
+
 var winTotal=0;
 var gameRA=[];
 // gameRA.push("Line 2 :"+ary[0][1]+"*5")
-
 //console.log(gameRA.toString())
 function bonusCacl() {
+    var bet = parseFloat($('#bet').val());
+//console.log(bet)
     scoreBefore = score
     if (ary[0][slotR[0]]== ary[1][slotR[1]]&& ary[1][slotR[1]]== ary[2][slotR[2]] && ary[2][slotR[2]] ==
         ary[3][slotR[3]] && ary[3][slotR[3]] == ary[4][slotR[4]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[0]], score, bet, 5)
+        bonusCount(ary[0][slotR[0]], score, bet, 20)
         console.log("0 1 2 3 4")
         gameRA.push("Line 2 :"+ary[0][slotR[0]]+"*5")
         L2();
@@ -23,7 +24,7 @@ function bonusCacl() {
         L2();
     } else if (ary[0][slotR[0]]== ary[1][slotR[1]]&& ary[1][slotR[1]]== ary[2][slotR[2]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[0]], score, bet, 3)
+        bonusCount(ary[0][slotR[0]], score, bet, 2)
         console.log("0 1 2 ")
         gameRA.push("Line 2 :"+ary[0][slotR[0]]+"*3")
         L2();
@@ -33,7 +34,7 @@ function bonusCacl() {
     if (ary[0][slotR[5]]== ary[1][slotR[6]] && ary[1][slotR[6]] == ary[2][slotR[7]] && ary[2][slotR[7]] == slotR[
             8] && ary[3][slotR[8]] == ary[4][slotR[9]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[5]], score, bet, 5)
+        bonusCount(ary[0][slotR[5]], score, bet, 20)
         console.log("5 6 7 8 9")
         gameRA.push("Line 1 :"+ary[0][slotR[5]]+"*5")
         L1();
@@ -47,7 +48,7 @@ function bonusCacl() {
         L1();
     } else if (ary[0][slotR[5]]== ary[1][slotR[6]] && ary[1][slotR[6]] == ary[2][slotR[7]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[5]], score, bet, 3)
+        bonusCount(ary[0][slotR[5]], score, bet, 2)
         console.log("5 6 7")
         gameRA.push("Line 1 :"+ary[0][slotR[5]]+"*3")
         L1();
@@ -56,7 +57,7 @@ function bonusCacl() {
     if (ary[0][slotR[10]]== ary[1][slotR[11]] && ary[1][slotR[11]] == ary[2][slotR[12]] && ary[2][slotR[12]] ==
         ary[3][slotR[13]] && ary[3][slotR[13]] == ary[4][slotR[14]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[10]], score, bet, 5)
+        bonusCount(ary[0][slotR[10]], score, bet, 20)
         console.log("10 11 12 13 14")
         gameRA.push("Line 3 :"+ary[0][slotR[10]]+"*5")
         L3();
@@ -71,7 +72,7 @@ function bonusCacl() {
     } else if (ary[0][slotR[10]]== ary[1][slotR[11]] && ary[1][slotR[11]] == slotR[
             12]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[10]], score, bet, 3)
+        bonusCount(ary[0][slotR[10]], score, bet, 2)
         console.log("10 11 12")
         gameRA.push("Line 3 :"+ary[0][slotR[10]]+"*3")
         L3();
@@ -80,7 +81,7 @@ function bonusCacl() {
     if (ary[0][slotR[0]]== ary[1][slotR[6]] && ary[1][slotR[6]] == ary[2][slotR[12]] && ary[2][slotR[12]] ==
         ary[3][slotR[8]] && ary[3][slotR[8]] == ary[4][slotR[4]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[0]], score, bet, 5)
+        bonusCount(ary[0][slotR[0]], score, bet, 20)
         console.log("0 6 12 8 4");
         gameRA.push("Line 4 :"+ary[0][slotR[0]]+"*5")
         L4();
@@ -93,7 +94,7 @@ function bonusCacl() {
         L4();
     } else if (ary[0][slotR[0]]== ary[1][slotR[6]] && ary[1][slotR[6]] == ary[2][slotR[12]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[0]], score, bet, 3)
+        bonusCount(ary[0][slotR[0]], score, bet, 2)
         console.log("0 6 12")
         gameRA.push("Line 4 :"+ary[0][slotR[0]]+"*3")
         L4();
@@ -102,7 +103,7 @@ function bonusCacl() {
     if (ary[0][slotR[10]]== ary[1][slotR[6]] && ary[1][slotR[6]] == ary[2][slotR[2]] && ary[2][slotR[2]] == slotR[
             8] && ary[3][slotR[8]] == ary[4][slotR[14]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[10]], score, bet, 5)
+        bonusCount(ary[0][slotR[10]], score, bet, 20)
         console.log("10 6 2 8 14")
         gameRA.push("Line 5 :"+ary[0][slotR[10]]+"*5")
         L5();
@@ -115,7 +116,7 @@ function bonusCacl() {
         L5();
     } else if (ary[0][slotR[10]]== ary[1][slotR[6]] && ary[1][slotR[6]] == ary[2][slotR[2]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[10]], score, bet, 3)
+        bonusCount(ary[0][slotR[10]], score, bet, 2)
         console.log("10 6 2")
         gameRA.push("Line 5 :"+ary[0][slotR[10]]+"*3")
         L5();
@@ -125,7 +126,7 @@ function bonusCacl() {
     if (ary[0][slotR[0]]== ary[1][slotR[1]]&& ary[1][slotR[1]]== ary[2][slotR[7]] && ary[2][slotR[7]] == slotR[
             3] && ary[3][slotR[3]] == ary[4][slotR[4]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[0]], score, bet, 5)
+        bonusCount(ary[0][slotR[0]], score, bet, 20)
         console.log("0 1 7 3 4")
         gameRA.push("Line 6 :"+ary[0][slotR[0]]+"*5")
         L6();
@@ -138,7 +139,7 @@ function bonusCacl() {
         L6();
     } else if (ary[0][slotR[0]]== ary[1][slotR[1]]&& ary[1][slotR[1]]== ary[2][slotR[7]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[0]], score, bet, 3)
+        bonusCount(ary[0][slotR[0]], score, bet, 2)
         console.log("0 1 7")
         gameRA.push("Line 6 :"+ary[0][slotR[0]]+"*3")
         L6();
@@ -148,7 +149,7 @@ function bonusCacl() {
     if (ary[0][slotR[10]]== ary[1][slotR[11]] && ary[1][slotR[11]] == ary[2][slotR[7]] && ary[2][slotR[7]] == slotR[
             3] && ary[3][slotR[3]] == ary[4][slotR[4]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[10]], score, bet, 5)
+        bonusCount(ary[0][slotR[10]], score, bet, 20)
         console.log("10 11 7 13 14")
         gameRA.push("Line 7 :"+ary[0][slotR[10]]+"*5")
         L7();
@@ -161,7 +162,7 @@ function bonusCacl() {
         L7();
     } else if (ary[0][slotR[10]]== ary[1][slotR[11]] && ary[1][slotR[11]] == ary[2][slotR[7]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[10]], score, bet, 3)
+        bonusCount(ary[0][slotR[10]], score, bet, 2)
         console.log("10 11 7")
         gameRA.push("Line 7 :"+ary[0][slotR[10]]+"*3")
         L7();
@@ -171,7 +172,7 @@ function bonusCacl() {
     if (ary[0][slotR[5]]== ary[1][slotR[1]]&& ary[1][slotR[1]]== ary[2][slotR[2]] && ary[2][slotR[2]] == slotR[
             3] && ary[3][slotR[3]] == ary[4][slotR[9]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[5]], score, bet, 5)
+        bonusCount(ary[0][slotR[5]], score, bet, 20)
         console.log("5 1 2 3 9")
         gameRA.push("Line 8 :"+ary[0][slotR[5]]+"*5")
         L8();
@@ -184,7 +185,7 @@ function bonusCacl() {
         L8();
     } else if (ary[0][slotR[5]]== ary[1][slotR[1]]&& ary[1][slotR[1]]== ary[2][slotR[2]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[5]], score, bet, 3)
+        bonusCount(ary[0][slotR[5]], score, bet, 2)
         gameRA.push("Line 8 :"+ary[0][slotR[5]]+"*3")
         console.log("5 1 2")
         L8();
@@ -194,7 +195,7 @@ function bonusCacl() {
     if (ary[0][slotR[5]]== ary[1][slotR[11]] && ary[1][slotR[11]] == ary[2][slotR[12]] && ary[2][slotR[12]] ==
         ary[3][slotR[13]] && ary[3][slotR[13]] == ary[4][slotR[9]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[5]], score, bet, 5)
+        bonusCount(ary[0][slotR[5]], score, bet, 20)
         console.log("5 11 12 13 9")
         gameRA.push("Line 9 :"+ary[0][slotR[5]]+"*5")
         L9();
@@ -207,7 +208,7 @@ function bonusCacl() {
         L9();
     } else if (ary[0][slotR[5]]== ary[1][slotR[11]] && ary[1][slotR[11]] == ary[2][slotR[12]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[5]], score, bet, 3)
+        bonusCount(ary[0][slotR[5]], score, bet, 2)
         console.log("5 11 12")
         gameRA.push("Line 9 :"+ary[0][slotR[5]]+"*3")
         L9();
@@ -217,7 +218,7 @@ function bonusCacl() {
     if (ary[0][slotR[5]]== ary[1][slotR[1]]&& ary[1][slotR[1]]== ary[2][slotR[7]] && ary[2][slotR[7]] == slotR[
             3] && ary[3][slotR[3]] == ary[4][slotR[9]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[5]], score, bet, 5)
+        bonusCount(ary[0][slotR[5]], score, bet, 20)
         console.log("5 1 7 3 9")
         gameRA.push("Line 10 :"+ary[0][slotR[5]]+"*5")
         L10();
@@ -230,7 +231,7 @@ function bonusCacl() {
         L10();
     } else if (ary[0][slotR[5]]== ary[1][slotR[1]]&& ary[1][slotR[1]]== ary[2][slotR[7]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[5]], score, bet, 3)
+        bonusCount(ary[0][slotR[5]], score, bet, 2)
         console.log("5 1 7")
         gameRA.push("Line 10 :"+ary[0][slotR[5]]+"*3")
         L10();
@@ -239,7 +240,7 @@ function bonusCacl() {
     if (ary[0][slotR[5]]== ary[1][slotR[11]] && ary[1][slotR[11]] == ary[2][slotR[7]] && ary[2][slotR[7]] == slotR[
             13] && ary[3][slotR[13]] == ary[4][slotR[9]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[5]], score, bet, 5)
+        bonusCount(ary[0][slotR[5]], score, bet, 20)
         console.log("5 11 7 13 9")
         gameRA.push("Line 11 :"+ary[0][slotR[5]]+"*5")
         L11();
@@ -252,7 +253,7 @@ function bonusCacl() {
         L11();
     } else if (ary[0][slotR[5]]== ary[1][slotR[11]] && ary[1][slotR[11]] == ary[2][slotR[7]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[5]], score, bet, 3)
+        bonusCount(ary[0][slotR[5]], score, bet, 2)
         console.log("5 11 7")
         gameRA.push("Line 11 :"+ary[0][slotR[5]]+"*3")
         L11();
@@ -260,7 +261,7 @@ function bonusCacl() {
     //12.0 6 2 8 4
     if (ary[0][slotR[0]]== ary[1][slotR[6]] && ary[1][slotR[6]] == ary[2][slotR[2]] && ary[2][slotR[2]] == ary[3][slotR[8]] && ary[3][slotR[8]] == ary[4][slotR[4]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[0]], score, bet, 5)
+        bonusCount(ary[0][slotR[0]], score, bet, 20)
         console.log("0 6 2 8 4")
         gameRA.push("Line 12 :"+ary[0][slotR[0]]+"*5")
         L12();
@@ -272,7 +273,7 @@ function bonusCacl() {
         L12();
     } else if (ary[0][slotR[0]]== ary[1][slotR[6]] && ary[1][slotR[6]] == ary[2][slotR[2]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[0]], score, bet, 3)
+        bonusCount(ary[0][slotR[0]], score, bet, 2)
         console.log("0 6 2")
         gameRA.push("Line 12 :"+ary[0][slotR[0]]+"*3")
         L12();
@@ -282,7 +283,7 @@ function bonusCacl() {
     if (ary[0][slotR[10]]== ary[1][slotR[6]] && ary[1][slotR[6]] == ary[2][slotR[12]] && ary[2][slotR[12]] ==
         ary[3][slotR[8]] && ary[3][slotR[8]] == ary[4][slotR[14]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[10]], score, bet, 5)
+        bonusCount(ary[0][slotR[10]], score, bet, 20)
         console.log("10 6 12 8 14")
         gameRA.push("Line 13 :"+ary[0][slotR[10]]+"*5")
         L13();
@@ -295,7 +296,7 @@ function bonusCacl() {
         L13();
     } else if (ary[0][slotR[10]]== ary[1][slotR[6]] && ary[1][slotR[6]] == ary[2][slotR[12]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[10]], score, bet, 3)
+        bonusCount(ary[0][slotR[10]], score, bet, 2)
         console.log("10 6 12")
         gameRA.push("Line 13 :"+ary[0][slotR[10]]+"*3")
         L13();
@@ -304,7 +305,7 @@ function bonusCacl() {
     //14.5 6 2 8 9
     if (ary[0][slotR[5]]== ary[1][slotR[6]] && ary[1][slotR[6]] == ary[2][slotR[2]] && ary[2][slotR[2]] == ary[3][slotR[8]] && ary[3][slotR[8]] == ary[4][slotR[9]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[5]], score, bet, 5)
+        bonusCount(ary[0][slotR[5]], score, bet, 20)
         console.log("5 6 2 8 9")
         gameRA.push("Line 14 :"+ary[0][slotR[5]]+"*5")
         L14();
@@ -316,7 +317,7 @@ function bonusCacl() {
         L14();
     } else if (ary[0][slotR[5]]== ary[1][slotR[6]] && ary[1][slotR[6]] == ary[2][slotR[2]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[5]], score, bet, 3)
+        bonusCount(ary[0][slotR[5]], score, bet, 2)
         console.log("5 6 2")
         gameRA.push("Line 14 :"+ary[0][slotR[5]]+"*3")
         L14();
@@ -325,7 +326,7 @@ function bonusCacl() {
     //15.5 6 12 8 9
     if (ary[0][slotR[5]]== ary[1][slotR[6]] && ary[1][slotR[6]] == ary[2][slotR[12]] && ary[2][slotR[12]] == ary[3][slotR[8]] && ary[3][slotR[8]] == ary[4][slotR[9]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[5]], score, bet, 5)
+        bonusCount(ary[0][slotR[5]], score, bet, 20)
         console.log("5 6 12 8 9")
         gameRA.push("Line 15 :"+ary[0][slotR[5]]+"*5")
         L15();
@@ -337,7 +338,7 @@ function bonusCacl() {
         L15();
     } else if (ary[0][slotR[5]]== ary[1][slotR[6]] && ary[1][slotR[6]] == ary[2][slotR[12]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[5]], score, bet, 3)
+        bonusCount(ary[0][slotR[5]], score, bet, 2)
         console.log("5 6 12")
         gameRA.push("Line 15 :"+ary[0][slotR[5]]+"*3")
         L15();
@@ -346,7 +347,7 @@ function bonusCacl() {
     //16.0 6 7 8 4
     if (ary[0][slotR[0]]== ary[1][slotR[6]] && ary[1][slotR[6]] == ary[2][slotR[7]] && ary[2][slotR[7]] == ary[3][slotR[8]] && ary[3][slotR[8]] == ary[4][slotR[4]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[0]], score, bet, 5)
+        bonusCount(ary[0][slotR[0]], score, bet, 20)
         console.log("0 6 7 8 4")
         gameRA.push("Line 16 :"+ary[0][slotR[0]]+"*5")
         L16();
@@ -358,7 +359,7 @@ function bonusCacl() {
         L16();
     } else if (ary[0][slotR[0]]== ary[1][slotR[6]] && ary[1][slotR[6]] == ary[2][slotR[7]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[0]], score, bet, 3)
+        bonusCount(ary[0][slotR[0]], score, bet, 2)
         console.log("0 6 7")
         gameRA.push("Line 16 :"+ary[0][slotR[0]]+"*3")
         L16();
@@ -366,7 +367,7 @@ function bonusCacl() {
     //17.10 6 7 8 14
     if (ary[0][slotR[10]]== ary[1][slotR[6]] && ary[1][slotR[6]] == ary[2][slotR[7]] && ary[2][slotR[7]] == ary[3][slotR[8]] && ary[3][slotR[8]] == ary[4][slotR[14]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[10]], score, bet, 5)
+        bonusCount(ary[0][slotR[10]], score, bet, 20)
         console.log("10 6 7 8 14")
         gameRA.push("Line 17 :"+ary[0][slotR[10]]+"*5")
         L17();
@@ -378,7 +379,7 @@ function bonusCacl() {
         L17();
     } else if (ary[0][slotR[10]]== ary[1][slotR[6]] && ary[1][slotR[6]] == ary[2][slotR[7]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[10]], score, bet, 3)
+        bonusCount(ary[0][slotR[10]], score, bet, 2)
         console.log("10 6 7")
         gameRA.push("Line 17 :"+ary[0][slotR[10]]+"*3")
         L17();
@@ -387,7 +388,7 @@ function bonusCacl() {
     //18.0 6 12 13 14
     if (ary[0][slotR[0]]== ary[1][slotR[6]] && ary[1][slotR[6]] == ary[2][slotR[12]] && ary[2][slotR[12]] == ary[3][slotR[13]] && ary[3][slotR[13]] == ary[4][slotR[14]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[0]], score, bet, 5)
+        bonusCount(ary[0][slotR[0]], score, bet, 20)
         console.log("0 6 12 13 14")
         gameRA.push("Line 18 :"+ary[0][slotR[0]]+"*5")
         L18();
@@ -403,7 +404,7 @@ function bonusCacl() {
     //19.10 6 2 3 4
     if (ary[0][slotR[10]]== ary[1][slotR[6]] && ary[1][slotR[6]] == ary[2][slotR[2]] && ary[2][slotR[2]] == ary[3][slotR[3]] && ary[3][slotR[3]] == ary[4][slotR[4]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[10]], score, bet, 5)
+        bonusCount(ary[0][slotR[10]], score, bet, 20)
         console.log("10 6 2 3 4")
         gameRA.push("Line 19 :"+ary[0][slotR[10]]+"*5")
         L19();
@@ -418,7 +419,7 @@ function bonusCacl() {
     //20.0 11 2 13 4
     if (ary[0][slotR[0]]== ary[1][slotR[11]] && ary[1][slotR[11]] == ary[2][slotR[2]] && ary[2][slotR[2]] == ary[3][slotR[13]] && ary[3][slotR[13]] == ary[4][slotR[4]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[0]], score, bet, 5)
+        bonusCount(ary[0][slotR[0]], score, bet, 20)
         console.log("0 11 2 13 4")
         gameRA.push("Line 20 :"+ary[0][slotR[0]]+"*5")
         L20();
@@ -430,7 +431,7 @@ function bonusCacl() {
         L20();
     } else if (ary[0][slotR[0]]== ary[1][slotR[11]] && ary[1][slotR[11]] == ary[2][slotR[2]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[0]], score, bet, 3)
+        bonusCount(ary[0][slotR[0]], score, bet, 2)
         console.log("0 11 2")
         gameRA.push("Line 20 :"+ary[0][slotR[0]]+"*3")
         L20();
@@ -440,7 +441,7 @@ function bonusCacl() {
     if (ary[0][slotR[10]]== ary[1][slotR[1]]&& ary[1][slotR[1]]== ary[2][slotR[12]] && ary[2][slotR[12]] ==
         ary[3][slotR[3]] && ary[3][slotR[3]] == ary[4][slotR[14]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[10]], score, bet, 5)
+        bonusCount(ary[0][slotR[10]], score, bet, 20)
         console.log("10 1 12 3 14")
         gameRA.push("Line 21 :"+ary[0][slotR[10]]+"*5")
         L21();
@@ -453,7 +454,7 @@ function bonusCacl() {
         L21();
     } else if (ary[0][slotR[10]]== ary[1][slotR[1]]&& ary[1][slotR[1]]== ary[2][slotR[12]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[10]], score, bet, 3)
+        bonusCount(ary[0][slotR[10]], score, bet, 2)
         console.log("10 1 12")
         gameRA.push("Line 21 :"+ary[0][slotR[10]]+"*3")
         L21();
@@ -462,7 +463,7 @@ function bonusCacl() {
     //22.5 1 12 3 9
     if (ary[0][slotR[5]]== ary[1][slotR[1]]&& ary[1][slotR[1]]== ary[2][slotR[12]] && ary[2][slotR[12]] == ary[3][slotR[3]] && ary[3][slotR[3]] == ary[4][slotR[9]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[5]], score, bet, 5)
+        bonusCount(ary[0][slotR[5]], score, bet, 20)
         console.log("5 1 12 3 9")
         gameRA.push("Line 22 :"+ary[0][slotR[5]]+"*5")
         L22();
@@ -474,7 +475,7 @@ function bonusCacl() {
         L22();
     } else if (ary[0][slotR[5]]== ary[1][slotR[1]]&& ary[1][slotR[1]]== ary[2][slotR[12]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[5]], score, bet, 3)
+        bonusCount(ary[0][slotR[5]], score, bet, 2)
         console.log("5 1 12")
         gameRA.push("Line 22 :"+ary[0][slotR[5]]+"*3")
         L22();
@@ -483,7 +484,7 @@ function bonusCacl() {
     //23.5 11 2 13 9
     if (ary[0][slotR[5]]== ary[1][slotR[11]] && ary[1][slotR[11]] == ary[2][slotR[2]] && ary[2][slotR[2]] == ary[3][slotR[13]] && ary[3][slotR[13]] == ary[4][slotR[9]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[5]], score, bet, 5)
+        bonusCount(ary[0][slotR[5]], score, bet, 20)
         console.log("5 11 2 13 9")
         gameRA.push("Line 23 :"+ary[0][slotR[5]]+"*5")
         L23();
@@ -495,7 +496,7 @@ function bonusCacl() {
         L23();
     } else if (ary[0][slotR[5]]== ary[1][slotR[11]] && ary[1][slotR[11]] == ary[2][slotR[2]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[5]], score, bet, 3)
+        bonusCount(ary[0][slotR[5]], score, bet, 2)
         console.log("5 11 2")
         gameRA.push("Line 23 :"+ary[0][slotR[5]]+"*3")
         L23();
@@ -504,7 +505,7 @@ function bonusCacl() {
     //24.0 1 7 13 14
     if (ary[0][slotR[0]]== ary[1][slotR[1]]&& ary[1][slotR[1]]== ary[2][slotR[7]] && ary[2][slotR[7]] == ary[3][slotR[13]] && ary[3][slotR[13]] == ary[4][slotR[14]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[0]], score, bet, 5)
+        bonusCount(ary[0][slotR[0]], score, bet, 20)
         console.log("0 1 7 13 14")
         gameRA.push("Line 24 :"+ary[0][slotR[0]]+"*5")
         L24();
@@ -520,7 +521,7 @@ function bonusCacl() {
     if (ary[0][slotR[10]]== ary[1][slotR[11]] && ary[1][slotR[11]] == ary[2][slotR[7]] && ary[2][slotR[7]] ==
         ary[3][slotR[3]] && ary[3][slotR[3]] == ary[4][slotR[4]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[10]], score, bet, 5)
+        bonusCount(ary[0][slotR[10]], score, bet, 20)
         console.log("10 11 7 3 4")
         gameRA.push("Line 25 :"+ary[0][slotR[10]]+"*5")
         L25();
@@ -536,7 +537,7 @@ function bonusCacl() {
     //26.5 11 7 3 9
     if (ary[0][slotR[5]]== ary[1][slotR[11]] && ary[1][slotR[11]] == ary[2][slotR[7]] && ary[2][slotR[7]] == ary[3][slotR[3]] && ary[3][slotR[3]] == ary[4][slotR[9]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[5]], score, bet, 5)
+        bonusCount(ary[0][slotR[5]], score, bet, 20)
         console.log("5 11 7 3 9")
         gameRA.push("Line 26 :"+ary[0][slotR[5]]+"*5")
         L26();
@@ -551,7 +552,7 @@ function bonusCacl() {
     //27.5 1 7 13 9
     if (ary[0][slotR[5]]== ary[1][slotR[1]]&& ary[1][slotR[1]]== ary[2][slotR[7]] && ary[2][slotR[7]] == ary[3][slotR[13]] && ary[3][slotR[13]] == ary[4][slotR[9]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[5]], score, bet, 5)
+        bonusCount(ary[0][slotR[5]], score, bet, 20)
         console.log("5 1 7 13 9")
         gameRA.push("Line 27 :"+ary[0][slotR[5]]+"*5")
         L27();
@@ -565,7 +566,7 @@ function bonusCacl() {
     //28.0 1 12 3 4
     if (ary[0][slotR[0]]== ary[1][slotR[1]]&& ary[1][slotR[1]]== ary[2][slotR[12]] && ary[2][slotR[12]] == ary[3][slotR[3]] && ary[3][slotR[3]] == ary[4][slotR[4]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[0]], score, bet, 5)
+        bonusCount(ary[0][slotR[0]], score, bet, 20)
         console.log("0 1 12 3 4")
         gameRA.push("Line 28 :"+ary[0][slotR[0]]+"*5")
         L28();
@@ -577,7 +578,7 @@ function bonusCacl() {
         L28();
     } else if (ary[0][slotR[0]]== ary[1][slotR[1]]&& ary[1][slotR[1]]== ary[2][slotR[12]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[0]], score, bet, 3)
+        bonusCount(ary[0][slotR[0]], score, bet, 2)
         console.log("0 1 12")
         gameRA.push("Line 28 :"+ary[0][slotR[0]]+"*3")
         L28();
@@ -587,7 +588,7 @@ function bonusCacl() {
     if (ary[0][slotR[10]]== ary[1][slotR[11]] && ary[1][slotR[11]] == ary[2][slotR[2]] && ary[2][slotR[2]] ==
         ary[3][slotR[13]] && ary[3][slotR[13]] == ary[4][slotR[14]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[10]], score, bet, 5)
+        bonusCount(ary[0][slotR[10]], score, bet, 20)
         console.log("10 11 2 13 14")
         gameRA.push("Line 29 :"+ary[0][slotR[10]]+"*5")
         L29();
@@ -600,7 +601,7 @@ function bonusCacl() {
         L29();
     } else if (ary[0][slotR[10]]== ary[1][slotR[11]] && ary[1][slotR[11]] == ary[2][slotR[2]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[10]], score, bet, 3)
+        bonusCount(ary[0][slotR[10]], score, bet, 2)
         console.log("10 11 2")
         gameRA.push("Line 29 :"+ary[0][slotR[10]]+"*3")
         L29();
@@ -610,7 +611,7 @@ function bonusCacl() {
     if (ary[0][slotR[0]]== ary[1][slotR[11]] && ary[1][slotR[11]] == ary[2][slotR[12]] && ary[2][slotR[12]] ==
         ary[3][slotR[13]] && ary[3][slotR[13]] == ary[4][slotR[4]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[0]], score, bet, 5)
+        bonusCount(ary[0][slotR[0]], score, bet, 20)
         console.log("0 11 12 13 4")
         gameRA.push("Line 30 :"+ary[0][slotR[0]]+"*5")
         L30();
@@ -623,7 +624,7 @@ function bonusCacl() {
         L30();
     } else if (ary[0][slotR[0]]== ary[1][slotR[11]] && ary[1][slotR[11]] == ary[2][slotR[12]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[0]], score, bet, 3)
+        bonusCount(ary[0][slotR[0]], score, bet, 2)
         console.log("0 11 12")
         gameRA.push("Line 30 :"+ary[0][slotR[0]]+"*3")
         L30();
@@ -632,7 +633,7 @@ function bonusCacl() {
     //31.10 1 2 3 14
     if (ary[0][slotR[10]]== ary[1][slotR[1]]&& ary[1][slotR[1]]== ary[2][slotR[2]] && ary[2][slotR[2]] == ary[3][slotR[3]] && ary[3][slotR[3]] == ary[4][slotR[14]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[10]], score, bet, 5)
+        bonusCount(ary[0][slotR[10]], score, bet, 20)
         console.log("10 1 2 3 14")
         gameRA.push("Line 31 :"+ary[0][slotR[10]]+"*5")
         L31();
@@ -644,7 +645,7 @@ function bonusCacl() {
         L31();
     } else if (ary[0][slotR[10]]== ary[1][slotR[1]]&& ary[1][slotR[1]]== ary[2][slotR[2]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[10]], score, bet, 3)
+        bonusCount(ary[0][slotR[10]], score, bet, 2)
         console.log("10 1 2")
         gameRA.push("Line 31 :"+ary[0][slotR[10]]+"*3")
         L31();
@@ -653,7 +654,7 @@ function bonusCacl() {
     //32.0 11 7 3 14
     if (ary[0][slotR[0]]== ary[1][slotR[11]] && ary[1][slotR[11]] == ary[2][slotR[7]] && ary[2][slotR[7]] == ary[3][slotR[3]] && ary[3][slotR[3]] == ary[4][slotR[14]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[0]], score, bet, 5)
+        bonusCount(ary[0][slotR[0]], score, bet, 20)
         console.log("0 11 7 3 14")
         gameRA.push("Line 32 :"+ary[0][slotR[0]]+"*5")
         L32();
@@ -665,7 +666,7 @@ function bonusCacl() {
         L32();
     } else if (ary[0][slotR[0]]== ary[1][slotR[11]] && ary[1][slotR[11]] == ary[2][slotR[7]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[0]], score, bet, 3)
+        bonusCount(ary[0][slotR[0]], score, bet, 2)
         console.log("0 11 7")
         gameRA.push("Line 32 :"+ary[0][slotR[0]]+"*3")
         L32();
@@ -674,7 +675,7 @@ function bonusCacl() {
     //33.10 1 7 13 4
     if (ary[0][slotR[10]]== ary[1][slotR[1]]&& ary[1][slotR[1]]== ary[2][slotR[7]] && ary[2][slotR[7]] == ary[3][slotR[13]] && ary[3][slotR[13]] == ary[4][slotR[4]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[10]], score, bet, 5)
+        bonusCount(ary[0][slotR[10]], score, bet, 20)
         console.log("10 1 7 13 4")
         gameRA.push("Line 33 :"+ary[0][slotR[10]]+"*5")
         L33();
@@ -686,7 +687,7 @@ function bonusCacl() {
         L33();
     } else if (ary[0][slotR[10]]== ary[1][slotR[1]]&& ary[1][slotR[1]]== ary[2][slotR[7]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[10]], score, bet, 3)
+        bonusCount(ary[0][slotR[10]], score, bet, 2)
         console.log("10 1 7")
         gameRA.push("Line 33 :"+ary[0][slotR[10]]+"*3")
         L33();
@@ -695,7 +696,7 @@ function bonusCacl() {
     //34.5 1 12 8 14
     if (ary[0][slotR[5]]== ary[1][slotR[1]]&& ary[1][slotR[1]]== ary[2][slotR[12]] && ary[2][slotR[12]] == ary[3][slotR[8]] && ary[3][slotR[8]] == ary[4][slotR[14]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[5]], score, bet, 5)
+        bonusCount(ary[0][slotR[5]], score, bet, 20)
         console.log("5 1 12 8 14")
         gameRA.push("Line 34 :"+ary[0][slotR[5]]+"*5")
         L34();
@@ -710,7 +711,7 @@ function bonusCacl() {
     //35.0 11 7 13 4
     if (ary[0][slotR[0]]== ary[1][slotR[11]] && ary[1][slotR[11]] == ary[2][slotR[7]] && ary[2][slotR[7]] == ary[3][slotR[13]] && ary[3][slotR[13]] == ary[4][slotR[4]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[0]], score, bet, 5)
+        bonusCount(ary[0][slotR[0]], score, bet, 20)
         console.log("0 11 7 13 4")
         gameRA.push("Line 35 :"+ary[0][slotR[0]]+"*5")
         L35();
@@ -724,7 +725,7 @@ function bonusCacl() {
     //36.0 6 2 8 14
     if (ary[0][slotR[0]]== ary[1][slotR[6]] && ary[1][slotR[6]] == ary[2][slotR[2]] && ary[2][slotR[2]] == ary[3][slotR[8]] && ary[3][slotR[8]] == ary[4][slotR[14]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[0]], score, bet, 5)
+        bonusCount(ary[0][slotR[0]], score, bet, 20)
         console.log("0 6 2 8 14")
         gameRA.push("Line 36 :"+ary[0][slotR[0]]+"*5")
         L36();
@@ -734,7 +735,7 @@ function bonusCacl() {
     if (ary[0][slotR[10]]== ary[1][slotR[6]] && ary[1][slotR[6]] == ary[2][slotR[12]] && ary[2][slotR[12]] ==
         ary[3][slotR[3]] && ary[3][slotR[3]] == ary[4][slotR[4]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[10]], score, bet, 5)
+        bonusCount(ary[0][slotR[10]], score, bet, 20)
         console.log("10 6 12 3 4")
         gameRA.push("Line 37 :"+ary[0][slotR[10]]+"*5")
         L37();
@@ -750,7 +751,7 @@ function bonusCacl() {
     //38.10 1 2 8 14
     if (ary[0][slotR[10]]== ary[1][slotR[1]]&& ary[1][slotR[1]]== ary[2][slotR[2]] && ary[2][slotR[2]] == ary[3][slotR[8]] && ary[3][slotR[8]] == ary[4][slotR[14]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[10]], score, bet, 5)
+        bonusCount(ary[0][slotR[10]], score, bet, 20)
         console.log("10 1 2 8 14")
         gameRA.push("Line 38 :"+ary[0][slotR[10]]+"*5")
         L38();
@@ -766,7 +767,7 @@ function bonusCacl() {
     if (ary[0][slotR[5]]== ary[1][slotR[11]] && ary[1][slotR[11]] == ary[2][slotR[12]] && ary[2][slotR[12]] ==
         ary[3][slotR[3]] && ary[3][slotR[3]] == ary[4][slotR[4]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[5]], score, bet, 5)
+        bonusCount(ary[0][slotR[5]], score, bet, 20)
         console.log("5 11 12 3 4")
         gameRA.push("Line 39 :"+ary[0][slotR[5]]+"*5")
         L39();
@@ -782,7 +783,7 @@ function bonusCacl() {
     //40.0 1 7 8 14
     if (ary[0][slotR[0]]== ary[1][slotR[1]]&& ary[1][slotR[1]]== ary[2][slotR[7]] && ary[2][slotR[7]] == ary[3][slotR[8]] && ary[3][slotR[8]] == ary[4][slotR[14]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[0]], score, bet, 5)
+        bonusCount(ary[0][slotR[0]], score, bet, 20)
         console.log("0 1 7 8 14")
         gameRA.push("Line 40 :"+ary[0][slotR[0]]+"*5")
         L40();
@@ -798,7 +799,7 @@ function bonusCacl() {
     if (ary[0][slotR[10]]== ary[1][slotR[11]] && ary[1][slotR[11]] == ary[2][slotR[2]] && ary[2][slotR[2]] ==
         ary[3][slotR[8]] && ary[3][slotR[8]] == ary[4][slotR[4]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[10]], score, bet, 5)
+        bonusCount(ary[0][slotR[10]], score, bet, 20)
         console.log("10 11 2 8 4")
         gameRA.push("Line 41 :"+ary[0][slotR[10]]+"*5")
         L41();
@@ -813,7 +814,7 @@ function bonusCacl() {
     //42.0 1 12 13 14
     if (ary[0][slotR[0]]== ary[1][slotR[1]]&& ary[1][slotR[1]]== ary[2][slotR[12]] && ary[2][slotR[12]] == ary[3][slotR[13]] && ary[3][slotR[13]] == ary[4][slotR[14]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[0]], score, bet, 5)
+        bonusCount(ary[0][slotR[0]], score, bet, 20)
         console.log("0 1 12 13 14")
         gameRA.push("Line 42 :"+ary[0][slotR[0]]+"*5")
         L42();
@@ -828,7 +829,7 @@ function bonusCacl() {
     if (ary[0][slotR[10]]== ary[1][slotR[11]] && ary[1][slotR[11]] == ary[2][slotR[2]] && ary[2][slotR[2]] ==
         ary[3][slotR[3]] && ary[3][slotR[3]] == ary[4][slotR[4]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[10]], score, bet, 5)
+        bonusCount(ary[0][slotR[10]], score, bet, 20)
         console.log("10 11 2 3 4")
         gameRA.push("Line 43 :"+ary[0][slotR[10]]+"*5")
         L43();
@@ -844,7 +845,7 @@ function bonusCacl() {
     //44.5 11 2 8 14
     if (ary[0][slotR[5]]== ary[1][slotR[11]] && ary[1][slotR[11]] == ary[2][slotR[2]] && ary[2][slotR[2]] == ary[3][slotR[8]] && ary[3][slotR[8]] == ary[4][slotR[14]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[5]], score, bet, 5)
+        bonusCount(ary[0][slotR[5]], score, bet, 20)
         console.log("5 11 2 8 14")
         gameRA.push("Line 44 :"+ary[0][slotR[5]]+"*5")
         L44();
@@ -858,7 +859,7 @@ function bonusCacl() {
     //45.5 1 12 8 4
     if (ary[0][slotR[5]]== ary[1][slotR[1]]&& ary[1][slotR[1]]== ary[2][slotR[12]] && ary[2][slotR[12]] == ary[3][slotR[8]] && ary[3][slotR[8]] == ary[4][slotR[4]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[5]], score, bet, 5)
+        bonusCount(ary[0][slotR[5]], score, bet, 20)
         console.log("5 1 12 8 4")
         gameRA.push("Line 45 :"+ary[0][slotR[5]]+"*5")
         L45();
@@ -867,7 +868,7 @@ function bonusCacl() {
     //46.0 6 12 8 9
     if (ary[0][slotR[0]]== ary[1][slotR[6]] && ary[1][slotR[6]] == ary[2][slotR[12]] && ary[2][slotR[12]] == ary[3][slotR[8]] && ary[3][slotR[8]] == ary[4][slotR[9]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[0]], score, bet, 5)
+        bonusCount(ary[0][slotR[0]], score, bet, 20)
         console.log("0 6 12 8 9")
         gameRA.push("Line 46 :"+ary[0][slotR[0]]+"*5")
         L46();
@@ -875,7 +876,7 @@ function bonusCacl() {
     //47.10 6 2 13 9
     if (ary[0][slotR[10]]== ary[1][slotR[6]] && ary[1][slotR[6]] == ary[2][slotR[2]] && ary[2][slotR[2]] == ary[3][slotR[13]] && ary[3][slotR[13]] == ary[4][slotR[9]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[10]], score, bet, 5)
+        bonusCount(ary[0][slotR[10]], score, bet, 20)
         console.log("10 6 2 13 9")
         gameRA.push("Line 47 :"+ary[0][slotR[10]]+"*5")
         L47();
@@ -889,7 +890,7 @@ function bonusCacl() {
     //48.5 11 7 3 4
     if (ary[0][slotR[5]]== ary[1][slotR[11]] && ary[1][slotR[11]] == ary[2][slotR[7]] && ary[2][slotR[7]] == ary[3][slotR[3]] && ary[3][slotR[3]] == ary[4][slotR[4]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[5]], score, bet, 5)
+        bonusCount(ary[0][slotR[5]], score, bet, 20)
         console.log("5 11 7 3 4")
         gameRA.push("Line 48 :"+ary[0][slotR[5]]+"*5")
         L48();
@@ -897,7 +898,7 @@ function bonusCacl() {
     //49.5 1 7 13 14
     if (ary[0][slotR[5]]== ary[1][slotR[1]]&& ary[1][slotR[1]]== ary[2][slotR[7]] && ary[2][slotR[7]] == ary[3][slotR[13]] && ary[3][slotR[13]] == ary[4][slotR[14]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[5]], score, bet, 5)
+        bonusCount(ary[0][slotR[5]], score, bet, 20)
         console.log("5 1 7 13 14")
         gameRA.push("Line 49 :"+ary[0][slotR[5]]+"*5")
         L49();
@@ -906,7 +907,7 @@ function bonusCacl() {
     if (ary[0][slotR[10]]== ary[1][slotR[6]] && ary[1][slotR[6]] == ary[2][slotR[12]] && ary[2][slotR[12]] ==
         ary[3][slotR[3]] && ary[3][slotR[3]] == ary[4][slotR[9]]) {
         score = parseFloat($("#result").text());
-        bonusCount(ary[0][slotR[10]], score, bet, 5)
+        bonusCount(ary[0][slotR[10]], score, bet, 20)
         console.log("10 6 12 3 9")
         gameRA.push("Line 50 :"+ary[0][slotR[10]]+"*5")
         L50();
@@ -918,41 +919,45 @@ function bonusCacl() {
 function bonusCount(x, score, bet, count) {
     winCount = 0;
     //console.log(score)
+    bet=bet*50;
+    //三個連線 *2
+    //四個連線 *4
+    //五個連線 *20
     switch (x) {
 
         case 'cherry':
-            console.log("cherry")
-            winCount += 2 * bet * count;
+            //console.log("cherry")
+            winCount += 0.2 * bet * count;
             console.log(score)
             break;
         case 'orange':
-            console.log('orange')
-            winCount += 3 * bet * count;
+            //console.log('orange')
+            winCount += 0.3 * bet * count;
             console.log(score)
             break;
         case 'grape':
-            console.log('grape')
-            winCount += 4 * bet * count;
+            //console.log('grape')
+            winCount += 0.4 * bet * count;
             console.log(score)
             break;
         case 'cookie':
-            console.log('cookie')
-            winCount += 5 * bet * count;
+            //console.log('cookie')
+            winCount += 0.5 * bet * count;
             console.log(score)
             break;
         case 'bell':
-            console.log('bell')
-            winCount += 6 * bet * count;
+            //console.log('bell')
+            winCount += 0.6 * bet * count;
             console.log(score)
             break;
         case 'bar':
-            console.log('bar')
-            winCount += 7 * bet * count;
+           // console.log('bar')
+            winCount +=0.7 * bet * count;
             console.log(score)
             break;
         case '777':
-            console.log('777')
-            winCount += 10 * bet * count;
+           // console.log('777')
+            winCount += 1 * bet * count;
             console.log(score)
             break;
     }

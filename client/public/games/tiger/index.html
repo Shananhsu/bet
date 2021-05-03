@@ -45,7 +45,7 @@
     <div class="panel panel-primary container" style="position: relative;">
 
         <div id="main" class="panel-body ">
-           
+
             <div class="slotwrapper">
                 <ul class="ring" id="ring1" style="top:0px">
                 </ul>
@@ -59,16 +59,25 @@
                 </ul>
             </div>
 
-            <div>
-                <button v-on:click="handleBet" type="button" class="btn btn-success btn-lg" id="btn">開始</button>
+            <div id="resultbg">
+                <p id="result">{{userwallet}}</p>
             </div>
-            <p id="result">{{userwallet}}</p>
-            <button class="btn btn-success btn-lg" id="less">-</button>
-            <input id="bet" type="text" placeholder="1" value="10">
-            <button class="btn btn-success btn-lg" id="add">+</button>
-            本局贏得獎金<span id="jackpot">0</span>
-            <div>
-                <button v-on:click="handleResult" type="button" class="btn btn-primary btn-lg" id="btn">遊戲結果</button>
+            <div id="betbg">
+                <input id="bet" type="text" placeholder="1" value="10.00">
+            </div>
+
+            <div class="addlessbet">
+                <img src="./img/1x/addbet.png" id="add" alt=""><img src="./img/1x/lessbet.png" id="less" alt="">
+            </div>
+            <div id="betlinebg">
+                <span id="betline">50</span>
+            </div>
+            <div id="jackpotbg">
+                <span id="jackpot">0</span>
+            </div>
+            <div id="buttonSA">
+                <img v-on:click="handleBet" id="btnStart" src="./img/1x/Start.png">
+                <img v-on:click="handleAuto" id="btnAuto" src="./img/1x/Auto.png">
             </div>
         </div>
         <canvas id="myCanvas"></canvas>
@@ -78,7 +87,6 @@
     </div>
 
     <script>
-        
         var vueMain = new Vue({
             el: '#main',
             data: {
@@ -97,42 +105,31 @@
             },
             methods: {
                 handleBet: function () {
-                    slotR = [];
-                    var score = parseFloat($("#result").text()).toFixed(2);
-                    var bet = parseFloat($('#bet').val());
-                    var scoreBefore = 0
-                    var winCount = 0;
-                    bettime=new Date().toLocaleString('zh-TW', {timeZone: 'Asia/Taipei',hour12: false});;
-                    //console.log(bet)
-
-                    if (score < bet) {
-                        $("#btn").attr("disabled", true);
-                        alert("You don't have enough money")
-                    } else {
-                        score -= bet;
-                        $("#result").text(score.toFixed(2));
-
-                        $("#btn").attr("disabled", true);
-                        $('.slotwrapper ul').playSpin();
-                        ingSound.play();
-                        let userwallet = parseFloat($("#result").text());
-                        console.log("start:" + userwallet)
-                        $.ajax({
-                            type: "put",
-                            url: "http://localhost:3001/tiger/user",
-                            data: {
-                                UserWallet: userwallet
-                            }
-                        });
-                    }
+                    fp = 500;
+                    StartGame();
                 },
-                handleResult(){
-                    location.href="results.html";
-                    
+                handleAuto() {
+                    runtime++;
+                    fp = 250;
+                    //if()
+                    if (runtime == 1) {
+
+                        console.log(1)
+                        autogame = setInterval(function () {
+                            StartGame()
+                        }, 3000);
+
+                    } else {
+
+                        console.log("stop")
+                        clearInterval(autogame);
+                        runtime = 0;
+                    }
+                    //console.log(runtime)
                 }
             }
         })
-        
+
         var ary = [
             ['cherry', 'orange', 'grape', 'cookie', 'bell', 'bar', '777'],
             ['orange', 'grape', 'cherry', 'cookie', '777', 'bell', 'bar'],
@@ -145,8 +142,12 @@
         var count = 0;
         var finCount = 0;
         var temp = 0;
+        var runtime = 0;
+        var fp = 500;
+        var autogame = null;
+        var keepgame = 1;
         // var slotresult=document.getElementById('slotresult');
-        var rwdW = parseInt($('.slotwrapper').css("width"));
+        var rwdW = parseInt($('.slotwrapper').css("width")) - 20;
         var rwdH = parseInt($('.slotwrapper').css("height"))
         $('#myCanvas').attr("width", rwdW);
         $('#myCanvas').attr("height", rwdH)
@@ -193,58 +194,41 @@
             }
             return count;
         }
-    //    screenshot();
-        // $('#btn').on('click', function () {
-            // slotR = [];
-            // var score = parseFloat($("#result").text()).toFixed(2);
-            // var bet = parseFloat($('#bet').val());
-            // var scoreBefore = 0
-            // var winCount = 0;
-            // //console.log(bet)
+        //startGame
+        StartGame = () => {
 
-            // if (score < bet) {
-            //     $("#btn").attr("disabled", true);
-            //     alert("You don't have enough money")
-            // } else {
-            //     score -= bet;
-            //     $("#result").text(score.toFixed(2));
+            slotR = [];
+            var score = parseFloat($("#result").text()).toFixed(2);
+            var bet = parseFloat($('#bet').val()) * 50;
+            var scoreBefore = 0
+            var winCount = 0;
+            bettime = new Date().toLocaleString('zh-TW', {
+                timeZone: 'Asia/Taipei',
+                hour12: false
+            });
+            //console.log(bet)
+            if (score < bet) {
+                $("#btn").attr("disabled", true);
+                alert("餘額不足!");
+                clearInterval(autogame);
+            } else {
+                score -= bet;
+                $("#result").text(score.toFixed(2));
 
-            //     $("#btn").attr("disabled", true);
-            //     $('.slotwrapper ul').playSpin();
-            //     ingSound.play();
-            // }
-        // });
-        //將遊戲結果截圖
-        // function screenshot() {
-        //     html2canvas(document.getElementById('#slotresult')).then(function (canvas) {
-        //         // document.body.appendChild(canvas);
-              
-        //         a= canvas.toDataURL("image/jpeg",0.2)
-        //        af.setAttribute("src",a)
-        //       console.log(a);
-        //     });
-            
-        // }
-        //將圖片轉由base64轉blob
-        // function dataURLtoBlob(dataURI) {
-        //     // convert base64/URLEncoded data component to raw binary data held in a string
-        //     var byteString;
-        //     if (dataURI.split(',')[0].indexOf('base64') >= 0)
-        //         byteString = atob(dataURI.split(',')[1]);
-        //     else
-        //         byteString = unescape(dataURI.split(',')[1]);
-
-        //     // separate out the mime component
-        //     var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-
-        //     // write the bytes of the string to a typed array
-        //     var ia = new Uint8Array(byteString.length);
-        //     for (var i = 0; i < byteString.length; i++) {
-        //         ia[i] = byteString.charCodeAt(i);
-        //     }
-
-        //     return new Blob([ia], { type: mimeString });
-        // }
+                $("#btn").attr("disabled", true);
+                $('.slotwrapper ul').playSpin();
+                ingSound.play();
+                let userwallet = parseFloat($("#result").text());
+                console.log("start:" + userwallet)
+                $.ajax({
+                    type: "put",
+                    url: "/game/user",
+                    data: {
+                        UserWallet: userwallet
+                    }
+                });
+            }
+        }
         creatRing1 = function () {
             var rings = document.querySelectorAll('.ring');
             //console.log($('#ring1'))
