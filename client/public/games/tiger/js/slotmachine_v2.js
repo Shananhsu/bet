@@ -208,10 +208,10 @@ var slotMachine = function (el, options, track) {
                 var endBal = parseFloat($("#result").text());
                 //var bettimeS=bettime.getFullYear()+"/"+bettime.getMonth()+1+"/"+bettime.getDate()+" "+
                 console.log(endBal)
-                console.log(typeof(bettime))
+                console.log((bettime))
                 $.ajax({ //更新帳戶餘額
                     type: "put",
-                    url: "/tiger/user",
+                    url: "http://localhost:3001/tiger/user",
                     data: {
                         UserWallet: endBal
                     }
@@ -219,9 +219,9 @@ var slotMachine = function (el, options, track) {
 
                 $.ajax({ //將遊戲結果寫入db
                     type: "post",
-                    url: "/tiger/addresults",
+                    url: "http://localhost:3001/tiger/addresults",
                     data: {
-                        BetTime: bettime.toLocaleString('zh-TW', { hour12: false }), //下注時間
+                        BetTime: bettime, //下注時間
                         Stake: bet, //投注金額
                         AccountBalBE: startBal + bet, //遊戲前餘額
                         GameResult:gameRA.toString(),//遊戲結果

@@ -1,5 +1,6 @@
-import React, { Component ,useEffect,useState} from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { withRouter } from "react-router-dom";
 import Logo from './Logo';
 import Mainnav from './Mainnav';
 import Axios from "axios";
@@ -36,8 +37,11 @@ const Header = props => {
                     <Mainnav />
                 </div>
 
-                { account ? (<MemberState account = {account} balance={balance}/>)
-                :(< LoginForm />)}
+
+                {/* {account ? (<MemberState account={account} balance={balance} props={props} />)
+                    : (< LoginForm />)} */}
+                <MemberState account={"1234"} balance={9999999} props={props} />
+
 
 
             </div>
@@ -47,4 +51,4 @@ const Header = props => {
 }
 // }
 
-export default Header;
+export default withRouter(Header);

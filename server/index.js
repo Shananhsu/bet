@@ -34,9 +34,15 @@ const db = mysql.createPool({
 
 app.use(express.json());
 app.use(cors({
+<<<<<<< HEAD
   origin: ["http://localhost:3000"],
   methods: ["GET", "POST"],
   credentials: true
+=======
+    origin : ["http://localhost:3000"] ,
+    methods : ["GET","POST","PUT"],
+    credentials :true
+>>>>>>> d4c9c343b376645a79ade1d3ad4171f34898949a
 }));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -51,23 +57,6 @@ app.use(
     }
   }));
 
-// 阿川加的，為了處理CROP的問題(前端跟後端要資料被檔)，是不是只有我遇到這個問題?--------------------------
-// https://dailc.github.io/2017/03/22/ajaxCrossDomainSolution.html 見 Node.js後台配置(express框架) 這行
-// app.all('*', function (req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "X-Requested-With");
-//   res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
-//   res.header("X-Powered-By", ' 3.2.1')
-//   //这段仅仅为了方便返回json而已
-//   res.header("Content-Type", "application/json;charset=utf-8");
-//   if (req.method == 'OPTIONS') {
-//     //让options请求快速返回
-//     res.sendStatus(200);
-//   } else {
-//     next();
-//   }
-// });
-// 阿川加的，為了處理CROP的問題(前端跟後端要資料被檔)，是不是只有我遇到這個問題?--------------------------
 
 
 
@@ -82,6 +71,7 @@ app.use(
 
 
 // 會員註冊
+<<<<<<< HEAD
 app.post("/api/register", (req, res) => {
   console.log("in api register")
   const account = req.body.account;
@@ -99,6 +89,22 @@ app.post("/api/register", (req, res) => {
 
     db.query(sqlregister,
       [account, hash, username, address, phone, email], (err, result) => {
+=======
+app.post("/api/register",(req,res)=>{
+    console.log("in api register")
+    const account = req.body.account;
+    const password = req.body.password;
+    const username = req.body.username;
+    const address = req.body.address;
+    const phone = req.body.phone;
+    const email = req.body.email;
+    const risk_level = "D"
+    const register_time = new Date()
+    const sqlregister = "insert into  member_information ( account  ,password ,name ,address ,phone ,email,risk_level,register_time,identifyID ) values(?,?,?,?,?,?,?,?,?) "
+    const identifyID = 0
+
+    bcrypt.hash(password,saltRounds , (err,hash)=>{
+>>>>>>> d4c9c343b376645a79ade1d3ad4171f34898949a
         if (err) {
           res.send({
             status: 'FAILURE',
@@ -112,6 +118,24 @@ app.post("/api/register", (req, res) => {
       })
   })
 
+<<<<<<< HEAD
+=======
+        db.query(sqlregister,
+            [account  ,hash ,username ,address ,phone ,email,risk_level,register_time,identifyID], (err,result)=>{
+            if(err) {
+                res.send({
+                  status: 'FAILURE',
+                  err: err
+                });
+              } else {
+                res.send({
+                  status: 'SUCCESS'
+                });
+              }
+        })
+    })
+    
+>>>>>>> d4c9c343b376645a79ade1d3ad4171f34898949a
 })
 
 //會員登入
@@ -178,9 +202,17 @@ app.post("/api/login", (req, res) => {
 
 })
 // 登出
+<<<<<<< HEAD
 app.get('/logout', function (req, res) {
   req.session.destroy();
   res.redirect('/');
+=======
+app.get('/api/logout', function(req, res) {
+  req.session.destroy(function(err){ 
+        // res.redirect('/');
+  });
+  res.send({"true":true})
+>>>>>>> d4c9c343b376645a79ade1d3ad4171f34898949a
 });
 
 
@@ -313,6 +345,7 @@ app.get("/tiger/user", function (request, response) {
   );
 
 })
+//取得tiger遊戲結果
 app.get("/tiger/results", function (request, response) {
 
   db.query('select * from tiger_results',
@@ -332,6 +365,7 @@ app.get("/tiger/results", function (request, response) {
 //寫入遊戲紀錄
 app.post("/tiger/addresults", function (request, response) {
 
+<<<<<<< HEAD
   db.query(
     "insert into tiger_results set UserID = 1, BetTime = ?,Lay='All',Stake=?,AccountBalBE=?,GameResult=?,NetWin=?,AccountBalAF=? ",
     [
@@ -346,6 +380,28 @@ app.post("/tiger/addresults", function (request, response) {
   // console.log(request)
   response.send("row inserted.");
 
+=======
+	db.query(
+		// "insert into tiger_results set UserID = 1, BetTime = ?,Lay='All',Stake=?,AccountBalBE=?,GameResult=?,NetWin=?,AccountBalAF=? "
+    "insert into results set betTime = ?,account='steven',gameType='拉霸',object='All',bets=?,moneyBefore=?,status=?,result=?,moneyAfter=? ", 
+			[
+				// request.body.BetTime, 
+				// request.body.Stake,
+				// request.body.AccountBalBE,
+				// request.body.GameResult,
+				// request.body.NetWin,
+				// request.body.AccountBalAF
+        request.body.betTime, 
+				request.body.bets,
+				request.body.moneyBefore,
+				request.body.status,
+				request.body.result,
+				request.body.moneyAfter
+			]);
+			// console.log(request)
+	response.send("row inserted.");
+    
+>>>>>>> d4c9c343b376645a79ade1d3ad4171f34898949a
 })
 //tiger後台
 app.get('/tiger/gameresults', function (req, res) {
@@ -381,7 +437,15 @@ app.post("/fishShooter/uploadBetRecord", function (req, res) {
      )
 values(?)`
 
+<<<<<<< HEAD
   data = [req.body.betRecord];
+=======
+    let nums_per_page = 6;
+    let offset = (page - 1) * nums_per_page;
+    let sql = `SELECT * FROM fishshooter_betrecord LIMIT ${offset},${nums_per_page};
+    SELECT COUNT(*) AS COUNT FROM fishshooter_betrecord;`;
+    // console.log(sql)
+>>>>>>> d4c9c343b376645a79ade1d3ad4171f34898949a
 
   db.query(
     sql,
