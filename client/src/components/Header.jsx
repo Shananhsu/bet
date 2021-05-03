@@ -43,7 +43,6 @@ const Header = props => {
                 <MemberState account={"1234"} balance={9999999} props={props} />
 
 
-
             </div>
         </React.Fragment >
 
