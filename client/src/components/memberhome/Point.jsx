@@ -24,8 +24,8 @@ class Point extends Component {
 
     render() {
         return (
-            <div class="col-sm-10 membercontent">
-                <div id="sf-membercenter-point-getbalance-00002">
+        
+                <div id="sf-membercenter-point-getbalance-00002" >
                     <div class="panel panel-primary">
                         <div class="panel-heading">目前額度</div>
                         <div className="container col-sm" style={{width:"480px"}} ><Doughnut data={data} /></div>
@@ -84,7 +84,7 @@ class Point extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+         
         )
     }
 }

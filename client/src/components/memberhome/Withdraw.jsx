@@ -24,7 +24,7 @@ class Withdraw extends Component {
 
     render() {
         return (
-            <div class="col-sm-10 membercontent" >
+            <div class="sf-membercenter-withdraw-00002" style={{"display":"none"}} >
                 <div id="sf-membercenter-trademoney-withdraw-00002">
                     <form id="purchase" class="trademoneyForm form-horizontal" role="form" action="/trademoney/withdraw" method="post">
                         <input type="hidden" name="_token" value="YS0hnN94HgkO13whwOYaBSQOmjjRkUdvfqiyfOkT" />

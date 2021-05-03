@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 class Verifyphotoinfo extends Component {
     render() {
         return (
-            <div className="col-sm-10 membercontent">
-                <div id="sf-membercenter-verifyphotoinfo-00002">
+    
+                <div id="sf-membercenter-verifyphotoinfo-00002" style={{"display":"none"}}>
                     <div className="panel">
                         <div className="panel-heading">驗證照上傳</div>
                         <div className="panel-body">
@@ -39,7 +39,7 @@ class Verifyphotoinfo extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+         
         )
     }
 }

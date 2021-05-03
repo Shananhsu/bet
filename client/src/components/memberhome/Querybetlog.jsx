@@ -54,8 +54,8 @@ class Querybetlog extends Component {
 
     render() {
         return (
-            <div class="col-sm-10 membercontent">
-                <div id="sf-membercenter-querybetlog-00002">
+     
+                <div id="sf-membercenter-querybetlog-00002" style={{"display":"none"}}>
                     <form id="querybetlogForm" class="form-horizontal" action="/querybetlog" method="get">
                         <input type="hidden" name="_token" value="EY7AxzrP97e9xaYDiy0ssw59WhrIi8kS6UvIlxxv" />
                         <div class="panel panel-primary">
@@ -141,7 +141,7 @@ class Querybetlog extends Component {
                     </form>
 
                 </div>
-            </div>
+       
         )
     }
 }

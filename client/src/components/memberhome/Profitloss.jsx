@@ -25,8 +25,8 @@ class Profitloss extends Component {
 
     render() {
         return (
-            <div class="col-sm-10 membercontent">
-                <div id="sf-membercenter-profitloss-00002">
+           
+                <div id="sf-membercenter-profitloss-00002" style={{"display":"none"}}>
                     <form id="gameprofitlossForm" class="form-horizontal" action="/profitloss" method="get">
                         <div class="panel panel-primary">
                             <div class="panel-heading">遊戲盈虧</div>
@@ -76,7 +76,7 @@ class Profitloss extends Component {
                     </form>
 
                 </div>
-            </div>
+      
         )
     }
 }
