@@ -15,6 +15,7 @@ import MemberState from "./MemberState"
 //     render() {
 const Header = props => {
     // const { register, handleSubmit, formState: { errors } } = useForm();
+
     const [account, setAccount,] = useState("");
     const [balance, setBalance,] = useState("");
     Axios.defaults.withCredentials = true;
@@ -38,9 +39,9 @@ const Header = props => {
                 </div>
 
 
-                {/* {account ? (<MemberState account={account} balance={balance} props={props} />)
-                    : (< LoginForm />)} */}
-                <MemberState account={"1234"} balance={9999999} props={props} />
+                {account ? (<MemberState account={account} balance={balance} props={props} />)
+                    : (< LoginForm />)}
+                {/* <MemberState account={"1234"} balance={9999999} props={props} /> */}
 
 
             </div>

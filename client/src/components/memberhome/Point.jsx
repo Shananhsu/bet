@@ -24,55 +24,56 @@ class Point extends Component {
 
     render() {
         return (
-        
-                <div id="sf-membercenter-point-getbalance-00002" >
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">目前額度</div>
-                        <div className="container col-sm" style={{width:"480px"}} ><Doughnut data={data} /></div>
-                        
-                        <div class="panel-body">
-                            <ul class="info list-group">
-                                <li class="list-group-item col-sm-3"><span class="badge">0</span>主帳戶</li>
-                                <li class="list-group-item col-sm-3"><span class="badge">0</span>紅利點數</li>
-                                <li class="list-group-item col-sm-3"><span class="badge">0</span>返水</li>
-                                <li class="list-group-item col-sm-3">
-                                    <span class="badge point" data-num="14">查詢</span>
+
+            <div id="sf-membercenter-point-getbalance-00002" >
+                <div class="panel panel-primary">
+                    <div class="panel-heading">餘額圖</div>
+                    <div className="container col-sm" style={{ width: "300px" }} ><Doughnut data={data} /></div>
+
+                    <div class="panel-body">
+                        <ul class="info list-group">
+                            <li class="list-group-item col-sm-3"><span class="badge">0</span>主帳戶</li>
+                            <li class="list-group-item col-sm-3"><span class="badge">0</span>紅利點數</li>
+                            <li class="list-group-item col-sm-3"><span class="badge">0</span>返水</li>
+                            <li class="list-group-item col-sm-3">
+                                <span class="badge point" data-num="14">查詢</span>
                                                 Super
                                 </li>
-                                <li class="list-group-item col-sm-3">
-                                    <span class="badge point" data-num="2">查詢</span>
+                            <li class="list-group-item col-sm-3">
+                                <span class="badge point" data-num="2">查詢</span>
                                                 歐博
                                 </li>
-                                <li class="list-group-item col-sm-3">
-                                    <span class="badge point" data-num="9">查詢</span>
+                            <li class="list-group-item col-sm-3">
+                                <span class="badge point" data-num="9">查詢</span>
                                                 沙龍
                                 </li>
-                                <li class="list-group-item col-sm-3">
-                                    <span class="badge point" data-num="27">查詢</span>
+                            <li class="list-group-item col-sm-3">
+                                <span class="badge point" data-num="27">查詢</span>
                                                 AMEBA
                                 </li>
-                                <li class="list-group-item col-sm-3">
-                                    <span class="badge point" data-num="34">查詢</span>
+                            <li class="list-group-item col-sm-3">
+                                <span class="badge point" data-num="34">查詢</span>
                                                 DG
                                 </li>
-                                <li class="list-group-item col-sm-3">
-                                    <span class="badge point" data-num="41">查詢</span>
+                            <li class="list-group-item col-sm-3">
+                                <span class="badge point" data-num="41">查詢</span>
                                                 36588六合彩
                                 </li>
-                                <li class="list-group-item col-sm-3">
-                                    <span class="badge point" data-num="42">查詢</span>
+                            <li class="list-group-item col-sm-3">
+                                <span class="badge point" data-num="42">查詢</span>
                                                 OG
                                 </li>
-                                <li class="list-group-item col-sm-3">
-                                    <span class="badge point" data-num="43">查詢</span>
+                            <li class="list-group-item col-sm-3">
+                                <span class="badge point" data-num="43">查詢</span>
                                                 WM
                                 </li>
 
-                            </ul>
-                        </div>
+                        </ul>
                     </div>
+                </div>
 
-                    <div class="panel panel-primary info">
+                {/* 警語先不用 */}
+                {/* <div class="panel panel-primary info">
                         <div class="panel-heading"><i class="glyphicon glyphicon-info-sign"></i> 注意事項</div>
                         <div class="panel-body">
                             <ul>
@@ -82,9 +83,9 @@ class Point extends Component {
                                 <li>過於頻繁的轉移動作，系統將自動濾除。</li>
                             </ul>
                         </div>
-                    </div>
-                </div>
-         
+                    </div>*/}
+            </div>
+
         )
     }
 }

@@ -57,12 +57,12 @@ const Memberbanner = (props) => {
                         <div className="banner">
                             <h2 className="name">{props.props.account}</h2>
 
-                            <b className="getbalance">主帳戶:
+                            <b className="getbalance">主帳戶餘額: {props.props.balance} 
 
-                                <div id="sf-balance-00001">
+                                {/* <div id="sf-balance-00001">
                                     <span className="glyphicon glyphicon-usd"></span>
                                     <b className="balance">查詢</b>
-                                </div>
+                                </div> */}
                             </b>
                         </div>
                         <div className="portrait">
