@@ -13,38 +13,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="js/slotmachine_v2.js"></script>
-    <link rel="shortcut icon" href="#">
-    <!-- <script src="http://html2canvas.hertzen.com/dist/html2canvas.min.js"></script> -->
+   
     <style>
-        .panel {
-            width: 1225px;
-        }
-
-        img {
-            width: 230px;
-            height: 230px;
-        }
-
-        .slotwrapper {
-
-            width: 1155px;
-            height: 690px;
-            border: 1px solid black;
-            ;
-        }
-
-        canvas {
-            position: absolute;
-            top: 13px;
-            left: 30px;
-        }
+       
     </style>
 </head>
 
 <body>
-    <div class="panel panel-primary container" style="position: relative;">
+    <div class="container" style="position: relative;top:50px">
 
-        <div id="main" class="panel-body ">
+        <div id="main" class="panel-body "style="position: relative;">
 
             <div class="slotwrapper">
                 <ul class="ring" id="ring1" style="top:0px">
@@ -222,7 +200,7 @@
                 console.log("start:" + userwallet)
                 $.ajax({
                     type: "put",
-                    url: "/game/user",
+                    url: "http://localhost:3001/tiger/user",
                     data: {
                         UserWallet: userwallet
                     }
