@@ -27,6 +27,9 @@ const db = mysql.createPool({
     user : "root",
     password : "",
     database : "games",
+    // 阿川加的，為了可以同時使用多個sql雨具語句
+    multipleStatements: true,
+    // 阿川加的，為了可以同時使用多個sql雨具語句
 });
 
 app.use(express.json());
@@ -167,7 +170,28 @@ app.get('/api/logout', function(req, res) {
   res.send({"true":true})
 });
 
+///////會員資訊//////
+app.post("/api/getBalance",(req,res)=>{
+  // console.log('in api getbalance')
+  const account = req.body.account;
+  const sqllogin = "select * from  thirdpart_moneybag where account=? ;"
+  db.query(sqllogin,
+  // [account  ,password ],
+  account,
+  (err,result)=>{
+      // console.log(result)
+      if(err) {
+          res.send({
+              err :err
+          });
+        } 
+      if (result.length >0) {
+          res.send(result);
+      }
+    })
+})
 
+/////////////////遊戲區//////////////////////////////////
 // 21點
 app.get("/blackjack/fetch", (req, res) => {
     db.query("select * from blackjack_records where id in (select a.maxID from (select max(id) maxID from blackjack_records) a)", [], (err, result) => {
@@ -211,7 +235,7 @@ app.post("/dragonshoot/PostGameStart", function (req, res) {
   
     db.query(
       //會員帳號,累計投注項目金額,總投注額
-      "INSERT INTO sddGamehistory (account, betTime, object, bets, moneyBefore, moneyAfter, gameType) VALUES(?,?,?,?,?,?,?)",
+      "INSERT INTO sddGamehistory (sddPlayerAccount,sddPlayerBetTime,sddPlayerBetProject,sddPlayerBetMoney,sddPlayerMoneyBefore,sddPlayerMoneyAfter) VALUES(?,?,?,?,?,?)",
       //會員帳號,累計投注項目金額,總投注額
       [
         sddPostThisPlayerAccount,
@@ -245,7 +269,7 @@ app.post("/dragonshoot/PostGameStart", function (req, res) {
   
     db.query(
       //會員帳號,累計投注項目金額,總投注額
-      "UPDATE sddGamehistory SET object = ? , bets = ? , moneyAfter = ? , result = ? , status = ? WHERE id IN (SELECT a.maxID FROM (SELECT max(id) maxID FROM sddGamehistory) a) ",
+      "UPDATE sddGamehistory SET sddPlayerBetProject = ? , sddPlayerBetMoney = ? , sddPlayerMoneyAfter = ? , sddPlayerBetResult = ? , sddGameResult = ? WHERE id IN (SELECT a.maxID FROM (SELECT max(id) maxID FROM sddGamehistory) a) ",
       //會員帳號,累計投注項目金額,總投注額
       [
         sddPostProject,
@@ -319,7 +343,7 @@ app.post("/tiger/addresults", function (request, response) {
 
 	db.query(
 		// "insert into tiger_results set UserID = 1, BetTime = ?,Lay='All',Stake=?,AccountBalBE=?,GameResult=?,NetWin=?,AccountBalAF=? "
-    "insert into tiger_results set betTime = ?,account='steven',gameType='拉霸',object='All',bets=?,moneyBefore=?,status=?,result=?,moneyAfter=? ", 
+    "insert into results set betTime = ?,account='steven',gameType='拉霸',object='All',bets=?,moneyBefore=?,status=?,result=?,moneyAfter=? ", 
 			[
 				// request.body.BetTime, 
 				// request.body.Stake,
@@ -346,7 +370,7 @@ app.get('/tiger/gameresults', function (req, res) {
 app.put("/tiger/user", function (request, response) {
 
 	db.query(
-		"update tiger_users set UserWallet = ? where UserId =1 " ,
+		"update users set UserWallet = ? where UserId =1 " ,
 		    
 			[
 				request.body.UserWallet 

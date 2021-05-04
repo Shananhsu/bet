@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,useState,useContext } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Point from './Point';
 import Withdraw from './Withdraw';
@@ -8,37 +8,35 @@ import Tradepoint from './Tradepoint';
 import Profitloss from './Profitloss';
 import { render } from "react-dom";
 import $ from "jquery";
+import { MyContext } from '../../commons/context-manager';
+import AccountSetting from './AccountSetting';
+
 
 const Memberbanner = (props) => {
-
-    const pieChart = () => {
-        $('#sf-balance-00001 .balance').click(function () {
-            var self = $(this);
-            self.empty().append("<img src='/images/ajax-loader.gif' />");
-            $.get('/GameAutoTransferWithdraw', function (e) { self.html(e); });
-        });
-    }
-
-
-    const clickPoint = () => {
-        $('.tab-title li').on('click', function () {
-            $(this).addClass(" ui-tabs-active ui-state-active").attr({ "tabIndex": 0, "aria-selected": "true", "aria-expanded": "true" });
-            $('.tab-title li').not(this).removeClass(" ui-tabs-active ui-state-active").attr({ "tabIndex": -1, "aria-selected": "false", "aria-expanded": "false" });
-            var thismodal = "#" + $(this).attr("aria-controls");
-            $("div[aria-hidden='false']").attr("aria-hidden", "true").css("display", "none")
-            $(thismodal).attr("aria-hidden", "false").css("display", "")
-        })
-    }
+   
+    // const pieChart = () => {
+    //     $('#sf-balance-00001 .balance').click(function () {
+    //         var self = $(this);
+    //         self.empty().append("<img src='/images/ajax-loader.gif' />");
+    //         $.get('/GameAutoTransferWithdraw', function (e) { self.html(e); });
+    //     });
+    // }
+    
+    const [total_balance, setTotal_balance] = useState(0);
+    
 
     const clickComponent = () => {
         $('.modalUseing').on('click', function () {
             var usemodal = "#" + $(this).attr("aria-controls");
             $(usemodal).css("display", "")
             $('.modalUseing').not(this).each(function (idx, val) {
-               const notUseModal= "#"+ $(val).attr("aria-controls");
+                const notUseModal = "#" + $(val).attr("aria-controls");
                 $(notUseModal).css("display", "none")
             })
+
+
         })
+
     }
 
     // console.log(props)
@@ -56,8 +54,9 @@ const Memberbanner = (props) => {
                     <div className="row content">
                         <div className="banner">
                             <h2 className="name">{props.props.account}</h2>
-
-                            <b className="getbalance">主帳戶餘額: {props.props.balance} 
+                            {console.log(props.props)}
+                            {/* <b className="getbalance">主帳戶餘額: {props.props.balance} */}
+                            <b className="getbalance">總共餘額: {total_balance}
 
                                 {/* <div id="sf-balance-00001">
                                     <span className="glyphicon glyphicon-usd"></span>
@@ -114,7 +113,7 @@ const Memberbanner = (props) => {
                                             <span className="text">點數紀錄</span>
                                         </a>
                                     </li>
-                                    <li className="list-group-item modalUseing" aria-controls="memberinfo" onClick={clickComponent}>
+                                    <li className="list-group-item modalUseing" aria-controls="sf-membercenter-memberinfo-00002" onClick={clickComponent}>
                                         {/* <a href="/memberinfo"> */}
                                         <a>
                                             <i className="icon glyphicon glyphicon-cog"></i>
@@ -132,13 +131,17 @@ const Memberbanner = (props) => {
                             </div>
                             {/* modal 畫面顯示 */}
                             <div class="col-sm-10 membercontent" >
-                                <Point />
-                                <Profitloss />
-                                <Querybetlog />
-                                <Tradepoint />
-                                <Verifyphotoinfo />
-                                <Withdraw />
-
+                                <MyContext.Provider value={{ setTotal_balance }}>
+                                    {/* <Child step={step} number={number} count={count} /> */}
+                                    {console.log(total_balance)}
+                                    <Point account={props.props.account} balance={props.props.balance} total_balance={total_balance}/>
+                                    <Profitloss />
+                                    <Querybetlog />
+                                    <Tradepoint />
+                                    <Verifyphotoinfo />
+                                    <AccountSetting />
+                                    <Withdraw />
+                                </MyContext.Provider>
                             </div>
                         </div>
                     </div>
