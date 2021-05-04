@@ -32,14 +32,16 @@
                     </thead>
                     <tbody>
                       <tr v-for='(resultItem,index) in resultList'>
-                        <th scope="row">{{resultItem.ResultID}}</th>
-                        <td>{{resultItem.BetTime}}</td>
-                        <td>{{resultItem.Lay}}</td>
-                        <td>{{resultItem.Stake}}</td>
-                        <td>{{resultItem.AccountBalBE}}</td>
-                        <td>{{resultItem.GameResult}}</td>
-                        <td>{{resultItem.NetWin}}</td>
-                        <td>{{resultItem.AccountBalAF}}</td>
+                        <th scope="row">{{resultItem.id}}</th>
+                        <td>{{resultItem.account}}</td>
+                        <td>{{resultItem.gameType}}</td>
+                        <td>{{resultItem.betTime}}</td>
+                        <td>{{resultItem.object}}</td>
+                        <td>{{resultItem.bets}}</td>
+                        <td>{{resultItem.moneyBefore}}</td>
+                        <td>{{resultItem.status}}</td>
+                        <td>{{resultItem.result}}</td>
+                        <td>{{resultItem.moneyAfter}}</td>
                       </tr>
                     </tbody>
                   </table>

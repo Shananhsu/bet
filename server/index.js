@@ -319,7 +319,7 @@ app.post("/tiger/addresults", function (request, response) {
 
 	db.query(
 		// "insert into tiger_results set UserID = 1, BetTime = ?,Lay='All',Stake=?,AccountBalBE=?,GameResult=?,NetWin=?,AccountBalAF=? "
-    "insert into results set betTime = ?,account='steven',gameType='拉霸',object='All',bets=?,moneyBefore=?,status=?,result=?,moneyAfter=? ", 
+    "insert into tiger_results set betTime = ?,account='steven',gameType='拉霸',object='All',bets=?,moneyBefore=?,status=?,result=?,moneyAfter=? ", 
 			[
 				// request.body.BetTime, 
 				// request.body.Stake,
@@ -346,7 +346,7 @@ app.get('/tiger/gameresults', function (req, res) {
 app.put("/tiger/user", function (request, response) {
 
 	db.query(
-		"update users set UserWallet = ? where UserId =1 " ,
+		"update tiger_users set UserWallet = ? where UserId =1 " ,
 		    
 			[
 				request.body.UserWallet 
