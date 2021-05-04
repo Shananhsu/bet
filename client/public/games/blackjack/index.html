@@ -28,14 +28,14 @@
     </div>
 
 
-    <div id="winRate">
+    <!-- <div id="winRate">
         <div id="winB">
             <p>勝率</p>
         </div>
         <div>
             <p id="rate"></p>
         </div>
-    </div>
+    </div> -->
 
     <!-- points -->
     <div id="dpp">
@@ -56,7 +56,7 @@
     </div>
 
 
-    <div id="gameRecord">
+    <!-- <div id="gameRecord">
         <table>
             <tr>
                 <th colspan="10">遊戲紀錄</th>
@@ -137,7 +137,7 @@
                 <td class="whoWin"></td>
             </tr>
         </table>
-    </div>
+    </div> -->
 
     <!-- 撲克牌 -->
     <div id="cardback"><img id="cb" src="img/cards/bc1.jpg" alt=""></div>
@@ -200,22 +200,22 @@
 
     </script>
     <script>
-        for (i = 0; i < document.getElementsByClassName("whoWin").length; i++) {
-            switch (document.getElementsByClassName("whoWin")[i].innerText) {
-                case '贏':
-                    document.getElementsByClassName("whoWin")[i].style = "color:red";
-                    break;
-                case '輸':
-                    document.getElementsByClassName("whoWin")[i].style = "color:green";
-                    break;
-                case '和':
-                    document.getElementsByClassName("whoWin")[i].style = "color:white";
-                    break;
-            }
-        }
-        if (rate.innerText === 'NA%') {
-            rate.innerText = '0%';
-        }
+        // for (i = 0; i < document.getElementsByClassName("whoWin").length; i++) {
+        //     switch (document.getElementsByClassName("whoWin")[i].innerText) {
+        //         case '贏':
+        //             document.getElementsByClassName("whoWin")[i].style = "color:red";
+        //             break;
+        //         case '輸':
+        //             document.getElementsByClassName("whoWin")[i].style = "color:green";
+        //             break;
+        //         case '和':
+        //             document.getElementsByClassName("whoWin")[i].style = "color:white";
+        //             break;
+        //     }
+        // }
+        // if (rate.innerText === 'NA%') {
+        //     rate.innerText = '0%';
+        // }
     </script>
 
 

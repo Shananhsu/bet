@@ -527,7 +527,7 @@ openc.onclick = function () {
                         dpcs++;
 
                         setTimeout(() => {
-                            if (dpoints < 21) {
+                            if (dpoints < 16) {
                                 let dsc5 = random(0, randomPick.length - 1);
                                 resultDc5 = Object.keys(randomPick[dsc5]);
                                 let gdv5 = randomPick.splice(dsc5, 1);
@@ -545,7 +545,7 @@ openc.onclick = function () {
                                 dpcs++;
 
                                 setTimeout(() => {
-                                    if (dpoints < 21) {
+                                    if (dpoints < 16) {
                                         let dsc6 = random(0, randomPick.length - 1);
                                         resultDc6 = Object.keys(randomPick[dsc6]);
                                         let gdv6 = randomPick.splice(dsc6, 1);
