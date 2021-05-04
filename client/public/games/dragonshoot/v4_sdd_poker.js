@@ -117,10 +117,11 @@ const gameStart = function () {
   axios.post("http://localhost:3001/dragonshoot/PostGameStart", {
     sddPostThisPlayerAccount: sddPlayeyName,
     sddPostProject: `龍門： ${sddBetsdd_total}`,
-    sddPostBetMoney: `本局投注金額：${sddBettotal}`,
+    sddPostBetMoney: sddBettotal,
     sddPostMoneyBefore: sddBetmoney + sddBetsdd_total,
     sddPostMoneyAfter: sddBetmoney,
     sddPostNowTime: showNowtime,
+    sddPostGameType: gameType,
   });
 
   for (let i = 0; i < 2; i++) {
@@ -701,11 +702,11 @@ const gamePK = function () {
       雙數： ${sddBeteven_total},
       梅花： ${sddPlum_total},`,
     // 累計投注金額
-    sddPostBetMoney: `本局投注金額：${sddBettotal}`,
+    sddPostBetMoney: sddBettotal,
     // 本局遊戲後餘額
-    sddPostMoneyAfter: `遊戲後餘額：${sddBetmoney}`,
+    sddPostMoneyAfter: sddBetmoney,
     // 輸贏金額
-    sddPostBetResult: `輸贏金額：${sddBetmoney - sddPostMoneyBefore}`,
+    sddPostBetResult: sddBetmoney - sddPostMoneyBefore,
     //中獎資訊
     sddPostGameResult: `幸運七：${sddLucky7End},
                         射龍門：${sddSddEnd},
