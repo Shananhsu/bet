@@ -29,12 +29,12 @@
             <thead>
                 <tr class="Listtitle" style="width: 100%;">
                     <th>序號</th>
-                    <th>會員編號</th>
+                    <th>遊戲館別</th>
                     <th>會員帳號</th>
                     <th>遊戲時間</th>
                     <th>投注項目</th>
                     <th>投注金額</th>
-                    <th>錢包餘額</th>
+                    <th>遊戲前錢包餘額</th>
                     <th>中獎資訊</th>
                     <th>輸贏結果</th>
                     <th>結算餘額</th>
@@ -43,15 +43,15 @@
             <tbody v-for="(history, index) in newsList">
                 <tr>
                     <td>{{history.id}}</td>
-                    <td>{{history.sddPlayerId}}</td>
-                    <td>{{history.sddPlayerAccount}}</td>
-                    <td>{{history.sddPlayerBetTime}}</td>
-                    <td>{{history.sddPlayerBetProject}}</td>
-                    <td>{{history.sddPlayerBetMoney}}</td>
-                    <td>{{history.sddPlayerMoneyBefore}}</td>
-                    <td>{{history.sddGameResult}}</td>
-                    <td>{{history.sddPlayerBetResult}}</td>
-                    <td>{{history.sddPlayerMoneyAfter}}</td>
+                    <td>{{history.gameType}}</td>
+                    <td>{{history.account}}</td>
+                    <td>{{history.betTime}}</td>
+                    <td>{{history.object}}</td>
+                    <td>{{history.bets}}</td>
+                    <td>{{history.moneyBefore}}</td>
+                    <td>{{history.status}}</td>
+                    <td>{{history.result}}</td>
+                    <td>{{history.moneyAfter}}</td>
                 </tr>
                 <!-- <tr>
                     <td>{{newsList.id}}</td>

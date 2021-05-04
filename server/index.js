@@ -211,7 +211,7 @@ app.post("/dragonshoot/PostGameStart", function (req, res) {
   
     db.query(
       //會員帳號,累計投注項目金額,總投注額
-      "INSERT INTO sddGamehistory (sddPlayerAccount,sddPlayerBetTime,sddPlayerBetProject,sddPlayerBetMoney,sddPlayerMoneyBefore,sddPlayerMoneyAfter) VALUES(?,?,?,?,?,?)",
+      "INSERT INTO sddGamehistory (account, betTime, object, bets, moneyBefore, moneyAfter, gameType) VALUES(?,?,?,?,?,?,?)",
       //會員帳號,累計投注項目金額,總投注額
       [
         sddPostThisPlayerAccount,
@@ -245,7 +245,7 @@ app.post("/dragonshoot/PostGameStart", function (req, res) {
   
     db.query(
       //會員帳號,累計投注項目金額,總投注額
-      "UPDATE sddGamehistory SET sddPlayerBetProject = ? , sddPlayerBetMoney = ? , sddPlayerMoneyAfter = ? , sddPlayerBetResult = ? , sddGameResult = ? WHERE id IN (SELECT a.maxID FROM (SELECT max(id) maxID FROM sddGamehistory) a) ",
+      "UPDATE sddGamehistory SET object = ? , bets = ? , moneyAfter = ? , result = ? , status = ? WHERE id IN (SELECT a.maxID FROM (SELECT max(id) maxID FROM sddGamehistory) a) ",
       //會員帳號,累計投注項目金額,總投注額
       [
         sddPostProject,
