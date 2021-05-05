@@ -382,62 +382,69 @@ app.put("/tiger/user", function (request, response) {
 
 
 /////////fish///////////
-const render = require('ejs');//----------------
-app.set('view engine', 'ejs');
-
-// 將捕魚機傳來的資料送到資料庫
 app.post("/fishShooter/uploadBetRecord", function (req, res) {
 
-    // db.connect();
 
-    sql = `insert into fishshooter_betrecord
-    values(?)`
-    data = [req.body.betRecord];
+  sql = `insert into fishshooter_betrecord
+(
+  memberId, account, betTime,
+   gameType,object, bets, moneyBefore,
+    status, result, moneyAfter,
+     fishHited, fishKilled, betOverTime
+     )
+values(?)`
 
-    db.query(
-        sql,
-        data,
-        function () {
-            res.send("賭局完成")
-        }
-    )
+  data = [req.body.betRecord];
+
+  db.query(
+    sql,
+    data,
+    function (err, row) {
+      res.send("賭局完成")
+    }
+  )
 })
 
 
-// 有做出分頁功能的簡易後台 檢視捕魚機下注紀錄
+app.get("/fishShooter/betrecord/:page([0-9]+)", function (req, res) {
+  if(req.params.page<=0){
+    res.redirect('/fishShooter/betrecord/1')
+    return
+  };
 
-app.get("/fishShooter/page/:page([0-9]+)", function (req, res) {
+// 暫時先不刪，如果createpool不能用multipleStatements: true的話，要改回來
+  // let db = mysql.createConnection({
+  //   user: "root",
+  //   password: "",
+  //   host: '127.0.0.1',
+  //   port: 3306,
+  //   database: 'games',
+  //   multipleStatements: true
+  // });
+  // db.connect();
 
-    let page = req.params.page;
+  let page = req.params.page;
+  let nums_per_page = 10;
+  let offset = (page - 1) * nums_per_page;
 
-    let nums_per_page = 6;
-    let offset = (page - 1) * nums_per_page;
-    let sql = `SELECT * FROM fishshooter_betrecord LIMIT ${offset},${nums_per_page};
-    SELECT COUNT(*) AS COUNT FROM fishshooter_betrecord;`;
-    // console.log(sql)
+  sql = `
+SELECT * FROM fishshooter_betrecord LIMIT ${offset},${nums_per_page};
+SELECT COUNT(*) AS COUNT FROM fishshooter_betrecord;
+`
 
-    db.query(sql, function (err, data) {
-        if (err) {
-            console.log(err);
-        }
-
-        let last_page = Math.ceil(data[1][0].COUNT / nums_per_page)
-
-        if (page > last_page) {
-            res.redirect('/fishShooter/page/' + last_page);
-            return
-        }
-
-        res.render('/fishShooter/betRecord_page', {
-            rows: data[0],
-            curr_page: page,
-            total_nums: data[1][0].COUNT,
-            last_page: last_page
-        })
-
-    })
-
-
+  db.query(
+    sql,
+    function (err, data) {
+      let last_page = Math.ceil(data[1][0].COUNT / nums_per_page)
+      res.send({
+        rows: data[0],
+        total_nums: data[1][0].COUNT,
+        curr_page: page,
+        last_page: last_page
+      });
+      if(err){console.log(err);}
+    }
+  )
 })
 
 /////////////////////////////////

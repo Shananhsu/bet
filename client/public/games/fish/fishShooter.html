@@ -28,9 +28,14 @@
         }
 
         canvas {
-            background-color: sandybrown;
-            background: sandybrown url("./img/backgroundImg/sea04.jpg") no-repeat;
-            background-size: 100% 83%;
+            /* background-color: sandybrown; */
+            /* background: sandybrown url("./img/backgroundImg/sea01.jpg") no-repeat; */
+            background:url("./img/backgroundImg/sea01.jpg"), url("./img/backgroundImg/chisou_kazan.png");
+            /* background-size: 100% 83%; */
+            background-size:100% 83%, 150% 50%;
+            background-repeat: no-repeat,no-repeat;
+            background-position-x: 0,20%;
+            background-position-y: 0,120%;
             display: block;
             margin: auto;
             height: 100vh;
@@ -829,6 +834,8 @@
                     this.text = tex; // 文字內容
 
                     this.fontFamily = 'Comic Sans MS' // 字型
+                    this.font =this.fontSize + " " + this.fontFamily;
+
                     if(type=="textBtn"){
                         this.textAlign="center";
                     }else(this.textAlign="start")
@@ -841,7 +848,9 @@
                     if (this.type == 'textBtn') {
 
                         // 取得字串width之前必須先將字體大小與字型代進去才能得到正確的width
-                        ctx.font = this.fontSize + " " + this.fontFamily
+                        // ctx.font = this.fontSize + " " + this.fontFamily;
+                        this.font ="bolder" + " " +this.fontSize + " " + this.fontFamily
+                        ctx.font = this.font;
                         this.width = ctx.measureText(tex).width;
                         // 要取得文字的高度相當麻煩，因為時間不充裕，我決定先用最簡單也最死板的方法
                         // 畫一個矩形放在字的下層，調整高度使貼合文字上下端
@@ -880,7 +889,7 @@
 
                     // 字體大小與字型
                     ctx.save();
-                    ctx.font = this.fontSize + " " + this.fontFamily
+                    ctx.font = this.font
                     ctx.textBaseline = "middle"
                     ctx.textAlign = this.textAlign
                     ctx.fillStyle = this.color;
@@ -1028,8 +1037,8 @@
             startBtn.reNew();
   
             //查看下注紀錄按鈕
-            let recoredBtn = new textObj("textBtn", 1800, 950, "50px", "white", "下注紀錄")
-            let infoBtn = new textObj("textBtn", 1800, 1030, "50px", "white", "遊戲說明")
+            let recoredBtn = new textObj("textBtn", 1800, 950, "50px", "black", "下注紀錄")
+            let infoBtn = new textObj("textBtn", 1800, 1030, "50px", "black", "遊戲說明")
 
 
             // 砲彈選擇按鈕
@@ -1062,7 +1071,6 @@
             fishGeneratorArr.push(new fishGenerator(-300, 300, 1));
             fishGeneratorArr.push(new fishGenerator((canvas.width + 300), 450, -1));
             fishGeneratorArr.push(new fishGenerator(-300, 600, 1));
-            // fishGeneratorArr.push(new fishGenerator((canvas.width + 300), 750, -1));
             // 中魚
             fishGeneratorArr.push(new fishGenerator((canvas.width + 300), 200, -1, fishes02));
             fishGeneratorArr.push(new fishGenerator(-300, 400, 1, fishes02));

@@ -9,9 +9,11 @@
 </head>
 
 <style>
-    body{
-        background-color:dodgerblue;
-        color: black;
+    body {
+        background-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0.7) 90%, rgba(255, 255, 255, 0) 100%), url(./img/backgroundImg/beach02.jpg), url(./img/backgroundImg/cloud03.png);
+        background-position: left top, bottom, left top;
+        background-repeat: repeat, no-repeat, repeat;
+        background-size: 100%, 100% 75vh, 150%;
     }
 
     .title {
@@ -31,6 +33,10 @@
     .infoContainer {
         margin: auto;
         width: 900px;
+        background: rgba(0, 0, 0, 0.02);
+        box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.548);
+        backdrop-filter: blur(4px);
+        border-radius: 10px;
     }
 
     .infoNum {
@@ -46,48 +52,59 @@
         display: inline-block;
         width: 96%;
         white-space: pre-wrap;
-        /* overflow:auto; */
-        /* text-overflow:clip; */
         font-size: 2rem;
         margin-top: 0;
         margin-bottom: 0;
+        font-weight: bold;
     }
 
     .shellTitle {
         font-size: 2rem;
     }
-    .shellTitle>img{
+
+    .shellTitle>img {
         width: 30px;
     }
-    .shellTitle>span{
+
+    .shellTitle>span {
         font-weight: bold;
     }
 
-.fishCard{
-    display: inline-block;
-    width: 200px;
-}
+    .fishContainer{        
+display: flex;
+flex-wrap: wrap;
+justify-content: space-evenly;
+    }
 
-    .fishTitle{
-        font-size: 2rem;
+    .fishCard {
+        width: 200px;
+        background: rgba(0, 0, 0, 0.25);
+        box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.548);
+        backdrop-filter: blur(4px);
+        border-radius: 10px;
+        margin: 0 20px 15px 20px;
     }
-    .fishTitle>img{
-        width: 50px;
+
+    .fishTitle {
+        text-align: center;
     }
-    .fishTitle>span{
+
+    .fishTitle>img {
+        width: 150px;
+    }
+
+    .fishTitle>span {
         font-weight: bold;
     }
-    
-
 </style>
 
 <body>
 
     <div>
-        <h1 class="title" style="display: block;">捕魚機遊戲說明</h1>
+        <h1 class="title">捕魚機遊戲說明</h1>
         <div class="infoContainer">
-            <h2 class="subTitle">遊戲方法</h2>
-            <p class="infoTxt" style="display: block;">請對照下圖數字標示查看此說明:</p>
+            <h2 class="subTitle" style="margin-bottom: 20px;">遊戲方法</h2>
+            <p class="infoTxt" style="display: block; margin-bottom: 10px;">請對照下圖數字標示查看此說明:</p>
             <p class="infoNum">1.</p>
             <p class="infoTxt">滑鼠點擊START字樣遊戲即開始。
 如果遊戲中途掉到其他的視窗，遊戲會暫停，點擊START便可重新開始遊戲。</p>
@@ -143,61 +160,66 @@ HP很高的魚可以瞬間就消耗掉所有的傷害次數。如果魚被打死
 
         </div>
 
-<div class="infoContainer">
-    
-    <h2 class="subTitle">魚種介紹</h2>
-<div class="fishCard">
-    <div class="fishTitle">
-        <img  src="./img/fish01.png" alt="小魚">
-        <span >小魚</span>
-    </div>
-    <p class="infoTxt">HP:1點
+
+
+    <div class="infoContainer">
+        <h2 class="subTitle">魚種簡介</h2>
+
+        <div class="fishContainer">
+        <div class="fishCard">
+            <div class="fishTitle">
+                <img src="./img/fish01.png" alt="小魚">
+            </div>
+            <p class="infoTxt">小魚
+HP:1點
 收益:1點
-    </p>
-</div>
+            </p>
+        </div>
 
-<div class="fishCard">
-    <div class="fishTitle">
-        <img  src="./img/fish02.png" alt="小魚">
-        <span >中魚</span>
-    </div>
-    <p class="infoTxt">HP:7點
+        <div class="fishCard">
+            <div class="fishTitle">
+                <img src="./img/fish02.png" alt="小魚">
+            </div>
+            <p class="infoTxt">中魚
+HP:7點
 收益:8點
-    </p>
-</div>
+            </p>
+        </div>
 
-<div class="fishCard">
-    <div class="fishTitle">
-        <img  src="./img/fish03.png" alt="小魚">
-        <span >大魚</span>
-    </div>
-    <p class="infoTxt">HP:11點
+        <div class="fishCard">
+            <div class="fishTitle">
+                <img src="./img/fish03.png" alt="小魚">
+            </div>
+            <p class="infoTxt">大魚
+HP:11點
 收益:13點
-    </p>
-</div>
+            </p>
+        </div>
 
-<br>
+        <br>
 
-    <div class="fishCard">
-    <div class="fishTitle">
-        <img  src="./img/fish04.png" alt="小魚">
-        <span >大紅魚</span>
-    </div>
-    <p class="infoTxt">HP:50點
+        <div class="fishCard">
+            <div class="fishTitle">
+                <img src="./img/fish04.png" alt="小魚">
+            </div>
+            <p class="infoTxt">大紅魚
+HP:50點
 收益:55點
-    </p>
-</div>
-    <div class="fishCard">
-    <div class="fishTitle">
-        <img  src="./img/fish05.png" alt="小魚">
-        <span >小快魚</span>
-    </div>
-    <p class="infoTxt">HP:1點
+            </p>
+        </div>
+        
+        <div class="fishCard">
+            <div class="fishTitle">
+                <img src="./img/fish05.png" alt="小魚">
+            </div>
+            <p class="infoTxt">小快魚
+HP:1點
 收益:2點
-    </p>
-</div>
+            </p>
+        </div>
+    </div>
 
-</div>
+    </div>
 
 
     </div>
