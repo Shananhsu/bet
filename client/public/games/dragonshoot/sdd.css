@@ -5,6 +5,15 @@
   padding: 0;
 }
 
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+body{
+  background-image: url(./img/table.jpeg);
+}
+
 /* 第一張撲克牌 */
 
 #gameShowcards {
@@ -44,12 +53,18 @@
 /* 遊戲開獎結果 */
 #sddShowGameHistory {
   width: 25%;
+  border-style: solid;
+  background-color: black;
+  color: whitesmoke;
 }
 
 /* 遊戲資訊區_射龍門 */
 
 #sddNavabar {
   width: 25%;
+  border-style: solid;
+  background-color: black;
+  color: whitesmoke;
 }
 
 /* 遊戲機率區_射中 */
@@ -105,12 +120,16 @@
 #sddBetsuit_1 {
   display: flex;
   width: 100%;
+  margin-top: 50px;
 }
 
 /* 投注區域_第一區_滑鼠經過時變色 */
 
 #sddBetsuit_1 > div:hover {
-  background-color: yellow;
+  /* background-color: yellow; */
+  border-color: yellow;
+  border-style: solid;
+  box-sizing: border-box;
 }
 
 /* 投注區域_花色_黑桃 */
@@ -148,12 +167,16 @@
 #sddBetsuit_2 {
   display: flex;
   width: 100%;
+  margin-top: 50px;
 }
 
 /* 投注區域_第一區_滑鼠經過時變色 */
 
 #sddBetsuit_2 > div:hover {
-  background-color: yellow;
+  /* background-color: yellow; */
+  border-color: yellow;
+  border-style: solid;
+  box-sizing: border-box;
 }
 
 /* 投注區域_花色_方塊 */
@@ -190,14 +213,20 @@
 
 #sddBetbig {
   width: 20%;
+  height: 150px;
+  line-height: 150px;
   text-align: center;
+  font-size: 150px;
 }
 
 /* 投注區域_大小_小 */
 
 #sddBetsmall {
   width: 20%;
+  height: 150px;
+  line-height: 150px;
   text-align: center;
+  font-size: 150px;
 }
 
 /* 投注區域_Lucky 7 */
@@ -217,7 +246,10 @@
 
 #sddBetodd {
   width: 20%;
+  height: 150px;
+  line-height: 150px;
   text-align: center;
+  font-size: 150px;
 }
 
 /* 投注區域_射龍門 */
@@ -232,12 +264,14 @@
   max-width: 100%;
   max-height: 100%;
 }
-
 /* 投注區域_單雙_雙 */
 
 #sddBeteven {
   width: 20%;
+  height: 150px;
+  line-height: 150px;
   text-align: center;
+  font-size: 150px;
 }
 
 /* 籌碼區域 */
@@ -256,38 +290,123 @@
 #sddGamemenu {
   width: 100%;
   display: flex;
-  background-color: black;
-  height: 30px;
+  background-color: #000000;
+  height: 100px;
+  line-height: 100px;
+  align-items: center;
 }
 
 #sddGamemenu > div {
   color: whitesmoke;
   font-size: larger;
-  width: 25%;
-  /* border-style: solid;
-    border-width: 1px; */
 }
 
 #showBettotal_1 {
   display: flex;
   width: 100%;
   height: 50px;
+  font-size: 30px;
+  
 }
 
-#showBettotal_1>div{
-    width: 20%;
-    text-align: center;
-    line-height: 50px;
+#showBettotal_1 > div {
+  width: 20%;
+  text-align: center;
+  line-height: 50px;
 }
 
 #showBettotal_2 {
-    display: flex;
-    width: 100%;
-    height: 50px;
-  }
+  display: flex;
+  width: 100%;
+  height: 50px;
+  font-size: 30px;
   
-  #showBettotal_2>div{
-      width: 20%;
-      text-align: center;
-      line-height: 50px;
-  }
+}
+
+#showBettotal_2 > div {
+  width: 20%;
+  text-align: center;
+  line-height: 50px;
+}
+
+
+
+#sddUseraccount {
+  border-style: solid;
+  text-align: center;
+  width: 200px;
+}
+
+#sddUsermoney {
+  border-style: solid;
+  margin-left: 20px;
+  text-align: center;
+  width: 200px;
+}
+
+#sddBetamount {
+  border-style: solid;
+  text-align: center;
+  width: 200px;
+  margin-left: 0;
+}
+
+#sddBet50{
+  margin-left: 180px;
+  margin-top: 55px;
+}
+
+#sddBet100{
+  margin-top: 55px;
+}
+
+#sddBet500{
+  margin-top: 55px;
+}
+
+#sddBet1000{
+  margin-top: 55px;
+}
+
+#sddBet5000{
+  margin-top: 55px;
+}
+
+#sddBetamount{
+  margin-left: 100px;
+}
+
+#sddStart{
+  margin-left: 50px;
+  border-radius: 8px;
+  width: 100px;
+  height: 40px;
+  font-size: 20px;
+}
+
+#sddCallcard {
+  display: none;
+  margin-left: 50px;
+  border-radius: 8px;
+  width: 100px;
+  height: 40px;
+  font-size: 20px;
+}
+
+#sddGiveup {
+  display: none;
+  margin-left: 50px;
+  border-radius: 8px;
+  width: 100px;
+  height: 40px;
+  font-size: 20px;
+}
+
+#sddPlayHistory{
+  margin-left: 20px;
+  border-radius: 8px;
+  width: 100px;
+  height: 40px;
+  font-size: 20px;
+}
+

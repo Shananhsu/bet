@@ -13,14 +13,9 @@
 </head>
 
 <body>
-    <div id="sddGamemenu">
-        <div>會員帳號：Mepunk</div>
-        <div id="sddUsermoney">錢包餘額：</div>
-        <div id="sddBetamount">本局投注金額：0</div>
-        <div id="prentTime"></div>
-    </div>
     <div id="sddGamearea">
-        <div id="sddNavabar"><h3>投注明細：</h3>
+        <div id="sddNavabar">
+            <h3>投注明細：</h3>
             <h4 id="sddGamehistory_01"></h4>
             <h4 id="sddGamehistory_02"></h4>
             <h4 id="sddGamehistory_03"></h4>
@@ -41,11 +36,11 @@
 
         <div id="sddShowGameHistory">
             <h3>此局開獎結果：</h3>
-            <h4 id="sddShowGameHistory_01">幸運七</h4>
-            <h4 id="sddShowGameHistory_02">射龍門</h4>
-            <h4 id="sddShowGameHistory_03">中獎花色</h4>
-            <h4 id="sddShowGameHistory_04">中獎大小</h4>
-            <h4 id="sddShowGameHistory_05">中獎單雙</h4>
+            <h4 id="sddShowGameHistory_01"></h4>
+            <h4 id="sddShowGameHistory_02"></h4>
+            <h4 id="sddShowGameHistory_03"></h4>
+            <h4 id="sddShowGameHistory_04"></h4>
+            <h4 id="sddShowGameHistory_05"></h4>
         </div>
     </div>
     <!-- <div id="gameProbability">
@@ -89,7 +84,7 @@
     <div id="sddBetsuit_2">
         <div id="sddCube"><img src="./img/cube.png" alt=""></div>
         <div id="sddBetodd">單</div>
-        <div id="sddBetsdd"><img src="./img/Dragon.png" alt=""></div>
+        <div id="sddBetsdd"><img src="./img/OMOG-02.png" alt=""></div>
         <div id="sddBeteven">雙</div>
         <div id="sddPlum"><img src="./img/plum.png" alt=""></div>
     </div>
@@ -100,21 +95,24 @@
         <div id="showBettotalarea_09"></div>
         <div id="showBettotalarea_10"></div>
     </div>
-    <div id="sddBetchip">
+
+    <div id="sddGamemenu">
+        <div id="sddUseraccount">會員帳號：steven</div>
+        <div id="sddUsermoney">錢包餘額：</div>
         <div id="sddBet50"><img src="./img/50.png"></div>
         <div id="sddBet100"><img src="./img/100.png"></div>
         <div id="sddBet500"><img src="./img/500.png"></div>
         <div id="sddBet1000"><img src="./img/1000.png"></div>
         <div id="sddBet5000"><img src="./img/5000.png"></div>
+        <div id="sddBetamount">本局投注金額：0</div>
+        <button id="sddStart">開始</button>
+        <button id="sddCallcard">要牌</button>
+        <button id="sddGiveup"><a href="http://localhost:3000/">下一局</a></button>
+        <button id="sddPlayHistory"><a href="http://localhost:3000/router.html">遊戲紀錄</a></button>
+        <!-- <div id="prentTime"></div> -->
     </div>
 
 
-
-
-    <button id="sddStart">開始</button>
-    <button id="sddCallcard">要牌</button>
-    <button id="sddGiveup"><a href="./games/dragonshoot/index.html">下一局</a></button>
-    <button id="sddGiveup"><a href="./router.html">去後台</a></button>
     <script src="./v4_sdd_poker.js"></script>
 </body>
 
