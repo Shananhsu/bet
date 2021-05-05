@@ -1928,3 +1928,6 @@ body.modal-open {
     box-shadow: 1px 1px 3px 0 rgba(0, 12, 105, 0.28);
     border-radius: 15px;
 }
+.tab_left{
+    background-image: url(../images/playground/tab_left.png);
+}

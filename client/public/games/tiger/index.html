@@ -56,6 +56,7 @@
             <div id="buttonSA">
                 <img v-on:click="handleBet" id="btnStart" src="./img/1x/Start.png">
                 <img v-on:click="handleAuto" id="btnAuto" src="./img/1x/Auto.png">
+                <img v-on:click="handleResult" id="imggetresult" src="./img/1x/gameresults.png" alt="">
             </div>
         </div>
         <canvas id="myCanvas"></canvas>
@@ -82,6 +83,9 @@
                 });
             },
             methods: {
+                handleResult:function(){
+                    location.href='./results.html'
+                },
                 handleBet: function () {
                     fp = 500;
                     StartGame();

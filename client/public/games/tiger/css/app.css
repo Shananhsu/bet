@@ -202,9 +202,15 @@ canvas {
     top: -500px;
     left: 950px;
     width: 400px;
+    height: 150px;
 }
 
 #buttonSA>img {
     width: 150px;
     height: 150px;
+}
+#imggetresult{
+    position: relative;
+    top: -150px;
+    left: 350px;
 }
