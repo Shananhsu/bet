@@ -1,25 +1,27 @@
 //使用說明 打開註解 或關閉 啟動功能
 //1.關閉重複出現的撲克牌 line => 42
-let showNowtime = "";
-//顯示時間
-window.onload = showTime;
-function showTime() {
-  var NowDate = new Date();
-  var d = NowDate.getDay();
-  var dayNames = new Array(
-    "星期日",
-    "星期一",
-    "星期二",
-    "星期三",
-    "星期四",
-    "星期五",
-    "星期六"
-  );
-  showNowtime = NowDate.toLocaleString() + " 【" + dayNames[d] + "】";
-  document.getElementById("prentTime").innerHTML = showNowtime;
-  // 更新頻率1000=每秒更新 500=每半秒更新
-  setTimeout("showTime()", 500);
-}
+let showNowtime = new Date();
+// //顯示時間
+// window.onload = showTime;
+// function showTime() {
+//   var NowDate = new Date();
+//   var d = NowDate.getDay();
+//   var dayNames = new Array(
+//     "星期日",
+//     "星期一",
+//     "星期二",
+//     "星期三",
+//     "星期四",
+//     "星期五",
+//     "星期六"
+//   );
+//   showNowtime = NowDate.toLocaleString() + " 【" + dayNames[d] + "】";
+//   document.getElementById("prentTime").innerHTML = showNowtime;
+//   // 更新頻率1000=每秒更新 500=每半秒更新
+//   setTimeout("showTime()", 500);
+// }
+
+let gameType = ["射龍門"];
 
 //準備撲克牌
 // 中改英文 不然爆圖 0.0
