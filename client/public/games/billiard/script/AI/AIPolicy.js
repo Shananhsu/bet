@@ -5,7 +5,7 @@ function AIPolicy(){
 AIPolicy.prototype.evaluate = function(state, gamePolicy){
 
     let evaluation = 1;
-           
+
     for (var i = 0 ; i < state.balls.length; i++){
         for(var j = i + 1 ; j < state.balls.length ; j++){
 

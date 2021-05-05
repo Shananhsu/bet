@@ -2,112 +2,112 @@
 
 function GameWorld() {
 
-    this.whiteBallStartingPosition = new Vector2(413,413);
-//紅球擺放位置
+    this.whiteBallStartingPosition = new Vector2(413, 413);
+    //紅球擺放位置
     this.redBalls = [
-    new Ball(new Vector2(1056,433),Color.red),//3
-    new Ball(new Vector2(1090,374),Color.red),//4
-    new Ball(new Vector2(1126,393),Color.red),//8
-    new Ball(new Vector2(1126,472),Color.red),//10;
-    new Ball(new Vector2(1162,335),Color.red),//11
-    new Ball(new Vector2(1162,374),Color.red),//12
-    new Ball(new Vector2(1162,452),Color.red)//14
-    ]
-//黃球擺放位置
+            new Ball(new Vector2(1056, 433), Color.red), //3
+            new Ball(new Vector2(1090, 374), Color.red), //4
+            new Ball(new Vector2(1126, 393), Color.red), //8
+            new Ball(new Vector2(1126, 472), Color.red), //10;
+            new Ball(new Vector2(1162, 335), Color.red), //11
+            new Ball(new Vector2(1162, 374), Color.red), //12
+            new Ball(new Vector2(1162, 452), Color.red) //14
+        ]
+        //黃球擺放位置
     this.blueBalls = [
-    new Ball(new Vector2(1022,413),Color.blue),//1
-    new Ball(new Vector2(1056,393),Color.blue),//2
-    new Ball(new Vector2(1090,452),Color.blue),//6
-    new Ball(new Vector2(1126,354),Color.blue),//7
-    new Ball(new Vector2(1126,433),Color.blue),//9
-    new Ball(new Vector2(1162,413),Color.blue),//13
-    new Ball(new Vector2(1162,491),Color.blue)//15
+        new Ball(new Vector2(1022, 413), Color.blue), //1
+        new Ball(new Vector2(1056, 393), Color.blue), //2
+        new Ball(new Vector2(1090, 452), Color.blue), //6
+        new Ball(new Vector2(1126, 354), Color.blue), //7
+        new Ball(new Vector2(1126, 433), Color.blue), //9
+        new Ball(new Vector2(1162, 413), Color.blue), //13
+        new Ball(new Vector2(1162, 491), Color.blue) //15
     ];
-//黑白球擺放位置
-    this.whiteBall = new Ball(new Vector2(413,413),Color.white);
-    this.goldBall = new Ball(new Vector2(1090,413),Color.gold);
+    //黑白球擺放位置
+    this.whiteBall = new Ball(new Vector2(413, 413), Color.white);
+    this.goldBall = new Ball(new Vector2(1090, 413), Color.gold);
 
     this.balls = [
-    this.blueBalls[0],
-    this.blueBalls[1],
-    this.redBalls[0],
-    this.redBalls[1],
-    this.goldBall,
-    this.blueBalls[2],
-    this.blueBalls[3],
-    this.redBalls[2],
-    this.blueBalls[4],
-    this.redBalls[3],
-    this.redBalls[4],
-    this.redBalls[5],
-    this.blueBalls[5],
-    this.redBalls[6],
-    this.blueBalls[6],
-    this.whiteBall]
-//球桿位置
-    this.stick = new Stick({ x : 407, y : 411 });
+            this.blueBalls[0],
+            this.blueBalls[1],
+            this.redBalls[0],
+            this.redBalls[1],
+            this.goldBall,
+            this.blueBalls[2],
+            this.blueBalls[3],
+            this.redBalls[2],
+            this.blueBalls[4],
+            this.redBalls[3],
+            this.redBalls[4],
+            this.redBalls[5],
+            this.blueBalls[5],
+            this.redBalls[6],
+            this.blueBalls[6],
+            this.whiteBall
+        ]
+        //球桿位置
+    this.stick = new Stick({ x: 407, y: 411 });
 
     this.gameOver = false;
 }
 
-GameWorld.prototype.getBallsSetByColor = function(color){
+GameWorld.prototype.getBallsSetByColor = function(color) {
 
-    if(color === Color.red){
+    if (color === Color.red) {
         return this.redBalls;
     }
-    if(color === Color.blue){
+    if (color === Color.blue) {
         return this.blueBalls;
     }
-    if(color === Color.white){
+    if (color === Color.white) {
         return this.whiteBall;
     }
-    if(color === Color.gold){
+    if (color === Color.gold) {
         return this.goldBall;
     }
 }
 
-GameWorld.prototype.handleInput = function (delta) {
+GameWorld.prototype.handleInput = function(delta) {
     this.stick.handleInput(delta);
 };
 
-GameWorld.prototype.update = function (delta) {
+GameWorld.prototype.update = function(delta) {
     this.stick.update(delta);
 
-    for (var i = 0 ; i < this.balls.length; i++){
-        for(var j = i + 1 ; j < this.balls.length ; j++){
+    for (var i = 0; i < this.balls.length; i++) {
+        for (var j = i + 1; j < this.balls.length; j++) {
             this.handleCollision(this.balls[i], this.balls[j], delta);
         }
     }
 
-    for (var i = 0 ; i < this.balls.length; i++) {
+    for (var i = 0; i < this.balls.length; i++) {
         this.balls[i].update(delta);
     }
 
-    if(!this.ballsMoving() && AI.finishedSession){
+    if (!this.ballsMoving() && AI.finishedSession) {
         Game.policy.updateTurnOutcome();
-        if(Game.policy.foul){
+        if (Game.policy.foul) {
             this.ballInHand();
         }
     }
 
 };
 
-GameWorld.prototype.ballInHand = function(){
-    if(AI_ON && Game.policy.turn === AI_PLAYER_NUM){
+GameWorld.prototype.ballInHand = function() {
+    if (AI_ON && Game.policy.turn === AI_PLAYER_NUM) {
         return;
     }
 
     KEYBOARD_INPUT_ON = false;
     this.stick.visible = false;
-    if(!Mouse.left.down){
+    if (!Mouse.left.down) {
         this.whiteBall.position = Mouse.position;
-    }
-    else{
+    } else {
         let ballsOverlap = this.whiteBallOverlapsBalls();
 
-        if(!Game.policy.isOutsideBorder(Mouse.position,this.whiteBall.origin) &&
+        if (!Game.policy.isOutsideBorder(Mouse.position, this.whiteBall.origin) &&
             !Game.policy.isInsideHole(Mouse.position) &&
-            !ballsOverlap){
+            !ballsOverlap) {
             KEYBOARD_INPUT_ON = true;
             Keyboard.reset();
             Mouse.reset();
@@ -121,12 +121,12 @@ GameWorld.prototype.ballInHand = function(){
 
 }
 
-GameWorld.prototype.whiteBallOverlapsBalls = function(){
+GameWorld.prototype.whiteBallOverlapsBalls = function() {
 
     let ballsOverlap = false;
-    for (var i = 0 ; i < this.balls.length; i++) {
-        if(this.whiteBall !== this.balls[i]){
-            if(this.whiteBall.position.distanceFrom(this.balls[i].position)<BALL_SIZE){
+    for (var i = 0; i < this.balls.length; i++) {
+        if (this.whiteBall !== this.balls[i]) {
+            if (this.whiteBall.position.distanceFrom(this.balls[i].position) < BALL_SIZE) {
                 ballsOverlap = true;
             }
         }
@@ -135,12 +135,12 @@ GameWorld.prototype.whiteBallOverlapsBalls = function(){
     return ballsOverlap;
 }
 
-GameWorld.prototype.ballsMoving = function(){
+GameWorld.prototype.ballsMoving = function() {
 
     var ballsMoving = false;
 
-    for (var i = 0 ; i < this.balls.length; i++) {
-        if(this.balls[i].moving){
+    for (var i = 0; i < this.balls.length; i++) {
+        if (this.balls[i].moving) {
             ballsMoving = true;
         }
     }
@@ -148,12 +148,12 @@ GameWorld.prototype.ballsMoving = function(){
     return ballsMoving;
 }
 
-GameWorld.prototype.handleCollision = function(ball1, ball2, delta){
+GameWorld.prototype.handleCollision = function(ball1, ball2, delta) {
 
-    if(ball1.inHole || ball2.inHole)
+    if (ball1.inHole || ball2.inHole)
         return;
 
-    if(!ball1.moving && !ball2.moving)
+    if (!ball1.moving && !ball2.moving)
         return;
 
     var ball1NewPos = ball1.position.add(ball1.velocity.multiply(delta));
@@ -161,16 +161,16 @@ GameWorld.prototype.handleCollision = function(ball1, ball2, delta){
 
     var dist = ball1NewPos.distanceFrom(ball2NewPos);
 
-    if(dist<BALL_SIZE){
+    if (dist < BALL_SIZE) {
         Game.policy.checkColisionValidity(ball1, ball2);
 
-        var power = (Math.abs(ball1.velocity.x) + Math.abs(ball1.velocity.y)) + 
-                    (Math.abs(ball2.velocity.x) + Math.abs(ball2.velocity.y));
+        var power = (Math.abs(ball1.velocity.x) + Math.abs(ball1.velocity.y)) +
+            (Math.abs(ball2.velocity.x) + Math.abs(ball2.velocity.y));
         power = power * 0.00482;
 
-        if(Game.sound && SOUND_ON){
+        if (Game.sound && SOUND_ON) {
             var ballsCollide = sounds.ballsCollide.cloneNode(true);
-            ballsCollide.volume = (power/(20))<1?(power/(20)):1;
+            ballsCollide.volume = (power / (20)) < 1 ? (power / (20)) : 1;
             ballsCollide.play();
         }
 
@@ -181,12 +181,12 @@ GameWorld.prototype.handleCollision = function(ball1, ball2, delta){
         ball1.moving = true;
         ball2.moving = true;
 
-        var velocity2 = new Vector2(90*Math.cos(rotation + Math.PI)*power,90*Math.sin(rotation + Math.PI)*power);
+        var velocity2 = new Vector2(90 * Math.cos(rotation + Math.PI) * power, 90 * Math.sin(rotation + Math.PI) * power);
         ball2.velocity = ball2.velocity.addTo(velocity2);
 
         ball2.velocity.multiplyWith(0.97);
 
-        var velocity1 = new Vector2(90*Math.cos(rotation)*power,90*Math.sin(rotation)*power);
+        var velocity1 = new Vector2(90 * Math.cos(rotation) * power, 90 * Math.sin(rotation) * power);
         ball1.velocity = ball1.velocity.addTo(velocity1);
 
         ball1.velocity.multiplyWith(0.97);
@@ -194,10 +194,10 @@ GameWorld.prototype.handleCollision = function(ball1, ball2, delta){
 
 }
 
-GameWorld.prototype.draw = function () {
-   
+GameWorld.prototype.draw = function() {
+
     Canvas2D.drawImage(sprites.background);
-   
+
     Game.policy.drawScores();
 
     for (var i = 0; i < this.balls.length; i++) {
@@ -207,11 +207,11 @@ GameWorld.prototype.draw = function () {
     this.stick.draw();
 };
 
-axios.get("http://localhost:3001/biliard/fetch")
-.then((e)=>{console.log(e.data)})
-.catch((err)=>console.log(err))
+axios.get("/fetch")
+    .then((e) => { console.log(e.data) })
+    .catch((err) => console.log(err))
 
-GameWorld.prototype.reset = function () {
+GameWorld.prototype.reset = function() {
     this.gameOver = false;
 
     for (var i = 0; i < this.balls.length; i++) {
@@ -220,13 +220,13 @@ GameWorld.prototype.reset = function () {
 
     this.stick.reset();
 
-    if(AI_ON && AI_PLAYER_NUM === 0){
+    if (AI_ON && AI_PLAYER_NUM === 0) {
         AI.startSession();
     }
 };
 
-GameWorld.prototype.initiateState = function(balls){
-    
+GameWorld.prototype.initiateState = function(balls) {
+
     for (var i = 0; i < this.balls.length; i++) {
         this.balls[i].position.x = balls[i].position.x;
         this.balls[i].position.y = balls[i].position.y;
@@ -236,4 +236,3 @@ GameWorld.prototype.initiateState = function(balls){
 
     this.stick.position = this.whiteBall.position;
 }
-

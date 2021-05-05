@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>SddBank</title>
+    <title>蘿莉控</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -10,9 +10,27 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"
-        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+
+    <!-- 新加的 -->
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="wow/WOW-master/css/libs/animate.css">
+    <script src="wow/WOW-master/dist/wow.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <!-- 再新加 -->
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+
 </head>
 <style>
     #sddContainer {
@@ -22,17 +40,226 @@
     }
 </style>
 
-<body>
+<body class="subpage">
+    <!-- Header -->
+    <header id="header">
+        <div class="logo"><a href="index.html">撞球撞起來</a></div>
+    </header>
+
+
+
+    <!-- One -->
+    <div class="style3background">
+
+        <div>
+            <section id="One" class="wrapper style6">
+
+                <div class="inner">
+                    <header class="align-center animate__animated animate__fadeInUp animate__slow  wow">
+                        <p>來看看你的偉大戰績吧</p>
+                        <h2>遊戲紀錄</h2>
+                    </header>
+
+                </div>
+
+            </section>
+        </div>
+
+    </div>
+
+
+
+    <div id="routerdiv"class="routerindex">
+    
+      
+        </div>
+        
+        
+
+        <div id="root">
+
+        </div>
+
+
+
+    <div class="slider_container ">
+
+        <div>
+            <img src="images/logo.png" class="bbackground " height="100%" width="100%" />
+            <span class=" info"></span>
+        </div>
+        <div>
+            <img src="images/logo.png" class="bbackground " height="100%" width="100%" />
+            <span class="info"></span>
+        </div>
+        <div>
+            <img src="images/logo.png" class="bbackground " height="100%" width="100%" />
+            <span class="info"></span>
+        </div>
+        <div>
+            <img src="images/logo.png" class="bbackground " height="100%" width="100%" />
+            <span class="info"></span>
+        </div>
+        <div>
+            <img src="images/logo.png" class="bbackground " height="100%" width="100%" />
+            <span class="info"></span>
+        </div>
+
+
+
+
+
+
+      
+
+        <script type="text/babel">
+
+
+
+
+
+
+
+            class GameResult extends React.Component{ 
+                constructor(){
+super();
+this.rows;
+this.rowsCount;
+this.currPage;
+this.lastPage;
+
+$.ajax({
+type:"get",
+url:"http://localhost:3001/gameresult/1",
+data: "",
+async: false,
+success: (res) => {
+this.rows = res.rows;
+this.rowsCount = res.total_nums;
+this.currPage = res.curr_page;
+this.lastPage = res.last_page;
+
+
+},
+error : function (err) { 
+    
+console.log(err)
+}
+})
+
+this.changePage = (i) => {
+if(i <= 0){i = 1};
+if(i >= this.lastPage){ i =this.lastPage};
+$.ajax({
+    type: "get",
+    url: `http://localhost:3001/gameresult/${i}`,
+    data: "",
+success: (res) =>{
+    this.rows = res.rows;
+    this.rowsCount = res.total_nums;
+    this.currPage = res.curr_page;
+    this.lastPage = res.last_page;
+
+    this.setState({rows: res.rows})
+    this.setState({currPage:res.curr_page})
+    console.log(this.state.currPage);
+},
+error: function(err){
+    console.log(err)
+}
+
+
+
+
+})
+
+}
+
+
+
+
+
+
+
+
+
+
+       this.state = {
+rows:this.rows,
+pageArr: this.pageArr,
+currPage: this.currPage
+
+
+
+       }    
+    console.log(this.state.pageArr);
+    }
+                
+                
+                render(){
+
+                    this.pageArr = []
+// for(let i =1;i<= this.lastPage;i++){
+for (let i = this.currPage-2; i <= (parseInt(this.currPage)+2); i++){
+
+if(i<=0) continue
+if(i>this.lastPage)continue
+
+
+
+if(i == this.currPage){
+    this.pageArr.push(
+        <button style={{backgroundColor:"#534a4abb"}} className ="lolbut" key = {i} onClick={() => {this.changePage(i)}} >{i}</button>
+    )
+continue
+}
 
     
+    
+    this.pageArr.push(
+        <button className ="lolbut" key = {i} onClick={() => {this.changePage(i)}} >{i}</button>
+    )
+}
 
-    <div id="sddContainer" class="container">
-        <table class="row-bg-4 table table-dark table-hover">
+
+
+
+                    this.tdArr = []
+                for (let i = 0; i < this.state.rows.length; i++) {
+                    this.tdArr.push(
+                        <tr key={i}>
+                            <td>{this.state.rows[i].id}</td>
+                            <td>{this.state.rows[i].betTime}</td>
+                            <td>{this.state.rows[i].account}</td>
+                            <td>{this.state.rows[i].gameType}</td>
+                            <td>{this.state.rows[i].object}</td>
+                            <td>{this.state.rows[i].bets}</td>
+                            <td>{this.state.rows[i].moneyBefore}</td>
+                            <td>{this.state.rows[i].status}</td>
+                            <td>{this.state.rows[i].result}</td>
+                            <td>{this.state.rows[i].moneyAfter}</td>
+                        </tr>
+                    )
+                }
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    return(
+            <React.Fragment>
+                <table class="routerindex">
             <thead>
-                <tr>
+                <tr className="routertr">
                     <th>序號</th>
                     <th>會員帳號</th>
                     <th>遊戲時間</th>
+                    <th>遊戲項目</th>
                     <th>投注項目</th>
                     <th>投注金額</th>
                     <th>投注前餘額</th>
@@ -41,115 +268,43 @@
                     <th>投注後餘額</th>
                 </tr>
             </thead>
-            <tbody id="gamehistory">
-                <tr v-for="(history, index) in newsList">
-                    <td>{{history.id}}</td>
-                    <td>{{history.account}}</td>
-                    <td>{{history.time}}</td>
-                    <td>{{history.betproject}}</td>
-                    <td>{{history.betmoney}}</td>
-                    <td>{{history.beforemoney}}</td>
-                    <td>{{history.gameresult}}</td>
-                    <td>{{history.betresult}}</td>
-                    <td>{{history.aftermoney}}</td>
-
-                 
-                </tr>
-                <!-- <tr>
-                    <td>{{newsList.id}}</td>
-                    <td>{{newsList.sddPlayerAccount}}</td>
-                    <td>{{newsList.sddPlayerBetMoney}}</td>
-                </tr> -->
+            <tbody id="gamehistory" className="routertbody">
+              
+                {this.tdArr}
             </tbody>
+
         </table>
-    </div>
-    <script>
 
-        var newsApp = new Vue({
-            el: "#gamehistory",
-            data: {
-                newsList: [
-                    // {
-                    //     id: 1,
-                    //     sddPlayerId: 1,
-                    //     sddPlayerAccount: "Mepunk",
-                    //     sddPlayerBetTime: "2021/4/22 上午11:57:02 【星期四】",
-                    //     sddPlayerBetProject: "\n 黑桃： 500,\n 大點： 500,\n 中七： 500,\n 小點： 500,\n 愛心： 500,\n 方塊： 500,\n 單數： 500,\n 龍門： 100,\n 雙數： 500,\n 梅花： 500,",
-                    //     sddPlayerBetMoney: "4600",
-                    //     sddPlayerMoneyBefore: "10000",
-                    //     sddGameResult: "幸運七：沒中,\n 射龍門：沒射過,\n 中獎花色：梅花,\n 中獎大小：中小,\n 中獎單雙：中雙,",
-                    //     sddPlayerBetResult: "-725",
-                    //     sddPlayerMoneyAfter: "9275"
-                    // },
-                    // {
-                    //     id: 2,
-                    //     sddPlayerId: 1,
-                    //     sddPlayerAccount: "Mepunk",
-                    //     sddPlayerBetTime: "2021/4/22 上午11:60:02 【星期四】",
-                    //     sddPlayerBetProject: "\n 黑桃： 500,\n 大點： 500,\n 中七： 500,\n 小點： 500,\n 愛心： 500,\n 方塊： 500,\n 單數： 500,\n 龍門： 100,\n 雙數： 500,\n 梅花： 500,",
-                    //     sddPlayerBetMoney: "5000",
-                    //     sddPlayerMoneyBefore: "10000",
-                    //     sddGameResult: "幸運七：沒中,\n 射龍門：沒射過,\n 中獎花色：梅花,\n 中獎大小：中小,\n 中獎單雙：中雙,",
-                    //     sddPlayerBetResult: "-725",
-                    //     sddPlayerMoneyAfter: "9275"
-                    // },
-                    // {
-                    //     id: 3,
-                    //     sddPlayerId: 1,
-                    //     sddPlayerAccount: "Mepunk",
-                    //     sddPlayerBetTime: "2021/4/22 上午11:60:02 【星期四】",
-                    //     sddPlayerBetProject: "\n 黑桃： 500,\n 大點： 500,\n 中七： 500,\n 小點： 500,\n 愛心： 500,\n 方塊： 500,\n 單數： 500,\n 龍門： 100,\n 雙數： 500,\n 梅花： 500,",
-                    //     sddPlayerBetMoney: "5000",
-                    //     sddPlayerMoneyBefore: "10000",
-                    //     sddGameResult: "幸運七：沒中,\n 射龍門：沒射過,\n 中獎花色：梅花,\n 中獎大小：中小,\n 中獎單雙：中雙,",
-                    //     sddPlayerBetResult: "-725",
-                    //     sddPlayerMoneyAfter: "9275"
-                    // },
-                ]
-            },
-            created() { 
-                axios.get("http://localhost:3001/billiard/admin")
-                .then((e) => {newsApp.newsList = e.data})
-                // .then((e)=>{console.log(e.data)})
-                .catch((err) => {console.log(err)})
-            }
 
-            // mounted() {
-            //     axios
-            //     .get("/admin")
-            //     .then(res => {newsApp.newsList = res.data})
-            //     .catch(req => (console.log("err")))
-            // }
-        });
-        
-        // axios({
-        //     method: "get",
-        //     url: "/admin",
-        //     parmas: {
-        //         id,
-        //         sddPlayerId,
-        //         sddPlayerAccount,
-        //         sddPlayerBetTime,
-        //         sddPlayerBetProject,
-        //         sddPlayerBetMoney,
-        //         sddPlayerMoneyBefore,
-        //         sddGameResult,
-        //         sddPlayerBetResult,
-        //         sddPlayerMoneyAfter
-        //     }.then((res => { alert(res.data) }))
-        // })
+<div class="pagebuttondiv">
+    <button className = "lolbut" onClick={() => {this.changePage(this.currPage -1)}}>＜</button>
+    {this.pageArr}
+    <button className = "lolbut" onClick={() => {this.changePage(parseInt(this.currPage) +1)}}>＞</button>
+    </div>            </React.Fragment>
+            ) } } ReactDOM.render(
 
-        // id: 1,
-        //         sddPlayerId: 1,
-        //         sddPlayerAccount: "Mepunk",
-        //         sddPlayerBetTime: "2021/4/22 上午11:57:02 【星期四】",
-        //         sddPlayerBetProject: "\n 黑桃： 500,\n 大點： 500,\n 中七： 500,\n 小點： 500,\n 愛心： 500,\n 方塊： 500,\n 單數： 500,\n 龍門： 100,\n 雙數： 500,\n 梅花： 500,",
-        //         sddPlayerBetMoney: "4600",
-        //         sddPlayerMoneyBefore: "10000",
-        //         sddGameResult: "幸運七：沒中,\n 射龍門：沒射過,\n 中獎花色：梅花,\n 中獎大小：中小,\n 中獎單雙：中雙,",
-        //         sddPlayerBetResult: "-725",
-        //         sddPlayerMoneyAfter: "9275"
-    </script>
+            <GameResult/>, document.getElementById('root') );
+
+        </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <script src="assets/js/skel.min.js"></script>
+        <script src="assets/js/util.js"></script>
+        <script src="assets/js/main.js"></script>
 </body>
 
 </html>
