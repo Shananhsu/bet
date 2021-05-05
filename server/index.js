@@ -5,6 +5,9 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require("express-session");
 
+// 引用moment固定資料庫時間格式
+const moment = require('moment');
+
 const app = express();
 const cors = require('cors');
 const mysql = require('mysql');
@@ -205,7 +208,7 @@ app.post("/blackjack/store", function (req, res) {
   var bet = req.body.bet;
   var moneyBefore = req.body.moneyBefore;
   var moneyAfter = req.body.moneyAfter;
-  var betTime = req.body.betTime;
+  var betTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
   var gameType = req.body.gameType;
 
   db.query(
@@ -543,7 +546,7 @@ SELECT COUNT(*) AS COUNT FROM billiard_ball;
 ////////niuniu/////////////
 app.get("/niuniu/fetch", function (req, res) {
   conn.query(
-    "select * from niuniu_records where id in (select a.maxID from (select max(id) maxID from records) a)", [], function (err, result) {
+    "select * from niuniu_records where id in (select a.maxID from (select max(id) maxID from niuniu_records) a)", [], function (err, result) {
       if (err) {
         console.log(JSON.stringify(err));
         return;
@@ -558,7 +561,7 @@ app.post("/niuniu/store", function (req, res) {
   var bet = req.body.bet;
   var moneyBefore = req.body.moneyBefore;
   var moneyAfter = req.body.moneyAfter;
-  var betTime = req.body.betTime;
+  var betTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
   var gameType = req.body.gameType;
 
   conn.query(
@@ -578,7 +581,7 @@ app.post("/niuniu/update", function (req, res) {
   var status = req.body.status;
 
   conn.query(
-    "UPDATE niuniu_records SET moneyAfter = ?, result = ?,dealerCards=?,playerCards=?,status=?  WHERE id IN (SELECT a.maxID FROM (SELECT max(id) maxID FROM records) a)",
+    "UPDATE niuniu_records SET moneyAfter = ?, result = ?,dealerCards=?,playerCards=?,status=?  WHERE id IN (SELECT a.maxID FROM (SELECT max(id) maxID FROM niuniu_records) a)",
     [moneyAfter, result, dealerCards, playerCards, status],
     function (err, result) {
       if (err) { throw err } else {
@@ -586,12 +589,6 @@ app.post("/niuniu/update", function (req, res) {
       }
     }
   )
-})
-
-
-app.get("/niuniu/admin", function (req, res) {
-  res.redirect("data.html")
-  // res.render("data.html")
 })
 
 app.get("/niuniu/select", function (req, res) {
