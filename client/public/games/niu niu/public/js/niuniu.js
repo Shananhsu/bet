@@ -190,7 +190,7 @@ gameStart.onclick = function () {
             }
 
             // axios
-            axios.post("/store", {
+            axios.post("/niuniu/store", {
                 account: account.innerText,
                 bet: parseInt(money.innerText),
                 moneyBefore: parseInt(point.innerText) + parseInt(money.innerText),
@@ -546,7 +546,7 @@ openc.onclick = function () {
 
 
         // UPDATE
-        axios.post("/update", {
+        axios.post("/niuniu/update", {
             moneyAfter: parseInt(point.innerText),
             result: result,
             dealerCards: `${dsuits[0]},${dsuits[1]},${dsuits[2]},${dsuits[3]},${dsuits[4]}`,
