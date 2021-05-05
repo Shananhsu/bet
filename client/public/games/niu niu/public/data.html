@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <title>妞妞後台</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: rgb(25, 30, 43);
+            color: white;
+        }
+
+        table,
+        th,
+        td {
+            border-collapse: collapse;
+            text-align: center;
+            border-bottom: 1px solid white;
+            padding: 8px;
+            margin: 0;
+        }
+
+        table {
+            border: 1px solid white;
+            width: 100%;
+        }
+
+        tr:hover {
+            background-color: rgba(92, 97, 156, 0.493);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="apple">
+        <table>
+            <tr>
+                <th><button id="returnTo">返回</button></th>
+                <th>玩家編號</th>
+                <th>下注前金額</th>
+                <th>下注金額</th>
+                <th>輸贏結果</th>
+                <th>下注時間</th>
+                <th>遊戲後金額</th>
+                <th>莊家牌</th>
+                <th>玩家牌</th>
+                <th>遊戲類別</th>
+                <th>遊戲內容</th>
+            </tr>
+            <tr v-for="item in temp">
+                <td>{{item.id}}</td>
+                <td>{{item.account}}</td>
+                <td>{{item.moneyBefore}}</td>
+                <td>{{item.bets}}</td>
+                <td>{{item.result}}</td>
+                <td>{{item.betTime}}</td>
+                <td>{{item.moneyAfter}}</td>
+                <td>{{item.dealerCards}}</td>
+                <td>{{item.playerCards}}</td>
+                <td>{{item.gameType}}</td>
+                <td>{{item.status}}</td>
+
+            </tr>
+        </table>
+    </div>
+
+    <script>
+
+        var app = new Vue({
+            el: "#apple",
+            data: {
+                temp: [],
+                color: ""
+            },
+            created() {
+                axios.get("http://localhost:3001/niuniu/select")
+                    .then((e) => { app.temp = e.data })
+                    .catch((err) => { console.log(err) })
+            },
+            computed: {
+                setColor() {
+                    if (this.temp.result) {
+
+                    }
+                }
+            }
+        })
+    </script>
+
+    <script>
+        returnTo.onclick = () => {
+            window.location.href = "/"
+        }
+    </script>
+
+
+
+</body>
+
+</html>

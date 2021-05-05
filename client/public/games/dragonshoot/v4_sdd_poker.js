@@ -1,25 +1,27 @@
 //使用說明 打開註解 或關閉 啟動功能
 //1.關閉重複出現的撲克牌 line => 42
-let showNowtime = "";
-//顯示時間
-window.onload = showTime;
-function showTime() {
-  var NowDate = new Date();
-  var d = NowDate.getDay();
-  var dayNames = new Array(
-    "星期日",
-    "星期一",
-    "星期二",
-    "星期三",
-    "星期四",
-    "星期五",
-    "星期六"
-  );
-  showNowtime = NowDate.toLocaleString() + " 【" + dayNames[d] + "】";
-  document.getElementById("prentTime").innerHTML = showNowtime;
-  // 更新頻率1000=每秒更新 500=每半秒更新
-  setTimeout("showTime()", 500);
-}
+let showNowtime = new Date();
+// //顯示時間
+// window.onload = showTime;
+// function showTime() {
+//   var NowDate = new Date();
+//   var d = NowDate.getDay();
+//   var dayNames = new Array(
+//     "星期日",
+//     "星期一",
+//     "星期二",
+//     "星期三",
+//     "星期四",
+//     "星期五",
+//     "星期六"
+//   );
+//   showNowtime = NowDate.toLocaleString() + " 【" + dayNames[d] + "】";
+//   document.getElementById("prentTime").innerHTML = showNowtime;
+//   // 更新頻率1000=每秒更新 500=每半秒更新
+//   setTimeout("showTime()", 500);
+// }
+
+let gameType = ["射龍門"];
 
 //準備撲克牌
 // 中改英文 不然爆圖 0.0
@@ -112,7 +114,8 @@ const gameStart = function () {
   document.getElementById(
     "sddBetamount"
   ).innerHTML = `本局投注金額：${sddBettotal}`;
-
+  document.getElementById("sddStart").style.display = "none";
+  document.getElementById("sddCallcard").style.display = "block";
   // axios 要牌時
   axios.post("http://localhost:3001/dragonshoot/PostGameStart", {
     sddPostThisPlayerAccount: sddPlayeyName,
@@ -135,7 +138,7 @@ const gameStart = function () {
       document.getElementById(
         "showCrad_1"
       ).innerHTML = `<img src="./img/cards/${firstPoker}.png">`;
-      console.log(`第一張牌:${firstPoker}`);
+      // console.log(`第一張牌:${firstPoker}`);
     } else {
       // 每次執行清空上次執行結果
       // let secondPoker = [];
@@ -146,7 +149,7 @@ const gameStart = function () {
       document.getElementById(
         "showCrad_2"
       ).innerHTML = `<img src="./img/cards/${secondPoker}.png">`;
-      console.log(`第二張牌:${secondPoker}`);
+      // console.log(`第二張牌:${secondPoker}`);
       // 機率顯示
       if (firstPoker[0][2] < secondPoker[0][2]) {
         //射中機率顯示
@@ -253,7 +256,12 @@ sddBet50.addEventListener("click", function () {
   document.getElementById("sddBetsdd").value = 50;
   document.getElementById("sddBeteven").value = 50;
   document.getElementById("sddPlum").value = 50;
-  console.log("選定籌碼50");
+  // console.log("選定籌碼50");
+  document.getElementById("sddBet50").style.marginTop="0px"
+  document.getElementById("sddBet100").style.marginTop="55px"
+  document.getElementById("sddBet500").style.marginTop="55px"
+  document.getElementById("sddBet1000").style.marginTop="55px"
+  document.getElementById("sddBet5000").style.marginTop="55px"
 });
 
 // 點擊100元籌碼時 投注區域的值都變更為100
@@ -268,7 +276,12 @@ sddBet100.addEventListener("click", function () {
   document.getElementById("sddBetsdd").value = 100;
   document.getElementById("sddBeteven").value = 100;
   document.getElementById("sddPlum").value = 100;
-  console.log("選定籌碼100");
+  // console.log("選定籌碼100");
+  document.getElementById("sddBet50").style.marginTop="55px"
+  document.getElementById("sddBet100").style.marginTop="0px"
+  document.getElementById("sddBet500").style.marginTop="55px"
+  document.getElementById("sddBet1000").style.marginTop="55px"
+  document.getElementById("sddBet5000").style.marginTop="55px"
 });
 
 // 點擊500元籌碼時 投注區域的值都變更為500
@@ -283,7 +296,12 @@ sddBet500.addEventListener("click", function () {
   document.getElementById("sddBetsdd").value = 500;
   document.getElementById("sddBeteven").value = 500;
   document.getElementById("sddPlum").value = 500;
-  console.log("選定籌碼500");
+  // console.log("選定籌碼500");
+  document.getElementById("sddBet50").style.marginTop="55px"
+  document.getElementById("sddBet100").style.marginTop="55px"
+  document.getElementById("sddBet500").style.marginTop="0px"
+  document.getElementById("sddBet1000").style.marginTop="55px"
+  document.getElementById("sddBet5000").style.marginTop="55px"
 });
 
 // 點擊1000元籌碼時 投注區域的值都變更為1000
@@ -298,7 +316,12 @@ sddBet1000.addEventListener("click", function () {
   document.getElementById("sddBetsdd").value = 1000;
   document.getElementById("sddBeteven").value = 1000;
   document.getElementById("sddPlum").value = 1000;
-  console.log("選定籌碼1000");
+  // console.log("選定籌碼1000");
+  document.getElementById("sddBet50").style.marginTop="55px"
+  document.getElementById("sddBet100").style.marginTop="55px"
+  document.getElementById("sddBet500").style.marginTop="55px"
+  document.getElementById("sddBet1000").style.marginTop="0px"
+  document.getElementById("sddBet5000").style.marginTop="55px"
 });
 
 // 點擊5000元籌碼時 投注區域的值都變更為5000
@@ -313,7 +336,12 @@ sddBet5000.addEventListener("click", function () {
   document.getElementById("sddBetsdd").value = 5000;
   document.getElementById("sddBeteven").value = 5000;
   document.getElementById("sddPlum").value = 5000;
-  console.log("選定籌碼5000");
+  // console.log("選定籌碼5000");
+  document.getElementById("sddBet50").style.marginTop="55px"
+  document.getElementById("sddBet100").style.marginTop="55px"
+  document.getElementById("sddBet500").style.marginTop="55px"
+  document.getElementById("sddBet1000").style.marginTop="55px"
+  document.getElementById("sddBet5000").style.marginTop="0px"
 });
 
 // 點擊黑桃,投注區域時,將值累加存到,sddSpades_total
@@ -675,7 +703,9 @@ const gamePK = function () {
   document.getElementById(
     "showCrad_3"
   ).innerHTML = `<img src="./img/cards/${thirdPoker}.png">`;
-  console.log(`第三張牌：${thirdPoker}`);
+  // console.log(`第三張牌：${thirdPoker}`);
+  document.getElementById("sddCallcard").style.display = "none";
+  document.getElementById("sddGiveup").style.display = "block";
   // 射龍門遊戲結果判斷函式
   sddBetsdd_WL();
   // 猜花色遊戲結果判斷函示
