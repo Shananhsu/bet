@@ -3,9 +3,6 @@ let sumMoney = [];
 let sum = 0;
 let gameReady = 0;
 
-back.onclick = function () {
-    window.location.href = "/admin"
-}
 // 一點籌碼圖片馬上新增到array
 function handleChip(num) {
     // 籌碼最多不能超過7倍下注金額
@@ -190,12 +187,12 @@ gameStart.onclick = function () {
             }
 
             // axios
-            axios.post("/niuniu/store", {
+            axios.post("http://localhost:3001/niuniu/store", {
                 account: account.innerText,
                 bet: parseInt(money.innerText),
                 moneyBefore: parseInt(point.innerText) + parseInt(money.innerText),
                 moneyAfter: parseInt(point.innerText),
-                betTime: (new Date()).toLocaleString(),
+                // betTime: (new Date()).toLocaleString(),
                 gameType: "妞妞"
             }).then(function (e) {
                 console.log(e);
@@ -546,7 +543,7 @@ openc.onclick = function () {
 
 
         // UPDATE
-        axios.post("/niuniu/update", {
+        axios.post("http://localhost:3001/niuniu/update", {
             moneyAfter: parseInt(point.innerText),
             result: result,
             dealerCards: `${dsuits[0]},${dsuits[1]},${dsuits[2]},${dsuits[3]},${dsuits[4]}`,

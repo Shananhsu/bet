@@ -17,9 +17,9 @@ class Maingamelink extends Component {
 
                             </a>
 
-                            <a className="col-sm-3 col-xs-6 game" href="./games/niu niu/public/index.html"
+                            <a className="col-sm-3 col-xs-6 game" href="./games/niuniu/public/index.html"
                                 target="game" data-category="" data-sub_category="">
-                                <img src="/images/gamelink/niuniu.jpg" style={{"max-height": "50%"}} />妞妞
+                                <img src="/images/gamelink/niuniu.jpg" style={{ "max-height": "50%" }} />妞妞
                             </a>
 
                             <a className="col-sm-3 col-xs-6 game" href="./games/dragonshoot/index.html"
