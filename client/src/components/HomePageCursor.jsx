@@ -12,16 +12,16 @@ class HomePageCursor extends Component {
                     <img src="images/cursor/Carousel_01.png" alt ="imgErr"/>
                 </div>
                 <div>
-                    <img src="images/cursor/Carousel_01.png" alt ="imgErr"/>
+                    <img src="images/cursor/Carousel_02.png" alt ="imgErr"/>
                 </div>
                 <div>
-                    <img src="images/cursor/Carousel_01.png" alt ="imgErr"/>
+                    <img src="images/cursor/Carousel_03.png" alt ="imgErr"/>
                 </div>
                 <div>
-                    <img src="images/cursor/Carousel_01.png" alt ="imgErr"/>
+                    <img src="images/cursor/Carousel_04.png" alt ="imgErr"/>
                 </div>
                 <div>
-                    <img src="images/cursor/Carousel_01.png" alt ="imgErr"/>
+                    <img src="images/cursor/Carousel_05.png" alt ="imgErr"/>
                 </div>
             </Carousel>
         );
