@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <style>
+         :root {
+            --player: #3782be;
+            --banker: #bb3d20;
+            --tie: #47a344;
+            --borders: rgba(255, 255, 255, 0.3);
+            --yellow: #bdb03e;
+            --dark: rgba(0, 0, 0, 0.33);
+            --background-color: #414241;
+        }
+        
+        body {
+            margin: 0;
+        }
+        
+        .container {
+            background-color: var(--background-color);
+            height: 100vh;
+            display: grid;
+            /* grid-template-columns: [line1] 0.28fr[line2] 0.25fr [line4] 0.25fr [line3] 0.28fr;
+            grid-template-rows: [row1] 0.08fr [row3] 0.2fr [row4] 0.12fr [row2] 0.6fr; */
+            grid-template-columns: [line1] 0.28fr[line2] 0.5fr [line3] 0.28fr;
+            grid-template-rows: [row1] 0.6fr [row2] 0.4fr;
+        }
+        
+        .screen1 {
+            grid-column-start: line1;
+            grid-column-end: line2;
+            grid-row-start: row1;
+            grid-row-end: row2;
+            background-color: var(--background-color);
+            border: 2px solid black;
+        }
+        
+        .screen2 {
+            grid-column-start: line2;
+            grid-column-end: line3;
+            grid-row-start: row1;
+            grid-row-end: row2;
+            background-color: var(--background-color);
+        }
+        
+        .screen2 {
+            display: grid;
+            grid-template-columns: [screen2Line1] 0.25fr [screen2Line2] 0.25fr [screen2Line3] 0.25fr [screen2Line4] 0.25fr;
+            grid-template-rows: [screen2row1] 0.2fr [screen2row2] 0.5fr [screen2row3] 0.4fr;
+            border: 2px solid black;
+        }
+        /* .screen2 .pointHead {
+            grid-column-start: line4;
+            grid-column-end: end;
+            grid-row-start: row3;
+            grid-row-end: row4;
+        } */
+        
+        .screen2 .bankerTitle {
+            grid-column-start: screen2Line1;
+            grid-column-end: screen2Line3;
+            grid-row-start: screen2row1;
+            grid-row-end: screen2row2;
+            text-align: center;
+            color: #fff;
+            background-color: var(--banker);
+            height: 100%;
+            font-size: 35px;
+            font-family: monospace;
+        }
+        
+        .screen2 .playerTitle {
+            grid-column-start: screen2Line3;
+            grid-column-end: end;
+            grid-row-start: screen2row1;
+            grid-row-end: screen2row2;
+            text-align: center;
+            color: #fff;
+            background-color: var(--player);
+            font-size: 35px;
+            font-family: monospace;
+        }
+        
+        .screen2 b {
+            font-size: 50px;
+            margin: -5px 40px;
+            vertical-align: middle;
+        }
+        
+        .screen2 .putCard1 {
+            grid-column-start: screen2Line1;
+            grid-column-end: screen2Line2;
+            grid-row-start: screen2row2;
+            grid-row-end: screen2row3;
+            background-color: var(--dark);
+            width: 8.5vw;
+            height: 11.9vw;
+            perspective: 600px;
+            margin: 0.75vw;
+            border-radius: 0.75vw;
+            justify-self: center;
+        }
+        
+        .screen2 .putCard2 {
+            grid-column-start: screen2Line2;
+            grid-column-end: screen2Line3;
+            grid-row-start: screen2row2;
+            grid-row-end: screen2row3;
+            background-color: var(--dark);
+            width: 8.5vw;
+            height: 11.9vw;
+            perspective: 600px;
+            margin: 0.75vw;
+            border-radius: 0.75vw;
+            justify-self: center;
+        }
+        
+        .screen2 .putCard3 {
+            grid-column-start: screen2Line1;
+            grid-column-end: screen2Line3;
+            grid-row-start: screen2row3;
+            grid-row-end: end;
+            background-color: var(--dark);
+            width: 8.5vw;
+            height: 11.9vw;
+            perspective: 600px;
+            margin-top: -10px;
+            border-radius: 0.75vw;
+            justify-self: center;
+            transform: rotate(90deg);
+        }
+        
+        .screen2 .putCard4 {
+            grid-column-start: screen2Line3;
+            grid-column-end: screen2Line4;
+            grid-row-start: screen2row2;
+            grid-row-end: screen2row3;
+            background-color: var(--dark);
+            width: 8.5vw;
+            height: 11.9vw;
+            perspective: 600px;
+            margin: 0.75vw;
+            border-radius: 0.75vw;
+            justify-self: center;
+        }
+        
+        .screen2 .putCard5 {
+            grid-column-start: screen2Line4;
+            grid-column-end: end;
+            grid-row-start: screen2row2;
+            grid-row-end: screen2row3;
+            background-color: var(--dark);
+            width: 8.5vw;
+            height: 11.9vw;
+            perspective: 600px;
+            margin: 0.75vw;
+            border-radius: 0.75vw;
+            justify-self: center;
+        }
+        
+        .screen2 .putCard6 {
+            grid-column-start: screen2Line3;
+            grid-column-end: end;
+            grid-row-start: screen2row3;
+            grid-row-end: end;
+            background-color: var(--dark);
+            width: 8.5vw;
+            height: 11.9vw;
+            perspective: 600px;
+            margin-top: -10px;
+            border-radius: 0.75vw;
+            justify-self: center;
+            transform: rotate(90deg);
+        }
+        /* 卡片 */
+        
+        [class^="cardsPlace"] {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            transform-style: preserve-3d;
+            opacity: 0;
+        }
+        
+        .Front {
+            position: absolute;
+            background-size: 100%;
+            height: 100%;
+            width: 100%;
+            backface-visibility: hidden;
+            /* -webkit-backface-visibility: hidden; */
+            transform: rotateY(180deg);
+        }
+        
+        .Back {
+            background-image: url("./cards/1B.svg");
+            background-size: 100%;
+            height: 100%;
+            width: 100%;
+        }
+        /* 發牌 */
+        
+        .cardIn {
+            --fade: 750ms;
+            --flip: 1000ms;
+            transition: opacity var(--fade), transform var(--flip) var(--fade);
+            transform: rotateY(-180deg);
+            opacity: 1;
+        }
+        
+        .screen3 {
+            grid-column-start: line3;
+            grid-column-end: end;
+            grid-row-start: row1;
+            grid-row-end: row2;
+            background-color: var(--background-color);
+        }
+        
+        .screen3 {
+            display: grid;
+            grid-template-columns: [screen3Line1] 0.25fr [screen3Line2] 0.25fr [screen3Line3] 0.25fr [screen3Line4] 0.25fr;
+            grid-template-rows: [screen3row1] 0.1fr [screen3row2] 0.2fr [screen3row3] 0.70fr;
+        }
+        /* 記分板表頭 */
+        
+        .screen3 .winnerBoard {
+            display: grid;
+            grid-column-start: screen3Line1;
+            grid-column-end: end;
+            grid-row-start: screen3row1;
+            grid-row-end: screen3row2;
+            grid-auto-flow: row;
+            grid-template-columns: repeat(4, 1fr);
+            color: white;
+            font-size: 32px;
+            font-family: monospace;
+        }
+        
+        .screen3 .winnerBoard div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid black;
+        }
+        /* 記分板 */
+        
+        .screen3 .stateBoard {
+            display: grid;
+            grid-column-start: screen3Line1;
+            grid-column-end: end;
+            grid-row-start: screen3row2;
+            grid-row-end: screen3row3;
+            grid-auto-flow: row;
+            grid-template-columns: repeat(4, 1fr);
+            color: white;
+            font-size: 42px;
+            font-weight: bold;
+            font-family: monospace;
+        }
+        
+        .screen3 .stateBoard div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid black;
+        }
+        /* 莊閒統計資料 */
+        
+        .screen3 .Board {
+            display: grid;
+            grid-column-start: screen3Line1;
+            grid-column-end: end;
+            grid-row-start: screen3row3;
+            grid-row-end: end;
+            grid-template-columns: repeat(7, 1fr);
+            grid-template-rows: repeat(7, 1fr);
+            grid-auto-flow: column;
+            border: 2px solid rgb(0, 0, 0);
+        }
+        /* .screen3 .Board div {} */
+        /* 統計莊閒圓圈 */
+        
+        .dot {
+            border-radius: 50%;
+            width: 3vw;
+            display: flex;
+            transform: scale(0);
+            transition: transform 1s cubic-bezier(0, 0, 0.25, 4);
+            z-index: 1;
+            border: 0.1vh solid rgba(0, 0, 0, 0.5);
+        }
+        
+        div .run {
+            height: 100%;
+            display: grid;
+            grid-auto-flow: column;
+        }
+        
+        .playerWinner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgb(7, 2, 77);
+            background-color: var(--player);
+        }
+        
+        .bankerWinner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgb(7, 2, 77);
+            background-color: var(--banker);
+        }
+        
+        .tieWinner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgb(7, 2, 77);
+            background-color: var(--tie);
+        }
+        /* 桌面點數 */
+        
+        .baccaratTable {
+            grid-column-start: line1;
+            grid-column-end: end;
+            grid-row-start: row2;
+            grid-row-end: end;
+            background-image: url(./img/table-color.png);
+            background-repeat: repeat;
+            perspective: 800px;
+            min-height: 20vh;
+            text-align: center;
+        }
+        
+        table,
+        tr,
+        td {
+            /* transform-style: preserve-3d; */
+            transform: rotateX(30deg) translateX(-2px) translateY(3px) rotateZ(0deg) scale(1);
+            border: 2px solid yellow;
+            border-collapse: collapse;
+            margin-top: 2px;
+            /* position: relative; */
+            margin: 0 auto;
+            margin-top: 20px;
+            font-size: 32px;
+            color: white;
+            font-family: Microsoft JhengHei;
+        }
+        
+        table {
+            width: 70%;
+            height: 80%;
+        }
+        /* 籌碼欄位 */
+        
+        .diceGameBar {
+            width: 600px;
+            height: 60px;
+            line-height: 50px;
+            /* filter: progid: DXImageTransform.Microsoft.Gradient(startColorStr='#4e4e4e', endColorStr='#242424', gradientType='0'); */
+            background: -webkit-linear-gradient(top, #4e4e4e, #242424);
+            background: -moz-linear-gradient(top, bottom, #4e4e4e, #242424);
+            /* background-color: chartreuse; */
+            padding: 0 16%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            border-radius: 5px;
+        }
+        
+        .diceGameBar .betBar {
+            height: 63px;
+            line-height: 63px;
+            /* position: relative; */
+            display: inline-block;
+        }
+        
+        .diceGameInfo {
+            height: 63px;
+            line-height: 63px;
+            display: inline-block;
+            vertical-align: middle;
+            position: absolute;
+            left: 20px;
+        }
+        
+        .diceGameInfo .userName {
+            display: inline-block;
+            position: relative;
+        }
+        
+        .diceGameInfo .userName .name {
+            font-size: 18px;
+            left: 2px;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            padding: 0px 20px 0 50px;
+            height: 32px;
+            line-height: 32px;
+            text-align: right;
+            border: 1px solid #493f3f;
+            background-color: #0e0e0e;
+            color: #df8818;
+            border-top-right-radius: 10px;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+        
+        .diceGameInfo .userName .nameLogo {
+            height: 42px;
+            width: 42px;
+            vertical-align: middle;
+            background-image: url('./IMG/nameLogo.svg');
+            background-repeat: no-repeat;
+            background-size: 42px;
+            z-index: 1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            margin: auto;
+        }
+        
+        .balance {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .balanceLogo {
+            position: absolute;
+            bottom: 0;
+            top: 0;
+            margin: auto;
+            left: 6px;
+            display: inline-block;
+            height: 22px;
+            width: 22px;
+            background: url('./IMG/balance.svg');
+            background-size: 22px;
+            z-index: 1;
+        }
+        
+        .balanceDetail {
+            bottom: 0;
+            top: 0;
+            left: 0;
+            margin: auto;
+            height: 30px;
+            line-height: 30px;
+            font-size: 0;
+            text-align: center;
+            padding: 0px 20px 0 40px;
+            border: 1px solid #493f3f;
+            background-color: #0e0e0e;
+            color: #df8818;
+            border-top-right-radius: 10px;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+        
+        .balanceDetail .balanceLabel,
+        .betMoneyDetail .betMoneyLabel {
+            font-size: 18px;
+        }
+        
+        .betMoney {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .diceGameBar .betBar {
+            height: 63px;
+            line-height: 63px;
+            /* position: relative; */
+            display: inline-block;
+        }
+        
+        .betBar>.button {
+            position: absolute;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .betBar>.button.cancelButton {
+            margin: auto;
+            left: 200px;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            color: firebrick;
+            width: 100px;
+            height: 38px;
+            line-height: 38px;
+            font-size: 18px;
+            border-radius: 6px;
+            background-image: linear-gradient(to top, #f2f2f2, #ffffff);
+            box-shadow: 0 0.8px 0.3px 0 rgba(255, 255, 255, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.28);
+            border: solid 1px #e0e0e0;
+            cursor: pointer;
+        }
+        
+        .betMoneyLogo {
+            position: absolute;
+            bottom: 0;
+            top: 0;
+            margin: auto;
+            left: 4px;
+            display: inline-block;
+            height: 30px;
+            width: 28px;
+            background: url('./IMG/betMoney.png');
+            background-repeat: no-repeat;
+            background-size: 30px 28px;
+            z-index: 1;
+        }
+        
+        .betMoneyDetail {
+            bottom: 0;
+            top: 0;
+            margin: auto;
+            font-size: 0;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            padding: 0px 20px 0 40px;
+            border: 1px solid #493f3f;
+            background-color: #0e0e0e;
+            color: #df8818;
+            border-top-right-radius: 10px;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+        
+        .balanceDetail .balanceAmount,
+        .betMoney .betMoneyAmount {
+            color: #ffffff;
+            font-size: 18px;
+        }
+        /* tempchips */
+        
+        .TempChips1 {
+            width: 46px;
+            height: 42px;
+            line-height: 42px;
+            font-size: 16px;
+            text-align: center;
+            background-image: url('./img/chips.png');
+            background-size: 462px;
+            background-repeat: no-repeat;
+            background-position: 0 0px;
+            pointer-events: none
+        }
+        
+        .TempChips5 {
+            width: 46px;
+            height: 42px;
+            line-height: 42px;
+            font-size: 16px;
+            text-align: center;
+            background-image: url('./img/chips.png');
+            background-size: 462px;
+            background-repeat: no-repeat;
+            background-position: -60px 0px;
+            pointer-events: none
+        }
+        
+        .TempChips10 {
+            width: 46px;
+            height: 42px;
+            line-height: 42px;
+            font-size: 16px;
+            text-align: center;
+            background-image: url('./img/chips.png');
+            background-size: 462px;
+            background-repeat: no-repeat;
+            background-position: -118px 0px;
+            pointer-events: none
+        }
+        
+        .TempChips20 {
+            width: 46px;
+            height: 42px;
+            line-height: 42px;
+            font-size: 16px;
+            text-align: center;
+            background-image: url('./img/chips.png');
+            background-size: 462px;
+            background-repeat: no-repeat;
+            background-position: -179px 0px;
+            pointer-events: none
+        }
+        
+        .TempChips50 {
+            width: 46px;
+            height: 42px;
+            line-height: 42px;
+            font-size: 16px;
+            text-align: center;
+            background-image: url('./img/chips.png');
+            background-size: 462px;
+            background-repeat: no-repeat;
+            background-position: -238px 0px;
+            pointer-events: none;
+        }
+        
+        .TempChips100 {
+            width: 46px;
+            height: 42px;
+            line-height: 42px;
+            font-size: 16px;
+            text-align: center;
+            background-image: url('./img/chips.png');
+            background-size: 462px;
+            background-repeat: no-repeat;
+            background-position: -297px 0px;
+            pointer-events: none;
+        }
+        
+        .TempChips1000 {
+            width: 46px;
+            height: 42px;
+            line-height: 42px;
+            font-size: 16px;
+            text-align: center;
+            background-image: url('./img/chips.png');
+            background-size: 462px;
+            background-repeat: no-repeat;
+            background-position: -356px 0px;
+            pointer-events: none;
+        }
+        
+        .TempChips5000 {
+            width: 46px;
+            height: 42px;
+            line-height: 42px;
+            font-size: 16px;
+            text-align: center;
+            background-image: url('./img/chips.png');
+            background-size: 462px;
+            background-repeat: no-repeat;
+            background-position: -416px 0px;
+            pointer-events: none;
+        }
+        /* 我是籌碼 */
+        
+        .chips {
+            background-color: rgb(2, 0, 31);
+            position: absolute;
+            /* left: 0; */
+            right: 0;
+            top: 0;
+            bottom: 0px;
+            margin: auto;
+            font-size: 0;
+            text-align: center;
+            width: 400px;
+            height: 32px;
+            padding: 0 12px;
+            border-radius: 10px;
+        }
+        
+        .chips .chip {
+            display: inline-block;
+            width: 46px;
+            height: 42px;
+            line-height: 42px;
+            font-size: 16px;
+            text-align: center;
+            background-image: url('./img/chips.png');
+            background-size: 462px;
+            background-repeat: no-repeat;
+            top: -10px;
+            position: relative;
+        }
+        
+        .chips .chip.chip1 {
+            background-position: 0 -52px;
+        }
+        /* 滑鼠經過的時候位置 */
+        
+        .chips .chip.chip1.on,
+        .chips .chip.chip1:hover {
+            background-position: 0 0px;
+            top: -21px;
+        }
+        
+        .chips .chip.chip5 {
+            background-position: -60px -52px;
+        }
+        
+        .chips .chip.chip5.on,
+        .chips .chip.chip5:hover {
+            top: -21px;
+            background-position: -60px 0px;
+        }
+        
+        .chips .chip.chip10 {
+            background-position: -120px -52px;
+        }
+        
+        .chips .chip.chip10.on,
+        .chips .chip.chip10:hover {
+            top: -21px;
+            background-position: -118px 0px;
+        }
+        
+        .chips .chip.chip20 {
+            background-position: -179px -52px;
+        }
+        
+        .chips .chip.chip20.on,
+        .chips .chip.chip20:hover {
+            top: -21px;
+            background-position: -179px 0px;
+        }
+        
+        .chips .chip.chip50 {
+            background-position: -238px -52px;
+        }
+        
+        .chips .chip.chip50.on,
+        .chips .chip.chip50:hover {
+            top: -21px;
+            background-position: -238px -0px;
+        }
+        
+        .chips .chip.chip100 {
+            background-position: -297px -52px;
+        }
+        
+        .chips .chip.chip100.on,
+        .chips .chip.chip100:hover {
+            top: -21px;
+            background-position: -297px 0px;
+        }
+        
+        .chips .chip.chip1000 {
+            background-position: -358px -52px;
+        }
+        
+        .chips .chip.chip1000.on,
+        .chips .chip.chip1000:hover {
+            top: -21px;
+            background-position: -356px 0px;
+        }
+        
+        .chips .chip.chip5000 {
+            background-position: -417px -52px;
+        }
+        
+        .chips .chip.chip5000.on,
+        .chips .chip.chip5000:hover {
+            top: -21px;
+            background-position: -416px 0px;
+        }
+        /* 籌碼結束 */
+        /* 中獎格子 */
+        
+        .tableShine {
+            border: 1px solid #d00;
+            background: #ffe9e8;
+            color: #d00;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="screen1">
+            <button class="test" onclick="gamestart()">test</button>
+        </div>
+        <div class="screen2">
+            <div class="bankerTitle">
+                BANKER
+                <b id="BankerPoints">0</b>
+            </div>
+            <div class="playerTitle">
+                PLAYER
+                <b id="PlayerPoints">0</b>
+            </div>
+            <div class="putCard1">
+                <div class="cardsPlace1">
+                    <div class="cardSide Front"></div>
+                    <div class="cardSide Back"></div>
+                </div>
+            </div>
+            <div class="putCard2">
+                <div class="cardsPlace2">
+                    <div class="cardSide Front"></div>
+                    <div class="cardSide Back"></div>
+                </div>
+            </div>
+            <div class="putCard3">
+                <div class="cardsPlace3">
+                    <div class="cardSide Front"></div>
+                    <div class="cardSide Back"></div>
+                </div>
+            </div>
+            <div class="putCard4">
+                <div class="cardsPlace4">
+                    <div class="cardSide Front"></div>
+                    <div class="cardSide Back"></div>
+                </div>
+            </div>
+            <div class="putCard5">
+                <div class="cardsPlace5">
+                    <div class="cardSide Front"></div>
+                    <div class="cardSide Back"></div>
+                </div>
+            </div>
+            <div class="putCard6">
+                <div class="cardsPlace6">
+                    <div class="cardSide Front"></div>
+                    <div class="cardSide Back"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="screen3">
+            <!-- <div style="text-align: center; width: 4vw;border-radius: 50%;background-color: gold; border: 1px solid rgba(0, 0, 0, 0.5)">B</div> -->
+            <div class="winnerBoard">
+                <div>Banker</div>
+                <div>Player</div>
+                <div>Tie</div>
+                <div>統計</div>
+            </div>
+            <div class="stateBoard">
+                <div id="bankerCount">0</div>
+                <div id="playerCount">0</div>
+                <div id="tieCount">0</div>
+                <div id="allCount">0</div>
+            </div>
+            <div class="Board"></div>
+        </div>
+
+        <div class="baccaratTable">
+            <table>
+                <tr>
+                    <td class="gameSelect" odds="11" id="bankerPair" value="bankerPair">莊對 11</td>
+                    <td class="gameSelect" odds="1.5" id="big" value="big">大 1.5</td>
+                    <td rowspan="4" class="gameSelect" odds="8" id="tie" value="tie">和
+                        <p>8</p>
+                    </td>
+                    <td class="gameSelect" odds="2.5" id="small" value="small">小 2.5</td>
+                    <td class="gameSelect" odds="11" id="playerPair" value="playerPair">閒對 11</td>
+                </tr>
+                <tr>
+                    <td rowspan="2" colspan="2" class="gameSelect" odds="1.95" id="banker" value="banker">莊 1.95</td>
+                    <td rowspan="2" colspan="2" class="gameSelect" odds="2" id="player" value="player">閒 2</td>
+                </tr>
+                <tr>
+                </tr>
+                <tr>
+                    <td class="gameSelect" odds="1.95" id="bankerOdd" value="bankerOdd">莊單 1.95</td>
+                    <td class="gameSelect" odds="1.95" id="bankereven" value="bankereven">莊雙 1.95</td>
+
+                    <td class="gameSelect" odds="1.95" id="playerOdd" value="playerOdd">閒單 1.95</td>
+                    <td class="gameSelect" odds="1.95" id="playereven" value="playereven">閒雙 1.95</td>
+                </tr>
+
+            </table>
+
+        </div>
+        <div class="diceGameBar">
+            <div class="diceGameInfo">
+                <div class="balance">
+                    <div class="balanceLogo"></div>
+                    <div class="balanceDetail">
+                        <span class="balanceLabel">餘額：</span>
+                        <span class="balanceAmount" id='balanceAmount'>6000元</span>
+                    </div>
+                </div>
+                <div class="betMoney">
+                    <div class="betMoneyLogo"></div>
+                    <div class="betMoneyDetail">
+                        <span class="betMoneyLabel">下注金額：</span>
+                        <span class="betMoneyAmount" id='betMoneyAmount'>0元</span>
+                    </div>
+                </div>
+                <div class="userName">
+                    <div class="nameLogo"></div>
+                    <div class="name">StupidClown</div>
+                </div>
+            </div>
+            <!-- <div class="betBar clearfix">
+                <div class="button resetButton" id="resetButton" onclick="resetchips()">重置注碼</div>
+                <div class="button cancelButton">取消投注</div>
+                <div class="button betButton">確認投注</div>
+                <div class="button pieceButtoon">翻倍投注</div>
+            </div> -->
+            <!-- 籌碼 -->
+            <div class="chips clearfix">
+                <div class="chip chip1" id="chip1" value="1"></div>
+                <div class="chip chip5" id="chip5" value="5"></div>
+                <div class="chip chip10" id="chip10" value="10"></div>
+                <div class="chip chip20" id="chip20" value="20"></div>
+                <div class="chip chip50" id="chip50" value="50"></div>
+                <div class="chip chip100" id="chip100" value="100"></div>
+                <div class="chip chip1000" id="chip1000" value="1000"></div>
+                <div class="chip chip5000" id="chip5000" value="5000"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        var cardColor = ['s', 'h', 'd', 'c']
+        var cardValue = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+        var cardFace = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+        var bankerCard1 = document.querySelector('.cardsPlace1');
+        var bankerCard2 = document.querySelector('.cardsPlace2');
+        var bankerCard3 = document.querySelector('.cardsPlace3');
+        var playerCard1 = document.querySelector('.cardsPlace4');
+        var playerCard2 = document.querySelector('.cardsPlace5');
+        var playerCard3 = document.querySelector('.cardsPlace6');
+        var allCards = [playerCard1, playerCard2, bankerCard1, bankerCard2, playerCard3, bankerCard3];
+        var delaytime = 200
+        var board = document.querySelector('.Board');
+
+
+        function cardBoxCreate() {
+            let cardBox = [];
+            for (let i = 0; i < 8; i++) {
+                // 8副牌一薛
+                for (let j = 0; j < cardColor.length; j++) {
+                    for (let m = 0; m < cardFace.length; m++) {
+                        cardBox.push({
+                            Face: cardFace[m],
+                            Value: cardValue[m],
+                            Color: cardColor[j],
+                            path: "./cards/" + cardFace[m] + cardColor[j] + ".svg"
+                        });
+                    }
+                }
+            }
+            // 亂數
+            var l = cardBox.length;
+            while (l) {
+                var n = parseInt(Math.random() * l);
+                var k = cardBox[--l];
+                cardBox[l] = cardBox[n];
+                cardBox[n] = k;
+            }
+            return cardBox
+        }
+
+        class Boots {
+            constructor() {
+                this.cards = cardBoxCreate();
+                this.haveWhiteCards = true;
+
+            }
+            dealCards() {
+                if (this.cards.length < (Math.floor(Math.random() * 30) + 12)) this.haveWhiteCards = false;
+                return this.cards.shift();
+            };
+            // 燒牌,第一張翻出幾點就削去幾張
+            burnCards() {
+                const burnCard = this.cards.shift();
+                for (let i = 0; i < burnCard.Value; i++) {
+                    // console.log(this.cards.shift())
+                    this.cards.shift();
+                }
+            };
+        }
+
+        function countPayout() {
+            var countPairs = 0;
+            var countBPT = 0;
+            var countOddEven = 0;
+            var countBigSmall = 0;
+            var totalwin = 0;
+            var countBack = 0;
+            start3 = new Date().getTime();
+            console.log(start3);
+            // 閒對
+            if (game.isPlayerPairs) {
+                shake($("#playerPair"), "tableShine", 6);
+                countPairs = countPairs + countingWin('playerPair');
+            }
+            // 莊對
+            if (game.isBankPairs) {
+                shake($("#bankerPair"), "tableShine", 6);
+                countPairs = countPairs + countingWin('bankerPair');
+            }
+            // 和
+            if (game.winner == "tie") {
+                shake($("#tie"), "tableShine", 6);
+                countBPT = countBPT + countingWin('tie');
+                countBack = countingBack('player') + countingBack('banker')
+            }
+            // 閒
+            if (game.winner == "player") {
+                shake($("#player"), "tableShine", 6);
+                countBPT = countBPT + countingWin('player');
+            }
+            // 莊
+            if (game.winner == "banker") {
+                shake($("#banker"), "tableShine", 6);
+                countBPT = countBPT + countingWin('banker');
+            }
+            // 大小
+            if (game.isBig) {
+                shake($("#big"), "tableShine", 6);
+                countBigSmall = countingWin('big');
+            } else {
+                shake($("#small"), "tableShine", 6);
+                countBigSmall = countingWin('small');
+            }
+            // 閒單雙
+            if ((game.playerScore % 2) == 1) {
+                shake($("#playerodd"), "tableShine", 6);
+                countBigSmall = countBigSmall + countingWin('playerOdd');
+            } else {
+                shake($("#playereven"), "tableShine", 6);
+                countBigSmall = countBigSmall + countingWin('playereven');
+            }
+            // 莊單雙
+            if ((game.playerScore % 2) == 1) {
+                shake($("#bankerodd"), "tableShine", 6);
+                countBigSmall = countBigSmall + countingWin('bankerOdd');
+            } else {
+                shake($("#bankereven"), "tableShine", 6);
+                countBigSmall = countBigSmall + countingWin('bankereven');
+            }
+
+            totalwin = countPairs + countBPT + countBigSmall + countOddEven + countBack;
+            // 清掉籌碼以免一直重複累加
+            $('[class^="TempChips"]').remove();
+            document.getElementById('betMoneyAmount').innerText = 0;
+            document.getElementById('balanceAmount').innerText =
+                parseFloat(document.getElementById('balanceAmount').innerText) + totalwin + "元";
+        }
+
+        function startGame(boots) {
+            game = {
+                playerHand: [],
+                bankerHand: [],
+                playerScore: 0,
+                bankerScore: 0,
+                twoCardsValueBanker: 0,
+                twoCardsValuePlayer: 0,
+                isNatural: false,
+                isPlayerPairs: false,
+                isBankPairs: false,
+                isBig: null,
+                winner: null,
+                cards: 0
+            };
+        }
+
+        function score(hand) {
+            var total = (hand.reduce(
+                (x, y) => x + y.Value, 0)) % 10;
+            return total;
+        }
+
+
+
+        function scoreHands() {
+            game.playerScore = score(game.playerHand);
+            game.bankerScore = score(game.bankerHand);
+        }
+
+        function twoCardsValueCalc() {
+            game.twoCardsValueBanker = (game.bankerHand[0].Value + game.bankerHand[1].Value) % 10
+            game.twoCardsValuePlayer = (game.playerHand[0].Value + game.playerHand[1].Value) % 10
+        }
+        // 先整理好牌
+        var boots = new Boots();
+        boots.burnCards();
+
+        async function gamestart() {
+            let start = new Date().getTime();
+            console.log(start)
+            document.getElementById('PlayerPoints').innerText = 0
+            document.getElementById('BankerPoints').innerText = 0
+            startGame(boots); //容器
+            games(); //先JS點數
+            console.log(game)
+            pairOrNot(); //是否pair
+            putCards(); //放牌隱形
+            if (giveCards()) { //放牌顯示
+                GameCount(); //記分板紀錄
+                giveGameDot(); //莊閒DOT
+                countPayout();
+            }
+        }
+
+        function games() {
+            // 發牌閒莊閒莊
+            game.playerHand.push(boots.dealCards());
+            game.bankerHand.push(boots.dealCards());
+            game.playerHand.push(boots.dealCards());
+            game.bankerHand.push(boots.dealCards());
+            // 確認第一次點數是否有8,9
+
+            scoreHands();
+            twoCardsValueCalc()
+                // console.log(`twoCardsValueBanker:${game.twoCardsValueBanker}`)
+            if (game.playerScore >= 8 || game.bankerScore >= 8) {
+                game.isNatural = true;
+                game.isBig = false;
+            } else {
+                console.log("in big")
+                HitorDraw()
+                scoreHands()
+            }
+            Winner()
+            game.cards = game.playerHand.length + game.bankerHand.length;
+        }
+
+        function Winner() {
+            if (game.playerScore === game.bankerScore) {
+                game.winner = "tie";
+            } else {
+                game.winner = game.playerScore > game.bankerScore ? "player" : "banker";
+            }
+        }
+
+        function HitorDraw() {
+            if (game.playerScore >= 6) {
+                //閒家5點以下補牌
+                if (game.bankerScore <= 5) {
+                    game.bankerHand.push(boots.dealCards());
+                    game.isBig = true;
+                } else {
+                    game.isBig = false;
+                }
+
+            } else {
+                game.playerHand.push(boots.dealCards());
+                let thirdCard = game.playerHand[2].value;
+                game.isBig = true;
+                //莊家<3點直接補牌
+                if (game.bankerScore < 3) {
+                    game.bankerHand.push(boots.dealCards());
+
+                }
+                //莊3點,閒家補的第三張牌是8點,就要補牌
+                if (game.bankerScore === 3 && thirdCard !== 8) {
+                    game.bankerHand.push(boots.dealCards());
+                }
+                //莊4點,閒家第三張牌是0,1,8,9不需要補牌所以 2~7要補牌
+                if (game.bankerScore === 4 && thirdCard >= 2 && thirdCard <= 7) {
+                    game.bankerHand.push(boots.dealCards());
+                }
+                //莊5點 第三張牌是 0,1,2,3,8,9不須要補牌,4~7要補牌
+                if (game.bankerScore === 5 && thirdCard >= 4 && thirdCard <= 7) {
+                    game.bankerHand.push(boots.dealCards());
+                }
+                //莊6點,閒家1~5點,且補牌第三張是6,7點才需要補牌
+                if (game.bankerScore === 6 && thirdCard >= 6 && thirdCard <= 7) {
+                    game.bankerHand.push(boots.dealCards());
+                }
+            }
+        }
+
+        function pairOrNot() {
+            //是否有對子
+            if (game.playerHand[0].Face == game.playerHand[1].Face) {
+                game.isPlayerPairs = true;
+                // console.log('player pair');
+            }
+            if (game.bankerHand[0].Face == game.bankerHand[1].Face) {
+                game.isBankPairs = true;
+                // console.log('Banker pair');
+            }
+        }
+
+        function putCards() {
+            // 牌局結果
+            // 把牌放到指定位置
+            console.log(playerCard2.firstElementChild.style.backgroundImage)
+            playerCard1.firstElementChild.style.backgroundImage = `url('${game.playerHand[0].path}')`;
+            playerCard2.firstElementChild.style.backgroundImage = `url('${game.playerHand[1].path}')`;
+
+            bankerCard1.firstElementChild.style.backgroundImage = `url('${game.bankerHand[0].path}')`;
+            bankerCard2.firstElementChild.style.backgroundImage = `url('${game.bankerHand[1].path}')`;
+
+            if (game.playerHand[2]) {
+                playerCard3.firstElementChild.style.backgroundImage = `url('${game.playerHand[2].path}')`;
+            }
+            if (game.bankerHand[2]) {
+                bankerCard3.firstElementChild.style.backgroundImage = `url('${game.bankerHand[2].path}')`;
+            }
+        }
+
+        // 清除顯示的牌
+        function clear() {
+            allCards.forEach(card => {
+                card.classList.remove('cardIn');
+            });
+        }
+
+        //發牌
+        function giveCards() {
+            start2 = new Date().getTime();
+            allCards.forEach(card => {
+                card.style.display = 'none';
+            });
+            setTimeout(() => {
+                allCards.forEach(card => {
+                    card.style.display = 'block';
+                });
+
+                clear();
+            }, 100);
+
+
+            setTimeout(() => {
+                playerCard1.classList.add('cardIn');
+                playerCard2.classList.add('cardIn');
+                document.getElementById('PlayerPoints').innerText = game.twoCardsValuePlayer
+
+            }, delaytime);
+
+            setTimeout(() => {
+                bankerCard1.classList.add('cardIn');
+                bankerCard2.classList.add('cardIn');
+                document.getElementById('BankerPoints').innerText = game.twoCardsValueBanker
+            }, delaytime * 12);
+            // console.log(game.playerScore)
+            if (game.playerHand[2]) {
+                setTimeout(() => {
+                    playerCard3.classList.add('cardIn');
+                    document.getElementById('PlayerPoints').innerText = game.playerScore;
+                }, delaytime * 18);
+                if (game.bankerHand[2]) {
+                    setTimeout(() => {
+                        bankerCard3.classList.add('cardIn');
+                        document.getElementById('BankerPoints').innerText = game.bankerScore;
+                    }, delaytime * 24);
+                }
+            } else if (game.bankerHand[2]) {
+                setTimeout(() => {
+                    bankerCard3.classList.add('cardIn');
+                    document.getElementById('BankerPoints').innerText = game.bankerScore;
+                }, delaytime * 18);
+            }
+            // end2 = new Date().getTime();
+            console.log(start2)
+            return true
+        }
+
+        function GameCount() {
+            setTimeout(() => {
+                if (game.winner == "player") {
+                    let x = parseInt(document.getElementById('playerCount').innerText);
+
+                    x = x + 1;
+                    document.getElementById('playerCount').innerText = x;
+                }
+                if (game.winner == "banker") {
+                    let x = parseInt(document.getElementById('bankerCount').innerText);
+                    x = x + 1;
+                    document.getElementById('bankerCount').innerText = x;
+                }
+                if (game.winner == "tie") {
+                    let x = parseInt(document.getElementById('tieCount').innerText);
+                    x = x + 1;
+                    document.getElementById('tieCount').innerText = x;
+
+                }
+                let y = parseInt(document.getElementById('allCount').innerText);
+                y = y + 1;
+                document.getElementById('allCount').innerText = y;
+            }, 6000);
+        }
+
+        function giveGameDot() {
+            var dot = document.createElement('div');
+            dot.classList.add('dot');
+            dot.classList.add(game.winner + 'Winner');
+            board.appendChild(dot);
+            setTimeout(() => {
+                dot.style.transform = 'scale(1)';
+            }, 6000);
+        }
+
+        // 選用籌碼
+        // priceNum = "";
+        priceNum = 0;
+        $('.chip').click(function() {
+            // 把點到的增加)class on ,點其他的會把其他的class on 取消
+            $(this).addClass('on').siblings('.chip').removeClass('on');
+            priceNum = $(this).attr('value');
+            console.log(`選用籌碼${priceNum}`)
+        });
+
+        // priceNum = 100;
+        // 創籌碼
+        // function createFlyChips(priceNum, value, method, odds, point) { 
+        function createTempChips(priceNum, value, method, odds) {
+            let ele = document.createElement('div');
+            $(ele).addClass(`TempChips${priceNum}`).attr({
+                'rel': 'BetChip',
+                'price': priceNum,
+                'code': value,
+                'nums': 1,
+                'method': method,
+                'odds': odds,
+                // 'point': point,
+            });
+            return $(ele);
+        }
+
+        // 籌碼在畫面上的位置
+        function letTempChips(priceNum, element) {
+            let method = element.attr('method');
+            let odds = element.attr('odds');
+            // let point = element.attr('point');
+            let value = element.attr('value');
+            TempChips = createTempChips(priceNum, value, method, odds);
+
+            TempChips.css({
+                "position": 'absolute',
+                // 元素生成位置
+                "left": element.offset().left + element[0].offsetWidth / 2 - (50 * Math.random()),
+                "top": element.offset().top + element[0].offsetHeight / 2 - (50 * Math.random()),
+            });
+            $('body').append(TempChips);
+        }
+
+        // 把籌碼總額算出來
+        function SumData(arr) {
+            var sum = 0;
+            for (var i = 0; i < arr.length; i++) {
+                sum += parseInt(arr[i]);
+            };
+            return sum;
+        }
+
+        function countingWin(code) {
+            // 籌碼部分
+            var allValues = [];
+            var allOdds = [];
+            var allPrice = [];
+            var wincount = 0;
+
+            $('[class^="TempChips"]').each(function(index, element) {
+                if ($(element).attr('price')) {
+                    allValues.push($(element).attr('code'));
+                    allOdds.push($(element).attr('odds'));
+                    allPrice.push($(element).attr('price'));
+                }
+            });
+
+            for (let i = 0; i < allValues.length; i++) {
+                console.log(` allValues.length:${allValues.length}`);
+                if (allValues[i] == code) {
+                    win = parseFloat(allOdds[i]) * parseInt(allPrice[i]);
+                    // console.log(`win:${win}`);
+                    wincount += win;
+                }
+            }
+            // console.log(`wincount:${wincount}`)
+            return wincount;
+        }
+
+        function countingBack(code) {
+            // 籌碼部分
+            var allValues = [];
+            var allOdds = [];
+            var allPrice = [];
+            var wincount = 0;
+
+            $('[class^="TempChips"]').each(function(index, element) {
+                if ($(element).attr('price')) {
+                    allValues.push($(element).attr('code'));
+                    allOdds.push($(element).attr('odds'));
+                    allPrice.push($(element).attr('price'));
+                }
+            });
+
+            for (let i = 0; i < allValues.length; i++) {
+                console.log(` allValues.length:${allValues.length}`);
+                if (allValues[i] == code) {
+                    win = parseInt(allPrice[i]);
+                    wincount += win;
+                }
+            }
+            return wincount;
+        }
+
+        //點TABLE
+        $(".gameSelect").click(function() {
+            let method = $(this).attr('method');
+            let odds = $(this).attr('odds');
+            let value = $(this).attr('value');
+            var totalBalance = document.getElementById('balanceAmount').innerText;
+            var totalBetmoney = document.getElementById('betMoneyAmount').innerText;
+
+            if ((parseInt(totalBalance) - priceNum) > 0) {
+                // 超過餘額不給下注
+                // 計算點了幾次         
+                //持有金額隨著減少
+                letTempChips(priceNum, $(this));
+                totalBalance = parseFloat(totalBalance) - parseInt(priceNum);
+                totalBetmoney = parseFloat(totalBetmoney) + parseInt(priceNum);
+                document.getElementById('betMoneyAmount').innerText = totalBetmoney + "元";
+                document.getElementById('balanceAmount').innerText = totalBalance + "元";
+            }
+        });
+
+        // ele要閃爍的元素, cls 閃爍顏色屬性,要在CSS改 ,times 次數
+        function shake(ele, cls, times) {
+            setTimeout(() => {
+                var i = 0,
+                    t = false,
+                    // 找到class 後面加一個屬性
+                    o = ele.attr("class") + " ",
+                    c = "",
+                    times = times || 2;
+                // console.log(t)
+                // if (t) return;
+                t = setInterval(function() {
+                    i++;
+                    // 為了閃爍要一次有一次沒有,非0則true別忘了
+                    c = i % 2 ? o + cls : o;
+                    ele.attr("class", c);
+                    if (i == 2 * times) {
+                        clearInterval(t);
+                        ele.removeClass(cls);
+                    }
+                }, 200);
+            }, 4000)
+        };
+    </script>
+</body>
+
+</html>

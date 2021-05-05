@@ -388,7 +388,7 @@ app.set('view engine', 'ejs');
 // 將捕魚機傳來的資料送到資料庫
 app.post("/fishShooter/uploadBetRecord", function (req, res) {
 
-    db.connect();
+    // db.connect();
 
     sql = `insert into fishshooter_betrecord
     values(?)`
@@ -502,8 +502,72 @@ app.get("/billiard/admin", function (req, res) {
 });
 
 //////////////////////////
+////////niuniu/////////////
+app.get("niuniu/fetch", function (req, res) {
+  conn.query(
+      "select * from niuniu_records where id in (select a.maxID from (select max(id) maxID from records) a)", [], function (err, result) {
+          if (err) {
+              console.log(JSON.stringify(err));
+              return;
+          }
+          res.send(JSON.stringify(result[0]));
+      }
+  )
+})
+
+app.post("niuniu/store", function (req, res) {
+  var account = req.body.account;
+  var bet = req.body.bet;
+  var moneyBefore = req.body.moneyBefore;
+  var moneyAfter = req.body.moneyAfter;
+  var betTime = req.body.betTime;
+  var gameType = req.body.gameType;
+
+  conn.query(
+      "INSERT INTO niuniu_records (account,bets,moneyBefore,moneyAfter,betTime,gameType) VALUES (?,?,?,?,?,?)", [account, bet, moneyBefore, moneyAfter, betTime, gameType], function (err, result) {
+          if (err) { throw err } else {
+              res.send('ok')
+          }
+      }
+  )
+})
+
+app.post("niuniu/update", function (req, res) {
+  var moneyAfter = req.body.moneyAfter;
+  var result = req.body.result;
+  var dealerCards = req.body.dealerCards;
+  var playerCards = req.body.playerCards;
+  var status = req.body.status;
+
+  conn.query(
+      "UPDATE niuniu_records SET moneyAfter = ?, result = ?,dealerCards=?,playerCards=?,status=?  WHERE id IN (SELECT a.maxID FROM (SELECT max(id) maxID FROM records) a)",
+      [moneyAfter, result, dealerCards, playerCards, status],
+      function (err, result) {
+          if (err) { throw err } else {
+              res.send('ok')
+          }
+      }
+  )
+})
 
 
+app.get("niuniu/admin", function (req, res) {
+  res.redirect("data.html")
+  // res.render("data.html")
+})
+
+app.get("niuniu/select", function (req, res) {
+  conn.query("select * from niuniu_records", [], function (err, result) {
+      if (err) {
+          console.log(JSON.stringify(err));
+          return;
+      }
+      res.send(JSON.stringify(result))
+  })
+})
+
+
+//////////////////////////////////////////
 app.listen(3001,()=>{
     console.log("server runing 3001")
 })

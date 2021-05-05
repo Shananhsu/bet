@@ -1,0 +1,29 @@
+資料庫： `niuniu`
+----------------------------------------------------------
+-- 資料表結構 `records`
+
+CREATE TABLE `records` (
+  `id` int(100) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `account` varchar(999) DEFAULT NULL,
+  `bets` varchar(999) DEFAULT NULL,
+  `moneyBefore` varchar(999) DEFAULT NULL,
+  `result` varchar(999) DEFAULT NULL,
+  `betTime` varchar(999) DEFAULT NULL,
+  `moneyAfter` varchar(999) DEFAULT NULL,
+  `dealerCards` varchar(999) DEFAULT NULL,
+  `playerCards` varchar(999) DEFAULT NULL,
+  `gameType` varchar(999) DEFAULT NULL,
+  `status` varchar(999) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+INSERT INTO `records` (`id`, `account`, `bets`, `moneyBefore`, `result`, `betTime`, `moneyAfter`, `dealerCards`, `playerCards`, `gameType`, `status`) VALUES
+(1, '12345', 'N/A', 'N/A', 'N/A', 'N/A', '100000', 'N/A', 'N/A', '妞妞', 'N/A'),
+(2, '12345', '5000', '100000', '-10000', '2021/4/23 上午10:23:31', '90000', 's2,d2,s7,h8,c11', 's1,h1,d6,d12,s13', '妞妞', '莊家:9 玩家:烏龍 莊家贏'),
+(3, '12345', '5000', '90000', '-10000', '2021/4/23 上午10:23:40', '80000', 'h2,h3,s7,d8,c9', 'c1,s5,c10,h10,s11', '妞妞', '莊家:9 玩家:6 莊家贏'),
+(4, '12345', '5000', '80000', '+10000', '2021/4/23 上午10:23:48', '90000', 'h2,s3,d8,d10,s11', 'h3,d7,s8,s12,s13', '妞妞', '莊家:3 玩家:8 玩家贏'),
+(5, '12345', '5000', '90000', '+5000', '2021/4/23 上午10:23:57', '95000', 's1,h5,c7,c13,s13', 'h4,c6,d7,s10,c12', '妞妞', '莊家:烏龍 玩家:7 玩家贏'),
+(6, '12345', '8000', '95000', '-8000', '2021/4/23 上午10:24:07', '87000', 's4,c5,d7,h9,s11', 'h3,c3,c6,d11,c13', '妞妞', '莊家:5 玩家:烏龍 莊家贏'),
+(7, '12345', '5500', '87000', '+16500', '2021/4/23 上午10:24:17', '103500', 'd5,c5,c7,c12,h13', 'h5,h6,c9,s11,d11', '妞妞', '莊家:7 玩家:妞妞 玩家贏'),
+(8, '12345', '5650', '103500', '-5650', '2021/4/23 上午10:24:28', '97850', 'h1,d2,d3,s3,c13', 'h2,d5,h8,c10,h11', '妞妞', '莊家:烏龍 玩家:烏龍 莊家贏'),
+(9, '12345', '10000', '97850', '-20000', '2021/4/23 上午10:33:58', '77850', 'd3,d4,h6,s7,s9', 'h1,s3,s8,d12,h12', '妞妞', '莊家:9 玩家:烏龍 莊家贏');
