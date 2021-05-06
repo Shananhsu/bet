@@ -13,7 +13,7 @@ class Verifyphotoinfo extends Component {
                                     <label for="" className="col-md-3 control-label">銀行存摺封面照</label>
                                     <div className="col-md-9">
                                         <form className="trademoneyForm form-horizontal" action="/verifyphoto"
-                                            method="post" enctype="multipart/form-data">
+                                            method="post" encType="multipart/form-data">
                                             <input type="hidden" name="_token"
                                                 value="WkJ2in66vOezWluMU8zrnQFwcuEJpATrCISsI6hy" />
 

@@ -62,7 +62,7 @@ class Querybetlog extends Component {
                             <div class="panel-heading">投注資料</div>
                             <div class="panel-body">
                                 <div class="form-group">
-                                    <label for="game" class="col-md-2 control-label">遊戲</label>
+                                    <label htmlFor="game" class="col-md-2 control-label">遊戲</label>
                                     <div class="col-md-10">
                                         <select id="gamenumber" class="form-control input-sm" name="gamenumber" required="">
                                             <option selected="" disabled="" value="">遊戲</option>

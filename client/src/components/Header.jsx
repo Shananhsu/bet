@@ -15,17 +15,47 @@ import MemberState from "./MemberState"
 //     render() {
 const Header = props => {
     // const { register, handleSubmit, formState: { errors } } = useForm();
-
-    const [account, setAccount,] = useState("");
-    const [balance, setBalance,] = useState("");
+    
+    // const [account, setAccount,] = useState("");
+    // const [balance, setBalance,] = useState("");
+    const [memberData , setMemberData]= useState({
+        memberid : "",
+        account : "",
+        password : "",
+        name : "",
+        address : "",
+        phone : "",
+        email : "",
+        risk_level : "",
+        register_time : "",
+        identifyID : "",
+        bonus : "",
+        balance : ""
+    })
     Axios.defaults.withCredentials = true;
-
     useEffect(() => {
         Axios.get("http://localhost:3001/login").then((response) => {
-            console.log(response.data.user)
+            // console.log("header get :")
+            // console.log(response.data.user)
+            // console.log("///////////////")
             if (response.data.loggedIn == true) {
-                setAccount(response.data.user[0].account);
-                setBalance(response.data.user[0].balance);
+                    // setAccount(response.data.user[0].account);
+                    // setBalance(response.data.user[0].balance);
+                    // setUserData = response.data.user[0]
+                    setMemberData((prevState => ({...prevState,
+                        memberid : response.data.user[0].memberid,
+                        account : response.data.user[0].account,
+                        password : response.data.user[0].password,
+                        name : response.data.user[0].name,
+                        address : response.data.user[0].address,
+                        phone : response.data.user[0].phone,
+                        email : response.data.user[0].email,
+                        risk_level : response.data.user[0].risk_level,
+                        register_time : response.data.user[0].register_time,
+                        identifyID : response.data.user[0].identifyID,
+                        bonus : response.data.user[0].bonus,
+                        balance : response.data.user[0].balance
+                    })))
             }
         });
     }, []);
@@ -37,9 +67,9 @@ const Header = props => {
                     <Logo />
                     <Mainnav />
                 </div>
-
-
-                {account ? (<MemberState account={account} balance={balance} props={props} />)
+                {/* {console.log("////headerdata/////")}
+                {console.log(memberData)} */}
+                {memberData.memberid ? (<MemberState memberData = {memberData} />)
                     : (< LoginForm />)}
                 {/* <MemberState account={"1234"} balance={9999999} props={props} /> */}
 

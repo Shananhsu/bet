@@ -34,10 +34,10 @@ export default function LoginMain(props) {
                 "password": data.password,
             }).then((res) => {
                 if (res.data.message === undefined) {
-                    console.log(res)
+                    // console.log("前台 RES :")
+                    // console.log(res)
+                    // console.log("///////")
                     // console.log("res.data :"+res.data)
-                    
-
                     // 讀取token並且存起來
                     // const jwToken = res.data;
                     // console.log(`---jwToken : ${jwToken}`)

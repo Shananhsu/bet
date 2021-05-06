@@ -43,7 +43,8 @@ export default {
       this.account = account.value;
       this.password = psw.value;
       axios
-        .post("http://127.0.0.1:3001/backend/login", {
+        // .post("http://127.0.0.1:3001/backend/login", {
+        .post("http://localhost:3001/backend/login", {
           account: this.account,
           password: this.password,
         })

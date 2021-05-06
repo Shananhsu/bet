@@ -2,6 +2,8 @@ import React, { Component, useState, useContext } from 'react'
 import Axios from "axios";
 import { Doughnut } from 'react-chartjs-2';
 import { MyContext } from '../../commons/context-manager';
+import { useForm } from 'react-hook-form';
+import $ from "jquery"
 
 
 const Point = (props) => {
@@ -16,8 +18,12 @@ const Point = (props) => {
     const [niuniu_balance, setNiuniu_balance] = useState("");
     const [baccarat_balance, setBaccarat_balance] = useState("");
     const [dicegame_balance, setDicegame_balance] = useState("");
+    const [main_balance, setMain_balance] = useState("");
+
     // 子傳父
     const { setTotal_balance } = useContext(MyContext);
+
+
 
     // 打後台拿資料
     const getMemberBalance = () => {
@@ -28,7 +34,7 @@ const Point = (props) => {
                 // console.log( res)
                 if (res.data.message === undefined) {
                     // console.log(props)
-                    setBalance(props.balance);
+                    setMain_balance(res.data[0].main_balance);
                     setSdd_balance(res.data[0].sdd_balance);
                     setBlackjack_balance(res.data[0].blackjack_balance);
                     setFish_balance(res.data[0].fish_balance);
@@ -44,12 +50,12 @@ const Point = (props) => {
     // 甜甜圈圖
     const data = {
         labels: ['主帳戶', '射龍門', '21點', '妞妞', '捕魚機', '老虎機',
-    '撞球遊戲','百家樂','骰子遊戲'],
+            '撞球遊戲', '百家樂', '骰子遊戲'],
         datasets: [
             {
                 label: '# of Votes',
-                data: [balance, sdd_balance, blackjack_balance,niuniu_balance, fish_balance,
-                    tiger_balance, billiard_balance,baccarat_balance,dicegame_balance],
+                data: [balance, sdd_balance, blackjack_balance, niuniu_balance, fish_balance,
+                    tiger_balance, billiard_balance, baccarat_balance, dicegame_balance],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -66,31 +72,138 @@ const Point = (props) => {
             },
         ],
     };
+    // 轉帳功能
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
+    const onSubmit = async (data) => {
+        // console.log($("#turnout option:selected").attr("name"))
+        const turnout = $("#turnout option:selected").attr("name")
+        const turnout_balance = $("#turnout option:selected").val()
+        const turnin = $("#turnin option:selected").attr("name")
+        const turnin_balance = $("#turnin option:selected").val()
+        console.log(`turnout :${turnout}`)
+        console.log(`turnout_balance : ${turnout_balance}`)
+        console.log(`turnin : ${turnin}`)
+        console.log(`turnin_balance : ${turnin_balance}`)
+        console.log(data.money)
+
+        if ( parseFloat(turnout_balance) > parseFloat(data.money)) {
+            await Axios.post('http://localhost:3001/api/transform',
+                {
+                    "turnout": turnout,
+                    "turnout_balance": parseFloat(turnout_balance) - parseFloat(data.money),
+                    "turnin": turnin,
+                    "turnin_balance": parseFloat(turnin_balance) + parseFloat(data.money),
+                    "account": props.account
+
+                }).then((res) => {
+                    console.log(res)
+                    if (res.data.affectedRows != 0) {
+                        alert("轉帳成功")
+                    }
+                    else { alert("其他錯誤,請洽詢客服") }
+                })
+
+        } else { alert("轉帳金額不足") }
+    }
 
     return (
 
         <div id="sf-membercenter-point-getbalance-00002" >
 
             <div class="panel panel-primary">
-                <div class="panel-heading">餘額圖</div>
-                <div className="container col-sm" style={{ "width": "300px" }} ><Doughnut data={data} /></div>
+                <div class="panel-heading">餘額總計</div>
+                <div className="container col-sm" style={{ "width": "300px" }} >
+                    <Doughnut data={data} />
+                </div>
 
                 <div class="panel-body">
-                    <ul class="info list-group">
+                    <ul class="info list-group col-sm-8">
+                        {/* {console.log("////point props/////")}
+                        {console.log(props)}
+                        {console.log("////point props/////")} */}
                         {getMemberBalance()}
-                        <li class="list-group-item col-sm-3"><span class="badge">{balance}</span>主帳戶</li>
-                        <li class="list-group-item col-sm-3"><span class="badge">{sdd_balance}</span>射龍門</li>
-                        <li class="list-group-item col-sm-3"><span class="badge">{blackjack_balance}</span>21點</li>
-                        <li class="list-group-item col-sm-3"><span class="badge">{niuniu_balance}</span>妞妞</li>
-                        <li class="list-group-item col-sm-3"><span class="badge">{fish_balance}</span>捕魚機</li>
-                        <li class="list-group-item col-sm-3"><span class="badge">{tiger_balance}</span>老虎機</li>
-                        <li class="list-group-item col-sm-3"><span class="badge">{billiard_balance}</span>撞球遊戲</li>
-                        <li class="list-group-item col-sm-3"><span class="badge">{baccarat_balance}</span>百家樂</li>
-                        <li class="list-group-item col-sm-3"><span class="badge">{dicegame_balance}</span>骰子遊戲</li>
-                        {setTotal_balance(balance + sdd_balance + blackjack_balance + niuniu_balance + fish_balance
+                        <li class="list-group-item col-sm-3">
+                            <span class="badge">{main_balance}</span>
+                            主帳戶</li>
+                        <li class="list-group-item col-sm-3">
+                            <span class="badge">{sdd_balance}</span>
+                            射龍門</li>
+                        <li class="list-group-item col-sm-3">
+                            <span class="badge">{blackjack_balance}</span>
+                            21點</li>
+                        <li class="list-group-item col-sm-3">
+                            <span class="badge">{niuniu_balance}</span>
+                            妞妞</li>
+                        <li class="list-group-item col-sm-3">
+                            <span class="badge">{fish_balance}</span>
+                            捕魚機</li>
+                        <li class="list-group-item col-sm-3">
+                            <span class="badge">{tiger_balance}</span>
+                            老虎機</li>
+                        <li class="list-group-item col-sm-3">
+                            <span class="badge">{billiard_balance}</span>
+                            撞球遊戲</li>
+                        <li class="list-group-item col-sm-3">
+                            <span class="badge">{baccarat_balance}</span>
+                            百家樂</li>
+                        <li class="list-group-item col-sm-3">
+                            <span class="badge">{dicegame_balance}</span>
+                            骰子遊戲</li>
+                        {setTotal_balance(main_balance + sdd_balance + blackjack_balance + niuniu_balance + fish_balance
                             + tiger_balance + billiard_balance + baccarat_balance + dicegame_balance)}
                     </ul>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <div class="form-group col-sm-3" >
+                            <label for="turnout" class="col-md-3 control-label">轉出:</label>
+                            <div class="col-md-9">
+                                <select id="turnout" class="form-control input-sm" name="category"
+                                // {...register('turnout', { required: true })} 
+                                >
+                                    <option selected="" disabled="" name="main_balance" value={main_balance}  >主帳戶</option>
+                                    <option name="sdd_balance" value={sdd_balance} >射龍門</option>
+                                    <option name="niuniu_balance" value={niuniu_balance}>妞妞</option>
+                                    <option name="fish_balance" value={fish_balance}>捕魚機</option>
+                                    <option name="tiger_balance" value={tiger_balance}>老虎機</option>
+                                    <option name="billiard_balance" value={billiard_balance}>撞球遊戲</option>
+                                    <option name="baccarat_balance" value={baccarat_balance}>百家樂</option>
+                                    <option name="dicegame_balance" value={dicegame_balance}>骰子遊戲</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-3" >
+                            <label for="turnin" class="col-md-3 control-label">轉入:</label>
+                            <div class="col-md-9">
+                                <select id="turnin" class="form-control input-sm" name="category"
+                                // {...register('trunin', { required: true })} 
+                                >
+                                    <option selected="" disabled="" name="main_balance" value={main_balance} >主帳戶</option>
+                                    <option name="sdd_balance" value={sdd_balance} >射龍門</option>
+                                    <option name="niuniu_balance" value={niuniu_balance}>妞妞</option>
+                                    <option name="fish_balance" value={fish_balance}>捕魚機</option>
+                                    <option name="tiger_balance" value={tiger_balance}>老虎機</option>
+                                    <option name="billiard_balance" value={billiard_balance}>撞球遊戲</option>
+                                    <option name="baccarat_balance" value={baccarat_balance}>百家樂</option>
+                                    <option name="dicegame_balance" value={dicegame_balance}>骰子遊戲</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label for="nubers" class="col-md-3 control-label">金額:</label>
+
+                            <div class="col-md-9">
+                                <input type="text" class="form-control input-sm"
+                                    {...register('money', { required: true })} />
+                            </div>
+
+                        </div>
+                        <div class="form-group col-sm-3" style={{ textAlign: "center" }}>
+                            {/* <label for="turnin" class="col-md-3 control-label"></label> */}
+                            <button >確認</button>
+                        </div>
+                    </form>
                 </div>
+
             </div>
 
             {/* 警語先不用 */}
