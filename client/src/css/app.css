@@ -975,13 +975,14 @@ a.yb:hover {
     text-align: center;
     border: 0;
     background: transparent;
+   
 }
 
 #tab-demo .tab-title li a {
     display: block;
     width: 140px;
     line-height: 40px;
-    height: 60px;
+    height: 120px;
     font-size: 20px;
     color: #333;
     margin-bottom: 20px;
@@ -999,32 +1000,35 @@ a.yb:hover {
 }
 
 #tab-demo .tab-title li:nth-child(1) a,
-#tab-demo .tab-title li:nth-child(2) a,
-#tab-demo .tab-title li:nth-child(3) a,
-#tab-demo .tab-title li:nth-child(4) a {
+#tab-demo .tab-title li:nth-child(2) a {
     transform: skew(20deg);
 }
+
+/* #tab-demo .tab-title li:nth-child(3) a,
+#tab-demo .tab-title li:nth-child(4) a */
 
 #tab-demo .tab-title li:nth-child(1) a span,
-#tab-demo .tab-title li:nth-child(2) a span,
-#tab-demo .tab-title li:nth-child(3) a span,
-#tab-demo .tab-title li:nth-child(4) a span {
-    transform: skew(-20deg);
-}
-
-#tab-demo .tab-title li:nth-child(5) a,
-#tab-demo .tab-title li:nth-child(6) a,
-#tab-demo .tab-title li:nth-child(7) a,
-#tab-demo .tab-title li:nth-child(8) a {
-    transform: skew(-20deg);
-}
-
-#tab-demo .tab-title li:nth-child(5) a span,
-#tab-demo .tab-title li:nth-child(6) a span,
-#tab-demo .tab-title li:nth-child(7) a span,
-#tab-demo .tab-title li:nth-child(8) a span {
+#tab-demo .tab-title li:nth-child(3) a span {
     transform: skew(20deg);
 }
+/* #tab-demo .tab-title li:nth-child(3) a span,
+#tab-demo .tab-title li:nth-child(4) a span */
+
+#tab-demo .tab-title li:nth-child(5) a,
+#tab-demo .tab-title li:nth-child(7) a{
+    transform: skew(-20deg);
+}
+
+/* #tab-demo .tab-title li:nth-child(7) a,
+#tab-demo .tab-title li:nth-child(8) a  */
+
+#tab-demo .tab-title li:nth-child(3) a span,
+#tab-demo .tab-title li:nth-child(4) a span {
+    transform: skew(20deg);
+}
+
+/* #tab-demo .tab-title li:nth-child(7) a span,
+#tab-demo .tab-title li:nth-child(8) a span */
 
 #tab-demo .tab-title li:nth-child(1) {
     margin-left: 50px;
@@ -1035,11 +1039,11 @@ a.yb:hover {
 }
 
 #tab-demo .tab-title li:nth-child(3) {
-    margin-left: 120px;
+    margin-left: 90px;
 }
 
 #tab-demo .tab-title li:nth-child(4) {
-    margin-left: 155px;
+    margin-left: 50px;
 }
 
 #tab-demo .tab-title li:nth-child(5) {
@@ -1085,7 +1089,7 @@ a.yb:hover {
 /*desktop.css:455行*/
 
 #tab-demo .tab-title .ui-tabs-active a {
-    height: 60px;
+    height: 120px;
     /*修改*/
     line-height: 41px;
     /*修改*/
@@ -1238,7 +1242,7 @@ a.yb:hover {
     z-index: 1;
     position: absolute;
     width: 140px;
-    height: 60px;
+    height: 120px;
 }
 
 .tab-inner ul li a .gamesName:hover {
@@ -1249,7 +1253,7 @@ a.yb:hover {
     content: " ";
     position: absolute;
     width: 7px;
-    height: 60px;
+    height:120px;
     background: #4765f3;
     top: 0;
     right: 0;
@@ -1257,7 +1261,7 @@ a.yb:hover {
 
 .tab-inner ul li a:hover:after {
     width: 140px;
-    height: 60px;
+    height: 120px;
     -webkit-transition: all 0.3s;
     transition: all 0.3s;
     background: #4765f3;

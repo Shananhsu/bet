@@ -19,44 +19,44 @@ class Playground extends Component {
         return (
             <React.Fragment>
                 <div id="tab-demo" className="ui-tabs ui-corner-all ui-widget ui-widget-content">
+                    
                     <div className="tab_left col-sm-3">
                         <ul className="tab-title ui-tabs-nav ui-corner-all ui-helper-reset ui-helper-clearfix ui-widget-header"
-                            role="tablist">
+                            role="tablist" >
                             <li role="tab" tabIndex="0" onMouseEnter={this.handleClick}
                                 className="ui-tabs-tab ui-corner-top ui-state-default ui-tab ui-tabs-active ui-state-active"
-                                aria-controls="tab00" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true">
+                                aria-controls="tab00" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true"style={{ marginLeft: '50px'}}>
                                 <a
                                     href="#tab00" role="presentation" tabIndex="-1" className="ui-tabs-anchor"
-                                    id="ui-id-1"><span>真人一館</span></a></li>
-                            <li role="tab" tabIndex="-1" onMouseEnter={this.handleClick} className="ui-tabs-tab ui-corner-top ui-state-default ui-tab"
+                                    id="ui-id-1"style={{height:'140px',paddingTop:'40px',paddingLeft:'15px'}}><span>經典遊戲</span></a></li>
+                            {/* <li role="tab" tabIndex="-1" onMouseEnter={this.handleClick} className="ui-tabs-tab ui-corner-top ui-state-default ui-tab"
                                 aria-controls="tab01" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false"><a
                                     href="#tab01" role="presentation" tabIndex="-1" className="ui-tabs-anchor" id="ui-id-2"
-                                ><span>真人二館</span></a></li>
+                                ><span>真人二館</span></a></li> */}
                             <li role="tab" tabIndex="-1" onMouseEnter={this.handleClick} className="ui-tabs-tab ui-corner-top ui-state-default ui-tab"
-                                aria-controls="tab02" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false">
-                                <a
-                                    href="#tab02" role="presentation" tabIndex="-1" className="ui-tabs-anchor" id="ui-id-3"
-                                ><span>體育賽事</span></a></li>
-                            <li role="tab" tabIndex="-1" onMouseEnter={this.handleClick} className="ui-tabs-tab ui-corner-top ui-state-default ui-tab"
+                                aria-controls="tab02" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"style={{ marginLeft: '110px'}}>
+                                <a href="#tab02" role="presentation" tabIndex="-1" className="ui-tabs-anchor" id="ui-id-3"style={{height:'140px',paddingTop:'40px',paddingLeft:'15px'}}
+                                ><span>體育競技</span></a></li>
+                            {/* <li role="tab" tabIndex="-1" onMouseEnter={this.handleClick} className="ui-tabs-tab ui-corner-top ui-state-default ui-tab"
                                 aria-controls="tab03" aria-labelledby="ui-id-4" aria-selected="false" aria-expanded="false"><a
                                     href="#tab03" role="presentation" tabIndex="-1" className="ui-tabs-anchor" id="ui-id-4"
-                                ><span>電競投注</span></a></li>
+                                ><span>電競投注</span></a></li> */}
                             <li role="tab" tabIndex="-1" onMouseEnter={this.handleClick} className="ui-tabs-tab ui-corner-top ui-state-default ui-tab"
-                                aria-controls="tab04" aria-labelledby="ui-id-5" aria-selected="false" aria-expanded="false"><a
-                                    href="#tab04" role="presentation" tabIndex="-1" className="ui-tabs-anchor" id="ui-id-5"
-                                ><span>棋牌遊戲</span></a></li>
-                            <li role="tab" tabIndex="-1" onMouseEnter={this.handleClick} className="ui-tabs-tab ui-corner-top ui-state-default ui-tab"
+                                aria-controls="tab04" aria-labelledby="ui-id-5" aria-selected="false" aria-expanded="false" style={{ marginLeft: '115px'}}><a
+                                    href="#tab04" role="presentation" tabIndex="-1" className="ui-tabs-anchor" id="ui-id-5"style={{height:'140px',transform:"skew(-20deg)",paddingTop:'40px',paddingLeft:'15px'}}
+                                ><span style={{transform:"skew(20deg)"}}>棋牌遊戲</span></a></li>
+                            {/* <li role="tab" tabIndex="-1" onMouseEnter={this.handleClick} className="ui-tabs-tab ui-corner-top ui-state-default ui-tab"
                                 aria-controls="tab05" aria-labelledby="ui-id-6" aria-selected="false" aria-expanded="false"><a
                                     href="#tab05" role="presentation" tabIndex="-1" className="ui-tabs-anchor"
-                                    id="ui-id-6"><span>彩票賓果</span></a></li>
+                                    id="ui-id-6"><span>彩票賓果</span></a></li> */}
                             <li role="tab" tabIndex="-1" onMouseEnter={this.handleClick} className="ui-tabs-tab ui-corner-top ui-state-default ui-tab"
-                                aria-controls="tab06" aria-labelledby="ui-id-7" aria-selected="false" aria-expanded="false"><a
-                                    href="#tab06" role="presentation" tabIndex="-1" className="ui-tabs-anchor" id="ui-id-7"
-                                ><span>電子一館</span></a></li>
-                            <li role="tab" tabIndex="-1" onMouseEnter={this.handleClick} className="ui-tabs-tab ui-corner-top ui-state-default ui-tab "
+                                aria-controls="tab06" aria-labelledby="ui-id-7" aria-selected="false" aria-expanded="false"style={{ marginLeft: '55px'}}><a
+                                    href="#tab06" role="presentation" tabIndex="-1" className="ui-tabs-anchor" id="ui-id-7"style={{height:'140px',transform:"skew(-20deg)",paddingTop:'40px',paddingLeft:'15px'}}
+                                ><span style={{transform:"skew(20deg)"}}>電子遊戲</span></a></li>
+                            {/* <li role="tab" tabIndex="-1" onMouseEnter={this.handleClick} className="ui-tabs-tab ui-corner-top ui-state-default ui-tab "
                                 aria-controls="tab07" aria-labelledby="ui-id-8" aria-selected="false" aria-expanded="false"><a
                                     href="#tab07" role="presentation" tabIndex="-1" className="ui-tabs-anchor" id="ui-id-8"
-                                ><span>電子二館</span></a></li>
+                                ><span>電子二館</span></a></li> */}
                         </ul>
                     </div>
                     <div className="tab_right col-sm-12">
@@ -69,18 +69,18 @@ class Playground extends Component {
                                 <li>
                                     <div className="gamesBg">
                                         <a className="col-xs-3 modal_btn game" data-toggle="modal" data-text="/login" href="#modal">
-                                            <div className="gamesName">DG</div>
+                                            <div className="gamesName">骰寶</div>
                                         </a>
                                     </div>
                                 </li>
                                 <li>
                                     <div className="gamesBg">
                                         <a className="col-xs-3 modal_btn game" data-toggle="modal" data-text="/login" href="#modal">
-                                            <div className="gamesName">亞博真人</div>
+                                            <div className="gamesName">百家樂</div>
                                         </a>
                                     </div>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <div className="gamesBg">
                                         <a className="col-xs-3 modal_btn game" data-toggle="modal" data-text="/login" href="#modal">
                                             <div className="gamesName">歐博</div>
@@ -93,10 +93,10 @@ class Playground extends Component {
                                             <div className="gamesName">WM</div>
                                         </a>
                                     </div>
-                                </li>
+                                </li> */}
                             </ul>
                         </div>
-                        <div id="tab01" className="tab-inner ui-tabs-panel ui-corner-bottom ui-widget-content" aria-labelledby="ui-id-2"
+                        {/* <div id="tab01" className="tab-inner ui-tabs-panel ui-corner-bottom ui-widget-content" aria-labelledby="ui-id-2"
                             role="tabpanel" aria-hidden="true" style={{ display: 'none' }}>
                             <img src="/images/playground/tab01.png" alt="imgErr" />
                             <img src="/images/playground/tab01-sm.png" alt="imgErr" className="float" />
@@ -125,7 +125,7 @@ class Playground extends Component {
                                     </div>
                                 </li>
                             </ul>
-                        </div>
+                        </div> */}
                         <div id="tab02" className="tab-inner ui-tabs-panel ui-corner-bottom ui-widget-content" aria-labelledby="ui-id-3"
                             role="tabpanel" aria-hidden="true" style={{ display: 'none' }}>
                             <img src="/images/playground/tab02.png" alt="imgErr" />
@@ -135,11 +135,11 @@ class Playground extends Component {
                                 <li>
                                     <div className="gamesBg">
                                         <a className="col-xs-3 modal_btn game" data-toggle="modal" data-text="/login" href="#modal">
-                                            <div className="gamesName">Super體育</div>
+                                            <div className="gamesName">人機撞球</div>
                                         </a>
                                     </div>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <div className="gamesBg">
                                         <a className="col-xs-3 modal_btn game" data-toggle="modal" data-text="/login" href="#modal">
                                             <div className="gamesName">AFB體育</div>
@@ -152,11 +152,11 @@ class Playground extends Component {
                                             <div className="gamesName">體球王</div>
                                         </a>
                                     </div>
-                                </li>
+                                </li> */}
                             </ul>
                         </div>
 
-                        <div id="tab03" className="tab-inner ui-tabs-panel ui-corner-bottom ui-widget-content" aria-labelledby="ui-id-4"
+                        {/* <div id="tab03" className="tab-inner ui-tabs-panel ui-corner-bottom ui-widget-content" aria-labelledby="ui-id-4"
                             role="tabpanel" aria-hidden="true" style={{ display: 'none' }}>
                             <img src="/images/playground/tab03.png" alt="imgErr" />
                             <img src="/images/playground/tab03-sm1.png" alt="imgErr" className="float" />
@@ -170,7 +170,7 @@ class Playground extends Component {
                                     </div>
                                 </li>
                             </ul>
-                        </div>
+                        </div> */}
 
                         <div id="tab04" className="tab-inner ui-tabs-panel ui-corner-bottom ui-widget-content" aria-labelledby="ui-id-5"
                             role="tabpanel" aria-hidden="true" style={{ display: 'none' }}>
@@ -181,27 +181,27 @@ class Playground extends Component {
                                 <li>
                                     <div className="gamesBg">
                                         <a className="col-xs-3 modal_btn game" data-toggle="modal" data-text="/login" href="#modal">
-                                            <div className="gamesName">OGB</div>
+                                            <div className="gamesName">21點</div>
                                         </a>
                                     </div>
                                 </li>
                                 <li>
                                     <div className="gamesBg">
                                         <a className="col-xs-3 modal_btn game" data-toggle="modal" data-text="/login" href="#modal">
-                                            <div className="gamesName">MG棋牌</div>
+                                            <div className="gamesName">妞妞</div>
                                         </a>
                                     </div>
                                 </li>
                                 <li>
                                     <div className="gamesBg">
                                         <a className="col-xs-3 modal_btn game" data-toggle="modal" data-text="/login" href="#modal">
-                                            <div className="gamesName">VG</div>
+                                            <div className="gamesName">射龍門</div>
                                         </a>
                                     </div>
                                 </li>
                             </ul>
                         </div>
-                        <div id="tab05" className="tab-inner ui-tabs-panel ui-corner-bottom ui-widget-content" aria-labelledby="ui-id-6"
+                        {/* <div id="tab05" className="tab-inner ui-tabs-panel ui-corner-bottom ui-widget-content" aria-labelledby="ui-id-6"
                             role="tabpanel" aria-hidden="true" style={{ display: 'none' }}>
                             <img src="/images/playground/tab05.png" alt="imgErr" />
                             <img src="/images/playground/tab05-sm1.png" alt="imgErr" className="float" />
@@ -229,7 +229,7 @@ class Playground extends Component {
                                     </div>
                                 </li>
                             </ul>
-                        </div>
+                        </div> */}
                         <div id="tab06" className="tab-inner ui-tabs-panel ui-corner-bottom ui-widget-content" aria-labelledby="ui-id-7"
                             role="tabpanel" aria-hidden="true" style={{ display: 'none' }}>
                             <img src="/images/playground/tab06.png" alt="imgErr" />
@@ -239,18 +239,18 @@ class Playground extends Component {
                                 <li>
                                     <div className="gamesBg">
                                         <a className="col-xs-3 modal_btn game" data-toggle="modal" data-text="/login" href="#modal">
-                                            <div className="gamesName">QTech</div>
+                                            <div className="gamesName">老虎機</div>
                                         </a>
                                     </div>
                                 </li>
                                 <li>
                                     <div className="gamesBg">
                                         <a className="col-xs-3 game" href="/lobby/obgelec">
-                                            <div className="gamesName">亞博電子</div>
+                                            <div className="gamesName">捕魚機</div>
                                         </a>
                                     </div>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <div className="gamesBg">
                                         <a className="col-xs-3 game" href="/lobby/ameba">
                                             <div className="gamesName">AMEBA</div>
@@ -270,7 +270,7 @@ class Playground extends Component {
                                             <div className="gamesName">RTG</div>
                                         </a>
                                     </div>
-                                </li>
+                                </li> */}
                             </ul>
                         </div>
                         <div id="tab07" className="tab-inner ui-tabs-panel ui-corner-bottom ui-widget-content" aria-labelledby="ui-id-8"

@@ -346,7 +346,10 @@ sddBet5000.addEventListener("click", function () {
 
 // 點擊黑桃,投注區域時,將值累加存到,sddSpades_total
 sddSpades.addEventListener("click", function () {
-  if (sddBetmoney > 0) {
+  if (document.getElementById("sddSpades").value > sddBetmoney) {
+    alert("餘額不足");
+    // console.log(`黑桃累計投注金額： ${sddSpades_total}`);
+  } else if (sddBetmoney > 0) {
     sddSpades_total =
       sddSpades_total + document.getElementById("sddSpades").value;
     getBettotal();
@@ -356,15 +359,14 @@ sddSpades.addEventListener("click", function () {
     document.getElementById(
       "showBettotalarea_01"
     ).innerHTML = `黑桃：${sddSpades_total}`;
-    // console.log(`黑桃累計投注金額： ${sddSpades_total}`);
-  } else if (sddBetmoney <= 0) {
-    alert("餘額不足");
   }
 });
 
 // 點擊大,投注區域時,將值累加存到,sddSpades_total
 sddBetbig.addEventListener("click", function () {
-  if (sddBetmoney > 0) {
+  if (document.getElementById("sddBetbig").value > sddBetmoney) {
+    alert("餘額不足");
+  } else if (sddBetmoney > 0) {
     sddBetbig_total =
       sddBetbig_total + document.getElementById("sddBetbig").value;
     getBettotal();
@@ -374,15 +376,14 @@ sddBetbig.addEventListener("click", function () {
     document.getElementById(
       "showBettotalarea_02"
     ).innerHTML = `大點：${sddBetbig_total}`;
-    // console.log(`大累計投注金額： ${sddBetbig_total}`);
-  } else if (sddBetmoney <= 0) {
-    alert("餘額不足");
   }
 });
 
 // 點擊幸運7,投注區域時,將值累加存到,sddBet7_total
 sddBet7.addEventListener("click", function () {
-  if (sddBetmoney > 0) {
+  if (document.getElementById("sddBet7").value > sddBetmoney) {
+    alert("餘額不足");
+  } else if (sddBetmoney > 0) {
     sddBet7_total = sddBet7_total + document.getElementById("sddBet7").value;
     getBettotal();
     document.getElementById(
@@ -391,15 +392,14 @@ sddBet7.addEventListener("click", function () {
     document.getElementById(
       "showBettotalarea_03"
     ).innerHTML = `Lucky 7：${sddBet7_total}`;
-    // console.log(`幸運7累計投注金額： ${sddBet7_total}`);
-  } else if (sddBetmoney <= 0) {
-    alert("餘額不足");
   }
 });
 
 // 點擊小,投注區域時,將值累加存到,sddBetsmall_total
 sddBetsmall.addEventListener("click", function () {
-  if (sddBetmoney > 0) {
+  if (document.getElementById("sddBetsmall").value > sddBetmoney) {
+    alert("餘額不足");
+  } else if (sddBetmoney > 0) {
     sddBetsmall_total =
       sddBetsmall_total + document.getElementById("sddBetsmall").value;
     getBettotal();
@@ -409,15 +409,14 @@ sddBetsmall.addEventListener("click", function () {
     document.getElementById(
       "showBettotalarea_04"
     ).innerHTML = `小點：${sddBetsmall_total}`;
-    // console.log(`小累計投注金額： ${sddBetsmall_total}`);
-  } else if (sddBetmoney <= 0) {
-    alert("餘額不足");
   }
 });
 
 // 點擊紅心,投注區域時,將值累加存到,sddBetsmall_total
 sddHeart.addEventListener("click", function () {
-  if (sddBetmoney > 0) {
+  if (document.getElementById("sddHeart").value > sddBetmoney) {
+    alert("餘額不足");
+  } else if (sddBetmoney > 0) {
     sddHeart_total = sddHeart_total + document.getElementById("sddHeart").value;
     getBettotal();
     document.getElementById(
@@ -426,15 +425,14 @@ sddHeart.addEventListener("click", function () {
     document.getElementById(
       "showBettotalarea_05"
     ).innerHTML = `愛心：${sddHeart_total}`;
-    // console.log(`愛心累計投注金額： ${sddHeart_total}`);
-  } else if (sddBetmoney <= 0) {
-    alert("餘額不足");
   }
 });
 
 // 點擊方塊,投注區域時,將值累加存到,sddCube_total
 sddCube.addEventListener("click", function () {
-  if (sddBetmoney > 0) {
+  if (document.getElementById("sddCube").value > sddBetmoney) {
+    alert("餘額不足");
+  } else if (sddBetmoney > 0) {
     sddCube_total = sddCube_total + document.getElementById("sddCube").value;
     getBettotal();
     document.getElementById(
@@ -443,15 +441,14 @@ sddCube.addEventListener("click", function () {
     document.getElementById(
       "showBettotalarea_06"
     ).innerHTML = `方塊：${sddCube_total}`;
-    // console.log(`方塊累計投注金額： ${sddCube_total}`);
-  } else if (sddBetmoney <= 0) {
-    alert("餘額不足");
   }
 });
 
 // 點擊單,投注區域時,將值累加存到,sddBetodd_total
 sddBetodd.addEventListener("click", function () {
-  if (sddBetmoney > 0) {
+  if (document.getElementById("sddBetodd").value > sddBetmoney) {
+    alert("餘額不足");
+  } else if (sddBetmoney > 0) {
     sddBetodd_total =
       sddBetodd_total + document.getElementById("sddBetodd").value;
     getBettotal();
@@ -461,15 +458,14 @@ sddBetodd.addEventListener("click", function () {
     document.getElementById(
       "showBettotalarea_07"
     ).innerHTML = `單數：${sddBetodd_total}`;
-    // console.log(`單數累計投注金額： ${sddBetodd_total}`);
-  } else if (sddBetmoney <= 0) {
-    alert("餘額不足");
   }
 });
 
 // 點擊射龍門,投注區域時,將值累加存到,sddBetsdd_total
 sddBetsdd.addEventListener("click", function () {
-  if (sddBetmoney > 0) {
+  if (document.getElementById("sddBetsdd").value > sddBetmoney) {
+    alert("餘額不足");
+  } else if (sddBetmoney > 0) {
     sddBetsdd_total =
       sddBetsdd_total + document.getElementById("sddBetsdd").value;
     getBettotal();
@@ -479,15 +475,14 @@ sddBetsdd.addEventListener("click", function () {
     document.getElementById(
       "showBettotalarea_08"
     ).innerHTML = `射龍門：${sddBetsdd_total}`;
-    // console.log(`射龍門累計投注金額： ${sddBetsdd_total}`);
-  } else if (sddBetmoney <= 0) {
-    alert("餘額不足");
   }
 });
 
 // 點擊雙,投注區域時,將值累加存到,sddBeteven_total
 sddBeteven.addEventListener("click", function () {
-  if (sddBetmoney > 0) {
+  if (document.getElementById("sddBeteven").value > sddBetmoney) {
+    alert("餘額不足");
+  } else if (sddBetmoney > 0) {
     sddBeteven_total =
       sddBeteven_total + document.getElementById("sddBeteven").value;
     getBettotal();
@@ -497,15 +492,14 @@ sddBeteven.addEventListener("click", function () {
     document.getElementById(
       "showBettotalarea_09"
     ).innerHTML = `雙數：${sddBeteven_total}`;
-    // console.log(`雙數累計投注金額： ${sddBeteven_total}`);
-  } else if (sddBetmoney <= 0) {
-    alert("餘額不足");
   }
 });
 
 // 點擊梅花,投注區域時,將值累加存到,
 sddPlum.addEventListener("click", function () {
-  if (sddBetmoney > 0) {
+  if (document.getElementById("sddPlum").value > sddBetmoney) {
+    alert("餘額不足");
+  } else if (sddBetmoney > 0) {
     sddPlum_total = sddPlum_total + document.getElementById("sddPlum").value;
     getBettotal();
     document.getElementById(
@@ -514,9 +508,6 @@ sddPlum.addEventListener("click", function () {
     document.getElementById(
       "showBettotalarea_10"
     ).innerHTML = `梅花：${sddPlum_total}`;
-    // console.log(`梅花累計投注金額： ${sddPlum_total}`);
-  } else if (sddBetmoney <= 0) {
-    alert("餘額不足");
   }
 });
 
