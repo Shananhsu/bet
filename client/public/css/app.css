@@ -1859,6 +1859,19 @@ body.modal-open {
 }
 
 /* gamelink */
+
+/* 阿川加的------------- */
+#sf-lobby-00001{
+    width: 900px;
+    margin:auto;
+    
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+/* 阿川加的------------- */
+
+
 #sf-lobby-00001 .game {
     padding: 0 5px!important;
     background-position: center!important;
@@ -1867,8 +1880,38 @@ body.modal-open {
     border-radius: 5px!important;
     border: 1px solid #b5b5b5!important;
     margin: 0 0.5% 30px 0.5%!important;
-    
 }
+
+#sf-lobby-00001 .game {
+    color: #fff;
+    display: block;
+    width: 280px;
+    height: 300px;
+    text-align: center;
+    margin: 15px auto;
+
+/* 阿川加的 */
+background-color: #000;
+font-size: 2rem;
+transition: 0.5s;
+/* 阿川加的 */
+}
+
+#sf-lobby-00001 .game>img {
+/* 阿川加的 */
+height: 80%;
+/* 阿川加的 */
+}
+
+/* 阿川加的 */
+#sf-lobby-00001 .game:hover {
+    /* color: black; */
+    text-decoration: none;
+    transform: scale(1.1,1.1);
+}
+/* 阿川加的 */
+
+
 #sf-lobby-00001 .tile {
     position: initial!important;
 }
@@ -1881,16 +1924,7 @@ body.modal-open {
 }
 
 
-#sf-lobby-00001 .game {
-    /* color: #fff; */
-    width: 280px;
-    height: 300px;
-    text-align: center;
-    margin: 15px auto;
-}
-#sf-lobby-00001 .game > img {
-    width: 100%;
-}
+
 
 
 
