@@ -246,109 +246,130 @@ let sddPlum_total = 0;
 
 // 點擊50元籌碼時 投注區域的值都變更為50
 sddBet50.addEventListener("click", function () {
-  document.getElementById("sddSpades").value = 50;
-  document.getElementById("sddBetbig").value = 50;
-  document.getElementById("sddBet7").value = 50;
-  document.getElementById("sddBetsmall").value = 50;
-  document.getElementById("sddHeart").value = 50;
-  document.getElementById("sddCube").value = 50;
-  document.getElementById("sddBetodd").value = 50;
-  document.getElementById("sddBetsdd").value = 50;
-  document.getElementById("sddBeteven").value = 50;
-  document.getElementById("sddPlum").value = 50;
-  // console.log("選定籌碼50");
-  document.getElementById("sddBet50").style.marginTop="0px"
-  document.getElementById("sddBet100").style.marginTop="55px"
-  document.getElementById("sddBet500").style.marginTop="55px"
-  document.getElementById("sddBet1000").style.marginTop="55px"
-  document.getElementById("sddBet5000").style.marginTop="55px"
+  if (sddBettotal === 0) {
+    alert("請先點擊開始");
+  } else {
+    document.getElementById("sddSpades").value = 50;
+    document.getElementById("sddBetbig").value = 50;
+    document.getElementById("sddBet7").value = 50;
+    document.getElementById("sddBetsmall").value = 50;
+    document.getElementById("sddHeart").value = 50;
+    document.getElementById("sddCube").value = 50;
+    document.getElementById("sddBetodd").value = 50;
+    document.getElementById("sddBetsdd").value = 50;
+    document.getElementById("sddBeteven").value = 50;
+    document.getElementById("sddPlum").value = 50;
+    // console.log("選定籌碼50");
+    document.getElementById("sddBet50").style.marginTop = "0px";
+    document.getElementById("sddBet100").style.marginTop = "55px";
+    document.getElementById("sddBet500").style.marginTop = "55px";
+    document.getElementById("sddBet1000").style.marginTop = "55px";
+    document.getElementById("sddBet5000").style.marginTop = "55px";
+  }
 });
 
 // 點擊100元籌碼時 投注區域的值都變更為100
 sddBet100.addEventListener("click", function () {
-  document.getElementById("sddSpades").value = 100;
-  document.getElementById("sddBetbig").value = 100;
-  document.getElementById("sddBet7").value = 100;
-  document.getElementById("sddBetsmall").value = 100;
-  document.getElementById("sddHeart").value = 100;
-  document.getElementById("sddCube").value = 100;
-  document.getElementById("sddBetodd").value = 100;
-  document.getElementById("sddBetsdd").value = 100;
-  document.getElementById("sddBeteven").value = 100;
-  document.getElementById("sddPlum").value = 100;
-  // console.log("選定籌碼100");
-  document.getElementById("sddBet50").style.marginTop="55px"
-  document.getElementById("sddBet100").style.marginTop="0px"
-  document.getElementById("sddBet500").style.marginTop="55px"
-  document.getElementById("sddBet1000").style.marginTop="55px"
-  document.getElementById("sddBet5000").style.marginTop="55px"
+  if (sddBettotal === 0) {
+    alert("請先點擊開始");
+  } else {
+    document.getElementById("sddSpades").value = 100;
+    document.getElementById("sddBetbig").value = 100;
+    document.getElementById("sddBet7").value = 100;
+    document.getElementById("sddBetsmall").value = 100;
+    document.getElementById("sddHeart").value = 100;
+    document.getElementById("sddCube").value = 100;
+    document.getElementById("sddBetodd").value = 100;
+    document.getElementById("sddBetsdd").value = 100;
+    document.getElementById("sddBeteven").value = 100;
+    document.getElementById("sddPlum").value = 100;
+    // console.log("選定籌碼100");
+    document.getElementById("sddBet50").style.marginTop = "55px";
+    document.getElementById("sddBet100").style.marginTop = "0px";
+    document.getElementById("sddBet500").style.marginTop = "55px";
+    document.getElementById("sddBet1000").style.marginTop = "55px";
+    document.getElementById("sddBet5000").style.marginTop = "55px";
+  }
 });
 
 // 點擊500元籌碼時 投注區域的值都變更為500
 sddBet500.addEventListener("click", function () {
-  document.getElementById("sddSpades").value = 500;
-  document.getElementById("sddBetbig").value = 500;
-  document.getElementById("sddBet7").value = 500;
-  document.getElementById("sddBetsmall").value = 500;
-  document.getElementById("sddHeart").value = 500;
-  document.getElementById("sddCube").value = 500;
-  document.getElementById("sddBetodd").value = 500;
-  document.getElementById("sddBetsdd").value = 500;
-  document.getElementById("sddBeteven").value = 500;
-  document.getElementById("sddPlum").value = 500;
-  // console.log("選定籌碼500");
-  document.getElementById("sddBet50").style.marginTop="55px"
-  document.getElementById("sddBet100").style.marginTop="55px"
-  document.getElementById("sddBet500").style.marginTop="0px"
-  document.getElementById("sddBet1000").style.marginTop="55px"
-  document.getElementById("sddBet5000").style.marginTop="55px"
+  if (sddBettotal === 0) {
+    alert("請先點擊開始");
+  } else {
+    document.getElementById("sddSpades").value = 500;
+    document.getElementById("sddBetbig").value = 500;
+    document.getElementById("sddBet7").value = 500;
+    document.getElementById("sddBetsmall").value = 500;
+    document.getElementById("sddHeart").value = 500;
+    document.getElementById("sddCube").value = 500;
+    document.getElementById("sddBetodd").value = 500;
+    document.getElementById("sddBetsdd").value = 500;
+    document.getElementById("sddBeteven").value = 500;
+    document.getElementById("sddPlum").value = 500;
+    // console.log("選定籌碼500");
+    document.getElementById("sddBet50").style.marginTop = "55px";
+    document.getElementById("sddBet100").style.marginTop = "55px";
+    document.getElementById("sddBet500").style.marginTop = "0px";
+    document.getElementById("sddBet1000").style.marginTop = "55px";
+    document.getElementById("sddBet5000").style.marginTop = "55px";
+  }
 });
 
 // 點擊1000元籌碼時 投注區域的值都變更為1000
 sddBet1000.addEventListener("click", function () {
-  document.getElementById("sddSpades").value = 1000;
-  document.getElementById("sddBetbig").value = 1000;
-  document.getElementById("sddBet7").value = 1000;
-  document.getElementById("sddBetsmall").value = 1000;
-  document.getElementById("sddHeart").value = 1000;
-  document.getElementById("sddCube").value = 1000;
-  document.getElementById("sddBetodd").value = 1000;
-  document.getElementById("sddBetsdd").value = 1000;
-  document.getElementById("sddBeteven").value = 1000;
-  document.getElementById("sddPlum").value = 1000;
-  // console.log("選定籌碼1000");
-  document.getElementById("sddBet50").style.marginTop="55px"
-  document.getElementById("sddBet100").style.marginTop="55px"
-  document.getElementById("sddBet500").style.marginTop="55px"
-  document.getElementById("sddBet1000").style.marginTop="0px"
-  document.getElementById("sddBet5000").style.marginTop="55px"
+  if (sddBettotal === 0) {
+    alert("請先點擊開始");
+  } else {
+    document.getElementById("sddSpades").value = 1000;
+    document.getElementById("sddBetbig").value = 1000;
+    document.getElementById("sddBet7").value = 1000;
+    document.getElementById("sddBetsmall").value = 1000;
+    document.getElementById("sddHeart").value = 1000;
+    document.getElementById("sddCube").value = 1000;
+    document.getElementById("sddBetodd").value = 1000;
+    document.getElementById("sddBetsdd").value = 1000;
+    document.getElementById("sddBeteven").value = 1000;
+    document.getElementById("sddPlum").value = 1000;
+    // console.log("選定籌碼1000");
+    document.getElementById("sddBet50").style.marginTop = "55px";
+    document.getElementById("sddBet100").style.marginTop = "55px";
+    document.getElementById("sddBet500").style.marginTop = "55px";
+    document.getElementById("sddBet1000").style.marginTop = "0px";
+    document.getElementById("sddBet5000").style.marginTop = "55px";
+  }
 });
 
 // 點擊5000元籌碼時 投注區域的值都變更為5000
 sddBet5000.addEventListener("click", function () {
-  document.getElementById("sddSpades").value = 5000;
-  document.getElementById("sddBetbig").value = 5000;
-  document.getElementById("sddBet7").value = 5000;
-  document.getElementById("sddBetsmall").value = 5000;
-  document.getElementById("sddHeart").value = 5000;
-  document.getElementById("sddCube").value = 5000;
-  document.getElementById("sddBetodd").value = 5000;
-  document.getElementById("sddBetsdd").value = 5000;
-  document.getElementById("sddBeteven").value = 5000;
-  document.getElementById("sddPlum").value = 5000;
-  // console.log("選定籌碼5000");
-  document.getElementById("sddBet50").style.marginTop="55px"
-  document.getElementById("sddBet100").style.marginTop="55px"
-  document.getElementById("sddBet500").style.marginTop="55px"
-  document.getElementById("sddBet1000").style.marginTop="55px"
-  document.getElementById("sddBet5000").style.marginTop="0px"
+  if (sddBettotal === 0) {
+    alert("請先點擊開始");
+  } else {
+    document.getElementById("sddSpades").value = 5000;
+    document.getElementById("sddBetbig").value = 5000;
+    document.getElementById("sddBet7").value = 5000;
+    document.getElementById("sddBetsmall").value = 5000;
+    document.getElementById("sddHeart").value = 5000;
+    document.getElementById("sddCube").value = 5000;
+    document.getElementById("sddBetodd").value = 5000;
+    document.getElementById("sddBetsdd").value = 5000;
+    document.getElementById("sddBeteven").value = 5000;
+    document.getElementById("sddPlum").value = 5000;
+    // console.log("選定籌碼5000");
+    document.getElementById("sddBet50").style.marginTop = "55px";
+    document.getElementById("sddBet100").style.marginTop = "55px";
+    document.getElementById("sddBet500").style.marginTop = "55px";
+    document.getElementById("sddBet1000").style.marginTop = "55px";
+    document.getElementById("sddBet5000").style.marginTop = "0px";
+  }
 });
 
 // 點擊黑桃,投注區域時,將值累加存到,sddSpades_total
 sddSpades.addEventListener("click", function () {
-  if (document.getElementById("sddSpades").value > sddBetmoney) {
+  if (isNaN(document.getElementById("sddSpades").value)) {
+    alert("請先選擇籌碼");
+  } else if (document.getElementById("sddSpades").value > sddBetmoney) {
     alert("餘額不足");
-    // console.log(`黑桃累計投注金額： ${sddSpades_total}`);
   } else if (sddBetmoney > 0) {
     sddSpades_total =
       sddSpades_total + document.getElementById("sddSpades").value;
@@ -364,7 +385,9 @@ sddSpades.addEventListener("click", function () {
 
 // 點擊大,投注區域時,將值累加存到,sddSpades_total
 sddBetbig.addEventListener("click", function () {
-  if (document.getElementById("sddBetbig").value > sddBetmoney) {
+  if (isNaN(document.getElementById("sddBetbig").value)) {
+    alert("請先選擇籌碼");
+  } else if (document.getElementById("sddBetbig").value > sddBetmoney) {
     alert("餘額不足");
   } else if (sddBetmoney > 0) {
     sddBetbig_total =
@@ -381,7 +404,9 @@ sddBetbig.addEventListener("click", function () {
 
 // 點擊幸運7,投注區域時,將值累加存到,sddBet7_total
 sddBet7.addEventListener("click", function () {
-  if (document.getElementById("sddBet7").value > sddBetmoney) {
+  if (isNaN(document.getElementById("sddBet7").value)) {
+    alert("請先選擇籌碼");
+  } else if (document.getElementById("sddBet7").value > sddBetmoney) {
     alert("餘額不足");
   } else if (sddBetmoney > 0) {
     sddBet7_total = sddBet7_total + document.getElementById("sddBet7").value;
@@ -397,7 +422,9 @@ sddBet7.addEventListener("click", function () {
 
 // 點擊小,投注區域時,將值累加存到,sddBetsmall_total
 sddBetsmall.addEventListener("click", function () {
-  if (document.getElementById("sddBetsmall").value > sddBetmoney) {
+  if (isNaN(document.getElementById("sddBetsmall").value)) {
+    alert("請先選擇籌碼");
+  } else if (document.getElementById("sddBetsmall").value > sddBetmoney) {
     alert("餘額不足");
   } else if (sddBetmoney > 0) {
     sddBetsmall_total =
@@ -414,7 +441,9 @@ sddBetsmall.addEventListener("click", function () {
 
 // 點擊紅心,投注區域時,將值累加存到,sddBetsmall_total
 sddHeart.addEventListener("click", function () {
-  if (document.getElementById("sddHeart").value > sddBetmoney) {
+  if (isNaN(document.getElementById("sddHeart").value)) {
+    alert("請先選擇籌碼");
+  } else if (document.getElementById("sddHeart").value > sddBetmoney) {
     alert("餘額不足");
   } else if (sddBetmoney > 0) {
     sddHeart_total = sddHeart_total + document.getElementById("sddHeart").value;
@@ -430,7 +459,9 @@ sddHeart.addEventListener("click", function () {
 
 // 點擊方塊,投注區域時,將值累加存到,sddCube_total
 sddCube.addEventListener("click", function () {
-  if (document.getElementById("sddCube").value > sddBetmoney) {
+  if (isNaN(document.getElementById("sddCube").value)) {
+    alert("請先選擇籌碼");
+  } else if (document.getElementById("sddCube").value > sddBetmoney) {
     alert("餘額不足");
   } else if (sddBetmoney > 0) {
     sddCube_total = sddCube_total + document.getElementById("sddCube").value;
@@ -446,7 +477,9 @@ sddCube.addEventListener("click", function () {
 
 // 點擊單,投注區域時,將值累加存到,sddBetodd_total
 sddBetodd.addEventListener("click", function () {
-  if (document.getElementById("sddBetodd").value > sddBetmoney) {
+  if (isNaN(document.getElementById("sddBetodd").value)) {
+    alert("請先選擇籌碼");
+  } else if (document.getElementById("sddBetodd").value > sddBetmoney) {
     alert("餘額不足");
   } else if (sddBetmoney > 0) {
     sddBetodd_total =
@@ -463,7 +496,9 @@ sddBetodd.addEventListener("click", function () {
 
 // 點擊射龍門,投注區域時,將值累加存到,sddBetsdd_total
 sddBetsdd.addEventListener("click", function () {
-  if (document.getElementById("sddBetsdd").value > sddBetmoney) {
+  if (isNaN(document.getElementById("sddBetsdd").value)) {
+    alert("請先選擇籌碼");
+  } else if (document.getElementById("sddBetsdd").value > sddBetmoney) {
     alert("餘額不足");
   } else if (sddBetmoney > 0) {
     sddBetsdd_total =
@@ -480,7 +515,9 @@ sddBetsdd.addEventListener("click", function () {
 
 // 點擊雙,投注區域時,將值累加存到,sddBeteven_total
 sddBeteven.addEventListener("click", function () {
-  if (document.getElementById("sddBeteven").value > sddBetmoney) {
+  if (isNaN(document.getElementById("sddBeteven").value)) {
+    alert("請先選擇籌碼");
+  } else if (document.getElementById("sddBeteven").value > sddBetmoney) {
     alert("餘額不足");
   } else if (sddBetmoney > 0) {
     sddBeteven_total =
@@ -497,7 +534,9 @@ sddBeteven.addEventListener("click", function () {
 
 // 點擊梅花,投注區域時,將值累加存到,
 sddPlum.addEventListener("click", function () {
-  if (document.getElementById("sddPlum").value > sddBetmoney) {
+  if (isNaN(document.getElementById("sddPlum").value)) {
+    alert("請先選擇籌碼");
+  } else if (document.getElementById("sddPlum").value > sddBetmoney) {
     alert("餘額不足");
   } else if (sddBetmoney > 0) {
     sddPlum_total = sddPlum_total + document.getElementById("sddPlum").value;
