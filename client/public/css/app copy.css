@@ -1865,7 +1865,7 @@ body.modal-open {
     /* background: url(../images/gamelink/bg_circle.png) no-repeat; */
     /* background-color: #000; */
 
-    width: 60%;
+    width: 65%;
     /* height: 615px; */
     /* margin:auto; */
     
@@ -1940,12 +1940,12 @@ height: 80%;
 
 
     position: sticky;
-    top: 20%;
+    top: 0;
 
     display: inline-block;
 
-    width: 40%;
-    height:500px;
+    width: 35%;
+    height:770px;
     padding: 20px;
     /* background-color: #999; */
     font-weight: bolder;
@@ -2006,4 +2006,3 @@ height: 80%;
 .tab_left{
     background-image: url(../images/playground/tab_left.png);
 }
-.game{margin: 1.5rem;}
