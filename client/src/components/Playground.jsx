@@ -273,7 +273,7 @@ class Playground extends Component {
                                 </li> */}
                             </ul>
                         </div>
-                        <div id="tab07" className="tab-inner ui-tabs-panel ui-corner-bottom ui-widget-content" aria-labelledby="ui-id-8"
+                        {/* <div id="tab07" className="tab-inner ui-tabs-panel ui-corner-bottom ui-widget-content" aria-labelledby="ui-id-8"
                             role="tabpanel" aria-hidden="true" style={{ display: 'none' }}>
                             <img src="/images/playground/tab07.png" alt="imgErr" />
                             <img src="/images/playground/tab07-sm1.png" alt="imgErr" className="float" />
@@ -308,7 +308,7 @@ class Playground extends Component {
                                     </div>
                                 </li>
                             </ul>
-                        </div>
+                        </div> */}
 
                     </div>
                 </div>

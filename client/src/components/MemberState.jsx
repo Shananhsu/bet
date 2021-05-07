@@ -26,6 +26,9 @@ const MemberState = (props) => {
     return (
         <React.Fragment>
 
+            {/* {console.log("///memberstate//props////")}
+            {console.log(props)}
+            {console.log("///memberstate//props////")} */}
             <div id="masthead">
 
                 <div className="">
@@ -52,13 +55,13 @@ const MemberState = (props) => {
                                     <b>您好,
                                             <a href="/" >
                                             {/* {console.log(props)} */}
-                                            {props.account}
+                                            {props.memberData.account}
                                         </a>
                                     </b> |
                                         <div id="sf-membermsg-button-00001" style={{ "display": "inline" }}>
                                         <b> 主帳戶餘額 :
                                                 <a >
-                                                {props.balance}
+                                                {props.memberData.balance}
                                             </a>
                                         </b>
                                     </div>

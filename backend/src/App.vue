@@ -1,6 +1,6 @@
 <template>
   <Login @Login="handleLogin" v-if="!isLogin" @session="handleSession" />
-  <SideBar v-if="isLogin" />
+  <SideBar v-if="isLogin" :account="account" />
   <TopBar v-if="isLogin" @logout="handleLogout" />
   <SearchBar v-if="isLogin" @boolen="handleEmit" />
   <Content
@@ -28,6 +28,7 @@ export default {
       closeGame: "",
       isLogin: false,
       session: "",
+      account: "",
     };
   },
 
@@ -41,11 +42,27 @@ export default {
     },
     handleLogin(e) {
       this.isLogin = true;
+      window.location.href = "/";
     },
     handleLogout(e) {
       this.isLogin = !this.isLogin;
-      req.session.data.destroyed();
     },
+  },
+  created() {
+    axios
+      .get("http://127.0.0.1:3001/backend/login")
+      .then((e) => {
+        console.log(e.data);
+        if (e.data === "guest") {
+          this.isLogin = false;
+        } else {
+          this.isLogin = true;
+          this.account = e.data;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 </script>

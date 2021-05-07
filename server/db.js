@@ -1,11 +1,17 @@
 const mysql = require('mysql')
 
+// const conn = mysql.createConnection({
+//     host: "127.0.0.1",
+//     user: "root",
+//     password: "root",
+//     port: 8889,
+//     database: "games"
+// })
 const conn = mysql.createConnection({
-    host: "127.0.0.1",
-    user: "root",
-    password: "root",
-    port: 8889,
-    database: "games"
+    host : "localhost",
+    user : "root",
+    password : "",
+    database : "games",
 })
 
 let query = async function (sql) {

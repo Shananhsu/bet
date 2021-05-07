@@ -5,8 +5,8 @@ import './accountSettingCss.css'
 
     return (
         <div id="sf-membercenter-memberinfo-00002" style ={{"display":"none"}}>
-            <div className="section">
-                <div className="container">
+            {/* <div className="section"> */}
+                {/* <div className="container"> */}
                     <h3 className="title" style={{ "fontSize": "32px" }}>修改會員資料</h3>
 
                     <form id="AccountSettingForm" action="">
@@ -145,8 +145,8 @@ import './accountSettingCss.css'
                     </form> */}
 
                 </div>
-            </div>
-        </div>
+            // </div>
+        // </div>
 
 
 

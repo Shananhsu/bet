@@ -1,7 +1,7 @@
 <template>
   <div id="sideBar">
     <img id="img" src="../assets/OMOG.png" alt="" />
-    <p id="player">Admin Account: {{ session }}</p>
+    <p id="player">Admin Account: {{ account }}</p>
     <button class="sideBtn">報表管理</button>
     <button class="sideBtn">會員管理</button>
   </div>
@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  props: ["session"],
+  props: ["account"],
 };
 </script>
 <style>

@@ -21,6 +21,14 @@ export default {
   methods: {
     Logout() {
       this.$emit("logout", true);
+      axios
+        .get("http://127.0.0.1:3001/backend/logout")
+        .then((e) => {
+          console.log(e);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     },
   },
 };
