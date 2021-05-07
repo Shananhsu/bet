@@ -85,10 +85,16 @@ let pvalue3 = 0;
 let pvalue4 = 0;
 let pvalue5 = 0;
 let pvalue6 = 0;
-// 存取剩下的牌
+// 存取牌
+let resultPc1 = "";
+let resultPc2 = "";
 let resultPc3 = "";
 let resultPc4 = "";
 let resultPc5 = "";
+let resultPc6 = "";
+
+let resultDc1 = "";
+let resultDc2 = "";
 let resultDc3 = "";
 let resultDc4 = "";
 let resultDc5 = "";
@@ -102,6 +108,15 @@ let dpcs = 0;
 // 計算玩家有幾張牌
 let ppcs = 0;
 
+const sendToBackend = () => {
+    axios.post("http://localhost:3001/blackjack/update", {
+        moneyAfter: parseInt(point.innerText),
+        result: result,
+        dealerCards: `${resultDc1},${resultDc2},${resultDc3},${resultDc4},${resultDc5},${resultDc6}`,
+        playerCards: `${resultPc1},${resultPc2},${resultPc3},${resultPc4},${resultPc5},${resultPc6}`,
+        status: `莊家:${dpoints} 玩家:${ppoints} ${status}`,
+    }).then((e) => { console.log(e); })
+}
 
 // 執行判斷1的function
 function checkAce() {
@@ -118,9 +133,11 @@ function checkAce() {
                     playerP.innerText = ppoints;
                     // document.getElementsByClassName("whoWin")[num].innerText = "贏";
                     // document.getElementsByClassName("whoWin")[num].style = "color:red";
+                    result += parseInt(money.innerText) * 2;
                     point.innerText = parseInt(point.innerText) + parseInt(money.innerText) * 3;
                     setTimeout(() => {
                         alert('Black jack 玩家贏');
+                        sendToBackend();
                     }, 200)
                     restart.style.display = "block";
                     openc.disabled = true;
@@ -233,23 +250,23 @@ gameStart.onclick = function () {
             // 用splice扣除發過的牌
             // 莊家開局的第一張牌
             let dsc1 = random(0, randomPick.length - 1);
-            let resultDc1 = Object.keys(randomPick[dsc1]);
+            resultDc1 = Object.keys(randomPick[dsc1]);
             let gdv1 = randomPick.splice(dsc1, 1);
 
 
             // 玩家開局的第一張牌
             let psc1 = random(0, randomPick.length - 1);
-            let resultPc1 = Object.keys(randomPick[psc1]);
+            resultPc1 = Object.keys(randomPick[psc1]);
             let gpv1 = randomPick.splice(psc1, 1);
 
             // 莊家開局的第二張牌
             let dsc2 = random(0, randomPick.length - 1);
-            let resultDc2 = Object.keys(randomPick[dsc2]);
+            resultDc2 = Object.keys(randomPick[dsc2]);
             let gdv2 = randomPick.splice(dsc2, 1);
 
             // 玩家開局的第二張牌
             let psc2 = random(0, randomPick.length - 1);
-            let resultPc2 = Object.keys(randomPick[psc2]);
+            resultPc2 = Object.keys(randomPick[psc2]);
             let gpv2 = randomPick.splice(psc2, 1);
 
             // 發牌
@@ -332,7 +349,8 @@ gameStart.onclick = function () {
 
 // 補牌條件設定
 let times = 0;
-
+let result = 0;
+let status = "";
 let checkBust = function () {
     setTimeout(() => {
         if (ppoints > 21) {
@@ -344,6 +362,9 @@ let checkBust = function () {
             setTimeout(() => {
                 alert('爆牌 莊家贏')
             }, 200)
+            result -= parseInt(money.innerText);
+            status = "莊家贏";
+            sendToBackend();
         }
     }, 200)
 }
@@ -455,11 +476,17 @@ let vic = function () {
             setTimeout(() => {
                 alert(`莊家${dpoints}點 莊家贏`)
             }, 200)
+            result -= parseInt(money.innerText);
+            status = "莊家贏";
+            sendToBackend();
             // document.getElementsByClassName("whoWin")[num].innerText = "輸";
             // document.getElementsByClassName("whoWin")[num].style = "color:green";
         }
         if (dpoints > 21) {
             dealerP.style = "color:red";
+            result += parseInt(money.innerText);
+            status = "玩家贏";
+            sendToBackend();
         }
         if (dpoints < ppoints && ppoints < 22 || dpoints > 21) {
             setTimeout(() => {
@@ -467,15 +494,21 @@ let vic = function () {
             }, 200)
             // document.getElementsByClassName("whoWin")[num].innerText = "贏";
             // document.getElementsByClassName("whoWin")[num].style = "color:red";
+            result += parseInt(money.innerText);
+            status = "玩家贏"
             point.innerText = parseInt(point.innerText) + parseInt(money.innerText) * 2;
+            sendToBackend();
         }
         if (dpoints === ppoints) {
             setTimeout(() => {
                 alert("和局")
             }, 200)
+            result = 0;
+            status = "和局";
             // document.getElementsByClassName("whoWin")[num].innerText = "和";
             // document.getElementsByClassName("whoWin")[num].style = "color:white";
             point.innerText = parseInt(point.innerText) + parseInt(money.innerText);
+            sendToBackend();
         }
         restart.style.display = "block";
     }, 500);
@@ -569,8 +602,8 @@ openc.onclick = function () {
                 }, 300)
             }
         }, 150)
-        cb.style.display = "none";
         vic();
+        cb.style.display = "none";
     }
 }
 
@@ -604,5 +637,7 @@ restart.onclick = function () {
     money.innerText = 0;
     gameReady = 0;
     cardback.style.display = "none";
+    status = "";
+    result = 0;
     reset();
 }

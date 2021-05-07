@@ -20,16 +20,6 @@
 </template>
 
 <script>
-// window.onload = () => {
-//   axios
-//     .get("http://127.0.0.1:3000/fuckguy")
-//     .then((e) => {
-//       console.log(e.data);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// };
 export default {
   data() {
     return {
@@ -43,16 +33,15 @@ export default {
       this.account = account.value;
       this.password = psw.value;
       axios
-        // .post("http://127.0.0.1:3001/backend/login", {
-        .post("http://localhost:3001/backend/login", {
+        .post("http://127.0.0.1:3001/backend/login", {
           account: this.account,
           password: this.password,
         })
         .then((e) => {
-          if (e.data[0] === "1") {
-            this.session = e.data[1];
+          if (e.data === 1) {
+            // this.session = e.data[1];
             this.$emit("Login", true);
-            this.$emit("session", e.data[1]);
+            // this.$emit("session", e.data[1]);
           }
           if (e.data === 0) {
             alert("請檢查帳號或密碼");
