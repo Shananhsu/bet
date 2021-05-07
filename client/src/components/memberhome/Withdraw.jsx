@@ -49,14 +49,14 @@ class Withdraw extends Component {
                                 <div class="form-group">
                                     <label for="start" class="col-md-2 control-label">開始:</label>
                                     <div class="col-md-10">
-                                        <input type="text" id="start" class="form-control input-sm hasDatepicker" name="starttime" value="" autocomplete="off" />
+                                        <input type="text" id="start" class="form-control input-sm hasDatepicker" name="starttime" value="" autoComplete="off" />
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="start" class="col-md-2 control-label">結束:</label>
                                     <div class="col-md-10">
-                                        <input type="text" id="end" class="form-control input-sm hasDatepicker" name="endtime" value="" autocomplete="off" />
+                                        <input type="text" id="end" class="form-control input-sm hasDatepicker" name="endtime" value="" autoComplete="off" />
                                     </div>
                                 </div>
 
