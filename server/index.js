@@ -565,7 +565,7 @@ app.get("/billiard/admin", function (req, res) {
 //////////////////////////
 ////////niuniu/////////////
 app.get("niuniu/fetch", function (req, res) {
-  conn.query(
+  db.query(
     "select * from niuniu_records where id in (select a.maxID from (select max(id) maxID from niuniu_records) a)", [],
     function (err, result) {
       if (err) {
@@ -584,7 +584,7 @@ app.post("niuniu/store", function (req, res) {
   var betTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
   var gameType = req.body.gameType;
 
-  conn.query(
+  db.query(
     "INSERT INTO niuniu_records (account,bets,moneyBefore,moneyAfter,betTime,gameType) VALUES (?,?,?,?,?,?)", [account, bet, moneyBefore, moneyAfter, betTime, gameType], function (err, result) {
       if (err) { throw err } else {
         res.send('ok')
@@ -600,7 +600,7 @@ app.post("niuniu/update", function (req, res) {
   var playerCards = req.body.playerCards;
   var status = req.body.status;
 
-  conn.query(
+  db.query(
     "UPDATE niuniu_records SET moneyAfter = ?, result = ?,dealerCards=?,playerCards=?,status=?  WHERE id IN (SELECT a.maxID FROM (SELECT max(id) maxID FROM niuniu_records) a)",
     [moneyAfter, result, dealerCards, playerCards, status],
     function (err, result) {
@@ -612,7 +612,7 @@ app.post("niuniu/update", function (req, res) {
 })
 
 app.get("/niuniu/select", function (req, res) {
-  conn.query("select * from niuniu_records", [], function (err, result) {
+  db.query("select * from niuniu_records", [], function (err, result) {
     if (err) {
       console.log(JSON.stringify(err));
       return;
