@@ -50,14 +50,10 @@
             constructor() {
                 super();
 
-
-
                 this.rows;
                 this.rowsCount;
                 this.currPage;
                 this.lastPage;
-
-
 
 
                 $.ajax({
@@ -78,48 +74,38 @@
                     }
                 })
 
+                this.changePage = (i) => {
+                    if (i > this.lastPage || i <= 0) { return }
+
+                    $.ajax({
+                        type: "get",
+                        url: `http://localhost:3001/fishShooter/betrecord/${i}`,
+                        data: "",
+                        async: false,
+                        success: (res) => {
+                            this.rows = res.rows;
+                            this.rowsCount = res.total_nums;
+                            this.currPage = parseInt(res.curr_page);
+                            this.lastPage = res.last_page;
+
+                            this.setState({ rows: res.rows })
+                            this.setState({ currPage: parseInt(res.curr_page) })
+                        },
+                        error: function (err) {
+                            console.log(err)
+                        }
+                    })
+                }
+
+
+
+
                 this.state = {
                     rows: this.rows,
-                    currPage: this.currPage,
-                    searchPage:"請輸入欲搜尋頁數"
+                    // pageArr: this.pageArr,
+                    currPage: this.currPage
                 }
-
-
-            } //constructor
-
-            changePage = (i) => {
-                if (i > this.lastPage || i <= 0) { return }
-
-                $.ajax({
-                    type: "get",
-                    url: `http://localhost:3001/fishShooter/betrecord/${i}`,
-                    data: "",
-                    async: false,
-                    success: (res) => {
-                        this.rows = res.rows;
-                        this.rowsCount = res.total_nums;
-                        this.currPage = parseInt(res.curr_page);
-                        this.lastPage = res.last_page;
-
-                        this.setState({ rows: res.rows })
-                        this.setState({ currPage: parseInt(res.curr_page) })
-                    },
-                    error: function (err) {
-                        console.log(err)
-                    }
-                })
-            } //changePage
-            changeValue = (e) => {
-    
-                if (e.target.id == "toPageInput") {
-                    this.setState({
-                        searchPage : e.target.value
-                    })           
-                }
-         
             }
-
-
             render() {
                 this.tdArr = []
                 for (let i = 0; i < this.state.rows.length; i++) {
@@ -193,12 +179,10 @@
                         <button className="pageBtn" onClick={() => { this.changePage(this.state.currPage + 1) }}>＞</button>
                         <button className="pageBtn" onClick={() => { this.changePage(this.lastPage) }}>＞＞{this.lastPage}</button>
                         
-                        
-                        <input id="toPageInput" type="text" onChange={this.changeValue} value={this.state.searchPage} />
-                        
-                        <button className="pageBtn" onClick={() => { this.changePage(this.state.searchPage) }}>指定頁數</button>
+                        <form action="">
+                            <input id="toPageInput"  type="text"  />
                             
-                       
+                        </form>
 
 
 
@@ -206,7 +190,7 @@
                     </React.Fragment>
                 );
             }
-        } //render
+        }
         ReactDOM.render(
             <FishRecord />,
             document.getElementById('root')

@@ -1054,7 +1054,7 @@
             let memberIdText = new textObj("txt", 1050, 950, "50px", "black", `會員帳號:${account}`);
             let ammTitle = new textObj("txt", 1050, 1030, "50px", "black", "錢包餘額:");
             let amm = new textObj("num", 1270, 1030, "50px", "black", memberMoneyBag);
-            let gameover = new textObj("num", canvas.width / 2, canvas.height / 2, '100px', 'white', 'GAMEOVER')
+            let ammNotEnough = new textObj("textBtn", canvas.width / 2, canvas.height / 2, '100px', 'white', '銀彈不足')
 
 
             // 遊戲物件
@@ -1102,6 +1102,9 @@
 
             let keyboardKeys = [] //鍵盤控制要用的陣列
 
+            let shellCost = 1; //當前砲彈的費用，當錢包於和小於這個值的時候，無法發射
+            
+
             // 以上為function gameRuning需要的變數---------------------------------------------
 
             // 更新畫面
@@ -1118,6 +1121,7 @@
                 ammTitle.reNew();
                 memberIdText.reNew();
                 amm.reNew(); //彈藥量
+        
                 shell01Btn.reNew();
                 shell02Btn.reNew();
                 shell03Btn.reNew();
@@ -1153,19 +1157,19 @@
                     // 生成並發射砲彈
                     if (keyboardKeys && keyboardKeys[32]) {
                         // cooldown的setTimeout控制發射冷卻時間
-                        if (ctxFrames >= cooldownOK && amm.text > 0) {
+                        if (ctxFrames >= cooldownOK && amm.text >= shellCost) {
                             cooldownOK = ctxFrames + cooldownTime;
                             shellsarr[shellsArrIndex] = window.chooseShell();
                             cannonSound.load();
                             cannonSound.play();
-                            // 彈藥歸零檢定，若為零無法射擊並開始結束遊戲倒數
-                            if (amm.text <= 0) {
-                                overCountdown.theLastShellIndex = shellsArrIndex;
-                                overCountdown.over();
-                            }
                             shellsArrIndex++;
                             // 控制場上最多有多少砲彈
-                            if (shellsArrIndex > 20) shellsArrIndex = 0;
+                            if (shellsArrIndex > 30) shellsArrIndex = 0;
+                       
+                        }
+                        if(ctxFrames >= cooldownOK && amm.text < shellCost){
+                            ammNotEnough.reNew()
+                        
                         }
                     }// 生成並發射砲彈
                 }// 檢查持續控制判定
@@ -1173,27 +1177,7 @@
                 startBtn.startID = requestAnimationFrame(gameRuning)
             } // gameRuning
 
-            // 彈藥歸零 遊戲結束倒數
-            let overCountdown = {
-                countdownTime: 60,
-                theLastShellIndex: 0, //這個值會在上面的彈藥歸零檢定再次賦值
-                over: function () {
-                    if (shellsarr[overCountdown.theLastShellIndex].y <= 0) {
-                        if (overCountdown.countdownTime <= 0) {
-                            cancelAnimationFrame(startBtn.startID)
-                            gameover.reNew(); // 顯示gameover文字
-                            return
-                        }
-                        overCountdown.countdownTime--;
-                        // 第一次在上面以overCountdown.over呼叫時是60，之後用raf呼叫時是undefined
-                        // 第二次以後的this指的是什麼? //是window，為什麼指到window去了
-                        // console.log(this.countdownTime);
-                    }
-                    requestAnimationFrame(overCountdown.over)
-                }
-            }
-
-
+      
 
             // 鍵盤控制 事件
 
@@ -1207,6 +1191,7 @@
                 if (e.keyCode == 49) {
                     for (x of shellBtnArr) x.color = "gray"
                     shell01Btn.color = "red";
+                    shellCost = 1;
                     window.chooseShell = function () {
                         return new Shell01();
                     }
@@ -1214,6 +1199,7 @@
                 if (e.keyCode == 50) {
                     for (x of shellBtnArr) x.color = "gray"
                     shell02Btn.color = "red";
+                    shellCost = 5;
                     window.chooseShell = function () {
                         return new Shell02();
                     }
@@ -1221,6 +1207,7 @@
                 if (e.keyCode == 51) {
                     for (x of shellBtnArr) x.color = "gray"
                     shell03Btn.color = "red";
+                    shellCost = 8;
                     window.chooseShell = function () {
                         return new Shell03();
                     }
@@ -1321,9 +1308,7 @@
             // 上面是mousedown 事件用的函式----------------------
 
             $(window).on({ //離開視窗時暫停
-                "blur": function () {
-                    if (overCountdown.countdownTime <= 0) return // 如果遊戲倒數計時<=0 就不跑後面的東西
-                 
+                "blur": function () {                 
                     window.cancelAnimationFrame(startBtn.startID)
                     startBtn.actived = true
                     startBtn.reNew();
