@@ -1,6 +1,11 @@
 <template>
   <Login @Login="handleLogin" v-if="!isLogin" @session="handleSession" />
-  <SideBar v-if="isLogin" :account="account" />
+  <SideBar
+    v-if="isLogin"
+    :account="account"
+    @clickReport="handleReport"
+    @clickMember="handleReport"
+  />
   <TopBar v-if="isLogin" @logout="handleLogout" />
   <SearchBar v-if="isLogin" @boolen="handleEmit" />
   <Content
@@ -9,6 +14,8 @@
     @close="handleEmit"
     :closeGame="closeGame"
   />
+  <Member v-if="isLogin" :report="report" @toShowModal="handleModal" />
+  <Modal v-if="showModal" @backdrop="handleModal" />
 </template>
 
 <script>
@@ -17,9 +24,11 @@ import SideBar from "./components/SideBar.vue";
 import TopBar from "./components/TopBar.vue";
 import SearchBar from "./components/SearchBar.vue";
 import Content from "./components/Content.vue";
+import Member from "./components/Member.vue";
+import Modal from "./components/Modal.vue";
 export default {
   name: "App",
-  components: { Login, SideBar, TopBar, SearchBar, Content },
+  components: { Login, SideBar, TopBar, SearchBar, Content, Member, Modal },
   data() {
     return {
       // 控制玩家列表開關
@@ -29,10 +38,18 @@ export default {
       isLogin: false,
       session: "",
       account: "",
+      report: true,
+      showModal: false,
     };
   },
 
   methods: {
+    handleModal(e) {
+      this.showModal = !this.showModal;
+    },
+    handleReport(e) {
+      this.report = e;
+    },
     handleEmit(e) {
       this.bool = e;
       this.closeGame = !e;
@@ -42,7 +59,7 @@ export default {
     },
     handleLogin(e) {
       this.isLogin = true;
-      window.location.href = "/";
+      // window.location.href = "/";
     },
     handleLogout(e) {
       this.isLogin = !this.isLogin;
