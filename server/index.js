@@ -623,20 +623,11 @@ app.get("/niuniu/select", function (req, res) {
 //////////////////////////////////////////
 
 ////////////////// Backend//////////////////
-
-
-
 app.use(bodyParser.json());
 
 const { query } = require('./db')
 
 app.use((req, res, next) => {
-  // console.log(`1-1 ${app.locals.apple}`);
-  // app.locals.apple = 'cat';
-  // console.log(`1-2 ${app.locals.apple}`);
-  // app.locals.acc = req.session.acc;
-  // console.log(req.session.acc, 'next acc');
-  console.log(app.locals.acc, 'next locals');
   if (!app.locals.acc) {
     req.session.acc = "guest";
     app.locals.acc = "guest"
@@ -646,11 +637,6 @@ app.use((req, res, next) => {
 
 // 後台登入
 app.post("/backend/login", async (req, res) => {
-
-  // console.log(`2- ${app.locals.apple}`);
-  // app.locals.apple = 'dog';
-  // console.log(`3- ${app.locals.apple}`);
-
   let backendAccount = req.body.account;
   let backendPassword = req.body.password;
   let re = await query(`select account, password from member_information where account='${backendAccount}'`);
@@ -662,12 +648,9 @@ app.post("/backend/login", async (req, res) => {
     if (accResult === backendAccount) {
       if (backendPassword === pswResult) {
         console.log('login success');
-
         req.session.acc = backendAccount;
         app.locals.acc = req.session.acc;
-        // let data = ['1', req.session.acc];
         res.send('1');
-        console.log(req.session.acc, 'session inside');
       } else {
         console.log('passwrong is wrong');
         res.send('0')
@@ -678,10 +661,6 @@ app.post("/backend/login", async (req, res) => {
   }
 })
 app.get("/backend/login", (req, res) => {
-  // console.log(`4- ${app.locals.apple}`);
-  // console.log(req.session.acc, 'session1');
-  console.log(app.locals.acc, 'session outside');
-  // if (req.session.acc != 'guest') {
   if (req.session.acc == 'guest') {
     res.send(app.locals.acc)
   } else {
@@ -693,15 +672,12 @@ app.get('/backend/logout', (req, res) => {
   req.session.destroy();
   app.locals.acc = "";
 })
-// app.get('/backend/loginStatus', (req, res) => {
-//   res.send(req.session.data);
-// })
 
 // 後台資料
 let sqlQuery = "";
 let gameList = "";
-// let account = "";
 let item = ['betTime', 'id', 'gameType', 'object', 'bets', 'moneyBefore', 'status', 'result', 'moneyAfter'];
+
 // 縮短sql語句
 function handleSql(event) {
   let apple = item.map(e => {
@@ -710,6 +686,7 @@ function handleSql(event) {
   });
   return apple.toString();
 }
+
 app.post('/backend/gameList', async (req, res) => {
   let sqlQuery1 = "";
   let sqlQuery2 = "";
@@ -889,41 +866,29 @@ app.post('/backend/gameList', async (req, res) => {
     default:
       break;
   }
-  // console.log(1);
 })
 
 // get會員資料
 app.get('/backend/getMember', async (req, res) => {
-  // console.log(sqlQuery, "member");
   let re = await query("select * from member_information where account='steven'", []);
-  // console.log(2);
   res.send(JSON.stringify(re));
 })
 
 // get總下注金額
 app.get('/backend/getTotalBets', async (req, res) => {
-  // console.log(sqlQuery, "bets");
   let re = await query(`select sum(bets) bet from (${sqlQuery}) aaa`, []);
-  // console.log(JSON.stringify(re[0].bet), "bets")
-  // console.log(3);
   res.send(JSON.stringify(re[0].bet));
 })
 
 // get注單數量
 app.get('/backend/getCount', async (req, res) => {
-  // console.log(sqlQuery, "counts");
   let re = await query(`select count(*) cnt from (${sqlQuery}) bbb`, []);
-  // console.log(JSON.stringify(re[0].cnt), "counts");
-  // console.log(4);
   res.send(JSON.stringify(re[0].cnt));
 })
 
 // get輸贏總金額
 app.get('/backend/getResults', async (req, res) => {
-  // console.log(sqlQuery, "results");
   let re = await query(`select sum(result) results from (${sqlQuery}) ccc`, []);
-  // console.log(JSON.stringify(re[0].results), "results");
-  // console.log(5);
   res.send(JSON.stringify(re[0].results));
 })
 
@@ -931,6 +896,18 @@ app.get('/backend/getResults', async (req, res) => {
 app.get('/backend/fetchGame', async (req, res) => {
   let re = await query(sqlQuery, []);
   res.send(JSON.stringify(re));
+})
+
+// get會員資訊
+app.get('/backend/member', async (req, res) => {
+  let re = await query('select * from member_information', []);
+  res.send(JSON.stringify(re))
+})
+// get會員錢包
+app.get('/backend/getThirdPartyMoney', async (req, res) => {
+  let re = await query('select * from thirdpart_moneybag', []);
+  console.log(JSON.stringify(re));
+  res.send(JSON.stringify(re[0]));
 })
 
 //////////////////////////////////////////
