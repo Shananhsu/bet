@@ -12,9 +12,6 @@
         <input id="psw" type="password" placeholder="管理者密碼" required />
       </div>
     </div>
-    <!-- <div class="field">
-        <label class="checkbox"><input type="checkbox" />記住我</label>
-      </div> -->
     <button id="login" @click="handleLogin">登入</button>
   </div>
 </template>
