@@ -6,8 +6,7 @@ class Logo extends Component {
             <React.Fragment>
                 <div className="auto_left">
                     <a className="logo" href = "/">
-                        <img src="images/logo/logo2.png" alt="logo_no_show"                        
-                        />
+                        <img src="images/logo/newlogo.png" alt="logo_no_show"/>
                     </a>
                 </div>
             </React.Fragment>
