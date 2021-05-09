@@ -231,7 +231,31 @@ app.post("/api/transform", (req, res) => {
 })
 
 
+//////////////存款////////////////
+app.post("/api/deposit", (req, res) => {
+  console.log('in api deposit')
+  const account = req.body.account;
+  const depositway = req.body.depositway;
+  const point = req.body.point;
+  const deposittime = req.body.deposittime;
 
+  const sqlregister = "insert into  deposit_table ( account  ,depositway ,point ,deposittime,confirmflag  ) values(?,?,?,?,?) "
+  const identifyID = 0
+
+  db.query(sqlregister,
+      [account, depositway, point, deposittime, 0], (err, result) => {
+        if (err) {
+          res.send({
+            status: 'FAILURE',
+            err: err
+          });
+        } else {
+          res.send({
+            status: 'SUCCESS'
+          });
+        }
+      })
+  })
 
 
 /////////////////遊戲區//////////////////////////////////

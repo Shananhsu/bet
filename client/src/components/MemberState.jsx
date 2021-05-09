@@ -18,6 +18,7 @@ const MemberState = (props) => {
     const logoutButtonClick = () => {
         Axios.get('http://localhost:3001/api/logout').then((res) => {
             // props.close('logout')
+            // console.log(props)
             props.props.history.go(0);
         })
     }
