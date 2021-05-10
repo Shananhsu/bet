@@ -5661,7 +5661,25 @@ justify-content: center;}
             text-align:center;
             position:relative;
             }
+            #gameindextop{text-align: center;
+            vertical-align: middle;}
+        #money{font-size: 2.5rem;
+            color: white;
+            margin: 3rem;
+        }
         
+            #gameresultbut{
+                font-size: 2.5rem;
+                color: white;
+                margin: 3rem;
+            background-color: rgb(185, 185, 185);
+            height: 4.122rem;
+            }
+            #gameresultbut:hover{background-color: #7e7e7e;
+            transform: scale(1.1);}
+            
+        #gameArea{ 
+            box-shadow: #666 0 0 100px;}
 
 
 @import url("//unpkg.com/element-ui@2.15.1/lib/theme-chalk/index.css");
