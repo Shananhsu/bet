@@ -5,6 +5,7 @@ let gameReady = 0;
 
 // 一點籌碼圖片馬上新增到array
 function handleChip(num) {
+    readyc.style.webkitAnimationPlayState = "running";
     // 籌碼最多不能超過7倍下注金額
     if ((parseInt(point.innerText) + parseInt(money.innerText)) - (parseInt(money.innerText) + num) * 7 > 0) {
         if (gameReady === 0) {
@@ -56,9 +57,11 @@ resetc.onclick = reset;
 // 點擊確認後無法再更動籌碼
 readyc.onclick = function ready() {
     if (money.innerText > 0) {
+        readyc.style.animationIterationCount = "1";
         gameReady++;
         resetc.disabled = true;
         readyc.disabled = true;
+        gameStart.style.webkitAnimationPlayState = "running";
     } else {
         alert('下注金額不能低於0');
         gameReady = 0;
@@ -111,8 +114,11 @@ let select = 0;
 gameStart.onclick = function () {
     if (money.innerText > 0) {
         if (readyc.disabled === true) {
+            gameStart.style.animationIterationCount = "1";
+            openc.style.webkitAnimationPlayState = "running";
             gameStart.disabled = true;
             openc.disabled = false;
+            restart.disabled = true;
 
             randomPickCards = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10', 'c11', 'c12', 'c13', 'd1', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8', 'd9', 'd10', 'd11', 'd12', 'd13', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7', 'h8', 'h9', 'h10', 'h11', 'h12', 'h13', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10', 's11', 's12', 's13'];
             randomPickPoints = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
@@ -165,6 +171,9 @@ gameStart.onclick = function () {
                 }
 
                 document.getElementById(`dc${i}`).innerHTML = `<img src="img/card/${dcard}.png">`;
+                dealerscards.style.display = "none";
+                document.getElementById(`dcb${i}`).innerHTML = `<img src="img/card/bc1.jpg">`;
+                dealerscardback.style.display = "inline-block";
                 document.getElementById(`pc${i}`).innerHTML = `<img src="img/card/${pcard}.png">`;
                 dpoints = dvalue1 + dvalue2 + dvalue3 + dvalue4 + dvalue5;
                 ppoints = pvalue1 + pvalue2 + pvalue3 + pvalue4 + pvalue5;
@@ -197,17 +206,6 @@ gameStart.onclick = function () {
             }).then(function (e) {
                 console.log(e);
             })
-
-            // 發牌從一張慢慢變五張
-            // 開牌動畫
-            // $("#openc").click(function () {
-            //     $("#dealerscards").animate({ width: "590px" }, "slow");
-            //     $("#dealerscards img").css("position", "static");
-            //     $("#playerscards").animate({ width: "590px" }, "slow");
-            // })
-            // 可選兩張或三張
-
-
         }
     } else {
         alert('請先下注');
@@ -332,10 +330,15 @@ function playerWin() {
 // 選擇的牌
 let total = 0;
 openc.onclick = function () {
-    if (select !== 0) {
+    if (select > 1 && select < 4) {
+        restart.disabled = false;
+        openc.style.animationIterationCount = "1";
+        restart.style.webkitAnimationPlayState = "running";
         for (i = 0; i < temp.length; i++) {
             total += temp[i];
         }
+        dealerscards.style.display = "inline-block";
+        dealerscardback.style.display = "none";
         // 判斷點數
         if (temp.length === 3) {
             if (total % 10 === 0) {
@@ -556,6 +559,8 @@ openc.onclick = function () {
 }
 
 restart.onclick = function () {
+    restart.style.animationIterationCount = "1";
+
     // 自行判斷i到多少然後結束迴圈
     for (i = 1; i <= 5; i++) {
         document.getElementById(`dc${i}`).innerHTML = "";
@@ -587,4 +592,16 @@ restart.onclick = function () {
     psuits = [];
     result = 0;
     reset();
+
+    // gameStart.style.animationIterationCount = "infinite";
+    // gameStart.style.webkitAnimationPlayState = "paused";
+
+    // openc.style.animationIterationCount = "infinite";
+    // openc.style.webkitAnimationPlayState = "paused";
+
+    // readyc.style.animationIterationCount = "infinite";
+    // readyc.style.webkitAnimationPlayState = "paused";
+
+    // restart.style.animationIterationCount = "infinite";
+    // restart.style.webkitAnimationPlayState = "paused";
 }

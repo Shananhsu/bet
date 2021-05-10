@@ -33,7 +33,7 @@ body {
 }
 
 #dpp {
-    top: 5.5%;
+    top: 7%;
 }
 
 #ppp {
@@ -41,9 +41,9 @@ body {
 }
 
 /* 撲克牌設定 */
-#dealerscards {
+#dealerscards,#dealerscardback {
     position: absolute;
-    top: 5%;
+    top: 7%;
     left: 30%;
     /* width: 130px; */
     width: 600px;
@@ -63,31 +63,32 @@ body {
     display: inline-block;
 }
 
-#playerscards div {
+#playerscards div,#dealerscards div,#dealerscardback div {
     position: absolute;
 }
 
-#pc1 {
+#pc1,#dc1,#dcb1 {
     left: 0;
 }
 
-#pc2 {
+#pc2,#dc2,#dcb2 {
     margin-left: 115px;
 }
 
-#pc3 {
+#pc3,#dc3,#dcb3 {
     left: 230px;
 }
 
-#pc4 {
+#pc4,#dc4,#dcb4 {
     left: 345px;
 }
 
-#pc5 {
+#pc5,#dc5,#dcb5 {
     left: 460px;
 }
 
 #dealerscards img,
+#dealerscardback img,
 #playerscards img {
     width: 100px;
     height: 150px;
@@ -101,6 +102,18 @@ body {
     border-radius: 10px;
     cursor: pointer;
 }
+
+/* 按鈕閃爍animation */
+#gameStart, #openc, #readyc, #restart{
+    animation: greenPulse 1s backwards; 
+    animation-iteration-count: infinite;
+    animation-play-state: paused;
+}
+@keyframes greenPulse {
+    0% { background-color: #000000; -webkit-box-shadow: 0 0 9px #333; }
+    100% { background-color: rgb(78, 76, 76); -webkit-box-shadow: 0 0 18px #181818; }
+  }
+
 
 /* 遊戲按鈕 */
 #gameStart {
@@ -118,7 +131,15 @@ body {
     color: white;
     border: 1px solid white;
     font-size: 16px;
+/* animation */
+    /* animation-name: greenPulse;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: none;
+    animation-play-state: paused; */
 }
+
+
 
 #openc {
     outline: none;
@@ -135,7 +156,15 @@ body {
     color: white;
     border: 1px solid white;
     font-size: 16px;
+
+    /* animation */
+    /* animation-name: greenPulse;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: none;
+    animation-play-state: paused; */
 }
+
 
 #restart {
     cursor: pointer;
@@ -152,6 +181,25 @@ body {
     outline: none;
     font-size: 16px;
     border: 1px solid white;
+}
+
+#back{
+    position: absolute;
+    right: 0;
+    /* bottom: 11%; */
+    top: 0;
+    background-color: black;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+#back:hover {
+    background-color: rgb(78, 76, 76);
+}
+
+#back a{
+   text-decoration: none;
+   color: white;
 }
 
 #gameStart:hover,
@@ -190,6 +238,7 @@ body {
     position: absolute;
     right: -6px;
 }
+
 .OK {
     outline: none;
     cursor: pointer;
