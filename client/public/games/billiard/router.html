@@ -10,7 +10,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
 
@@ -69,16 +70,16 @@
 
 
 
-    <div id="routerdiv"class="routerindex">
-    
-      
-        </div>
-        
-        
+    <div id="routerdiv" class="routerindex">
 
-        <div id="root">
 
-        </div>
+    </div>
+
+
+
+    <div id="root">
+
+    </div>
 
 
 
@@ -110,7 +111,7 @@
 
 
 
-      
+
 
         <script type="text/babel">
 
@@ -120,60 +121,65 @@
 
 
 
-            class GameResult extends React.Component{ 
-                constructor(){
-super();
-this.rows;
-this.rowsCount;
-this.currPage;
-this.lastPage;
+            class GameResult extends React.Component {
+                constructor() {
+                    super();
+                    this.rows;
+                    this.rowsCount;
+                    this.currPage;
+                    this.lastPage;
 
-$.ajax({
-type:"get",
-url:"http://localhost:3001/gameresult/1",
-data: "",
-async: false,
-success: (res) => {
-this.rows = res.rows;
-this.rowsCount = res.total_nums;
-this.currPage = res.curr_page;
-this.lastPage = res.last_page;
+                    $.ajax({
+                        type: "get",
+                        url: "http://localhost:3001/gameresult/1",
+                        data: "",
+                        async: false,
+                        success: (res) => {
+                            this.rows = res.rows;
+                            this.rowsCount = res.total_nums;
+                            this.currPage = res.curr_page;
+                            this.lastPage = res.last_page;
 
 
-},
-error : function (err) { 
-    
-console.log(err)
+                        },
+                        error: function (err) {
+
+                            console.log(err)
+                        }
+                    })
+
+                    this.changePage = (i) => {
+
+if (i % 1 !== 0 || i <= 0 || i > this.lastPage) {
+    this.setState({
+        searchPage: "輸入頁數",
+    })
+    return
 }
-})
+                        $.ajax({
+                            type: "get",
+                            url: `http://localhost:3001/gameresult/${i}`,
+                            data: "",
+                            success: (res) => {
+                                this.rows = res.rows;
+                                this.rowsCount = res.total_nums;
+                                this.currPage = res.curr_page;
+                                this.lastPage = res.last_page;
 
-this.changePage = (i) => {
-if(i <= 0){i = 1};
-if(i >= this.lastPage){ i =this.lastPage};
-$.ajax({
-    type: "get",
-    url: `http://localhost:3001/gameresult/${i}`,
-    data: "",
-success: (res) =>{
-    this.rows = res.rows;
-    this.rowsCount = res.total_nums;
-    this.currPage = res.curr_page;
-    this.lastPage = res.last_page;
-
-    this.setState({rows: res.rows})
-    this.setState({currPage:res.curr_page})
-    console.log(this.state.currPage);
-},
-error: function(err){
-    console.log(err)
-}
+                                this.setState({ rows: res.rows })
+                                this.setState({ currPage: res.curr_page })
+                                console.log(this.state.currPage);
+                            },
+                            error: function (err) {
+                                console.log(err)
+                            }
 
 
 
 
-})
+                        })
 
-}
+                    }
 
 
 
@@ -184,106 +190,133 @@ error: function(err){
 
 
 
-       this.state = {
-rows:this.rows,
-pageArr: this.pageArr,
-currPage: this.currPage
+                    this.state = {
+                        rows: this.rows,
+                        currPage: this.currPage,
+                        searchPage: "搜尋頁數",
+                        searchId: "請輸入欲搜尋注單編號"
+                    }
+                    console.log(this.state.pageArr);
+                }
+
+                changeInputValue = (e) => {
+
+                    if (e.target.id == "toPageInput") {
+                        this.setState({
+                            searchPage: e.target.value
+                        })
+                    }
+
+                }// changeValue
+                cleanValue = () => {
+                    this.setState({
+                        searchPage: "",
+                    })
+                }
 
 
 
-       }    
-    console.log(this.state.pageArr);
-    }
-                
-                
-                render(){
+
+                render() {
 
                     this.pageArr = []
-// for(let i =1;i<= this.lastPage;i++){
-for (let i = this.currPage-2; i <= (parseInt(this.currPage)+2); i++){
+                    // for(let i =1;i<= this.lastPage;i++){
+                    for (let i = this.currPage - 2; i <= (parseInt(this.currPage) + 2); i++) {
 
-if(i<=0) continue
-if(i>this.lastPage)continue
+                        if (i <= 0) continue
+                        if (i > this.lastPage) continue
 
 
 
-if(i == this.currPage){
-    this.pageArr.push(
-        <button style={{backgroundColor:"#534a4abb"}} className ="lolbut" key = {i} onClick={() => {this.changePage(i)}} >{i}</button>
-    )
-continue
-}
+                        if (i == this.currPage) {
+                            this.pageArr.push(
+                                <button style={{ backgroundColor: "#534a4abb" }} className="lolbut" key={i} onClick={() => { this.changePage(i) }} >{i}</button>
+                            )
+                            continue
+                        }
 
-    
-    
-    this.pageArr.push(
-        <button className ="lolbut" key = {i} onClick={() => {this.changePage(i)}} >{i}</button>
-    )
-}
+
+
+                        this.pageArr.push(
+                            <button className="lolbut" key={i} onClick={() => { this.changePage(i) }} >{i}</button>
+                        )
+                    }
 
 
 
 
                     this.tdArr = []
-                for (let i = 0; i < this.state.rows.length; i++) {
-                    this.tdArr.push(
-                        <tr key={i}>
-                            <td>{this.state.rows[i].id}</td>
-                            <td>{this.state.rows[i].betTime}</td>
-                            <td>{this.state.rows[i].account}</td>
-                            <td>{this.state.rows[i].gameType}</td>
-                            <td>{this.state.rows[i].object}</td>
-                            <td>{this.state.rows[i].bets}</td>
-                            <td>{this.state.rows[i].moneyBefore}</td>
-                            <td>{this.state.rows[i].status}</td>
-                            <td>{this.state.rows[i].result}</td>
-                            <td>{this.state.rows[i].moneyAfter}</td>
-                        </tr>
+                    for (let i = 0; i < this.state.rows.length; i++) {
+                        this.tdArr.push(
+                            <tr key={i}>
+                                <td>{this.state.rows[i].id}</td>
+                                <td>{this.state.rows[i].betTime}</td>
+                                <td>{this.state.rows[i].account}</td>
+                                <td>{this.state.rows[i].gameType}</td>
+                                <td>{this.state.rows[i].object}</td>
+                                <td>{this.state.rows[i].bets}</td>
+                                <td>{this.state.rows[i].moneyBefore}</td>
+                                <td>{this.state.rows[i].status}</td>
+                                <td>{this.state.rows[i].result}</td>
+                                <td>{this.state.rows[i].moneyAfter}</td>
+                            </tr>
+                        )
+                    }
+
+
+
+
+
+
+
+
+
+
+                    return (
+                        <React.Fragment>
+                            <table class="routerindex">
+                                <thead>
+                                    <tr className="routertr">
+                                        <th>序號</th>
+                                        <th>會員帳號</th>
+                                        <th>遊戲時間</th>
+                                        <th>遊戲項目</th>
+                                        <th>投注項目</th>
+                                        <th>投注金額</th>
+                                        <th>投注前餘額</th>
+                                        <th>輸贏結果</th>
+                                        <th>輸贏金額</th>
+                                        <th>投注後餘額</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="gamehistory" className="routertbody">
+
+                                    {this.tdArr}
+                                </tbody>
+
+                            </table>
+
+
+                            <div class="pagebuttondiv">
+                                <button className="lolbut" onClick={() => { this.changePage(1) }}>1</button>
+                                <button className="lolbut" onClick={() => { this.changePage(this.currPage - 1) }}>＜</button>
+                                {this.pageArr}
+                                <button className="lolbut" onClick={() => { this.changePage(parseInt(this.currPage) + 1) }}>＞</button>
+                                <button className="lolbut" onClick={() => { this.changePage(this.lastPage) }}>{this.lastPage}</button>
+
+                                <input id="toPageInput" className="searchBar" type="text" value={this.state.searchPage}
+                                    onChange={this.changeInputValue}
+                                    onClick={this.cleanValue} />
+                                <button id="searchPageBtn" className="searchBtn" onClick={() => { this.changePage(this.state.searchPage) }}>搜尋</button>
+
+
+
+                            </div>                       </React.Fragment>
                     )
                 }
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    return(
-            <React.Fragment>
-                <table class="routerindex">
-            <thead>
-                <tr className="routertr">
-                    <th>序號</th>
-                    <th>會員帳號</th>
-                    <th>遊戲時間</th>
-                    <th>遊戲項目</th>
-                    <th>投注項目</th>
-                    <th>投注金額</th>
-                    <th>投注前餘額</th>
-                    <th>輸贏結果</th>
-                    <th>輸贏金額</th>
-                    <th>投注後餘額</th>
-                </tr>
-            </thead>
-            <tbody id="gamehistory" className="routertbody">
-              
-                {this.tdArr}
-            </tbody>
+            } ReactDOM.render(
 
-        </table>
-
-
-<div class="pagebuttondiv">
-    <button className = "lolbut" onClick={() => {this.changePage(this.currPage -1)}}>＜</button>
-    {this.pageArr}
-    <button className = "lolbut" onClick={() => {this.changePage(parseInt(this.currPage) +1)}}>＞</button>
-    </div>            </React.Fragment>
-            ) } } ReactDOM.render(
-
-            <GameResult/>, document.getElementById('root') );
+                <GameResult />, document.getElementById('root'));
 
         </script>
 

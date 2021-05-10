@@ -505,7 +505,7 @@ SELECT COUNT(*) AS COUNT FROM fishshooter_betrecord;
 /////////////////////////////////
 /////////////billiard////////////
 
-app.post("/billiard/gameStart", function (req, res) {
+app.post("/gameStart", function(req, res) {
   // 投注項目/金額
   var postbeforemoney = req.body.postbeforemoney;
   var postbetmoney = req.body.postbetmoney;
@@ -513,55 +513,85 @@ app.post("/billiard/gameStart", function (req, res) {
   var postaftermoney = req.body.postaftermoney;
   var postbetproject = req.body.postbetproject;
   var postbetresult = req.body.postbetresult;
+  var postplaygameid = req.body.postplaygameid;
+  var posttime = req.body.posttime;
 
 
   db.query(
-    //會員帳號,累計投注項目金額,總投注額
-    "INSERT INTO billiard_ball (beforemoney, betmoney, account, aftermoney, betproject, betresult) VALUES(?,?,?,?,?,?)",
-    //會員帳號,累計投注項目金額,總投注額
-    [postbeforemoney, postbetmoney, postaccount, postaftermoney, postbetproject, postbetresult],
-    function (err, result) {
-      if (err) {
-        throw err;
-      } else {
-        res.send('anthing')
+      //會員帳號,累計投注項目金額,總投注額
+      "INSERT INTO billiard_ball (moneyBefore, bets, account, moneyAfter, object, result, gameType, betTime) VALUES(?,?,?,?,?,?,?,?)",
+      //會員帳號,累計投注項目金額,總投注額
+      [postbeforemoney, postbetmoney, postaccount, postaftermoney, postbetproject, postbetresult, postplaygameid, posttime],
+      function(err, result) {
+          if (err) {
+              throw err;
+          } else {
+              res.send('anthing')
+          }
       }
-    }
   );
 });
 
 
-app.post("/billiard/gameafter", function (req, res) {
+app.post("/gameafter", function(req, res) {
   var postaftermoney = req.body.postaftermoney;
   var postgameresult = req.body.postgameresult;
 
   db.query(
-    "UPDATE billiard_ball SET aftermoney = ?, gameresult = ? WHERE id IN (SELECT a.maxID FROM (SELECT max(id) maxID FROM billiard_ball) a) ",
-    [postaftermoney, postgameresult],
-    function (err, result) {
-      if (err) {
-        throw err;
-      } else {
-        res.send("ok231232132133213123123");
+      "UPDATE billiard_ball SET moneyAfter = ?, status = ? WHERE id IN (SELECT a.maxID FROM (SELECT max(id) maxID FROM billiard_ball) a) ", [postaftermoney, postgameresult],
+      function(err, result) {
+          if (err) {
+              throw err;
+          } else {
+              res.send("ok231232132133213123123");
+          }
       }
-    }
   );
 
 });
 
 
 // // 重資料庫取得
-app.get("/billiard/admin", function (req, res) {
-  db.query(
-    // "SELECT * FROM sddGamehistory WHERE id IN (SELECT a.maxID FROM (SELECT max(id) maxID FROM sddGamehistory) a)",
-    "SELECT * FROM billiard_ball",
-    [],
-    function (err, result) {
-      // if(err){throw err};
-      // res.send(JSON.stringify(result[0]));
-      res.send(JSON.stringify(result));
-    });
+app.get("/admin", function(req, res) {
+ db.query(
+      // "SELECT * FROM sddGamehistory WHERE id IN (SELECT a.maxID FROM (SELECT max(id) maxID FROM sddGamehistory) a)",
+      "SELECT * FROM billiard_ball", [],
+      function(err, result) {
+          // if(err){throw err};
+          // res.send(JSON.stringify(result[0]));
+          res.send(JSON.stringify(result));
+      });
 });
+
+
+app.get("/gameresult/:page([0-9]+)",function(req, res) {
+let page = req.params.page;
+
+// 每頁顯示資料筆數
+let nums_per_page =5;
+let offset = (page - 1)*nums_per_page;
+sql=
+// 從資料庫撈幾筆資料
+`SELECT*FROM billiard_ball LIMIT ${offset},${nums_per_page};
+
+SELECT COUNT(*) AS COUNT FROM billiard_ball;
+`
+
+db.query(
+  sql,
+  function(err, data){
+      let last_page = Math.ceil(data[1][0].COUNT / nums_per_page)
+      res.send({
+          rows: data[0],
+          total_nums: data[1][0].COUNT,
+          curr_page: page,
+          last_page:last_page
+      });
+      if(err){console.log(err);}}
+)
+
+
+})
 
 //////////////////////////
 ////////niuniu/////////////
