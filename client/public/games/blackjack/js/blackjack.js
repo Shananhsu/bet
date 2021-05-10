@@ -5,6 +5,7 @@ let gameReady = 0;
 
 // 一點籌碼圖片馬上新增到array
 function handleChip(num) {
+    readyc.style.webkitAnimationPlayState = "running";
     // 籌碼最多不能超過2倍下注金額
     if (parseInt(point.innerText) > 0 && parseInt(money.innerText) < parseInt(point.innerText)) {
         if (gameReady === 0) {
@@ -55,6 +56,8 @@ resetc.onclick = reset;
 // 點擊確認後無法再更動籌碼
 readyc.onclick = function ready() {
     if (money.innerText > 0) {
+        readyc.style.animationIterationCount = "1";
+        gameStart.style.webkitAnimationPlayState = "running";
         gameReady++;
         resetc.disabled = true;
         readyc.disabled = true;
@@ -185,6 +188,9 @@ gameStart.onclick = function () {
     if (money.innerText > 0) {
         if (readyc.disabled = true) {
             gameStart.disabled = true;
+            gameStart.style.animationIterationCount = "1";
+            add.style.webkitAnimationPlayState = "running";
+            openc.style.webkitAnimationPlayState = "running";
             // 使用object key-value
             randomPick = [
                 { c1: 1 },
@@ -359,6 +365,9 @@ let checkBust = function () {
             // document.getElementsByClassName("whoWin")[num].style = "color:green";
             restart.style.display = "block";
             openc.disabled = true;
+            add.style.animationIterationCount = "1";
+            openc.style.animationIterationCount = "1";
+            restart.style.webkitAnimationPlayState = "running";
             setTimeout(() => {
                 alert('爆牌 莊家贏')
             }, 200)
@@ -372,6 +381,7 @@ let checkBust = function () {
 // 玩家加牌
 add.onclick = function () {
     if (gameStart.disabled = true) {
+        openc.style.webkitAnimationPlayState = "running";
         if (times === 0 && ppoints < 21) {
             let psc3 = random(0, randomPick.length - 1);
             resultPc3 = Object.keys(randomPick[psc3]);
@@ -510,18 +520,20 @@ let vic = function () {
             point.innerText = parseInt(point.innerText) + parseInt(money.innerText);
             sendToBackend();
         }
-        restart.style.display = "block";
     }, 500);
 }
 
 
 // 開牌後做莊家開牌特效
 openc.onclick = function () {
+    add.style.animationIterationCount = "1";
     if (ppoints > 0 && openc.disabled != true) {
         openc.disabled = true;
         if (dpcs < 3) {
             dealerP.innerText = dpoints;
         }
+        openc.style.animationIterationCount = "1";
+        restart.style.webkitAnimationPlayState = "running";
         // 莊家自動補牌
         setTimeout(() => {
             if (dpoints < 17 || dpoints <= parseInt(pvalue2) + parseInt(pvalue3)) {
@@ -609,6 +621,7 @@ openc.onclick = function () {
 
 
 restart.onclick = function () {
+    restart.style.animationIterationCount = "1";
     // 自行判斷i到多少然後結束迴圈
     for (i = 1; i <= dpcs; i++) {
         var obj = document.getElementById(`dc${i}`);
@@ -623,6 +636,8 @@ restart.onclick = function () {
 
     dealerP.style.color = "white";
     playerP.style.color = "white";
+    dealerP.innerText = 0;
+    playerP.innerText = 0;
     resetc.disabled = false;
     readyc.disabled = false;
     gameStart.disabled = false;
