@@ -37,10 +37,10 @@ const MemberState = (props) => {
                         <div className="col-xs-1 auto_left">
 
                         </div>
-                        <div className="col-xs-11 auto_left" style={{ "float": "inherit" }}>
+                        <div className="col-xs-12 auto_left" style={{ "float": "inherit" }}>
                             <div className="auth" style={{ "float": "right" }}>
                                 <div>
-                                    <div style={{ "width": "300px", "float": "left" }}>
+                                    <div style={{ "width": "150px", "float": "left" }}>
                                         <a className="btn btn-sm btn-danger glyphicon glyphicon-log-out " onClick={logoutButtonClick}
                                             style={{ "marginTop": "4px" }}></a>
                                         {/* <a className="btn btn-sm btn-primary membercenter glyphicon glyphicon-home" href="/memberinfo" */}
@@ -51,8 +51,8 @@ const MemberState = (props) => {
                                         </Modal>
                                     </div>
                                 </div>
-                                <div className="info"
-                                    style={{ "float": "right", "marginLeft": "150px", "marginTop": "-24px" }}>
+                                <div className="info_member"
+                                    style={{ "float": "right",  "marginTop": "5px" ,"fontSize":"18px"}}>
                                     <b>您好,
                                             <a href="/" >
                                             {/* {console.log(props)} */}

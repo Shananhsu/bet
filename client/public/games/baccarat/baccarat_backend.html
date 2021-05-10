@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>SddBank</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        axios.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8';
+        axios.defaults.crossDomain = true;
+        axios.defaults.withCredentials = true;  //设置cross跨域 并设置访问权限 允许跨域携带cookie信息
+        axios.defaults.headers.common['Authorization'] = ''; // 设置请求头为 Authorization
+
+    </script>
+</head>
+<style>
+    #sddContainer {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+<body>
+
+    <div id="baccarat_container" class="container-fluid">
+        <table class="row-sm-12 table table-dark table-hover">
+            <thead>
+                <tr class="Listtitle" style="width: 100%;">
+                    <th>序號</th>
+                    <th>遊戲館別</th>
+                    <th>會員帳號</th>
+                    <th>遊戲時間</th>
+                    <th>投注項目</th>
+                    <th>投注金額</th>
+                    <th>遊戲前錢包餘額</th>
+                    <th>中獎資訊</th>
+                    <th>輸贏結果</th>
+                    <th>結算餘額</th>
+                </tr>
+            </thead>
+            <tbody v-for="(history, index) in newsList">
+                <tr>
+                    <td>{{history.game_id}}</td>
+                    <td>{{"百家樂遊戲"}}</td>
+                    <td>{{history.account}}</td>
+                    <td>{{history.betTime}}</td>
+                    <td>{{history.bet[0]['value']}}</td>
+                    <td>{{history.bet[0]["priceNum"]}}</td>
+                    <td>{{history.balance}}</td>
+                    <!-- <td>{{history.moneyBefore}}</td>
+                    <td>{{history.status}}</td>
+                    <td>{{history.result}}</td>
+                    <td>{{history.moneyAfter}}</td> -->
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+
+        var newsApp = new Vue({
+            el: "#baccarat_container",
+            data: {
+                testData: "OK",
+                newsList: [
+                ]
+            },
+            created() {
+                axios.get("http://localhost:3001/login").then((response) => {
+                    // console.log("///////axio/////////")
+                    // console.log(response)
+                    if (response.data.loggedIn == true) {
+                        userName = (response.data.user[0].account);
+                        axios.post("http://localhost:3001/baccarat/gamelog", {
+                            account: userName
+                        })
+                            .then((e) => { 
+                                // console.log(e.data[0].bet)
+                                 e.data[0].bet=JSON.parse(e.data[0].bet)
+                                newsApp.newsList = e.data })
+                            // .then((e)=>{console.log(e.data)})
+                            .catch((err) => { console.log(err) })
+                    }
+                    else {
+                        alert(" 請登入後再進行遊戲。");
+                        window.location.href = 'http://localhost:3000/';
+                    }
+                });
+            }
+        });
+        
+
+    </script>
+</body>
+
+</html>

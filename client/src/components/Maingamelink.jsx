@@ -47,6 +47,11 @@ class Maingamelink extends Component {
                                 <img src="/images/gamelink/baccarat.jpg" />百家樂
                             </a>
 
+                            {/* <a className="col-sm-3 col-xs-6 game" href="./games/dicegame/index.html"
+                                target="game" data-category="" data-sub_category="">
+                                <img src="/images/gamelink/dicegame.jpg" />骰子遊戲
+                            </a> */}
+
                         </div>
                     </div>
                 </div>
