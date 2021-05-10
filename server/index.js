@@ -565,19 +565,21 @@ app.get("/billiard/admin", function (req, res) {
 
 //////////////////////////
 ////////niuniu/////////////
-app.get("niuniu/fetch", function (req, res) {
+app.get("/niuniu/fetch", function (req, res) {
   db.query(
     "select * from niuniu_records where id in (select a.maxID from (select max(id) maxID from niuniu_records) a)", [],
     function (err, result) {
       if (err) {
         console.log(JSON.stringify(err));
         return;
+      } else {
+        res.send(JSON.stringify(result[0]))
       }
     }
   )
 })
 
-app.post("niuniu/store", function (req, res) {
+app.post("/niuniu/store", function (req, res) {
   var account = req.body.account;
   var bet = req.body.bet;
   var moneyBefore = req.body.moneyBefore;
@@ -594,7 +596,7 @@ app.post("niuniu/store", function (req, res) {
   )
 })
 
-app.post("niuniu/update", function (req, res) {
+app.post("/niuniu/update", function (req, res) {
   var moneyAfter = req.body.moneyAfter;
   var result = req.body.result;
   var dealerCards = req.body.dealerCards;
