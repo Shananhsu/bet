@@ -10,7 +10,7 @@ import { render } from "react-dom";
 import $ from "jquery";
 import { MyContext } from '../../commons/context-manager';
 import AccountSetting from './AccountSetting';
-
+import DepositPoint from "./Depositpoint"
 
 const Memberbanner = (props) => {
 
@@ -73,7 +73,7 @@ const Memberbanner = (props) => {
                     <div className="main">
                         <div className="col-sm-2 membernav">
                             <ul className="list-group">
-                                <li className="list-group-item modalUseing" aria-controls="saving" onClick={clickComponent}>
+                                <li className="list-group-item modalUseing" aria-controls="sf-membercenter-depositpoint-00002" onClick={clickComponent}>
                                     {/* <a href="/trademoney/saving"> */}
                                     <a >
                                         <span className="icon glyphicon glyphicon-usd"></span>
@@ -142,6 +142,7 @@ const Memberbanner = (props) => {
                                 <Tradepoint />
                                 <Verifyphotoinfo />
                                 <AccountSetting />
+                                <DepositPoint account={props.props.memberData.account}/>
                                 <Withdraw />
                             </MyContext.Provider>
                         </div>

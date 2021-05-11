@@ -328,3 +328,26 @@
 #sf-membercenter-profitloss-00002 thead th:last-child { border-right: none; }
 #sf-membercenter-profitloss-00002 th, #sf-membercenter-profitloss-00002 td { border: solid 1px #9D875A; border-top: none; border-bottom: none; }
 #sf-membercenter-profitloss-00002 tr:nth-child(even) { background-color: #212121;}
+
+
+/* depositpoint */
+#sf-membercenter-depositpoint-00002 .resultAndBetdetailShow { cursor: pointer; color: red; text-decoration: underline; }
+#sf-membercenter-depositpoint-00002 .resultAndBetdetail { display: none; }
+#sf-membercenter-depositpoint-00002 .submit { float: right; background-image: linear-gradient(to top, #596A46, #86A06B); }
+#sf-membercenter-depositpoint-00002 input[type='text'], #sf-membercenter-querybetlog-00002 select { border-radius: 0; }
+#sf-membercenter-depositpoint-00002 .panel { background-color: transparent; border-color: transparent; }
+#sf-membercenter-depositpoint-00002 .panel-heading { background-color: transparent; color: #9EBC7D; border-color: #9EBC7D; font-size: 16px; }
+#sf-membercenter-depositpoint-00002 label { color: #fff; text-align: left; }
+#sf-membercenter-depositpoint-00002 .table { color: #fff; background-color: #000; border: solid 1px #9D875A; }
+#sf-membercenter-depositpoint-00002 thead { background-color: #9D875A; }
+#sf-membercenter-depositpoint-00002 thead th { border-right: solid 1px #fff; }
+#sf-membercenter-depositpoint-00002 thead th:last-child { border-right: none; }
+#sf-membercenter-depositpoint-00002 th, #sf-membercenter-querybetlog-00002 td { border: solid 1px #9D875A; border-top: none; border-bottom: none; }
+#sf-membercenter-depositpoint-00002 tr:nth-child(even) { background-color: #212121;}
+#sf-membercenter-depositpoint-00002 .logdata .panel-body { overflow-x: visible; overflow-y: auto; }
+#sf-membercenter-depositpoint-00002 .logdata table { width: 1600px; }
+#sf-membercenter-depositpoint-00002 .pagination > .active > a { background-color: #9D8659; border-color: #9D8659; }
+/* depositpoint-end */
+
+
+

@@ -37,7 +37,7 @@ const db = mysql.createPool({
 
 app.use(express.json());
 app.use(cors({
-  origin: ["http://localhost:3000", "http://localhost:8080"],
+  origin: ["http://localhost:3000", "http://localhost:8080","http://localhost:3000/games/baccarat/index.html"],
   methods: ["GET", "POST", "PUT"],
   credentials: true
 }));
@@ -51,10 +51,17 @@ app.use(
     resave: false,
     cookie: {
       expires: 60 * 60 * 2400,
+      user: "",
+      loggedIn : false,
     }
   }));
 
-
+// app.use((req, res, next) => {
+//     res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, Accept, Content-Type, Cookie")
+//     res.setHeader("Access-Control-Allow-Origin", "*")
+//     res.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, TRACE, OPTIONS, PATCH")
+//     next();
+// })
 
 
 
@@ -102,14 +109,29 @@ app.post("/api/register", (req, res) => {
 
 })
 
+// app.get('/games/baccarat/index.html', (req, res) => {
+//   const cookie = req.get('Cookie')
+//   console.log(cookie)
+//   // res.render('test')
+//  })
 //會員登入
 app.get("/login", (req, res) => {
+  // console.log('///req.session.user////')
+  // console.log(req.session)
+  // console.log('///req.session.user////')
+  // console.log(req.session.user)
+  // console.log('///req.session.cookie////')
+  // console.log(req.session.cookie)
+  // console.log('////end///')
   if (req.session.user) {
+    
     res.send({ loggedIn: true, user: req.session.user });
   } else {
     res.send({ loggedIn: false });
   }
 });
+
+
 
 app.post("/api/login", (req, res) => {
   console.log('in api login')
@@ -135,12 +157,17 @@ app.post("/api/login", (req, res) => {
         bcrypt.compare(password, result[0].password, (error, response) => {
           if (response) {
             // 不使用session了
+            req.session.cookie.user = result[0].account;
             req.session.user = result;
-            console.log('store')
-            console.log(req.session.user)
-            console.log('store end')
-            res.send(result);
-
+            // console.log('store')
+            // console.log(req.session.user)
+            // console.log('store end')
+            // res.send(result);
+            // res.setHeader('Set-Cookie',req.session.user)
+            // console.log("/////login session////")
+            // console.log(req.session)
+            res.send(result)
+            
             // jwtoken可以傳特定的資料即可 暫時給定account balance
             // const {account,balance} = result[0]
 
@@ -180,6 +207,8 @@ app.get('/api/logout', function (req, res) {
 app.post("/api/getBalance", (req, res) => {
   // console.log('in api getbalance')
   const account = req.body.account;
+  // console.log('///////account////////')
+  // console.log(req.body)
   const sqllogin = "select * from  thirdpart_moneybag where account=? ;"
   db.query(sqllogin,
     // [account  ,password ],
@@ -193,9 +222,9 @@ app.post("/api/getBalance", (req, res) => {
       }
       // console.log("//////")
       // console.log(result)
-      if (result.length > 0) {
+      // if (result.length > 0) {
         res.send(result);
-      }
+      // }
     })
 })
 // 
@@ -231,7 +260,31 @@ app.post("/api/transform", (req, res) => {
 })
 
 
+//////////////存款////////////////
+app.post("/api/deposit", (req, res) => {
+  console.log('in api deposit')
+  const account = req.body.account;
+  const depositway = req.body.depositway;
+  const point = req.body.point;
+  const deposittime = req.body.deposittime;
 
+  const sqlregister = "insert into  deposit_table ( account  ,depositway ,point ,deposittime,confirmflag  ) values(?,?,?,?,?) "
+  const identifyID = 0
+  console.log([account, depositway, point, deposittime])
+  db.query(sqlregister,
+      [account, depositway, point, deposittime, 0], (err, result) => {
+        if (err) {
+          res.send({
+            status: 'FAILURE',
+            err: err
+          });
+        } else {
+          res.send({
+            status: 'SUCCESS'
+          });
+        }
+      })
+  })
 
 
 /////////////////遊戲區//////////////////////////////////
@@ -505,7 +558,7 @@ SELECT COUNT(*) AS COUNT FROM fishshooter_betrecord;
 /////////////////////////////////
 /////////////billiard////////////
 
-app.post("/billiard/gameStart", function (req, res) {
+app.post("/gameStart", function(req, res) {
   // 投注項目/金額
   var postbeforemoney = req.body.postbeforemoney;
   var postbetmoney = req.body.postbetmoney;
@@ -513,71 +566,103 @@ app.post("/billiard/gameStart", function (req, res) {
   var postaftermoney = req.body.postaftermoney;
   var postbetproject = req.body.postbetproject;
   var postbetresult = req.body.postbetresult;
+  var postplaygameid = req.body.postplaygameid;
+  var posttime = req.body.posttime;
 
 
   db.query(
-    //會員帳號,累計投注項目金額,總投注額
-    "INSERT INTO billiard_ball (beforemoney, betmoney, account, aftermoney, betproject, betresult) VALUES(?,?,?,?,?,?)",
-    //會員帳號,累計投注項目金額,總投注額
-    [postbeforemoney, postbetmoney, postaccount, postaftermoney, postbetproject, postbetresult],
-    function (err, result) {
-      if (err) {
-        throw err;
-      } else {
-        res.send('anthing')
+      //會員帳號,累計投注項目金額,總投注額
+      "INSERT INTO billiard_ball (moneyBefore, bets, account, moneyAfter, object, result, gameType, betTime) VALUES(?,?,?,?,?,?,?,?)",
+      //會員帳號,累計投注項目金額,總投注額
+      [postbeforemoney, postbetmoney, postaccount, postaftermoney, postbetproject, postbetresult, postplaygameid, posttime],
+      function(err, result) {
+          if (err) {
+              throw err;
+          } else {
+              res.send('anthing')
+          }
       }
-    }
   );
 });
 
 
-app.post("/billiard/gameafter", function (req, res) {
+app.post("/gameafter", function(req, res) {
   var postaftermoney = req.body.postaftermoney;
   var postgameresult = req.body.postgameresult;
 
   db.query(
-    "UPDATE billiard_ball SET aftermoney = ?, gameresult = ? WHERE id IN (SELECT a.maxID FROM (SELECT max(id) maxID FROM billiard_ball) a) ",
-    [postaftermoney, postgameresult],
-    function (err, result) {
-      if (err) {
-        throw err;
-      } else {
-        res.send("ok231232132133213123123");
+      "UPDATE billiard_ball SET moneyAfter = ?, status = ? WHERE id IN (SELECT a.maxID FROM (SELECT max(id) maxID FROM billiard_ball) a) ", [postaftermoney, postgameresult],
+      function(err, result) {
+          if (err) {
+              throw err;
+          } else {
+              res.send("ok231232132133213123123");
+          }
       }
-    }
   );
 
 });
 
 
 // // 重資料庫取得
-app.get("/billiard/admin", function (req, res) {
-  db.query(
-    // "SELECT * FROM sddGamehistory WHERE id IN (SELECT a.maxID FROM (SELECT max(id) maxID FROM sddGamehistory) a)",
-    "SELECT * FROM billiard_ball",
-    [],
-    function (err, result) {
-      // if(err){throw err};
-      // res.send(JSON.stringify(result[0]));
-      res.send(JSON.stringify(result));
-    });
+app.get("/admin", function(req, res) {
+ db.query(
+      // "SELECT * FROM sddGamehistory WHERE id IN (SELECT a.maxID FROM (SELECT max(id) maxID FROM sddGamehistory) a)",
+      "SELECT * FROM billiard_ball", [],
+      function(err, result) {
+          // if(err){throw err};
+          // res.send(JSON.stringify(result[0]));
+          res.send(JSON.stringify(result));
+      });
 });
+
+
+app.get("/gameresult/:page([0-9]+)",function(req, res) {
+let page = req.params.page;
+
+// 每頁顯示資料筆數
+let nums_per_page =5;
+let offset = (page - 1)*nums_per_page;
+sql=
+// 從資料庫撈幾筆資料
+`SELECT*FROM billiard_ball LIMIT ${offset},${nums_per_page};
+
+SELECT COUNT(*) AS COUNT FROM billiard_ball;
+`
+
+db.query(
+  sql,
+  function(err, data){
+      let last_page = Math.ceil(data[1][0].COUNT / nums_per_page)
+      res.send({
+          rows: data[0],
+          total_nums: data[1][0].COUNT,
+          curr_page: page,
+          last_page:last_page
+      });
+      if(err){console.log(err);}}
+)
+
+
+})
 
 //////////////////////////
 ////////niuniu/////////////
-app.get("niuniu/fetch", function (req, res) {
+app.get("/niuniu/fetch", function (req, res) {
   db.query(
     "select * from niuniu_records where id in (select a.maxID from (select max(id) maxID from niuniu_records) a)", [],
     function (err, result) {
       if (err) {
         console.log(JSON.stringify(err));
         return;
+      } else {
+        res.send(JSON.stringify(result[0]))
       }
     }
   )
 })
 
-app.post("niuniu/store", function (req, res) {
+app.post("/niuniu/store", function (req, res) {
   var account = req.body.account;
   var bet = req.body.bet;
   var moneyBefore = req.body.moneyBefore;
@@ -594,7 +679,7 @@ app.post("niuniu/store", function (req, res) {
   )
 })
 
-app.post("niuniu/update", function (req, res) {
+app.post("/niuniu/update", function (req, res) {
   var moneyAfter = req.body.moneyAfter;
   var result = req.body.result;
   var dealerCards = req.body.dealerCards;
@@ -622,6 +707,80 @@ app.get("/niuniu/select", function (req, res) {
   })
 })
 //////////////////////////////////////////
+/////////////////baccarat/////////////////////////
+
+app.post("/baccarat/playlist", function (req, res) {
+  // console.log(req.body)
+
+  var account = req.body.account;
+  var bet = req.body.bet;
+  var betTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
+  var balance = req.body.balance;
+  var playerHand1 = req.body.playerHand1;
+  var playerHand2 = req.body.playerHand2;
+  var playerHand3 = req.body.playerHand3;
+  var bankerHand1 = req.body.bankerHand1;
+  var bankerHand2 = req.body.bankerHand2;
+  var bankerHand3 = req.body.bankerHand3;
+  var playerScore = req.body.playerScore;
+  var bankerScore = req.body.bankerScore;
+  var isPlayerPairs = req.body.isPlayerPairs;
+  var isBankPairs = req.body.isBankPairs;
+  var isBig = req.body.isBig;
+  var winner = req.body.winner;
+  
+  db.query(
+    "INSERT INTO baccarat_gamelog"+
+    "(account,bet,betTime,balance,playerHand1,playerHand2,playerHand3,"+
+    "bankerHand1,bankerHand2,bankerHand3,playerScore,bankerScore,"+
+    "isPlayerPairs,isBankPairs,isBig,winner) "+
+    "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", 
+    [account,bet,betTime,balance,playerHand1,playerHand2,playerHand3,
+      bankerHand1,bankerHand2,bankerHand3,playerScore,bankerScore,
+      isPlayerPairs,isBankPairs,isBig,winner], 
+      function (err, result) {
+      if (err) { throw err } else {
+        res.send('ok')
+      }
+    }
+  )
+}) 
+
+app.post("/baccarat/moneyUpdate", function (req, res) {
+  let account = req.body.account;
+  let balance = req.body.balance;
+  db.query(
+    "UPDATE thirdpart_moneybag SET baccarat_balance = ?  WHERE account =?",
+    [balance, account],
+    function (err, result) {
+      if (err) { throw err } else {
+        res.send('ok')
+      }
+    }
+  )
+})
+
+app.post("/baccarat/gamelog", function (req, res) {
+  // console.log("gamelog in")
+  // console.log(req.body)
+  let account = req.body.account;
+  db.query(
+    "SELECT *  from baccarat_gamelog  WHERE account =?",
+    [account],
+    function (err, result) {
+      if (err) { throw err } else {
+        res.send(result)
+      }
+    }
+  )
+})
+
+
+
+
+
+
+////////////////////baccarat_end////////////////////////////
 
 ////////////////// Backend//////////////////
 app.use(bodyParser.json());
@@ -910,6 +1069,8 @@ app.get('/backend/getThirdPartyMoney', async (req, res) => {
   console.log(JSON.stringify(re));
   res.send(JSON.stringify(re[0]));
 })
+
+
 
 //////////////////////////////////////////
 app.listen(3001, () => {

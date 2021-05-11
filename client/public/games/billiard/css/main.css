@@ -5642,10 +5642,44 @@ justify-content: center;}
         margin:0.4em auto;
         }
         }
-
-
-
-
+        #toPageInput{width: 8%;
+            margin:1rem;
+        background-color: #7a7a7a}
+        #searchPageBtn{
+            display:inline-block;
+            padding:0em, 1.4em;
+            margin:1rem;
+            border-radius:0.15em;
+            box-sizing: border-box;
+            text-decoration:none;
+            font-family:'Roboto',sans-serif;
+            text-transform:uppercase;
+            font-weight:400;
+            color:#000000;
+            background-color:#ccccccce;
+            box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+            text-align:center;
+            position:relative;
+            }
+            #gameindextop{text-align: center;
+            vertical-align: middle;}
+        #money{font-size: 2.5rem;
+            color: white;
+            margin: 3rem;
+        }
+        
+            #gameresultbut{
+                font-size: 2.5rem;
+                color: white;
+                margin: 3rem;
+            background-color: rgb(185, 185, 185);
+            height: 4.122rem;
+            }
+            #gameresultbut:hover{background-color: #7e7e7e;
+            transform: scale(1.1);}
+            
+        #gameArea{ 
+            box-shadow: #666 0 0 100px;}
 
 
 @import url("//unpkg.com/element-ui@2.15.1/lib/theme-chalk/index.css");

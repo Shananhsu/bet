@@ -8,7 +8,7 @@ import $ from "jquery"
 
 const Point = (props) => {
     // 會員資料顯示
-    const [account, setAccount] = useState("");
+    // const [account, setAccount] = useState("");
     const [balance, setBalance] = useState("");
     const [sdd_balance, setSdd_balance] = useState("");
     const [blackjack_balance, setBlackjack_balance] = useState("");
@@ -98,7 +98,7 @@ const Point = (props) => {
 
                 }).then((res) => {
                     console.log(res)
-                    if (res.data.affectedRows != 0) {
+                    if (res.data.affectedRows !== 0) {
                         alert("轉帳成功")
                     }
                     else { alert("其他錯誤,請洽詢客服") }

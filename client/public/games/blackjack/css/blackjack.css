@@ -176,6 +176,17 @@ tr {
 }
 
 /* 遊戲按鈕 */
+/* 按鈕閃爍animation */
+#gameStart, #openc, #readyc, #restart,#add{
+    animation: greenPulse 1s backwards; 
+    animation-iteration-count: infinite;
+    animation-play-state: paused;
+}
+@keyframes greenPulse {
+    0% { background-color: #000000; -webkit-box-shadow: 0 0 9px #333; }
+    100% { background-color: rgb(78, 76, 76); -webkit-box-shadow: 0 0 18px #181818; }
+  }
+
 #gameStart {
     outline: none;
     cursor: pointer;

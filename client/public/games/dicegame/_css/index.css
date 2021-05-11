@@ -1,0 +1,755 @@
+/* .outerWrap { */
+
+body {
+    /* height: 900px; */
+    /* width: 1100px; */
+    width: 100%;
+    height: 600px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+    /* background-color: red; */
+    background-repeat: no-repeat;
+    background-image: url("../IMG/dice-background.png");
+}
+
+.gambleblock {
+    position: absolute;
+    height: 400px;
+    width: 900px;
+    top: 150px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.gambletable {
+    position: relative;
+    height: 300px;
+    width: 800px;
+    top: 20px;
+    /* bottom: 0; */
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+table,
+tr,
+td {
+    border: 1px solid yellow;
+    border-collapse: collapse;
+    margin-top: 2px;
+    /* position: relative; */
+}
+
+table {
+    /* position: absolute; */
+    background-color: rgb(4, 117, 4);
+    border-radius: 10px;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+td {
+    width: auto;
+    height: auto;
+}
+
+
+/* 4個角改為圓圈 */
+
+tr:first-child td:first-child {
+    border-top-left-radius: 10px;
+}
+
+tr:first-child td:last-child {
+    border-top-right-radius: 10px;
+    /* background-color: red; */
+}
+
+tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+.bigandsmall {
+    font-size: 72pt;
+    color: yellow;
+    text-align: center;
+    margin: 0;
+}
+
+.numbers {
+    margin: 0;
+    color: yellow;
+    font-size: 18pt;
+    text-align: center;
+}
+
+[class^=threesmae] {
+    background-color: rgb(4, 75, 4);
+    text-align: center;
+}
+
+.howmuchnumber {
+    color: yellow;
+    font-size: 14pt;
+    text-align: center;
+    background-color: rgb(4, 75, 4);
+}
+
+.odds {
+    color: white;
+    text-align: center;
+    margin: 0;
+}
+
+.otherwords {
+    color: darkkhaki;
+    text-align: center;
+}
+
+.numberdice {
+    width: 30px;
+}
+
+.threesamepic {
+    width: 40px;
+}
+
+#centerodds {
+    height: 40px;
+}
+
+
+/* tempchips */
+
+.TempChips1 {
+    width: 46px;
+    height: 42px;
+    line-height: 42px;
+    font-size: 16px;
+    text-align: center;
+    background-image: url('../IMG/chips.png');
+    background-size: 462px;
+    background-repeat: no-repeat;
+    background-position: 0 0px;
+    pointer-events: none
+}
+
+.TempChips5 {
+    width: 46px;
+    height: 42px;
+    line-height: 42px;
+    font-size: 16px;
+    text-align: center;
+    background-image: url('../IMG/chips.png');
+    background-size: 462px;
+    background-repeat: no-repeat;
+    background-position: -60px 0px;
+    pointer-events: none
+}
+
+.TempChips10 {
+    width: 46px;
+    height: 42px;
+    line-height: 42px;
+    font-size: 16px;
+    text-align: center;
+    background-image: url('../IMG/chips.png');
+    background-size: 462px;
+    background-repeat: no-repeat;
+    background-position: -118px 0px;
+    pointer-events: none
+}
+
+.TempChips20 {
+    width: 46px;
+    height: 42px;
+    line-height: 42px;
+    font-size: 16px;
+    text-align: center;
+    background-image: url('../IMG/chips.png');
+    background-size: 462px;
+    background-repeat: no-repeat;
+    background-position: -179px 0px;
+    pointer-events: none
+}
+
+.TempChips50 {
+    width: 46px;
+    height: 42px;
+    line-height: 42px;
+    font-size: 16px;
+    text-align: center;
+    background-image: url('../IMG/chips.png');
+    background-size: 462px;
+    background-repeat: no-repeat;
+    background-position: -238px 0px;
+    pointer-events: none;
+}
+
+.TempChips100 {
+    width: 46px;
+    height: 42px;
+    line-height: 42px;
+    font-size: 16px;
+    text-align: center;
+    background-image: url('../IMG/chips.png');
+    background-size: 462px;
+    background-repeat: no-repeat;
+    background-position: -297px 0px;
+    pointer-events: none;
+}
+
+.TempChips1000 {
+    width: 46px;
+    height: 42px;
+    line-height: 42px;
+    font-size: 16px;
+    text-align: center;
+    background-image: url('../IMG/chips.png');
+    background-size: 462px;
+    background-repeat: no-repeat;
+    background-position: -356px 0px;
+    pointer-events: none;
+}
+
+.TempChips5000 {
+    width: 46px;
+    height: 42px;
+    line-height: 42px;
+    font-size: 16px;
+    text-align: center;
+    background-image: url('../IMG/chips.png');
+    background-size: 462px;
+    background-repeat: no-repeat;
+    background-position: -416px 0px;
+    pointer-events: none;
+}
+
+
+/* 我是籌碼 */
+
+.chips {
+    background-color: rgb(2, 0, 31);
+    position: absolute;
+    /* left: 0; */
+    right: 0;
+    top: 0;
+    bottom: 0px;
+    margin: auto;
+    font-size: 0;
+    text-align: center;
+    width: 400px;
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 10px;
+}
+
+.chips .chip {
+    display: inline-block;
+    width: 46px;
+    height: 42px;
+    line-height: 42px;
+    font-size: 16px;
+    text-align: center;
+    background-image: url('../IMG/chips.png');
+    background-size: 462px;
+    background-repeat: no-repeat;
+    top: -10px;
+    position: relative;
+}
+
+.chips .chip.chip1 {
+    background-position: 0 -52px;
+}
+
+
+/* 滑鼠經過的時候位置 */
+
+.chips .chip.chip1.on,
+.chips .chip.chip1:hover {
+    background-position: 0 0px;
+    top: -21px;
+}
+
+.chips .chip.chip5 {
+    background-position: -60px -52px;
+}
+
+.chips .chip.chip5.on,
+.chips .chip.chip5:hover {
+    top: -21px;
+    background-position: -60px 0px;
+}
+
+.chips .chip.chip10 {
+    background-position: -120px -52px;
+}
+
+.chips .chip.chip10.on,
+.chips .chip.chip10:hover {
+    top: -21px;
+    background-position: -118px 0px;
+}
+
+.chips .chip.chip20 {
+    background-position: -179px -52px;
+}
+
+.chips .chip.chip20.on,
+.chips .chip.chip20:hover {
+    top: -21px;
+    background-position: -179px 0px;
+}
+
+.chips .chip.chip50 {
+    background-position: -238px -52px;
+}
+
+.chips .chip.chip50.on,
+.chips .chip.chip50:hover {
+    top: -21px;
+    background-position: -238px -0px;
+}
+
+.chips .chip.chip100 {
+    background-position: -297px -52px;
+}
+
+.chips .chip.chip100.on,
+.chips .chip.chip100:hover {
+    top: -21px;
+    background-position: -297px 0px;
+}
+
+.chips .chip.chip1000 {
+    background-position: -358px -52px;
+}
+
+.chips .chip.chip1000.on,
+.chips .chip.chip1000:hover {
+    top: -21px;
+    background-position: -356px 0px;
+}
+
+.chips .chip.chip5000 {
+    background-position: -417px -52px;
+}
+
+.chips .chip.chip5000.on,
+.chips .chip.chip5000:hover {
+    top: -21px;
+    background-position: -416px 0px;
+}
+
+
+/* 籌碼結束 */
+
+
+/* 投注欄位 */
+
+.diceGameBar {
+    width: 600px;
+    height: 60px;
+    line-height: 50px;
+    /* filter: progid: DXImageTransform.Microsoft.Gradient(startColorStr='#4e4e4e', endColorStr='#242424', gradientType='0'); */
+    background: -webkit-linear-gradient(top, #4e4e4e, #242424);
+    background: -moz-linear-gradient(top, bottom, #4e4e4e, #242424);
+    /* background-color: chartreuse; */
+    padding: 0 16%;
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border-radius: 5px;
+}
+
+.diceGameBar .betBar {
+    height: 63px;
+    line-height: 63px;
+    /* position: relative; */
+    display: inline-block;
+}
+
+.diceGameInfo {
+    height: 63px;
+    line-height: 63px;
+    display: inline-block;
+    vertical-align: middle;
+    position: absolute;
+    left: 20px;
+}
+
+.diceGameInfo .userName {
+    display: inline-block;
+    position: relative;
+}
+
+.diceGameInfo .userName .name {
+    font-size: 18px;
+    left: 2px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    padding: 0px 20px 0 50px;
+    height: 32px;
+    line-height: 32px;
+    text-align: right;
+    border: 1px solid #493f3f;
+    background-color: #0e0e0e;
+    color: #df8818;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.diceGameInfo .userName .nameLogo {
+    height: 42px;
+    width: 42px;
+    vertical-align: middle;
+    background-image: url('../IMG/nameLogo.svg');
+    background-repeat: no-repeat;
+    background-size: 42px;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.balance {
+    position: relative;
+    display: inline-block;
+}
+
+.balanceLogo {
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+    left: 6px;
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    background: url('../IMG/balance.svg');
+    background-size: 22px;
+    z-index: 1;
+}
+
+.balanceDetail {
+    bottom: 0;
+    top: 0;
+    left: 0;
+    margin: auto;
+    height: 30px;
+    line-height: 30px;
+    font-size: 0;
+    text-align: center;
+    padding: 0px 20px 0 40px;
+    border: 1px solid #493f3f;
+    background-color: #0e0e0e;
+    color: #df8818;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.balanceDetail .balanceLabel,
+.betMoneyDetail .betMoneyLabel {
+    font-size: 18px;
+}
+
+.betMoney {
+    position: relative;
+    display: inline-block;
+}
+
+.diceGameBar .betBar {
+    height: 63px;
+    line-height: 63px;
+    /* position: relative; */
+    display: inline-block;
+}
+
+.betBar>.button {
+    position: absolute;
+    text-align: center;
+    font-weight: 500;
+}
+
+.betBar>.button.cancelButton {
+    margin: auto;
+    left: 200px;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    color: firebrick;
+    width: 100px;
+    height: 38px;
+    line-height: 38px;
+    font-size: 18px;
+    border-radius: 6px;
+    background-image: linear-gradient(to top, #f2f2f2, #ffffff);
+    box-shadow: 0 0.8px 0.3px 0 rgba(255, 255, 255, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.28);
+    border: solid 1px #e0e0e0;
+    cursor: pointer;
+}
+
+.betMoneyLogo {
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+    left: 4px;
+    display: inline-block;
+    height: 30px;
+    width: 28px;
+    background: url('../IMG/betMoney.png');
+    background-repeat: no-repeat;
+    background-size: 30px 28px;
+    z-index: 1;
+}
+
+.betMoneyDetail {
+    bottom: 0;
+    top: 0;
+    margin: auto;
+    font-size: 0;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    padding: 0px 20px 0 40px;
+    border: 1px solid #493f3f;
+    background-color: #0e0e0e;
+    color: #df8818;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.balanceDetail .balanceAmount,
+.betMoney .betMoneyAmount {
+    color: #ffffff;
+    font-size: 18px;
+}
+
+
+/* 中獎格子閃亮 */
+
+.tableShine {
+    border: 1px solid #d00;
+    background: #ffe9e8;
+    color: #d00;
+    opacity: 0.6;
+}
+
+.dice-board {
+    position: absolute;
+    height: 150px;
+    width: 800px;
+    top: 40px;
+    /* bottom: 0; */
+    left: 0;
+    right: 0;
+    margin: auto;
+    /* align-items: center; */
+    /* background-color: rgb(85, 2, 2); */
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+[class^=container-dice] {
+    display: inline-block;
+    height: 120px;
+    /* margin-top: 100px; */
+    /* top: 100px; */
+    width: 180px;
+    margin: 30px;
+    /* position: absolute; */
+    position: relative;
+}
+
+
+/* 骰子格子 */
+
+.dice {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+}
+
+
+/* 骰子點數形狀 */
+
+.divot {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border-radius: 10px;
+    /* background: rgb(63, 63, 0); */
+    background: rgb(243, 200, 200);
+}
+
+
+/* 骰子位置 */
+
+.dice-one {
+    margin: 0 auto;
+    position: relative;
+    /* margin-left: 100px; */
+}
+
+.dice-two {
+    /* margin-left: 50px; */
+    margin: 0 auto;
+    position: relative;
+}
+
+.dice-three {
+    /* margin-left: 50px; */
+    margin: 0 auto;
+    position: relative;
+}
+
+.side {
+    background-color: rgba(223, 28, 28, 0.97);
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border: 2px solid red;
+    border-radius: 3ch;
+}
+
+.side:nth-child(1) {
+    transform: translateZ(25px);
+}
+
+.side:nth-child(6) {
+    transform: rotateY(180deg) translateZ(25px);
+}
+
+.side:nth-child(3) {
+    transform: rotateY(90deg) translateZ(25px);
+}
+
+.side:nth-child(4) {
+    transform: rotateY(-90deg) translateZ(25px);
+}
+
+.side:nth-child(5) {
+    transform: rotateX(90deg) translateZ(25px);
+}
+
+.side:nth-child(2) {
+    transform: rotateX(-90deg) translateZ(25px);
+}
+
+.show-1 {
+    transform: rotateX(720deg) rotateZ(-720deg);
+}
+
+.show-2 {
+    transform: rotateX(450deg) rotateZ(-720deg);
+}
+
+.show-3 {
+    transform: rotateY(-450deg) rotateZ(-1440deg);
+}
+
+.show-4 {
+    transform: rotateY(810deg) rotateZ(720deg);
+}
+
+.show-5 {
+    transform: rotateX(-810deg) rotateZ(-1080deg);
+}
+
+.show-6 {
+    transform: rotateX(-900deg) rotateZ(1080deg);
+}
+
+
+/* 骰子點數固定 */
+
+.two-1,
+.three-1,
+.four-1,
+.five-1,
+.six-1 {
+    top: 20%;
+    left: 20%;
+}
+
+.four-3,
+.five-3,
+.six-4 {
+    top: 20%;
+    left: 80%;
+}
+
+.one-1,
+.three-2,
+.five-5 {
+    top: 50%;
+    left: 50%;
+}
+
+.four-2,
+.five-2,
+.six-3 {
+    top: 80%;
+    left: 20%;
+}
+
+.two-2,
+.three-3,
+.four-4,
+.five-4,
+.six-6 {
+    top: 80%;
+    left: 80%;
+}
+
+.six-2 {
+    top: 50%;
+    left: 20%;
+}
+
+.six-5 {
+    top: 50%;
+    left: 80%;
+}
+
+#timecounter {
+    background-color: black;
+    color: blanchedalmond;
+    width: 300px;
+    height: 40px;
+    text-align: center;
+    align-items: center;
+    display: block;
+    z-index: 100;
+    position: relative;
+    font-size: 30px;
+    margin-left: auto;
+    margin-right: auto
+}

@@ -69,7 +69,7 @@ const Header = props => {
                 </div>
                 {/* {console.log("////headerdata/////")}
                 {console.log(memberData)} */}
-                {memberData.memberid ? (<MemberState memberData = {memberData} />)
+                {memberData.memberid ? (<MemberState memberData = {memberData} props={props} />)
                     : (< LoginForm />)}
                 {/* <MemberState account={"1234"} balance={9999999} props={props} /> */}
 
