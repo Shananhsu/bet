@@ -46,7 +46,7 @@ function GameWorld() {
             this.whiteBall
         ]
         //球桿位置
-    this.stick = new Stick({ x: 407, y: 411 });
+    this.stick = new Stick({ x: 407, y: 407 });
 
     this.gameOver = false;
 }
