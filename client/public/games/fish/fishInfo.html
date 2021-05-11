@@ -25,6 +25,33 @@
         font-size: 3rem;
     }
 
+    .kbdTitle {
+        display: inline-block;
+        width: 120px;
+        text-align: center;
+    }
+    .kbdTitle>kbd{
+        display: inline-block;
+        font-size: 2rem;
+        border: solid black 1px;
+        background-color: #bbb;
+        width: 100px;
+    }
+
+ .kbdTitle .kbdSubtitle{
+     width: 30px;
+ }
+
+
+    .kbdInfo {
+        display: inline-block;
+        white-space: pre-wrap;
+        font-size: 2rem;
+        margin-top: 0;
+        margin-bottom: 0;
+        font-weight: bold;
+    }
+
     #infoImg {
         width: 100%;
         margin-top: 10px;
@@ -44,7 +71,7 @@
         font-size: 30px;
         width: 3%;
         vertical-align: top;
-        margin-top: 0;
+        margin-top: 10px;
         margin-bottom: 0;
     }
 
@@ -53,7 +80,7 @@
         width: 96%;
         white-space: pre-wrap;
         font-size: 2rem;
-        margin-top: 0;
+        margin-top: 10px;
         margin-bottom: 0;
         font-weight: bold;
     }
@@ -70,10 +97,10 @@
         font-weight: bold;
     }
 
-    .fishContainer{        
-display: flex;
-flex-wrap: wrap;
-justify-content: space-evenly;
+    .fishContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
     }
 
     .fishCard {
@@ -103,6 +130,29 @@ justify-content: space-evenly;
     <div>
         <h1 class="title">捕魚機遊戲說明</h1>
         <div class="infoContainer">
+            <h2 class="subTitle" style="margin-bottom: 20px;">操作方法</h2>
+            <div class="kbdTitle">
+                <kbd>空白鍵</kbd>
+            </div>
+            <p class="kbdInfo">發射</p>
+            <br>
+            <div class="kbdTitle">
+                <kbd>&#8592;</kbd>
+            </div>
+            <p class="kbdInfo">砲台左旋轉</p>
+            <br>
+            <div class="kbdTitle">
+                <kbd>&#8594;</kbd>
+            </div>
+            <p class="kbdInfo">砲台右旋轉</p>
+            <br>
+            <div class="kbdTitle">
+                <kbd class="kbdSubtitle">1</kbd>
+                <kbd class="kbdSubtitle">2</kbd>
+                <kbd class="kbdSubtitle">3</kbd>
+            </div>
+            <p class="kbdInfo">1、2、3鍵可以更換砲彈</p>
+
             <h2 class="subTitle" style="margin-bottom: 20px;">遊戲方法</h2>
             <p class="infoTxt" style="display: block; margin-bottom: 10px;">請對照下圖數字標示查看此說明:</p>
             <p class="infoNum">1.</p>
@@ -132,16 +182,16 @@ justify-content: space-evenly;
             <h2 class="subTitle">砲彈介紹</h2>
             <div>
                 <div class="shellTitle">
-                    <img  src="./img/shellImg/shell1.png" alt="標準砲彈">
-                    <span >標準砲彈</span>
+                    <img src="./img/shellImg/shell1.png" alt="標準砲彈">
+                    <span>標準砲彈</span>
                 </div>
                 <p class="infoTxt">費用:1點
 最便宜的砲彈，只要別打空，基本上不會賠錢。
-擊中魚就會對魚造成1點傷害並消失        
+擊中魚就會對魚造成1點傷害並消失
                 </p>
                 <div class="shellTitle">
-                    <img  src="./img/shellImg/shell2.png" alt="貫穿砲彈">
-                    <span >貫穿砲彈</span>
+                    <img src="./img/shellImg/shell2.png" alt="貫穿砲彈">
+                    <span>貫穿砲彈</span>
                 </div>
                 <p class="infoTxt">費用:5點
 能夠貫穿魚群的砲彈，可以快速清場，打擊大魚。
@@ -149,8 +199,8 @@ justify-content: space-evenly;
 HP很高的魚可以瞬間就消耗掉所有的傷害次數。如果魚被打死還有剩餘的傷害次數，砲彈就會繼續飛行。
                 </p>
                 <div class="shellTitle">
-                    <img  src="./img/shellImg/shell3.png" alt="彈跳砲彈">
-                    <span >彈跳砲彈</span>
+                    <img src="./img/shellImg/shell3.png" alt="彈跳砲彈">
+                    <span>彈跳砲彈</span>
                 </div>
                 <p class="infoTxt">費用:8點
 打中魚或是畫面邊緣砲彈就會彈跳，如果可以打到魚群的中間使其在魚群間不斷跳動，可以造成很大的收益。
@@ -162,64 +212,64 @@ HP很高的魚可以瞬間就消耗掉所有的傷害次數。如果魚被打死
 
 
 
-    <div class="infoContainer">
-        <h2 class="subTitle">魚種簡介</h2>
+        <div class="infoContainer">
+            <h2 class="subTitle">魚種簡介</h2>
 
-        <div class="fishContainer">
-        <div class="fishCard">
-            <div class="fishTitle">
-                <img src="./img/fish01.png" alt="小魚">
+            <div class="fishContainer">
+                <div class="fishCard">
+                    <div class="fishTitle">
+                        <img src="./img/fish01.png" alt="小魚">
+                    </div>
+                    <p class="infoTxt">小魚
+                        HP:1點
+                        收益:1點
+                    </p>
+                </div>
+
+                <div class="fishCard">
+                    <div class="fishTitle">
+                        <img src="./img/fish02.png" alt="小魚">
+                    </div>
+                    <p class="infoTxt">中魚
+                        HP:7點
+                        收益:8點
+                    </p>
+                </div>
+
+                <div class="fishCard">
+                    <div class="fishTitle">
+                        <img src="./img/fish03.png" alt="小魚">
+                    </div>
+                    <p class="infoTxt">大魚
+                        HP:11點
+                        收益:13點
+                    </p>
+                </div>
+
+                <br>
+
+                <div class="fishCard">
+                    <div class="fishTitle">
+                        <img src="./img/fish04.png" alt="小魚">
+                    </div>
+                    <p class="infoTxt">大紅魚
+                        HP:50點
+                        收益:55點
+                    </p>
+                </div>
+
+                <div class="fishCard">
+                    <div class="fishTitle">
+                        <img src="./img/fish05.png" alt="小魚">
+                    </div>
+                    <p class="infoTxt">小快魚
+                        HP:1點
+                        收益:2點
+                    </p>
+                </div>
             </div>
-            <p class="infoTxt">小魚
-HP:1點
-收益:1點
-            </p>
-        </div>
 
-        <div class="fishCard">
-            <div class="fishTitle">
-                <img src="./img/fish02.png" alt="小魚">
-            </div>
-            <p class="infoTxt">中魚
-HP:7點
-收益:8點
-            </p>
         </div>
-
-        <div class="fishCard">
-            <div class="fishTitle">
-                <img src="./img/fish03.png" alt="小魚">
-            </div>
-            <p class="infoTxt">大魚
-HP:11點
-收益:13點
-            </p>
-        </div>
-
-        <br>
-
-        <div class="fishCard">
-            <div class="fishTitle">
-                <img src="./img/fish04.png" alt="小魚">
-            </div>
-            <p class="infoTxt">大紅魚
-HP:50點
-收益:55點
-            </p>
-        </div>
-        
-        <div class="fishCard">
-            <div class="fishTitle">
-                <img src="./img/fish05.png" alt="小魚">
-            </div>
-            <p class="infoTxt">小快魚
-HP:1點
-收益:2點
-            </p>
-        </div>
-    </div>
-
-    </div>
 
 
     </div>
