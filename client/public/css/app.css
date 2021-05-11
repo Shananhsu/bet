@@ -1901,6 +1901,7 @@ background-color: #000;
 font-size: 2rem;
 transition: 0.5s;
 /* 阿川加的 */
+margin: 1.5rem;
 }
 
 #sf-lobby-00001 .game>img {
@@ -2006,4 +2007,3 @@ height: 80%;
 .tab_left{
     background-image: url(../images/playground/tab_left.png);
 }
-#sf-lobby-00001 .game{margin: 1.5rem;}
