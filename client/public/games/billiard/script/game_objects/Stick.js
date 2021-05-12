@@ -3,9 +3,9 @@
 function Stick(position){
     this.position = position;
          //原點
-    this.origin = new Vector2(970,16);
+    this.origin = new Vector2(980,11);
           //擊球原點
-    this.shotOrigin = new Vector2(950,16);
+    this.shotOrigin = new Vector2(950,11);
     this.shooting = false;
         //可見的
     this.visible = true;
@@ -91,7 +91,7 @@ Stick.prototype.reset = function(){
   this.position.x = Game.gameWorld.whiteBall.position.x;
   this.position.y = Game.gameWorld.whiteBall.position.y;
 //球桿重置後位置準心
-	this.origin = new Vector2(970,16);
+	this.origin = new Vector2(970,11);
   this.shooting = false;
   this.visible = true;
 	this.power = 0;
