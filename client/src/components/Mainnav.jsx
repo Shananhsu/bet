@@ -28,13 +28,18 @@ class Mainnav extends Component {
                     <div className="navBox navigation collapse navbar-collapse">
                         <ul className="nav navStyle">
                             <li>
-                                <a className="on" href="/">首頁</a>
+                                <a className="on" href="/" style={{color:"#4167f8",}}>首頁</a>
                             </li>
                             <li>
-                                <a className="game" href="/gamelink" onMouseEnter={this.handleHover} > 真人一館</a>
+                                <a className="game" href="/gamelink" style={{color:"#4167f8"}}>遊戲大廳</a>
+                                {/* 因為下拉式選單出現的連結都用不掉，所以我就把onMouseEnter事件去掉了
+                                ，而下拉式選單的內容先不動 阿川 */}
+                                {/* <a className="game" href="/gamelink" onMouseEnter={this.handleHover} > 遊戲大廳</a> */}
                             </li>
 
-                            <li>
+
+                            {/* 這幾個用不到，註解掉 by阿川 */}
+                            {/* <li>
                                 <a className="game" href="/" onMouseEnter={this.handleHover} >體育賽事</a>
                             </li>
 
@@ -48,7 +53,7 @@ class Mainnav extends Component {
                                     />
 
                                 </a>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                     <div className="navigation-down">
