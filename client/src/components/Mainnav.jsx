@@ -43,7 +43,7 @@ class Mainnav extends Component {
                                 <a className="game" href="/" onMouseEnter={this.handleHover} >體育賽事</a>
                             </li> */}
 
-                            <li>
+                            {/* <li>
                                 <a className="game" href="/bonus">優惠活動</a>
                             </li>
                             <li>
@@ -53,7 +53,7 @@ class Mainnav extends Component {
                                     />
 
                                 </a>
-                            </li> */}
+                            </li>  */}
                         </ul>
                     </div>
                     {/* <div className="navigation-down">
