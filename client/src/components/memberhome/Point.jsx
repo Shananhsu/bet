@@ -123,7 +123,7 @@ const Point = (props) => {
                         {console.log(props)}
                         {console.log("////point props/////")} */}
                         {getMemberBalance()}
-                        <li class="list-group-item col-sm-3">
+                        <li class="list-group-item col-sm-3" style={{"marginTop": "0.25em"}}>
                             <span class="badge">{main_balance}</span>
                             主帳戶</li>
                         <li class="list-group-item col-sm-3">

@@ -714,6 +714,7 @@ app.post("/baccarat/playlist", function (req, res) {
 
   var account = req.body.account;
   var bet = req.body.bet;
+  var totalwin = req.body.totalwin
   var betTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
   var balance = req.body.balance;
   var playerHand1 = req.body.playerHand1;
@@ -731,11 +732,11 @@ app.post("/baccarat/playlist", function (req, res) {
   
   db.query(
     "INSERT INTO baccarat_gamelog"+
-    "(account,bet,betTime,balance,playerHand1,playerHand2,playerHand3,"+
+    "(account,bet,betTime,balance,totalwin,playerHand1,playerHand2,playerHand3,"+
     "bankerHand1,bankerHand2,bankerHand3,playerScore,bankerScore,"+
     "isPlayerPairs,isBankPairs,isBig,winner) "+
-    "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", 
-    [account,bet,betTime,balance,playerHand1,playerHand2,playerHand3,
+    "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", 
+    [account,bet,betTime,balance,totalwin,playerHand1,playerHand2,playerHand3,
       bankerHand1,bankerHand2,bankerHand3,playerScore,bankerScore,
       isPlayerPairs,isBankPairs,isBig,winner], 
       function (err, result) {

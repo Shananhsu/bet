@@ -22,10 +22,14 @@
     </script>
 </head>
 <style>
-    #sddContainer {
+    #baccarat_container {
         width: 100%;
         margin: 0;
         padding: 0;
+    }
+
+    img {
+      width: 50px;
     }
 </style>
 
@@ -41,25 +45,36 @@
                     <th>遊戲時間</th>
                     <th>投注項目</th>
                     <th>投注金額</th>
-                    <th>遊戲前錢包餘額</th>
-                    <th>中獎資訊</th>
-                    <th>輸贏結果</th>
+                    <th>輸贏</th>
                     <th>結算餘額</th>
+                    <th>閒手牌</th>
+                    <th>莊手牌</th>
+
                 </tr>
             </thead>
             <tbody v-for="(history, index) in newsList">
                 <tr>
+
                     <td>{{history.game_id}}</td>
                     <td>{{"百家樂遊戲"}}</td>
                     <td>{{history.account}}</td>
                     <td>{{history.betTime}}</td>
                     <td>{{history.bet[0]['value']}}</td>
                     <td>{{history.bet[0]["priceNum"]}}</td>
+                    <td>{{history.totalwin-history.bet[0]["priceNum"]}}</td>
                     <td>{{history.balance}}</td>
-                    <!-- <td>{{history.moneyBefore}}</td>
-                    <td>{{history.status}}</td>
-                    <td>{{history.result}}</td>
-                    <td>{{history.moneyAfter}}</td> -->
+                    
+                    <td>
+                        <img  :src=history.playerHand1.path alt="">
+                        <img :src=history.playerHand2.path alt="">
+                        <img v-if="history.playerHand3.path" :src=history.playerHand3.path alt="">
+                    </td>
+                    <td>
+                        <img  :src=history.bankerHand1.path alt="">
+                        <img :src=history.bankerHand2.path alt="">
+                        <img v-if="history.bankerHand3.path" :src=history.bankerHand3.path alt="">
+                    </td>
+
                 </tr>
 
             </tbody>
@@ -84,10 +99,22 @@
                         axios.post("http://localhost:3001/baccarat/gamelog", {
                             account: userName
                         })
-                            .then((e) => { 
-                                // console.log(e.data[0].bet)
-                                 e.data[0].bet=JSON.parse(e.data[0].bet)
-                                newsApp.newsList = e.data })
+                            .then((e) => {
+                                e.data.forEach(element => {
+                                    element.bet = JSON.parse(element.bet)
+                                    element.playerHand1 = JSON.parse(element.playerHand1)
+                                    element.playerHand2 = JSON.parse(element.playerHand2)
+                                    element.playerHand3 = JSON.parse(element.playerHand3)
+                                    element.bankerHand1 = JSON.parse(element.bankerHand1)
+                                    element.bankerHand2 = JSON.parse(element.bankerHand2)
+                                    element.bankerHand3 = JSON.parse(element.bankerHand3)
+                                    // element.playHand1= JSON.parse(element.playHand1)
+
+                                });
+
+                                // e.data.playerHand1=JSON.parse(e.data.playerHand1)
+                                newsApp.newsList = e.data
+                            })
                             // .then((e)=>{console.log(e.data)})
                             .catch((err) => { console.log(err) })
                     }
@@ -98,7 +125,7 @@
                 });
             }
         });
-        
+
 
     </script>
 </body>
