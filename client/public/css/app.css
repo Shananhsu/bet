@@ -237,6 +237,8 @@ ul {
 
 #sf-membercenter-point-getbalance-00002 .badge {
     background-color: #ababab !important;
+    margin-top: 7px;
+    font-size: 20px;
 }
 
 #sf-membercenter-querybetlog-00002 thead,
@@ -2007,3 +2009,5 @@ height: 80%;
 .tab_left{
     background-image: url(../images/playground/tab_left.png);
 }
+
+
