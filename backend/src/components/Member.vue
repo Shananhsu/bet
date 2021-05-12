@@ -44,6 +44,22 @@ export default {
       .then((e) => {
         console.log(e.data);
         this.memberInformation = e.data;
+        for (let i = 0; i < e.data.length; i++) {
+          let date = new Date(e.data[i].register_time);
+          date =
+            date.getFullYear() +
+            "-" +
+            ("00" + (date.getMonth() + 1)).slice(-2) +
+            "-" +
+            ("00" + date.getDate()).slice(-2) +
+            " " +
+            ("00" + date.getHours()).slice(-2) +
+            ":" +
+            ("00" + date.getMinutes()).slice(-2) +
+            ":" +
+            ("00" + date.getSeconds()).slice(-2);
+          this.memberInformation[i].register_time = date;
+        }
       })
       .catch((err) => {
         console.log(err);
