@@ -66,16 +66,17 @@ class Playground extends Component {
                             <img src="/images/playground/tab00-sm.png" alt="imgErr" className="float" />
                             <img src="/images/playground/tab00-sm2.png" alt="imgErr" className="secondFloat" />
                             <ul>
-                                <li>
+                                {/* 骰寶來不及做出來，我就先註解掉這部份了 */}
+                                {/* <li>
                                     <div className="gamesBg">
                                         <a className="col-xs-3 modal_btn game" data-toggle="modal" data-text="/login" href="#modal">
                                             <div className="gamesName">骰寶</div>
                                         </a>
                                     </div>
-                                </li>
+                                </li> */}
                                 <li>
                                     <div className="gamesBg">
-                                        <a className="col-xs-3 modal_btn game" data-toggle="modal" data-text="/login" href="#modal">
+                                        <a className="col-xs-3 modal_btn game" data-toggle="modal" data-text="/login" href="http://localhost:3000/games/baccarat/index.html" target="_blank">
                                             <div className="gamesName">百家樂</div>
                                         </a>
                                     </div>
@@ -134,7 +135,7 @@ class Playground extends Component {
                             <ul>
                                 <li>
                                     <div className="gamesBg">
-                                        <a className="col-xs-3 modal_btn game" data-toggle="modal" data-text="/login" href="#modal">
+                                        <a className="col-xs-3 modal_btn game" data-toggle="modal" data-text="/login" href="http://localhost:3000/games/billiard/index.html" target="_blank">
                                             <div className="gamesName">人機撞球</div>
                                         </a>
                                     </div>
@@ -180,21 +181,21 @@ class Playground extends Component {
                             <ul>
                                 <li>
                                     <div className="gamesBg">
-                                        <a className="col-xs-3 modal_btn game" data-toggle="modal" data-text="/login" href="#modal">
+                                        <a className="col-xs-3 modal_btn game" data-toggle="modal" data-text="/login" href="http://localhost:3000/games/blackjack/index.html" target="_blank">
                                             <div className="gamesName">21點</div>
                                         </a>
                                     </div>
                                 </li>
                                 <li>
                                     <div className="gamesBg">
-                                        <a className="col-xs-3 modal_btn game" data-toggle="modal" data-text="/login" href="#modal">
+                                        <a className="col-xs-3 modal_btn game" data-toggle="modal" data-text="/login" href="http://localhost:3000/games/niuniu/public/index.html" target="_blank">
                                             <div className="gamesName">妞妞</div>
                                         </a>
                                     </div>
                                 </li>
                                 <li>
                                     <div className="gamesBg">
-                                        <a className="col-xs-3 modal_btn game" data-toggle="modal" data-text="/login" href="#modal">
+                                        <a className="col-xs-3 modal_btn game" data-toggle="modal" data-text="/login" href="http://localhost:3000/games/dragonshoot/index.html" target="_blank">
                                             <div className="gamesName">射龍門</div>
                                         </a>
                                     </div>
@@ -238,14 +239,14 @@ class Playground extends Component {
                             <ul>
                                 <li>
                                     <div className="gamesBg">
-                                        <a className="col-xs-3 modal_btn game" data-toggle="modal" data-text="/login" href="#modal">
-                                            <div className="gamesName">老虎機</div>
+                                        <a className="col-xs-3 modal_btn game" data-toggle="modal" data-text="/login" href="http://localhost:3000/games/tiger/index.html" target="_blank">
+                                            <div className="gamesName">拉霸</div>
                                         </a>
                                     </div>
                                 </li>
                                 <li>
                                     <div className="gamesBg">
-                                        <a className="col-xs-3 game" href="/lobby/obgelec">
+                                        <a className="col-xs-3 game" href="http://localhost:3000/games/fish/fishShooter.html" target="_blank">
                                             <div className="gamesName">捕魚機</div>
                                         </a>
                                     </div>
