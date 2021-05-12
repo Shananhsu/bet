@@ -15,6 +15,7 @@ const MemberState = (props) => {
 
     Axios.defaults.withCredentials = true;
     const history = useHistory();
+    const [main_balance, setMain_balance] = useState("");
     const logoutButtonClick = () => {
         Axios.get('http://localhost:3001/api/logout').then((res) => {
             // props.close('logout')
@@ -23,7 +24,18 @@ const MemberState = (props) => {
         })
     }
     const [isModalOpen, toggleModal] = useState(false);
-
+    // 打後台拿資料
+    const getMemberBalance = () => {
+        Axios.post('http://localhost:3001/api/getBalance',
+            {
+                "account": props.memberData.account,
+            }).then((res) => {
+                // console.log( res)
+                if (res.data.message === undefined) {
+                    setMain_balance(res.data[0].main_balance);
+                }
+            })
+    }
     return (
         <React.Fragment>
 
@@ -31,7 +43,7 @@ const MemberState = (props) => {
             {console.log(props)}
             {console.log("///memberstate//props////")} */}
             <div id="masthead">
-
+                {getMemberBalance()}
                 <div className="">
                     <div className="row">
                         <div className="col-xs-1 auto_left">
@@ -62,7 +74,7 @@ const MemberState = (props) => {
                                         <div id="sf-membermsg-button-00001" style={{ "display": "inline" }}>
                                         <b> 主帳戶餘額 :
                                                 <a >
-                                                {props.memberData.balance}
+                                                {main_balance}
                                             </a>
                                         </b>
                                     </div>

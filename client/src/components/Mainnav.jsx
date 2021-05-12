@@ -33,10 +33,10 @@ class Mainnav extends Component {
                             <li>
                                 <a className="game" href="/gamelink" onMouseEnter={this.handleHover} > 真人一館</a>
                             </li>
-
+{/* 
                             <li>
                                 <a className="game" href="/" onMouseEnter={this.handleHover} >體育賽事</a>
-                            </li>
+                            </li> */}
 
                             <li>
                                 <a className="game" href="/bonus">優惠活動</a>
@@ -51,7 +51,7 @@ class Mainnav extends Component {
                             </li>
                         </ul>
                     </div>
-                    <div className="navigation-down">
+                    {/* <div className="navigation-down">
                         <div></div>
                         <div className="nav-down-menu" style={{ 'height': '0px' }}>
                             <ul>
@@ -109,7 +109,9 @@ class Mainnav extends Component {
                                 </li>
                             </ul>
                         </div>
+               
                     </div>
+                */}
                 </div>
 
             </React.Fragment >
