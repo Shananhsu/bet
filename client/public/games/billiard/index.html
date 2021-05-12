@@ -53,7 +53,7 @@
 
   <!-- Header -->
   <header id="header">
-    <div class="logo"><a href="http://localhost:3000/">OMOG</a></div>
+    <div class="logo"><a href="index.html">OMOG</a></div>
   </header>
 
 
@@ -62,7 +62,7 @@
   <div class="style3background">
 
     <div>
-      <section id="One" class="wrapper style6">
+      <section id="One" class="wrapper style7">
 
         <div class="inner">
           <header class="align-center animate__animated animate__fadeInUp animate__slow  wow">
@@ -82,23 +82,27 @@
 
 
   <div class="container" id="gameindextop">
+    
     <div class="row">
       <div class="col-sm">
         <div id="money">錢包餘額</div>
       </div>
       <div class="col-sm">
-        <button id="gameresultbut" onclick="location.href='http:/router.html'" >
+        <button id="gameresultbut" onclick="location.href='/games/billiard/router.html'" >
       遊戲紀錄</button>
 
       </div>
+      <div id="time">剩餘時間<span id="timer"></span></div>
 
     </div>
   </div>
+
+ 
   <div id="gameArea">
     <canvas id="screen" width="2000" height="1000"></canvas>
   </div>
   <script src="./script/index.js"></script>
-
+  <script src="./script/timer.js"></script>
 
 
 </body>
