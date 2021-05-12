@@ -111,6 +111,7 @@ function generateMainMenuButtons(inGame){
                 TRAIN_ITER = 5;
                 Game.mainMenu.active = false;
                 GAME_STOPPED = false;
+                startTimer();
                 setTimeout(Game.startNewGame,100);
                 sounds.fadeOut(Game.mainMenu.sound);
             },
