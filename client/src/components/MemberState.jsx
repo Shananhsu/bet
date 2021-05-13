@@ -74,7 +74,7 @@ const MemberState = (props) => {
                                         <div id="sf-membermsg-button-00001" style={{ "display": "inline" }}>
                                         <b> 主帳戶餘額 :
                                                 <a >
-                                                {main_balance}
+                                                {main_balance.toLocaleString()}
                                             </a>
                                         </b>
                                     </div>

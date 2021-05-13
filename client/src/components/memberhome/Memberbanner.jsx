@@ -58,7 +58,7 @@ const Memberbanner = (props) => {
                         <h2 className="name">{props.props.memberData.account}</h2>
                         {/* {console.log(props.props)} */}
                         {/* <b className="getbalance">主帳戶餘額: {props.props.balance} */}
-                        <b className="getbalance">總共餘額: {total_balance}
+                        <b className="getbalance">總共餘額: {total_balance.toLocaleString()}
 
                             {/* <div id="sf-balance-00001">
                                     <span className="glyphicon glyphicon-usd"></span>
