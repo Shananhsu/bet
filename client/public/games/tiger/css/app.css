@@ -211,7 +211,7 @@ canvas {
 }
 #imggetresult{
     position: relative;
-    top: -150px;
+    top: -200px;
     left: 350px;
 }
 #buttonSA input:disabled{
