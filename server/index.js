@@ -85,6 +85,7 @@ app.post("/api/register", (req, res) => {
   const risk_level = "D"
   const register_time = new Date()
   const sqlregister = "insert into  member_information ( account  ,password ,name ,address ,phone ,email,risk_level,register_time,identifyID ) values(?,?,?,?,?,?,?,?,?) "
+  const sqlregister2 = "insert into  thirdpart_moneybag ( account  ) values(?) " 
   const identifyID = 0
 
   bcrypt.hash(password, saltRounds, (err, hash) => {
@@ -105,6 +106,20 @@ app.post("/api/register", (req, res) => {
           });
         }
       })
+      db.query(sqlregister2,[account]),
+      (err, result) => {if (err){
+        res.send({
+          status: 'FAILURE',
+          err: err
+        });
+        }else {
+          res.send({
+            status: 'SUCCESS'
+          });
+        }}
+    
+
+
   })
 
 })
@@ -267,12 +282,13 @@ app.post("/api/deposit", (req, res) => {
   const depositway = req.body.depositway;
   const point = req.body.point;
   const deposittime = req.body.deposittime;
+  const deposit_withdrawal = 1
 
-  const sqlregister = "insert into  deposit_table ( account  ,depositway ,point ,deposittime,confirmflag  ) values(?,?,?,?,?) "
+  const sqlregister = "insert into  deposit_table (  deposit_withdrawal,account  ,depositway ,point ,deposittime,confirmflag  ) values(?,?,?,?,?,?) "
   const identifyID = 0
-  console.log([account, depositway, point, deposittime])
+  console.log([ deposit_withdrawal,account, depositway, point, deposittime])
   db.query(sqlregister,
-      [account, depositway, point, deposittime, 0], (err, result) => {
+      [ deposit_withdrawal,account, depositway, point, deposittime, 0], (err, result) => {
         if (err) {
           res.send({
             status: 'FAILURE',

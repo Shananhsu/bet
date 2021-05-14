@@ -22,7 +22,6 @@
             --player: #3782be;
             --banker: #bb3d20;
             --tie: #47a344;
-            --borders: rgba(255, 255, 255, 0.3);
             --yellow: #bdb03e;
             --dark: rgba(0, 0, 0, 0.33);
             --background-color: #414241;
@@ -52,28 +51,46 @@
             text-align: center;
             align-items: center;
             display: inline-block;
+            background-image: url("./img/table.jpeg");
         }
 
         .screen1 div {
             line-height: 100px;
         }
 
+        .startGame:hover {
+            opacity: 0.8;
+        }
+
         .startGame {
             margin-top: 100px;
             height: 80px;
             width: 150px;
-            /* line-height: 200px; */
-            font-size: 24px;
+            font-size: 32px;
             font-weight: bold;
-            border-radius: 0.3px;
+            border-radius: 25px;
+            text-align: center;
+            background-color: black;
+            color: white;
+            border: 1px solid white;
+
         }
 
         .betlist {
+            margin-top: 50px;
             height: 80px;
             width: 150px;
-            /* line-height: 20; */
-            font-size: 24px;
+            font-size: 32px;
             font-weight: bold;
+            border-radius: 25px;
+            text-align: center;
+            background-color: black;
+            color: white;
+            border: 1px solid white;
+        }
+
+        .betlist:hover {
+            opacity: 0.8;
         }
 
         .screen2 {
@@ -82,6 +99,7 @@
             grid-row-start: row1;
             grid-row-end: row2;
             background-color: var(--background-color);
+            background-image: url("./img/table.jpeg");
         }
 
         .screen2 {
@@ -258,6 +276,7 @@
             grid-row-start: row1;
             grid-row-end: row2;
             background-color: var(--background-color);
+            background-image: url("./img/table.jpeg");
         }
 
         .screen3 {
@@ -399,6 +418,7 @@
         }
 
         table {
+            margin-top: 0px;
             width: 70%;
             height: 80%;
         }
@@ -831,6 +851,7 @@
     <div class="container">
         <div class="screen1">
             <button class="startGame" onclick="gamestart()">Start</button>
+            <br>
             <button class="betlist" onclick="location.href='./baccarat_backend.html'">遊戲紀錄</button>
         </div>
 
@@ -1133,6 +1154,7 @@
             document.getElementById('betMoneyAmount').innerText = 0;
             document.getElementById('balanceAmount').innerText =
                 parseFloat(document.getElementById('balanceAmount').innerText) + totalwin;
+            
             return totalwin
         }
 
@@ -1188,7 +1210,7 @@
             if (await giveCards()) { //放牌顯示
                 await GameCount(); //記分板紀錄
                 await giveGameDot(); //莊閒DOT
-                totalwin=await countPayout();
+                totalwin = await countPayout();
                 console.log("////totalwin///////")
                 console.log(totalwin)
             }
@@ -1225,6 +1247,7 @@
                     .catch((err) => { console.log(err) })
 
                 // 紀錄完成清空籌碼
+                if (totalwin > 0 ) alert(`恭喜你贏得 : ${totalwin} 元`) 
                 totalBet = []
             }
         }

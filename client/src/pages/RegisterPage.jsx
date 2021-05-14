@@ -4,18 +4,19 @@ import Footer from "../components/Footer"
 import RegisterForm from "../components/RegisterForm"
 
 
-class RegisterPage extends Component {
-    state = {}
-    render() {
+// class RegisterPage extends Component {
+const RegisterPage =(props) => {
+    // state = {}
+    // render() {
         return (
             <React.Fragment>
                 <Header />
     
-                <RegisterForm />
+                <RegisterForm props={props}/>
                 <Footer />
             </React.Fragment>
         );
     }
-}
+// }
 
 export default RegisterPage;
