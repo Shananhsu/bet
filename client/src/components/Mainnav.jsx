@@ -19,8 +19,10 @@ class Mainnav extends Component {
     //         });
     //     });
     // }
-    css={
-        color:"#4176f8"
+    css = {
+        color: "#4176f8",
+        // marginTop:"5px",
+        fontSize:"1.3rem"
     }
 
 
@@ -29,24 +31,26 @@ class Mainnav extends Component {
             <React.Fragment>
                 <div className="auto_left">
                     <div className="navBox navigation collapse navbar-collapse">
-                        <ul className="nav navStyle">
-                            <p></p>
+                        {/* <ul className="nav navStyle"> className="nav"會導致顯示大小超過75%時 ul不顯示，因此刪掉*/}
+                        <ul className="navStyle">
+
                             <li>
-                                <a style={this.css} className="on" href="/">首頁</a>
+                                <a style={this.css} className="on btn" href="/">首頁</a>
+                                {/* <a style={this.css} className="on" href="/">首頁</a> */}
                             </li>
                             <li>
                                 {/* 因為跳出來的連結都用不到，所以我就把onMouseEnter拿掉了，這樣就不會顯示出來
                                 若要改回來，把下面這行刪掉，下下面那行註解和上上上面的handleHover取消就好了 by阿川*/}
-                                <a style={this.css} className="game" href="/gamelink" > 遊戲大廳</a>
+                                <a style={this.css} className="game btn" href="/gamelink" > 遊戲大廳</a>
                                 {/* <a className="game" href="/gamelink" onMouseEnter={this.handleHover} > 真人一館</a> */}
                             </li>
-                                <p></p>
-{/* 
+
+                            {/* 
                             <li>
                                 <a className="game" href="/" onMouseEnter={this.handleHover} >體育賽事</a>
                             </li> */}
 
-{/* 這兩個按鈕用不到，所以我註解掉了 by阿川 */}
+                            {/* 這兩個按鈕用不到，所以我註解掉了 by阿川 */}
                             {/* <li>
                                 <a className="game" href="/bonus">優惠活動</a>
                             </li>
