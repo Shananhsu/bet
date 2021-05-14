@@ -62,6 +62,16 @@ const MemberState = (props) => {
                                             <Memberbanner props={props} />
                                         </Modal>
                                     </div>
+                                    <div style={{ "width": "150px", "float": "left" }}>
+                                        <a className="btn btn-sm btn-danger glyphicon glyphicon-log-out " onClick={logoutButtonClick}
+                                            style={{ "marginTop": "4px" }}></a>
+                                        {/* <a className="btn btn-sm btn-primary membercenter glyphicon glyphicon-home" href="/memberinfo" */}
+                                        <a className="btn btn-sm btn-primary membercenter glyphicon glyphicon-home" onClick={() => toggleModal(!isModalOpen)}
+                                            style={{ "marginTop": "4px" }}> 會員中心</a>
+                                        <Modal isOpen={isModalOpen} toggle={toggleModal}>
+                                            <Memberbanner props={props} />
+                                        </Modal>
+                                    </div>
                                 </div>
                                 <div className="info_member"
                                     style={{ "float": "right",  "marginTop": "5px" ,"fontSize":"18px"}}>

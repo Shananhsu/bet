@@ -49,12 +49,12 @@ class Mainnav extends Component {
                             <li>
                                 <a className="game" href="/" onMouseEnter={this.handleHover} >體育賽事</a>
                             </li> */}
-
-                            {/* 這兩個按鈕用不到，所以我註解掉了 by阿川 */}
-                            {/* <li>
-                                <a className="game" href="/bonus">優惠活動</a>
-                            </li>
                             <li>
+                                <a style={this.css} className="game btn" href="/bonus">優惠活動</a>
+                            </li>
+
+                            {/* 這一個按鈕用不到，所以我註解掉了 by阿川 */}
+                            {/* <li>
                                 <a className="game linePicture" target="game" href="">
                                     <img src="images/logo/line.png" alt="imgErr"
                                         style={{ 'width': '30px', 'marginTop': '-3px' }}
