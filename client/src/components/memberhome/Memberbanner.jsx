@@ -10,7 +10,7 @@ import { render } from "react-dom";
 import $ from "jquery";
 import { MyContext } from '../../commons/context-manager';
 import AccountSetting from './AccountSetting';
-
+import DepositPoint from "./Depositpoint"
 
 const Memberbanner = (props) => {
 
@@ -50,15 +50,15 @@ const Memberbanner = (props) => {
                 <div className="row content">
                     <div className="banner">
                         {/* <div className="row"> */}
-                            <div className="col-sm-12 title">
-                                <h3 style={{ "textAlign": "center" }}>
-                                    會員中心MEMBER CENTER</h3>
-                            </div>
+                        <div className="col-sm-12 title">
+                            <h3 style={{ "textAlign": "center" }}>
+                                會員中心MEMBER CENTER</h3>
+                        </div>
                         {/* </div> */}
                         <h2 className="name">{props.props.memberData.account}</h2>
                         {/* {console.log(props.props)} */}
                         {/* <b className="getbalance">主帳戶餘額: {props.props.balance} */}
-                        <b className="getbalance">總共餘額: {total_balance}
+                        <b className="getbalance">總共餘額: {total_balance.toLocaleString()}
 
                             {/* <div id="sf-balance-00001">
                                     <span className="glyphicon glyphicon-usd"></span>
@@ -73,7 +73,16 @@ const Memberbanner = (props) => {
                     <div className="main">
                         <div className="col-sm-2 membernav">
                             <ul className="list-group">
-                                <li className="list-group-item modalUseing" aria-controls="saving" onClick={clickComponent}>
+                                <li className="list-group-item modalUseing" aria-controls="sf-membercenter-memberinfo-00002" onClick={clickComponent}>
+                                    {/* <a href="/memberinfo"> */}
+                                    <a>
+                                        <i className="icon glyphicon glyphicon-cog"></i>
+                                        <span className="text">基本資料</span>
+                                    </a>
+                                </li>
+
+
+                                <li className="list-group-item modalUseing" aria-controls="sf-membercenter-depositpoint-00002" onClick={clickComponent}>
                                     {/* <a href="/trademoney/saving"> */}
                                     <a >
                                         <span className="icon glyphicon glyphicon-usd"></span>
@@ -94,34 +103,28 @@ const Memberbanner = (props) => {
                                         <span className="text">點數提領</span>
                                     </a>
                                 </li>
-                                <li className="list-group-item modalUseing" aria-controls="sf-membercenter-querybetlog-00002" onClick={clickComponent}>
-                                    {/* <a href="/querybetlog"> */}
+                                {/* <li className="list-group-item modalUseing" aria-controls="sf-membercenter-querybetlog-00002" onClick={clickComponent}>
+                                    <a href="/querybetlog">
                                     <a >
                                         <i className="icon fa fa-futbol-o" aria-hidden="true"></i>
                                         <span className="text">投注資料</span>
                                     </a>
-                                </li>
-                                <li className="list-group-item modalUseing" aria-controls="sf-membercenter-profitloss-00002" onClick={clickComponent}>
-                                    {/* <a href="/profitloss"> */}
+                                </li> */}
+                                {/* <li className="list-group-item modalUseing" aria-controls="sf-membercenter-profitloss-00002" onClick={clickComponent}>
+                                    <a href="/profitloss">
                                     <a >
                                         <span className="icon fa fa-bar-chart" aria-hidden="true"></span>
                                         <span className="text">遊戲盈虧</span>
                                     </a>
-                                </li>
-                                <li className="list-group-item modalUseing" aria-controls="sf-membercenter-tradepoint-00002" onClick={clickComponent}>
-                                    {/* <a href="/tradepoint"> */}
+                                </li> */}
+                                {/* <li className="list-group-item modalUseing" aria-controls="sf-membercenter-tradepoint-00002" onClick={clickComponent}>
+                                    <a href="/tradepoint">
                                     <a >
                                         <span className="icon glyphicon glyphicon-asterisk"></span>
                                         <span className="text">點數紀錄</span>
                                     </a>
-                                </li>
-                                <li className="list-group-item modalUseing" aria-controls="sf-membercenter-memberinfo-00002" onClick={clickComponent}>
-                                    {/* <a href="/memberinfo"> */}
-                                    <a>
-                                        <i className="icon glyphicon glyphicon-cog"></i>
-                                        <span className="text">帳戶設定</span>
-                                    </a>
-                                </li>
+                                </li> */}
+
                                 <li className="list-group-item modalUseing" aria-controls='sf-membercenter-verifyphotoinfo-00002' onClick={clickComponent}>
                                     {/* <a href="/verifyphotoinfo"> */}
                                     <a >
@@ -141,7 +144,8 @@ const Memberbanner = (props) => {
                                 <Querybetlog />
                                 <Tradepoint />
                                 <Verifyphotoinfo />
-                                <AccountSetting />
+                                <AccountSetting memberData={props.props.memberData} />
+                                <DepositPoint account={props.props.memberData.account} />
                                 <Withdraw />
                             </MyContext.Provider>
                         </div>

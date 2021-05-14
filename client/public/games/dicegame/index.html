@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./_css/index.css">
+
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
+</head>
+
+<body>
+    <!-- 測試用按鈕 -->
+    <!-- <button id='comeOutButton'>dicetest</button> -->
+    <!-- 倒數計時表 -->
+    <div id="timecounter"></div>
+    <div class="outerWrap">
+        <!-- 骰子 -->
+        <div class="dice-board">
+            <div class="container-dice1">
+                <div class="dice dice-one" id='dice1'>
+                    <div class='side one' id="dice-one-side-one">
+                        <div class="divot one-1"></div>
+                    </div>
+                    <div class='side two' id="dice-one-side-two">
+                        <div class="divot two-1"></div>
+                        <div class="divot two-2"></div>
+                    </div>
+                    <div class='side three' id="dice-one-side-three">
+                        <div class="divot three-1"></div>
+                        <div class="divot three-2"></div>
+                        <div class="divot three-3"></div>
+                    </div>
+                    <div class='side four' id="dice-one-side-four">
+                        <div class="divot four-1"></div>
+                        <div class="divot four-2"></div>
+                        <div class="divot four-3"></div>
+                        <div class="divot four-4"></div>
+                    </div>
+                    <div class='side five' id="dice-one-side-five">
+                        <div class="divot five-1"></div>
+                        <div class="divot five-2"></div>
+                        <div class="divot five-3"></div>
+                        <div class="divot five-4"></div>
+                        <div class="divot five-5"></div>
+                    </div>
+                    <div class='side six' id="dice-one-side-six">
+                        <div class="divot six-1"></div>
+                        <div class="divot six-2"></div>
+                        <div class="divot six-3"></div>
+                        <div class="divot six-4"></div>
+                        <div class="divot six-5"></div>
+                        <div class="divot six-6"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-dice2">
+                <div class="dice dice-two" id='dice2'>
+                    <div class='side one' id="dice-two-side-one">
+                        <div class="divot one-1"></div>
+                    </div>
+                    <div class='side two' id="dice-two-side-two">
+                        <div class="divot two-1"></div>
+                        <div class="divot two-2"></div>
+                    </div>
+                    <div class='side three' id="dice-two-side-three">
+                        <div class="divot three-1"></div>
+                        <div class="divot three-2"></div>
+                        <div class="divot three-3"></div>
+                    </div>
+                    <div class='side four' id="dice-two-side-four">
+                        <div class="divot four-1"></div>
+                        <div class="divot four-2"></div>
+                        <div class="divot four-3"></div>
+                        <div class="divot four-4"></div>
+                    </div>
+                    <div class='side five' id="dice-two-side-five">
+                        <div class="divot five-1"></div>
+                        <div class="divot five-2"></div>
+                        <div class="divot five-3"></div>
+                        <div class="divot five-4"></div>
+                        <div class="divot five-5"></div>
+                    </div>
+                    <div class='side six' id="dice-two-side-six">
+                        <div class="divot six-1"></div>
+                        <div class="divot six-2"></div>
+                        <div class="divot six-3"></div>
+                        <div class="divot six-4"></div>
+                        <div class="divot six-5"></div>
+                        <div class="divot six-6"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-dice3">
+                <div class="dice dice-three" id='dice3'>
+                    <div class='side one' id="dice-three-side-one">
+                        <div class="divot one-1"></div>
+                    </div>
+                    <div class='side two' id="dice-three-side-two">
+                        <div class="divot two-1"></div>
+                        <div class="divot two-2"></div>
+                    </div>
+                    <div class='side three' id="dice-three-side-three">
+                        <div class="divot three-1"></div>
+                        <div class="divot three-2"></div>
+                        <div class="divot three-3"></div>
+                    </div>
+                    <div class='side four' id="dice-three-side-four">
+                        <div class="divot four-1"></div>
+                        <div class="divot four-2"></div>
+                        <div class="divot four-3"></div>
+                        <div class="divot four-4"></div>
+                    </div>
+                    <div class='side five' id="dice-three-side-five">
+                        <div class="divot five-1"></div>
+                        <div class="divot five-2"></div>
+                        <div class="divot five-3"></div>
+                        <div class="divot five-4"></div>
+                        <div class="divot five-5"></div>
+                    </div>
+                    <div class='side six' id="dice-three-side-six">
+                        <div class="divot six-1"></div>
+                        <div class="divot six-2"></div>
+                        <div class="divot six-3"></div>
+                        <div class="divot six-4"></div>
+                        <div class="divot six-5"></div>
+                        <div class="divot six-6"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 賭桌 -->
+        <div class="gambleblock">
+            <table class='gambletable'>
+                <tr>
+                    <td rowspan="3" colspan="4" id="smallDice" odds="1.95" value="small" class="gameSelect">
+                        <p class="bigandsmall">小</p>
+                        <p class="otherwords">點數 4-10</p>
+                        <p class="odds">1賠1.95</p>
+                        <p class="otherwords">豹子通吃</p>
+                    </td>
+                    <td colspan="6" class="odds" id="centerodds" odds="200">1賠200</td>
+                    <td rowspan="3" colspan="4" id="bigDice" odds="1.95" value="big" class="gameSelect">
+                        <p class="bigandsmall">大</p>
+                        <p class="otherwords">點數 11-17</p>
+                        <p class="odds">1賠1.95</p>
+                        <p class="otherwords">豹子通吃</p>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td class="threesmae1 gameSelect" value="threeSame1" odds="200" id="threeSame1"><img class="threesamepic" src="./IMG/111.png" alt=""></td>
+                    <td class="threesmae2 gameSelect" value="threeSame2" odds="200" id="threeSame2"><img class="threesamepic" src="./IMG/222.png" alt=""></td>
+                    <td class="threesmae3 gameSelect" value="threeSame3" odds="200" id="threeSame3"><img class="threesamepic" src="./IMG/333.png" alt=""></td>
+                    <td class="threesmae4 gameSelect" value="threeSame4" odds="200" id="threeSame4"><img class="threesamepic" src="./IMG/444.png" alt=""></td>
+                    <td class="threesmae5 gameSelect" value="threeSame5" odds="200" id="threeSame5"><img class="threesamepic" src="./IMG/555.png" alt=""></td>
+                    <td class="threesmae6 gameSelect" value="threeSame6" odds="200" id="threeSame6"><img class="threesamepic" src="./IMG/666.png" alt=""></td>
+                </tr>
+                <tr>
+                    <td colspan="6" class="odds threesmae gameSelect" odds="33" id="anyTS" value="anyTS">任意豹子 1賠33</td>
+                </tr>
+
+                <tr>
+                    <td rowspan="2" class="dice-4 gameSelect" odds="60">
+                        <p class="numbers">4</p>
+                        <p class="odds">1賠60</p>
+                    </td>
+                    <td rowspan="2" class="dice-5 gameSelect" odds="30">
+                        <p class="numbers">5</p>
+                        <p class="odds">1賠30</p>
+                    </td>
+                    <td rowspan="2" class="dice-6 gameSelect" odds="17">
+                        <p class="numbers ">6</p>
+                        <p class="odds">1賠17</p>
+                    </td>
+                    <td rowspan="2" class="dice-7 gameSelect" odds="8">
+                        <p class="numbers">7</p>
+                        <p class="odds">1賠8</p>
+                    </td>
+                    <td rowspan="2" class="dice-8 gameSelect" odds="7">
+                        <p class="numbers">8</p>
+                        <p class="odds">1賠7</p>
+                    </td>
+                    <td rowspan="2" class="dice-9 gameSelect" odds="6">
+                        <p class="numbers">9</p>
+                        <p class="odds">1賠6</p>
+                    </td>
+                    <td rowspan="2" class="dice-10 gameSelect" odds="6">
+                        <p class="numbers">10</p>
+                        <p class="odds">1賠6</p>
+                    </td>
+                    <td rowspan="2" class="dice-11 gameSelect" odds="6">
+                        <p class="numbers">11</p>
+                        <p class="odds">1賠6</p>
+                    </td>
+                    <td rowspan="2" class="dice-12 gameSelect" odds="7">
+                        <p class="numbers">12</p>
+                        <p class="odds">1賠7</p>
+                    </td>
+                    <td rowspan="2" class="dice-13 gameSelect" odds="8">
+                        <p class="numbers">13</p>
+                        <p class="odds">1賠8</p>
+                    </td>
+                    <td rowspan="2" class="dice-14 gameSelect" odds="12">
+                        <p class="numbers">14</p>
+                        <p class="odds">1賠12</p>
+                    </td>
+                    <td rowspan="2" class="dice-15 gameSelect" odds="17">
+                        <p class="numbers">15</p>
+                        <p class="odds">1賠17</p>
+                    </td>
+                    <td rowspan="2" class="dice-16 gameSelect" odds="30">
+                        <p class="numbers">16</p>
+                        <p class="odds">1賠30</p>
+                    </td>
+                    <td rowspan="2" class="dice-17 gameSelect" odds="60">
+                        <p class="numbers">17</p>
+                        <p class="odds">1賠60</p>
+                    </td>
+
+                </tr>
+                <!-- <tr>
+                    <td></td>
+                    <td colspan="2" class="howmuchnumber">一 <img class="numberdice" src="./IMG/1c.gif" alt=""></td>
+                    <td colspan="2" class="howmuchnumber">二 <img class="numberdice" src="./IMG/2c.gif" alt=""></td>
+                    <td colspan="2" class="howmuchnumber">三 <img class="numberdice" src="./IMG/3c.gif" alt=""></td>
+                    <td colspan="2" class="howmuchnumber">四 <img class="numberdice" src="./IMG/4c.gif" alt=""></td>
+                    <td colspan="2" class="howmuchnumber">五 <img class="numberdice" src="./IMG/5c.gif" alt=""></td>
+                    <td colspan="2" class="howmuchnumber" id="valueNuber6">六 <img class="numberdice" src="./IMG/6c.gif" alt=""></td>
+                </tr> -->
+            </table>
+        </div>
+
+        <!-- 訊息條 -->
+        <div class="diceGameBar">
+            <div class="diceGameInfo">
+                <div class="balance">
+                    <div class="balanceLogo"></div>
+                    <div class="balanceDetail">
+                        <span class="balanceLabel">餘額：</span>
+                        <span class="balanceAmount" id='balanceAmount'>6000元</span>
+                    </div>
+                </div>
+                <div class="betMoney">
+                    <div class="betMoneyLogo"></div>
+                    <div class="betMoneyDetail">
+                        <span class="betMoneyLabel">下注金額：</span>
+                        <span class="betMoneyAmount" id='betMoneyAmount'>0元</span>
+                    </div>
+                </div>
+                <div class="userName">
+                    <div class="nameLogo"></div>
+                    <div class="name">StupidClown</div>
+                </div>
+            </div>
+            <!-- <div class="betBar clearfix">
+                <div class="button resetButton" id="resetButton" onclick="resetchips()">重置注碼</div>
+                <div class="button cancelButton">取消投注</div>
+                <div class="button betButton">確認投注</div>
+                <div class="button pieceButtoon">翻倍投注</div>
+            </div> -->
+            <!-- 籌碼 -->
+            <div class="chips clearfix">
+                <div class="chip chip1" id="chip1" value="1"></div>
+                <div class="chip chip5" id="chip5" value="5"></div>
+                <div class="chip chip10" id="chip10" value="10"></div>
+                <div class="chip chip20" id="chip20" value="20"></div>
+                <div class="chip chip50" id="chip50" value="50"></div>
+                <div class="chip chip100" id="chip100" value="100"></div>
+                <div class="chip chip1000" id="chip1000" value="1000"></div>
+                <div class="chip chip5000" id="chip5000" value="5000"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./_js/index.js"></script>
+</body>
+
+</html>

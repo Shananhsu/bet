@@ -59,11 +59,11 @@ class Maingamelink extends Component {
             subTitle:"簡介與規則",
             desc:"你樂我樂百家樂"
         }
-        this.game08={
-            title:"骰寶",
-            subTitle:"簡介與規則",
-            desc:"就是比大小拉!"
-        }
+        // this.game08={
+        //     title:"骰寶",
+        //     subTitle:"簡介與規則",
+        //     desc:"就是比大小拉!"
+        // }
 
 
 
@@ -126,11 +126,11 @@ class Maingamelink extends Component {
                                 <img src="/images/gamelink/baccarat.jpg" />百家樂
                             </a>
 
-                            <a onMouseLeave={()=>{this.changeInfo(this.game00)}}
+                            {/* <a onMouseLeave={()=>{this.changeInfo(this.game00)}}
                              onMouseOver={()=>{this.changeInfo(this.game08)}} className="game" href="./games/baccarat/index.html"
                                 target="game" data-category="" data-sub_category="">
                                 <img src="/images/gamelink/sicBo_logo.png" />骰寶
-                            </a>
+                            </a> */}
 
                         </div>
 

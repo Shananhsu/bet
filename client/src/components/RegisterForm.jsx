@@ -19,6 +19,7 @@ export default function RegisterForm(props) {
                 
             }).then(()=>{
                 alert('註冊成功')
+                props.props.history.go(-1)
             });
     }
 

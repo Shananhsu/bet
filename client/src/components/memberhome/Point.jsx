@@ -8,7 +8,7 @@ import $ from "jquery"
 
 const Point = (props) => {
     // 會員資料顯示
-    const [account, setAccount] = useState("");
+    // const [account, setAccount] = useState("");
     const [balance, setBalance] = useState("");
     const [sdd_balance, setSdd_balance] = useState("");
     const [blackjack_balance, setBlackjack_balance] = useState("");
@@ -45,8 +45,9 @@ const Point = (props) => {
                     setDicegame_balance(res.data[0].dicegame_balance);
                 }
             })
+           
     }
-
+    
     // 甜甜圈圖
     const data = {
         labels: ['主帳戶', '射龍門', '21點', '妞妞', '捕魚機', '老虎機',
@@ -87,7 +88,7 @@ const Point = (props) => {
         console.log(`turnin_balance : ${turnin_balance}`)
         console.log(data.money)
 
-        if ( parseFloat(turnout_balance) > parseFloat(data.money)) {
+        if (parseFloat(turnout_balance) > parseFloat(data.money)) {
             await Axios.post('http://localhost:3001/api/transform',
                 {
                     "turnout": turnout,
@@ -98,7 +99,7 @@ const Point = (props) => {
 
                 }).then((res) => {
                     console.log(res)
-                    if (res.data.affectedRows != 0) {
+                    if (res.data.affectedRows !== 0) {
                         alert("轉帳成功")
                     }
                     else { alert("其他錯誤,請洽詢客服") }
@@ -112,43 +113,44 @@ const Point = (props) => {
         <div id="sf-membercenter-point-getbalance-00002" >
 
             <div class="panel panel-primary">
-                <div class="panel-heading">餘額總計</div>
-                <div className="container col-sm" style={{ "width": "300px" }} >
-                    <Doughnut data={data} />
-                </div>
+
 
                 <div class="panel-body">
-                    <ul class="info list-group col-sm-8">
+                    <div class="panel-heading">餘額總計</div>
+                    <div className="col-sm-8" style={{ "width": "550px"}} >
+                        <Doughnut data={data} />
+                    </div>
+                    <ul className="info list-group col-sm-5">
                         {/* {console.log("////point props/////")}
                         {console.log(props)}
                         {console.log("////point props/////")} */}
                         {getMemberBalance()}
-                        <li class="list-group-item col-sm-3">
-                            <span class="badge">{main_balance}</span>
+                        <li class="list-group-item col-sm-6" style={{ "marginTop": "0.25em" }}>
+                            <span class="badge">{main_balance.toLocaleString()}</span>
                             主帳戶</li>
-                        <li class="list-group-item col-sm-3">
-                            <span class="badge">{sdd_balance}</span>
+                        <li class="list-group-item col-sm-6">
+                            <span class="badge">{sdd_balance.toLocaleString()}</span>
                             射龍門</li>
-                        <li class="list-group-item col-sm-3">
-                            <span class="badge">{blackjack_balance}</span>
+                        <li class="list-group-item col-sm-6">
+                            <span class="badge">{blackjack_balance.toLocaleString()}</span>
                             21點</li>
-                        <li class="list-group-item col-sm-3">
-                            <span class="badge">{niuniu_balance}</span>
+                        <li class="list-group-item col-sm-6">
+                            <span class="badge">{niuniu_balance.toLocaleString()}</span>
                             妞妞</li>
-                        <li class="list-group-item col-sm-3">
-                            <span class="badge">{fish_balance}</span>
+                        <li class="list-group-item col-sm-6">
+                            <span class="badge">{fish_balance.toLocaleString()}</span>
                             捕魚機</li>
-                        <li class="list-group-item col-sm-3">
-                            <span class="badge">{tiger_balance}</span>
+                        <li class="list-group-item col-sm-6">
+                            <span class="badge">{tiger_balance.toLocaleString()}</span>
                             老虎機</li>
-                        <li class="list-group-item col-sm-3">
-                            <span class="badge">{billiard_balance}</span>
+                        <li class="list-group-item col-sm-6">
+                            <span class="badge">{billiard_balance.toLocaleString()}</span>
                             撞球遊戲</li>
-                        <li class="list-group-item col-sm-3">
-                            <span class="badge">{baccarat_balance}</span>
+                        <li class="list-group-item col-sm-6">
+                            <span class="badge">{baccarat_balance.toLocaleString()}</span>
                             百家樂</li>
-                        <li class="list-group-item col-sm-3">
-                            <span class="badge">{dicegame_balance}</span>
+                        <li class="list-group-item col-sm-6">
+                            <span class="badge">{dicegame_balance.toLocaleString()}</span>
                             骰子遊戲</li>
                         {setTotal_balance(main_balance + sdd_balance + blackjack_balance + niuniu_balance + fish_balance
                             + tiger_balance + billiard_balance + baccarat_balance + dicegame_balance)}

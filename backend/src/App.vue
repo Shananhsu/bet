@@ -38,7 +38,7 @@ export default {
       isLogin: false,
       session: "",
       account: "",
-      report: true,
+      report: false,
       showModal: false,
     };
   },

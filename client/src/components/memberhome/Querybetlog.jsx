@@ -73,33 +73,7 @@ class Querybetlog extends Component {
                                             <option value="">DG</option>
                                             <option value="">36588六合彩</option>
                                             <option value="">OG</option>
-                                            <option value="">WM</option>
-                                            <option value="">LJ Lottery</option>
-                                            <option value="">QT</option>
-                                            <option value="">VG</option>
-                                            <option value="">體球王</option>
-                                            <option value="">必贏</option>
-                                            <option value="15605">AFB</option>
-                                            <option value="">RTG</option>
-                                            <option value="">GsAviaEsport</option>
-                                            <option value="">S128越南鬥雞</option>
-                                            <option value="">GsYeeBet</option>
-                                            <option value="">Gsmilelect</option>
-                                            <option value="">GsDg</option>
-                                            <option value="">GsBetSoft</option>
-                                            <option value="">Vsl越南彩票</option>
-                                            <option value="15606">GsMgChess</option>
-                                            <option value="">GsOg</option>
-                                            <option value="">非同凡響</option>
-                                            <option value="">GsAllBet</option>
-                                            <option value="">AiGaming</option>
-                                            <option value="">GsQt</option>
-                                            <option value="">OBG Live</option>
-                                            <option value="">OBG 電子</option>
-                                            <option value="">億博</option>
-                                            <option value="">OG+</option>
-                                            <option value="">OBG 彩票</option>
-                                            <option value="">OBG 捕魚</option>
+
                                         </select>
                                     </div>
                                 </div>

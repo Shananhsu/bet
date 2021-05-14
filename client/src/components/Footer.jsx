@@ -18,61 +18,68 @@ class Footer extends Component {
                             <div className="aboutBox">
                                 <ul>
                                     <li>
-                                        <h6>關於</h6>
+                                        <h6>遊戲大廳</h6>
+                                        {/* <a href="http://localhost:3000/gamelink"><h6>遊戲大廳</h6></a> */}
                                     </li>
                                     <li>
-                                        <a href="/about/us">關於我們</a>
+                                        <a href="http://localhost:3000/gamelink" target="_blank">遊戲大廳入口</a>
                                     </li>
                                     <li>
-                                        <a href="/about/policy">服務條款</a>
+                                        <a href="http://localhost:3000/games/blackjack/index.html" target="_blank">21點</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://localhost:3000/games/niuniu/public/index.html" target="_blank">妞妞</a>
+                                    </li>
+                                    <li>
+                                        <a href="hhttp://localhost:3000/games/dragonshoot/index.html" target="_blank">設龍門</a>
+                                    </li>
+
+
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <h6><br /></h6>
+                                    </li>
+                                    <li>
+                                        <a href="http://localhost:3000/games/fish/fishShooter.html" target="_blank">捕魚機</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://localhost:3000/games/tiger/index.html" target="_blank">拉霸</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://localhost:3000/games/billiard/index.html" target="_blank">撞球</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://localhost:3000/games/baccarat/index.html" target="_blank">百家樂</a>
                                     </li>
                                 </ul>
                                 <ul>
                                     <li>
-                                        <h6>開戶交易</h6>
+                                        <h6>會員中心</h6>
                                     </li>
                                     <li>
-                                        <a href="/cust/open">開戶流程</a>
+                                        <a href="http://localhost:3000/login?">登入</a>
                                     </li>
                                     <li>
-                                        <a href="/cust/save">入金流程</a>
-                                    </li>
-                                    <li>
-                                        <a href="/cust/withdraw">出金流程</a>
-                                    </li>
-                                    <li>
-                                        <a href="./bonus.html">優惠中心</a>
-                                    </li>
+                                        <a href="http://localhost:3000/register">註冊</a>
+                                    </li>                                
                                 </ul>
-                                <ul>
+                          
+                                <ul style={{ "float": "left" }}>
                                     <li>
-                                        <h6>幫助與支持</h6>
-                                    </li>
-                                    <li>
-                                        <a href="/about/policy">服務條款</a>
-                                    </li>
-                                    <li>
-                                        <a href="/about/privacy">隱私政策</a>
-                                    </li>
-                                    <li>
-                                        <a href="/about/privacy">存取款幫助</a>
-                                    </li>
-                                </ul>
-                                <ul style={{"float": "left"}}>
-                                    <li>
-                                        <p>諾亞娛樂擁有歐洲馬耳他博彩管理局（MGA）和博彩委員會（PAGCOR）頒發的合法執照。</p>
+                                        <p>OMOG擁有南極洲冰河博彩管理局（SGA）和博彩委員會（SPAGCOR）頒發的合法執照。</p>
                                     </li>
                                 </ul>
                                 <ul>
 
                                     <li>
-                                        <p>註冊於英屬維爾京群島，是受國際博彩協會認可的合法博彩公司。進行註冊並娛樂前，請確保您年滿18周歲！</p>
+                                        <p>註冊於南極洲屬冰河群島，是受國際博彩協會認可的合法博彩公司。進行註冊並娛樂前，請確保您年滿18周歲！</p>
                                     </li>
                                 </ul>
 
                             </div>
                             <div className="copyright">
-                                COPYRIGHT (©) 2020 諾亞娛樂版權所有，不得轉載。
+                                COPYRIGHT (©) 2021 OMOG娛樂版權所有，不得轉載。
         </div>
                         </div>
                     </div>

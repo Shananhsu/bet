@@ -15,14 +15,27 @@ const MemberState = (props) => {
 
     Axios.defaults.withCredentials = true;
     const history = useHistory();
+    const [main_balance, setMain_balance] = useState("");
     const logoutButtonClick = () => {
         Axios.get('http://localhost:3001/api/logout').then((res) => {
             // props.close('logout')
+            // console.log(props)
             props.props.history.go(0);
         })
     }
     const [isModalOpen, toggleModal] = useState(false);
-
+    // 打後台拿資料
+    const getMemberBalance = () => {
+        Axios.post('http://localhost:3001/api/getBalance',
+            {
+                "account": props.memberData.account,
+            }).then((res) => {
+                // console.log( res)
+                if (res.data.message === undefined) {
+                    setMain_balance(res.data[0].main_balance);
+                }
+            })
+    }
     return (
         <React.Fragment>
 
@@ -30,16 +43,16 @@ const MemberState = (props) => {
             {console.log(props)}
             {console.log("///memberstate//props////")} */}
             <div id="masthead">
-
+                {getMemberBalance()}
                 <div className="">
                     <div className="row">
                         <div className="col-xs-1 auto_left">
 
                         </div>
-                        <div className="col-xs-11 auto_left" style={{ "float": "inherit" }}>
+                        <div className="col-xs-12 auto_left" style={{ "float": "inherit" }}>
                             <div className="auth" style={{ "float": "right" }}>
                                 <div>
-                                    <div style={{ "width": "300px", "float": "left" }}>
+                                    <div style={{ "width": "150px", "float": "left" }}>
                                         <a className="btn btn-sm btn-danger glyphicon glyphicon-log-out " onClick={logoutButtonClick}
                                             style={{ "marginTop": "4px" }}></a>
                                         {/* <a className="btn btn-sm btn-primary membercenter glyphicon glyphicon-home" href="/memberinfo" */}
@@ -49,9 +62,10 @@ const MemberState = (props) => {
                                             <Memberbanner props={props} />
                                         </Modal>
                                     </div>
+                                
                                 </div>
-                                <div className="info"
-                                    style={{ "float": "right", "marginLeft": "150px", "marginTop": "-24px" }}>
+                                <div className="info_member"
+                                    style={{ "float": "right",  "marginTop": "5px" ,"fontSize":"18px"}}>
                                     <b>您好,
                                             <a href="/" >
                                             {/* {console.log(props)} */}
@@ -61,7 +75,7 @@ const MemberState = (props) => {
                                         <div id="sf-membermsg-button-00001" style={{ "display": "inline" }}>
                                         <b> 主帳戶餘額 :
                                                 <a >
-                                                {props.memberData.balance}
+                                                {main_balance.toLocaleString()}
                                             </a>
                                         </b>
                                     </div>

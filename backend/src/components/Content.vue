@@ -1,6 +1,5 @@
 <template>
   <div id="content">
-    <!-- <p id="head" v-if="bool">財務報表 / 代理{{}}的會員 / 會員{{}}的明細</p> -->
     <div id="totalBet" v-if="closeGame">
       <p>總注單數量</p>
       <p>{{ count }}</p>
@@ -9,9 +8,8 @@
       <p>總下注金額</p>
       <p>{{ amount }}</p>
     </div>
-    <div></div>
     <div id="tables">
-      <table id="firstT" v-if="bool">
+      <table v-if="bool">
         <tr class="title">
           <th>會員帳號</th>
           <th>姓名</th>
@@ -29,7 +27,7 @@
           <td><button @click="showGameData">前往</button></td>
         </tr>
       </table>
-      <table id="secondT" v-if="closeGame">
+      <table id="gameTable" v-if="closeGame">
         <tr class="title">
           <th>下注時間</th>
           <th>注單編號</th>
@@ -56,7 +54,6 @@
         </tr>
       </table>
     </div>
-    <!-- <button v-if="closeGame" @click="reset">重選</button> -->
   </div>
 </template>
 
@@ -71,6 +68,7 @@ export default {
       count: 0,
       results: [],
       gameData: [],
+      betTime: [],
     };
   },
   watch: {
@@ -126,15 +124,28 @@ export default {
       axios
         .get("http://127.0.0.1:3001/backend/fetchGame")
         .then((e) => {
-          console.log(e);
+          console.log(e.data);
           this.gameData = e.data;
+          for (let i = 0; i < e.data.length; i++) {
+            let date = new Date(e.data[i].betTime);
+            date =
+              date.getFullYear() +
+              "-" +
+              ("00" + (date.getMonth() + 1)).slice(-2) +
+              "-" +
+              ("00" + date.getDate()).slice(-2) +
+              " " +
+              ("00" + date.getHours()).slice(-2) +
+              ":" +
+              ("00" + date.getMinutes()).slice(-2) +
+              ":" +
+              ("00" + date.getSeconds()).slice(-2);
+            this.gameData[i].betTime = date;
+          }
         })
         .catch((err) => {
           console.log(err);
         });
-    },
-    reset() {
-      window.location.href = "/";
     },
   },
 };
@@ -153,19 +164,9 @@ export default {
   font-size: 10px;
   color: white;
 }
-#firstT {
-  width: 51.5%;
-  background-color: #343a40;
-}
-#secondT {
-  width: 98%;
-  background-color: #343a40;
-}
 #tables {
-  /* background-color: #343a40; */
   margin-left: 18px;
   margin-top: 20px;
-  /* width: 96%; */
   text-align: center;
   overflow-y: auto;
   height: 67%;
@@ -210,11 +211,13 @@ th,
 td {
   border-collapse: collapse;
   text-align: center;
-  border: 1px solid rgb(51, 51, 51);
+  border: 1px solid #333333;
   padding: 10px;
   margin: 0;
 }
-
+.trhover {
+  background-color: #343a40;
+}
 .trhover:hover {
   background-color: rgba(92, 97, 156, 0.493);
 }
@@ -223,5 +226,8 @@ td {
 }
 .red {
   color: red;
+}
+#gameTable {
+  width: 98%;
 }
 </style>

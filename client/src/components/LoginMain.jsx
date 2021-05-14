@@ -59,7 +59,7 @@ export default function LoginMain(props) {
             })
     }
     useEffect(() => {
-        Axios.get("http://localhost:3001/login").then((response) => {
+        Axios.post("http://localhost:3001/login").then((response) => {
             // console.log(response)
             if (response.data.loggedIn == true) {
                 setLoginStatus(response.data.user[0].username);

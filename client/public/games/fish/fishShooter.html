@@ -30,12 +30,12 @@
         canvas {
             /* background-color: sandybrown; */
             /* background: sandybrown url("./img/backgroundImg/sea01.jpg") no-repeat; */
-            background:url("./img/backgroundImg/sea01.jpg"), url("./img/backgroundImg/chisou_kazan.png");
+            background: url("./img/backgroundImg/sea01.jpg"), url("./img/backgroundImg/chisou_kazan.png");
             /* background-size: 100% 83%; */
-            background-size:100% 83%, 150% 50%;
-            background-repeat: no-repeat,no-repeat;
-            background-position-x: 0,20%;
-            background-position-y: 0,120%;
+            background-size: 100% 83%, 150% 50%;
+            background-repeat: no-repeat, no-repeat;
+            background-position-x: 0, 20%;
+            background-position-y: 0, 120%;
             display: block;
             margin: auto;
             height: 100vh;
@@ -54,9 +54,9 @@
 
             // 匯入會員帳號與會員編號
             let memberId = "0005"
-            let account = "Stevan"
+            let account = "Steven"
             // 匯入會員錢包，moneyBag會在新建amm時用作引數
-            let memberMoneyBag = 200
+            let memberMoneyBag = 1000
 
 
             // 以上幾個資料需要等登入系統做好才能從cookie或session抓資料庫的資料
@@ -241,7 +241,7 @@
                     let betRecord = {
                         betRecord: [
                             memberId, account,
-                            this.firedTime , "捕魚機", this.shellsType,
+                            this.firedTime, "捕魚機", this.shellsType,
                             this.cost, memberMoneyBag,
                             this.scoreGeted, this.income, this.memberMoneyBagUpdate,
                             this.fishHited, this.fishKilled,
@@ -356,6 +356,20 @@
                     // 要傳到資料庫的資料-----------
                     this.shellsType = "捕魚機:彈跳砲彈" //砲彈種類
                     // 要傳到資料庫的資料-----------
+                    // 彈跳檢定用的參數
+                    this.xJump = true;
+                    this.yJump = true;
+                    this.pp = false
+                    //碰撞檢測用的參數
+                    this.edgeLeft = this.x - this.width / 2;
+                    this.edgeRight = this.x + this.width / 2
+                    this.edgeTop = this.y - this.height / 2;
+                    this.edgeBottom = this.y + this.height / 2
+                    //
+                    this.fishHitedIndex = "";
+                    this.lastFishHitedIndex = "";
+
+
                 } // constructor
                 reNew() {
                     // 更新物件數據
@@ -395,14 +409,16 @@
 
 
 
-                    //  彈跳
+                    //  彈跳 碰到畫面邊緣的彈跳
                     if (this.x <= 0 || this.x >= canvas.width) {
                         this.xSpeed = -this.xSpeed;
                         this.hp -= 1;
+                        this.lastFishHitedIndex = ""
                     }
                     if (this.y <= 0 || this.y >= canvas.height * 0.81) {
                         this.ySpeed = -this.ySpeed;
                         this.hp -= 1;
+                        this.lastFishHitedIndex = ""
                     }
                     if (this.hp <= -1) {
                         this.betResult();
@@ -417,165 +433,146 @@
                 // 碰撞檢測 
                 hitCheck(otherObj) {
 
+
                     // 檢測的項目並不是物件是否"已重疊"
                     // 而是物件是否"沒重疊"，通過if就是沒重疊，未通過則是已重疊
-                    // let hit = true;
                     if (
-                        (this.edgeLeft >= otherObj.edgeRight) ||
-                        (this.edgeRight <= otherObj.edgeLeft) ||
-                        (this.edgeTop >= otherObj.edgeBottom) ||
-                        (this.edgeBottom <= otherObj.edgeTop)
-                    ) {
-                        return
-                    } else {
+                        (this.edgeLeft > otherObj.edgeRight) ||
+                        (this.edgeRight < otherObj.edgeLeft) ||
+                        (this.edgeTop > otherObj.edgeBottom) ||
+                        (this.edgeBottom < otherObj.edgeTop)
+                    ) { } else {
+
+                        let foo = (obj) => obj == otherObj;
+                        let theFishIndex = fisharr.findIndex(foo);
+
+                        // 如果這次打到的魚跟最後一次打到的一樣，return
+                        if (theFishIndex === this.lastFishHitedIndex) {
+                            return
+                        } else { this.lastFishHitedIndex = theFishIndex } //更新最後一次打到的魚 
 
 
 
-                        // 打到魚彈跳
-                        // 砲彈從魚的右上方過來
-                        this.xJump = true; // 當砲彈的長或寬比魚的長或寬小的時候，避免觸發兩次彈跳檢定
-                        this.yJump = true; // 當砲彈的長或寬比魚的長或寬小的時候，避免觸發兩次彈跳檢定
+                        // 打到魚彈跳    
+                        // 打到魚彈跳    
+                        // 打到魚彈跳    
 
-
-                        // 如果角度為0，會造成x方向沒有反彈效果的問題
-                        // 如果角度太小，會造成大魚連續碰種砲彈
-                        // 解決辦法:加快砲彈的速度或是碰撞時增加角度
-                        // 採用碰撞時增加角度這個做法，結果導致彈跳方向難以預測
-                        // 這樣的結果蠻有趣的，所以就這樣吧
-                        // 因此在此作修正
+                        // // 如果角度為0，會造成x方向沒有反彈效果的問題
+                        // // 如果角度太小，會造成大魚連續碰種砲彈
+                        // // 解決辦法:加快砲彈的速度或是碰撞時增加角度
+                        // // 採用碰撞時增加角度這個做法，結果導致彈跳方向難以預測
+                        // // 這樣的結果蠻有趣的，所以就這樣吧
+                        // // 因此在此作修正
                         if (this.cannonAngle < 10 || this.cannonAngle > -10) {
-                            if (otherObj.speed < 0) {
-                                // if(this.edgeRight>=otherObj.edgeLeft && this.edgeRight<=otherObj.edgeRight){
+                            if (otherObj.speed < 0) { //砲彈會根據魚的向量決定要偏向哪邊
                                 this.angle += -35 * Math.PI / 180;
-                                this.xJump = false;
-                            } else if (otherObj.speed > 0) {
-                                // }else if(this.edgeLeft>=otherObj.edgeLeft && this.edgeLeft<=otherObj.edgeRight){
+                            } else if (otherObj.speed > 0) { //砲彈會根據魚的向量決定要偏向哪邊
                                 this.angle += 35 * Math.PI / 180;
-                                this.xJump = false;
                             }
-                        }
-                        // 如果角度為90或-90，會造成y方向沒有反彈效果的問題
-                        if (this.cannonAngle == 90 || this.cannonAngle == -90) {
-                            if (otherObj.speed < 0) {
-                                // if(this.edgeRight>=otherObj.edgeLeft && this.edgeRight<=otherObj.edgeRight){
+                        } else if (this.cannonAngle == 90 || this.cannonAngle == -90) {
+                            if (otherObj.speed < 0) { //砲彈會根據魚的向量決定要偏向哪邊
                                 this.angle += -35 * Math.PI / 180;
-                                this.yJump = false;
-                            } else if (otherObj.speed > 0) {
-                                // }else if(this.edgeLeft>=otherObj.edgeLeft && this.edgeLeft<=otherObj.edgeRight){
+                            } else if (otherObj.speed > 0) { //砲彈會根據魚的向量決定要偏向哪邊
                                 this.angle += 35 * Math.PI / 180;
-                                this.yJump = false;
                             }
                         }
 
 
-                        if (
-                            this.edgeLeft >= otherObj.edgeLeft && this.edgeLeft <= otherObj.edgeRight &&
-                            this.edgeBottom <= otherObj.edgeBottom && this.edgeBottom >= otherObj.edgeTop
-                        ) {
-                            if (
-                                (otherObj.edgeRight - this.edgeLeft) > (this.edgeBottom - otherObj.edgeTop) //如果重疊面積的長比高更大，判定為從上方碰撞
-                            ) {
-                                // 當砲彈的長或寬比魚的長或寬小的時候，避免觸發兩次彈跳檢定
-                                if (this.yJump) {
-                                    this.ySpeed = -this.ySpeed
-                                    this.yJump = false
-                                }
-                            } else if (
-                                (otherObj.edgeRight - this.edgeLeft) < (this.edgeBottom - otherObj.edgeTop) //如果重疊面積的長比高更小，判定為從右方碰撞
-                            ) {
-                                // 當砲彈的長或寬比魚的長或寬小的時候，避免觸發兩次彈跳檢定
-                                if (this.xJump) {
-                                    this.xSpeed = -this.xSpeed
-                                    this.xJump = false
-                                }
-                            } else { //其他情況，就是長與高相等，雖然機率很低
-                                // 當砲彈的長或寬比魚的長或寬小的時候，避免觸發兩次彈跳檢定
-                                if (this.xJump && this.yJump) {
-                                    this.ySpeed = -this.ySpeed
-                                    this.xSpeed = -this.xSpeed
-                                }
-                            }
-                            this.hp -= 1;
+                        // 先不考慮砲彈的碰撞盒子把魚的碰撞盒子整個包起來的狀況
+                        // 因為應該是不會發生這樣的狀況，真的發生了再修改
 
-                        }
-                        // 砲彈從魚的左上方過來
-                        if (
-                            this.edgeRight >= otherObj.edgeLeft && this.edgeRight <= otherObj.edgeRight &&
-                            this.edgeBottom <= otherObj.edgeBottom && this.edgeBottom >= otherObj.edgeTop
-                        ) {
-                            if (
-                                (this.edgeRight - otherObj.edgeLeft) > (this.edgeBottom - otherObj.edgeTop) //如果重疊面積的長比高更大，判定為從上方碰撞
-                            ) {
-                                if (this.yJump) {
-                                    this.ySpeed = -this.ySpeed
-                                    this.yJump = false
-                                }
-                            } else if (
-                                (this.edgeRight - otherObj.edgeLeft) < (this.edgeBottom - otherObj.edgeTop) //如果重疊面積的長比高更小，判定為從右方碰撞
-                            ) {
-                                if (this.xJump) {
-                                    this.xSpeed = -this.xSpeed
-                                    this.xJump = false
-                                }
-                            } else { //其他情況，就是長與高相等，雖然機率很低
-                                if (this.xJump && this.yJump) {
-                                    this.ySpeed = -this.ySpeed
-                                    this.xSpeed = -this.xSpeed
-                                }
+                        // 檢測一，砲彈碰撞盒子的角都沒有與魚碰撞盒子重疊，同時砲彈盒子的上緣或下緣與魚盒子重疊
+                        // 反應: y向量逆轉
+                        if (this.edgeLeft <= otherObj.edgeLeft &&
+                            this.edgeRight >= otherObj.edgeRight) {
+                            if (this.yJump == true) {
+                                this.ySpeed = -this.ySpeed
                             }
-                            this.hp -= 1;
-                        }
-                        //砲彈從魚的右下方過來
-                        if (
+                        } else if (
+                            // 檢測二，砲彈碰撞盒子的角都沒有與魚碰撞盒子重疊，同時砲彈盒子的左緣或右緣與魚盒子重疊
+                            // 反應: x向量逆轉
+                            this.edgeTop <= otherObj.edgeTop &&
+                            this.edgeBottom >= otherObj.edgeBottom) {
+                            if (this.xJump == true) {
+                                this.xSpeed = -this.xSpeed
+                            }
+                        } else if (
+                            // 狀況一:砲彈從魚的右下方過來 AKA 只有砲彈左上角與魚重疊
                             this.edgeLeft >= otherObj.edgeLeft && this.edgeLeft <= otherObj.edgeRight &&
                             this.edgeTop <= otherObj.edgeBottom && this.edgeTop >= otherObj.edgeTop
                         ) {
                             if (
                                 (otherObj.edgeRight - this.edgeLeft) > (otherObj.edgeBottom - this.edgeTop) //如果重疊面積的長比高更大，判定為從上方碰撞
                             ) {
-                                if (this.yJump) {
-                                    this.ySpeed = -this.ySpeed
-                                    this.yJump = false
-                                }
+                                this.ySpeed = -this.ySpeed;
                             } else if (
                                 (otherObj.edgeRight - this.edgeLeft) < (otherObj.edgeBottom - this.edgeTop) //如果重疊面積的長比高更小，判定為從右方碰撞
                             ) {
-                                if (this.xJump) {
-                                    this.xSpeed = -this.xSpeed
-                                    this.xJump = false
-                                }
-                            } else { //其他情況，就是長與高相等，雖然機率很低
-                                if (this.xJump && this.yJump) {
-                                    this.ySpeed = -this.ySpeed
-                                    this.xSpeed = -this.xSpeed
-                                }
+                                this.xSpeed = -this.xSpeed;
+                            } else { //其他情況，就是長與高相等，雖然機率很低                              
+                                this.ySpeed = -this.ySpeed;
+                                this.xSpeed = -this.xSpeed;
                             }
                             this.hp -= 1;
-                        }
-                        // 砲彈從左下方過來
-                        if (
+                        } else if (
+                            // 狀況二:砲彈從左下方過來 AKA 只有砲彈的右上角與魚重疊
                             this.edgeRight >= otherObj.edgeLeft && this.edgeRight <= otherObj.edgeRight &&
                             this.edgeTop <= otherObj.edgeBottom && this.edgeTop >= otherObj.edgeTop
                         ) {
                             if (
                                 (this.edgeRight - otherObj.edgeLeft) > (otherObj.edgeBottom - this.edgeTop) //如果重疊面積的長比高更大，判定為從上方碰撞
                             ) {
-                                if (this.yJump) {
-                                    this.ySpeed = -this.ySpeed
-                                    this.yJump = false
-                                }
+                                this.ySpeed = -this.ySpeed;
+
                             } else if (
                                 (this.edgeRight - otherObj.edgeLeft) < (otherObj.edgeBottom - this.edgeTop) //如果重疊面積的長比高更小，判定為從右方碰撞
                             ) {
-                                if (this.xJump) {
-                                    this.xSpeed = -this.xSpeed
-                                    this.xJump = false
-                                }
+                                this.xSpeed = -this.xSpeed
+
+                            } else { //其他情況，就是長與高相等，雖然機率很低                              
+                                this.ySpeed = -this.ySpeed
+                                this.xSpeed = -this.xSpeed
+                            }
+                            this.hp -= 1;
+                        } else if (
+                            // 狀況三:砲彈從魚的左上方過來 AKA 只有砲彈右下角與魚重疊
+
+                            this.edgeRight >= otherObj.edgeLeft && this.edgeRight <= otherObj.edgeRight &&
+                            this.edgeBottom <= otherObj.edgeBottom && this.edgeBottom >= otherObj.edgeTop
+                        ) {
+                            if (
+                                (this.edgeRight - otherObj.edgeLeft) > (this.edgeBottom - otherObj.edgeTop) //如果重疊面積的長比高更大，判定為從上方碰撞
+                            ) {
+                                this.ySpeed = -this.ySpeed
+                            } else if (
+                                (this.edgeRight - otherObj.edgeLeft) < (this.edgeBottom - otherObj.edgeTop) //如果重疊面積的長比高更小，判定為從右方碰撞
+                            ) {
+                                this.xSpeed = -this.xSpeed
+
+                            } else { //其他情況，就是長與高相等，雖然機率很低                              
+                                this.ySpeed = -this.ySpeed
+                                this.xSpeed = -this.xSpeed
+                            }
+                            this.hp -= 1;
+                        } else if (
+                            // 狀況四:砲彈從魚的右上方過來 AKA 只有砲彈的左下角與魚重疊
+                            this.edgeLeft >= otherObj.edgeLeft && this.edgeLeft <= otherObj.edgeRight &&
+                            this.edgeBottom <= otherObj.edgeBottom && this.edgeBottom >= otherObj.edgeTop
+                        ) {
+                            if (
+                                (otherObj.edgeRight - this.edgeLeft) > (this.edgeBottom - otherObj.edgeTop) //如果重疊面積的長比高更大，判定為從上方碰撞
+                            ) {
+                                // 當砲彈的長或寬比魚的長或寬小的時候，避免觸發兩次彈跳檢定                              
+                                this.ySpeed = -this.ySpeed;
+                            } else if (
+                                (otherObj.edgeRight - this.edgeLeft) < (this.edgeBottom - otherObj.edgeTop) //如果重疊面積的長比高更小，判定為從右方碰撞
+                            ) {
+                                // 當砲彈的長或寬比魚的長或寬小的時候，避免觸發兩次彈跳檢定                               
+                                this.xSpeed = -this.xSpeed;
                             } else { //其他情況，就是長與高相等，雖然機率很低
-                                if (this.xJump && this.yJump) {
-                                    this.ySpeed = -this.ySpeed
-                                    this.xSpeed = -this.xSpeed
-                                }
+                                // 當砲彈的長或寬比魚的長或寬小的時候，避免觸發兩次彈跳檢定                              
+                                this.ySpeed = -this.ySpeed
+                                this.xSpeed = -this.xSpeed
                             }
                             this.hp -= 1;
                         }
@@ -600,13 +597,9 @@
                             // 砲彈hp<=0，意味著這次下注的歷程結束，要結算這次下注的結果
                             this.betResult();
                         }
-
-
-
-                    }
-
-                }// hitCheck
-            }
+                    } // 碰撞檢定else
+                } // hitCheck
+            } // Shell03
 
 
             class fishes {
@@ -834,12 +827,12 @@
                     this.text = tex; // 文字內容
 
                     this.fontFamily = 'Comic Sans MS' // 字型
-                    this.font =this.fontSize + " " + this.fontFamily;
+                    this.font = this.fontSize + " " + this.fontFamily;
 
-                    if(type=="textBtn"){
-                        this.textAlign="center";
-                    }else(this.textAlign="start")
-                    
+                    if (type == "textBtn") {
+                        this.textAlign = "center";
+                    } else (this.textAlign = "start")
+
 
 
                     // type num代表數字 btn代表按鈕
@@ -849,7 +842,7 @@
 
                         // 取得字串width之前必須先將字體大小與字型代進去才能得到正確的width
                         // ctx.font = this.fontSize + " " + this.fontFamily;
-                        this.font ="bolder" + " " +this.fontSize + " " + this.fontFamily
+                        this.font = "bolder" + " " + this.fontSize + " " + this.fontFamily
                         ctx.font = this.font;
                         this.width = ctx.measureText(tex).width;
                         // 要取得文字的高度相當麻煩，因為時間不充裕，我決定先用最簡單也最死板的方法
@@ -881,6 +874,11 @@
 
                 reNew() {
                     // 更新物件數據
+                    if(this.type == 'textBtn'){
+                        this.font = "bolder" + " " + this.fontSize + " " + this.fontFamily
+                    }else{
+                        this.font = this.fontSize + " " + this.fontFamily;
+                    }
 
                     // 更新物件數據
 
@@ -908,7 +906,7 @@
                     this.img = img;
                     this.text = text;
                     this.key = key;
-                    this.cost= cost;
+                    this.cost = cost;
 
                     this.color = "gray";
                     this.fontSize = "25px";
@@ -926,7 +924,7 @@
                     ctx.fillRect(this.width / -2, this.height / -2 + 70, this.width, 80)
 
                     if (this.type == "shellBtn") {
-                        ctx.drawImage(this.img, this.width / -2 + 25 , this.height / -2 + 10, 50, 50)
+                        ctx.drawImage(this.img, this.width / -2 + 25, this.height / -2 + 10, 50, 50)
                     }
 
 
@@ -936,8 +934,8 @@
                     ctx.textAlign = "center"
                     ctx.fillText(this.text, 0, 23)
                     ctx.fillText(`費用:${this.cost}`, -13, 53)
-                    ctx.fillText(this.key,40,-15)
-            
+                    ctx.fillText(this.key, 40, -15)
+
 
                     ctx.restore(); //回復canvas狀態
                 } // reNew
@@ -1035,7 +1033,7 @@
             let startBtn = new textObj("textBtn", canvas.width / 2, canvas.height / 2, "100px", "white", "START");
             startBtn.actived = true
             startBtn.reNew();
-  
+
             //查看下注紀錄按鈕
             let recoredBtn = new textObj("textBtn", 1800, 950, "50px", "black", "下注紀錄")
             let infoBtn = new textObj("textBtn", 1800, 1030, "50px", "black", "遊戲說明")
@@ -1103,7 +1101,7 @@
             let keyboardKeys = [] //鍵盤控制要用的陣列
 
             let shellCost = 1; //當前砲彈的費用，當錢包於和小於這個值的時候，無法發射
-            
+
 
             // 以上為function gameRuning需要的變數---------------------------------------------
 
@@ -1111,9 +1109,10 @@
             // 更新畫面
             // 更新畫面-------------------------------------------------------------------------------
             function gameRuning() {
+
                 clearArea();
                 ctxFrames += 1;
-          
+
                 infoBtn.reNew();
                 recoredBtn.reNew();
                 cannon1.reNew();
@@ -1121,7 +1120,7 @@
                 ammTitle.reNew();
                 memberIdText.reNew();
                 amm.reNew(); //彈藥量
-        
+
                 shell01Btn.reNew();
                 shell02Btn.reNew();
                 shell03Btn.reNew();
@@ -1130,7 +1129,6 @@
                 for (x of fishGeneratorArr) {
                     x.generator();
                 }
-
                 // 執行每顆砲彈的reNew            
                 for (x of shellsarr) {
                     x.reNew();
@@ -1140,7 +1138,6 @@
                 for (x of fisharr) {
                     x.reNew();
                 }
-
 
                 // 因為是經過判定才動作，因此要放在更新畫面區塊中
                 // 檢查持續控制判定
@@ -1164,12 +1161,12 @@
                             cannonSound.play();
                             shellsArrIndex++;
                             // 控制場上最多有多少砲彈
-                            if (shellsArrIndex > 30) shellsArrIndex = 0;
-                       
+                            if (shellsArrIndex > 50) shellsArrIndex = 0;
+
                         }
-                        if(ctxFrames >= cooldownOK && amm.text < shellCost){
+                        if (ctxFrames >= cooldownOK && amm.text < shellCost) {
                             ammNotEnough.reNew()
-                        
+
                         }
                     }// 生成並發射砲彈
                 }// 檢查持續控制判定
@@ -1177,7 +1174,7 @@
                 startBtn.startID = requestAnimationFrame(gameRuning)
             } // gameRuning
 
-      
+
 
             // 鍵盤控制 事件
 
@@ -1258,10 +1255,40 @@
                 if (startBtn.actived) {
                     gameStart();
                 }
-           
                 seeRecord();
                 seeInfo();
             });
+
+            canvas.addEventListener('mousemove', function (e) {
+                // 滑鼠在該元素上的座標，若canvas經過css改變大小
+                // 這個座標與canvas的座標就會有誤差
+                let mx = e.offsetX
+                let my = e.offsetY
+
+                //canvas顯示在螢幕上的width與height，並轉型為浮點數，因為大小不一定是整數
+                let cw = parseFloat(getComputedStyle(canvas).getPropertyValue('width'))
+                let ch = parseFloat(getComputedStyle(canvas).getPropertyValue('height'))
+
+                // canvas的原始width與height，也代表著 像素 與 座標
+                let pw = canvas.width;
+                let ph = canvas.height;
+
+                // 前面兩者的比值
+                let xPercent = pw / cw;
+                let yPercent = ph / ch;
+
+                // 將滑鼠座標乘上比值，就可以得到canvas座標
+                cx = mx * xPercent;
+                cy = my * yPercent;
+
+                console.log("object");
+
+                seeRecordHover();
+                seeInfoHover();
+
+
+            });
+
 
             // mousedown 事件用的函式----------------
             function gameStart() { //遊戲開始
@@ -1278,9 +1305,9 @@
                 }
             }
 
-        
 
-            function seeRecord() { //遊戲暫停
+
+            function seeRecord() { // 看遊戲紀錄
                 if (
                     (cx > recoredBtn.edgeRight) ||
                     (cx < recoredBtn.edgeLeft) ||
@@ -1292,7 +1319,7 @@
                     window.open('./fishRecord.html')
                 }
             }
-            function seeInfo() { //遊戲暫停
+            function seeInfo() { // 看遊戲介紹
                 if (
                     (cx > infoBtn.edgeRight) ||
                     (cx < infoBtn.edgeLeft) ||
@@ -1307,8 +1334,40 @@
 
             // 上面是mousedown 事件用的函式----------------------
 
+
+            // mousemove 事件用的函式----------------------
+
+            function seeRecordHover() { // 看遊戲紀錄
+                if (
+                    (cx > recoredBtn.edgeRight) ||
+                    (cx < recoredBtn.edgeLeft) ||
+                    (cy > recoredBtn.edgeBottom) ||
+                    (cy < recoredBtn.edgeTop)
+                ) {
+                    recoredBtn.fontSize = "50px"
+                    return
+                } else {
+                    recoredBtn.fontSize = "60px"
+                }
+            }
+
+            function seeInfoHover() { // 看遊戲介紹
+                if (
+                    (cx > infoBtn.edgeRight) ||
+                    (cx < infoBtn.edgeLeft) ||
+                    (cy > infoBtn.edgeBottom) ||
+                    (cy < infoBtn.edgeTop)
+                ) {
+                    infoBtn.fontSize = "50px"
+                    return
+                } else {
+                    infoBtn.fontSize = "60px"
+                }
+            }
+            // 上面mousemove 事件用的函式----------------------
+
             $(window).on({ //離開視窗時暫停
-                "blur": function () {                 
+                "blur": function () {
                     window.cancelAnimationFrame(startBtn.startID)
                     startBtn.actived = true
                     startBtn.reNew();

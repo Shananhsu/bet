@@ -237,6 +237,8 @@ ul {
 
 #sf-membercenter-point-getbalance-00002 .badge {
     background-color: #ababab !important;
+    margin-top: 7px;
+    font-size: 20px;
 }
 
 #sf-membercenter-querybetlog-00002 thead,
@@ -502,15 +504,15 @@ label {
 #sf-marquee-00001 {
     float: left;
     width: 89%;
-    padding-left: 150px;
-    height: 40px;
-    background: url(/images/logo/announcement.png) no-repeat;
+    padding-left: 50px;
+    height: 50px;
+    background: url(../images/logo/logo.png) no-repeat;
     background-size: contain;
 }
 
 .marquee {
-    height: 40px;
-    line-height: 40px;
+    height: 50px;
+    line-height: 50px;
     color: #666;
 }
 
@@ -1901,6 +1903,7 @@ background-color: #000;
 font-size: 2rem;
 transition: 0.5s;
 /* 阿川加的 */
+margin: 1.5rem;
 }
 
 #sf-lobby-00001 .game>img {
@@ -2006,4 +2009,5 @@ height: 80%;
 .tab_left{
     background-image: url(../images/playground/tab_left.png);
 }
-#sf-lobby-00001 .game{margin: 1.5rem;}
+
+

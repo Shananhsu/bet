@@ -2,26 +2,35 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta charset="UTF-8"> -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script>
+        // console.log(document.cookie)
+        axios.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8';
+        axios.defaults.crossDomain = true;
+        axios.defaults.withCredentials = true;  //设置cross跨域 并设置访问权限 允许跨域携带cookie信息
+        axios.defaults.headers.common['Authorization'] = ''; // 设置请求头为 Authorization
+
+
+    </script>
     <style>
-         :root {
+        :root {
             --player: #3782be;
             --banker: #bb3d20;
             --tie: #47a344;
-            --borders: rgba(255, 255, 255, 0.3);
             --yellow: #bdb03e;
             --dark: rgba(0, 0, 0, 0.33);
             --background-color: #414241;
         }
-        
+
         body {
             margin: 0;
         }
-        
+
         .container {
             background-color: var(--background-color);
             height: 100vh;
@@ -31,7 +40,7 @@
             grid-template-columns: [line1] 0.28fr[line2] 0.5fr [line3] 0.28fr;
             grid-template-rows: [row1] 0.6fr [row2] 0.4fr;
         }
-        
+
         .screen1 {
             grid-column-start: line1;
             grid-column-end: line2;
@@ -39,29 +48,74 @@
             grid-row-end: row2;
             background-color: var(--background-color);
             border: 2px solid black;
+            text-align: center;
+            align-items: center;
+            display: inline-block;
+            background-image: url("./img/table.jpeg");
         }
-        
+
+        .screen1 div {
+            line-height: 100px;
+        }
+
+        .startGame:hover {
+            opacity: 0.8;
+        }
+
+        .startGame {
+            margin-top: 100px;
+            height: 80px;
+            width: 150px;
+            font-size: 32px;
+            font-weight: bold;
+            border-radius: 25px;
+            text-align: center;
+            background-color: black;
+            color: white;
+            border: 1px solid white;
+
+        }
+
+        .betlist {
+            margin-top: 50px;
+            height: 80px;
+            width: 150px;
+            font-size: 32px;
+            font-weight: bold;
+            border-radius: 25px;
+            text-align: center;
+            background-color: black;
+            color: white;
+            border: 1px solid white;
+        }
+
+        .betlist:hover {
+            opacity: 0.8;
+        }
+
         .screen2 {
             grid-column-start: line2;
             grid-column-end: line3;
             grid-row-start: row1;
             grid-row-end: row2;
             background-color: var(--background-color);
+            background-image: url("./img/table.jpeg");
         }
-        
+
         .screen2 {
             display: grid;
             grid-template-columns: [screen2Line1] 0.25fr [screen2Line2] 0.25fr [screen2Line3] 0.25fr [screen2Line4] 0.25fr;
             grid-template-rows: [screen2row1] 0.2fr [screen2row2] 0.5fr [screen2row3] 0.4fr;
             border: 2px solid black;
         }
+
         /* .screen2 .pointHead {
             grid-column-start: line4;
             grid-column-end: end;
             grid-row-start: row3;
             grid-row-end: row4;
         } */
-        
+
         .screen2 .bankerTitle {
             grid-column-start: screen2Line1;
             grid-column-end: screen2Line3;
@@ -74,7 +128,7 @@
             font-size: 35px;
             font-family: monospace;
         }
-        
+
         .screen2 .playerTitle {
             grid-column-start: screen2Line3;
             grid-column-end: end;
@@ -86,13 +140,13 @@
             font-size: 35px;
             font-family: monospace;
         }
-        
+
         .screen2 b {
             font-size: 50px;
             margin: -5px 40px;
             vertical-align: middle;
         }
-        
+
         .screen2 .putCard1 {
             grid-column-start: screen2Line1;
             grid-column-end: screen2Line2;
@@ -106,7 +160,7 @@
             border-radius: 0.75vw;
             justify-self: center;
         }
-        
+
         .screen2 .putCard2 {
             grid-column-start: screen2Line2;
             grid-column-end: screen2Line3;
@@ -120,7 +174,7 @@
             border-radius: 0.75vw;
             justify-self: center;
         }
-        
+
         .screen2 .putCard3 {
             grid-column-start: screen2Line1;
             grid-column-end: screen2Line3;
@@ -135,7 +189,7 @@
             justify-self: center;
             transform: rotate(90deg);
         }
-        
+
         .screen2 .putCard4 {
             grid-column-start: screen2Line3;
             grid-column-end: screen2Line4;
@@ -149,7 +203,7 @@
             border-radius: 0.75vw;
             justify-self: center;
         }
-        
+
         .screen2 .putCard5 {
             grid-column-start: screen2Line4;
             grid-column-end: end;
@@ -163,7 +217,7 @@
             border-radius: 0.75vw;
             justify-self: center;
         }
-        
+
         .screen2 .putCard6 {
             grid-column-start: screen2Line3;
             grid-column-end: end;
@@ -178,8 +232,9 @@
             justify-self: center;
             transform: rotate(90deg);
         }
+
         /* 卡片 */
-        
+
         [class^="cardsPlace"] {
             position: absolute;
             height: 100%;
@@ -187,7 +242,7 @@
             transform-style: preserve-3d;
             opacity: 0;
         }
-        
+
         .Front {
             position: absolute;
             background-size: 100%;
@@ -197,15 +252,16 @@
             /* -webkit-backface-visibility: hidden; */
             transform: rotateY(180deg);
         }
-        
+
         .Back {
             background-image: url("./cards/1B.svg");
             background-size: 100%;
             height: 100%;
             width: 100%;
         }
+
         /* 發牌 */
-        
+
         .cardIn {
             --fade: 750ms;
             --flip: 1000ms;
@@ -213,22 +269,24 @@
             transform: rotateY(-180deg);
             opacity: 1;
         }
-        
+
         .screen3 {
             grid-column-start: line3;
             grid-column-end: end;
             grid-row-start: row1;
             grid-row-end: row2;
             background-color: var(--background-color);
+            background-image: url("./img/table.jpeg");
         }
-        
+
         .screen3 {
             display: grid;
             grid-template-columns: [screen3Line1] 0.25fr [screen3Line2] 0.25fr [screen3Line3] 0.25fr [screen3Line4] 0.25fr;
             grid-template-rows: [screen3row1] 0.1fr [screen3row2] 0.2fr [screen3row3] 0.70fr;
         }
+
         /* 記分板表頭 */
-        
+
         .screen3 .winnerBoard {
             display: grid;
             grid-column-start: screen3Line1;
@@ -241,15 +299,16 @@
             font-size: 32px;
             font-family: monospace;
         }
-        
+
         .screen3 .winnerBoard div {
             display: flex;
             align-items: center;
             justify-content: center;
             border: 2px solid black;
         }
+
         /* 記分板 */
-        
+
         .screen3 .stateBoard {
             display: grid;
             grid-column-start: screen3Line1;
@@ -263,15 +322,16 @@
             font-weight: bold;
             font-family: monospace;
         }
-        
+
         .screen3 .stateBoard div {
             display: flex;
             align-items: center;
             justify-content: center;
             border: 2px solid black;
         }
+
         /* 莊閒統計資料 */
-        
+
         .screen3 .Board {
             display: grid;
             grid-column-start: screen3Line1;
@@ -283,9 +343,10 @@
             grid-auto-flow: column;
             border: 2px solid rgb(0, 0, 0);
         }
+
         /* .screen3 .Board div {} */
         /* 統計莊閒圓圈 */
-        
+
         .dot {
             border-radius: 50%;
             width: 3vw;
@@ -295,13 +356,13 @@
             z-index: 1;
             border: 0.1vh solid rgba(0, 0, 0, 0.5);
         }
-        
+
         div .run {
             height: 100%;
             display: grid;
             grid-auto-flow: column;
         }
-        
+
         .playerWinner {
             display: flex;
             align-items: center;
@@ -309,7 +370,7 @@
             border: 2px solid rgb(7, 2, 77);
             background-color: var(--player);
         }
-        
+
         .bankerWinner {
             display: flex;
             align-items: center;
@@ -317,7 +378,7 @@
             border: 2px solid rgb(7, 2, 77);
             background-color: var(--banker);
         }
-        
+
         .tieWinner {
             display: flex;
             align-items: center;
@@ -325,8 +386,9 @@
             border: 2px solid rgb(7, 2, 77);
             background-color: var(--tie);
         }
+
         /* 桌面點數 */
-        
+
         .baccaratTable {
             grid-column-start: line1;
             grid-column-end: end;
@@ -338,7 +400,7 @@
             min-height: 20vh;
             text-align: center;
         }
-        
+
         table,
         tr,
         td {
@@ -354,13 +416,15 @@
             color: white;
             font-family: Microsoft JhengHei;
         }
-        
+
         table {
+            margin-top: 0px;
             width: 70%;
             height: 80%;
         }
+
         /* 籌碼欄位 */
-        
+
         .diceGameBar {
             width: 600px;
             height: 60px;
@@ -377,14 +441,14 @@
             margin: auto;
             border-radius: 5px;
         }
-        
+
         .diceGameBar .betBar {
             height: 63px;
             line-height: 63px;
             /* position: relative; */
             display: inline-block;
         }
-        
+
         .diceGameInfo {
             height: 63px;
             line-height: 63px;
@@ -393,12 +457,12 @@
             position: absolute;
             left: 20px;
         }
-        
+
         .diceGameInfo .userName {
             display: inline-block;
             position: relative;
         }
-        
+
         .diceGameInfo .userName .name {
             font-size: 18px;
             left: 2px;
@@ -417,7 +481,7 @@
             border-bottom-left-radius: 10px;
             border-bottom-right-radius: 10px;
         }
-        
+
         .diceGameInfo .userName .nameLogo {
             height: 42px;
             width: 42px;
@@ -432,12 +496,12 @@
             bottom: 0;
             margin: auto;
         }
-        
+
         .balance {
             position: relative;
             display: inline-block;
         }
-        
+
         .balanceLogo {
             position: absolute;
             bottom: 0;
@@ -451,7 +515,7 @@
             background-size: 22px;
             z-index: 1;
         }
-        
+
         .balanceDetail {
             bottom: 0;
             top: 0;
@@ -470,30 +534,30 @@
             border-bottom-left-radius: 10px;
             border-bottom-right-radius: 10px;
         }
-        
+
         .balanceDetail .balanceLabel,
         .betMoneyDetail .betMoneyLabel {
             font-size: 18px;
         }
-        
+
         .betMoney {
             position: relative;
             display: inline-block;
         }
-        
+
         .diceGameBar .betBar {
             height: 63px;
             line-height: 63px;
             /* position: relative; */
             display: inline-block;
         }
-        
+
         .betBar>.button {
             position: absolute;
             text-align: center;
             font-weight: 500;
         }
-        
+
         .betBar>.button.cancelButton {
             margin: auto;
             left: 200px;
@@ -511,7 +575,7 @@
             border: solid 1px #e0e0e0;
             cursor: pointer;
         }
-        
+
         .betMoneyLogo {
             position: absolute;
             bottom: 0;
@@ -526,7 +590,7 @@
             background-size: 30px 28px;
             z-index: 1;
         }
-        
+
         .betMoneyDetail {
             bottom: 0;
             top: 0;
@@ -544,14 +608,15 @@
             border-bottom-left-radius: 10px;
             border-bottom-right-radius: 10px;
         }
-        
+
         .balanceDetail .balanceAmount,
         .betMoney .betMoneyAmount {
             color: #ffffff;
             font-size: 18px;
         }
+
         /* tempchips */
-        
+
         .TempChips1 {
             width: 46px;
             height: 42px;
@@ -564,7 +629,7 @@
             background-position: 0 0px;
             pointer-events: none
         }
-        
+
         .TempChips5 {
             width: 46px;
             height: 42px;
@@ -577,7 +642,7 @@
             background-position: -60px 0px;
             pointer-events: none
         }
-        
+
         .TempChips10 {
             width: 46px;
             height: 42px;
@@ -590,7 +655,7 @@
             background-position: -118px 0px;
             pointer-events: none
         }
-        
+
         .TempChips20 {
             width: 46px;
             height: 42px;
@@ -603,7 +668,7 @@
             background-position: -179px 0px;
             pointer-events: none
         }
-        
+
         .TempChips50 {
             width: 46px;
             height: 42px;
@@ -616,7 +681,7 @@
             background-position: -238px 0px;
             pointer-events: none;
         }
-        
+
         .TempChips100 {
             width: 46px;
             height: 42px;
@@ -629,7 +694,7 @@
             background-position: -297px 0px;
             pointer-events: none;
         }
-        
+
         .TempChips1000 {
             width: 46px;
             height: 42px;
@@ -642,7 +707,7 @@
             background-position: -356px 0px;
             pointer-events: none;
         }
-        
+
         .TempChips5000 {
             width: 46px;
             height: 42px;
@@ -655,8 +720,9 @@
             background-position: -416px 0px;
             pointer-events: none;
         }
+
         /* 我是籌碼 */
-        
+
         .chips {
             background-color: rgb(2, 0, 31);
             position: absolute;
@@ -672,7 +738,7 @@
             padding: 0 12px;
             border-radius: 10px;
         }
-        
+
         .chips .chip {
             display: inline-block;
             width: 46px;
@@ -686,90 +752,92 @@
             top: -10px;
             position: relative;
         }
-        
+
         .chips .chip.chip1 {
             background-position: 0 -52px;
         }
+
         /* 滑鼠經過的時候位置 */
-        
+
         .chips .chip.chip1.on,
         .chips .chip.chip1:hover {
             background-position: 0 0px;
             top: -21px;
         }
-        
+
         .chips .chip.chip5 {
             background-position: -60px -52px;
         }
-        
+
         .chips .chip.chip5.on,
         .chips .chip.chip5:hover {
             top: -21px;
             background-position: -60px 0px;
         }
-        
+
         .chips .chip.chip10 {
             background-position: -120px -52px;
         }
-        
+
         .chips .chip.chip10.on,
         .chips .chip.chip10:hover {
             top: -21px;
             background-position: -118px 0px;
         }
-        
+
         .chips .chip.chip20 {
             background-position: -179px -52px;
         }
-        
+
         .chips .chip.chip20.on,
         .chips .chip.chip20:hover {
             top: -21px;
             background-position: -179px 0px;
         }
-        
+
         .chips .chip.chip50 {
             background-position: -238px -52px;
         }
-        
+
         .chips .chip.chip50.on,
         .chips .chip.chip50:hover {
             top: -21px;
             background-position: -238px -0px;
         }
-        
+
         .chips .chip.chip100 {
             background-position: -297px -52px;
         }
-        
+
         .chips .chip.chip100.on,
         .chips .chip.chip100:hover {
             top: -21px;
             background-position: -297px 0px;
         }
-        
+
         .chips .chip.chip1000 {
             background-position: -358px -52px;
         }
-        
+
         .chips .chip.chip1000.on,
         .chips .chip.chip1000:hover {
             top: -21px;
             background-position: -356px 0px;
         }
-        
+
         .chips .chip.chip5000 {
             background-position: -417px -52px;
         }
-        
+
         .chips .chip.chip5000.on,
         .chips .chip.chip5000:hover {
             top: -21px;
             background-position: -416px 0px;
         }
+
         /* 籌碼結束 */
         /* 中獎格子 */
-        
+
         .tableShine {
             border: 1px solid #d00;
             background: #ffe9e8;
@@ -782,8 +850,11 @@
 <body>
     <div class="container">
         <div class="screen1">
-            <button class="test" onclick="gamestart()">test</button>
+            <button class="startGame" onclick="gamestart()">Start</button>
+            <br>
+            <button class="betlist" onclick="location.href='./baccarat_backend.html'">遊戲紀錄</button>
         </div>
+
         <div class="screen2">
             <div class="bankerTitle">
                 BANKER
@@ -882,7 +953,7 @@
                     <div class="balanceLogo"></div>
                     <div class="balanceDetail">
                         <span class="balanceLabel">餘額：</span>
-                        <span class="balanceAmount" id='balanceAmount'>6000元</span>
+                        <span class="balanceAmount" id='balanceAmount'>元</span>
                     </div>
                 </div>
                 <div class="betMoney">
@@ -894,7 +965,7 @@
                 </div>
                 <div class="userName">
                     <div class="nameLogo"></div>
-                    <div class="name">StupidClown</div>
+                    <div class="name">會員 :<span id="userNameDisplay"></span></div>
                 </div>
             </div>
             <!-- <div class="betBar clearfix">
@@ -919,6 +990,10 @@
 
 
     <script>
+        var totalBet = [];
+        var totalwin = 0;
+        var baccarat_balance = 0;
+        var userName = '';
         var cardColor = ['s', 'h', 'd', 'c']
         var cardValue = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
         var cardFace = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
@@ -931,6 +1006,40 @@
         var allCards = [playerCard1, playerCard2, bankerCard1, bankerCard2, playerCard3, bankerCard3];
         var delaytime = 200
         var board = document.querySelector('.Board');
+
+
+        function betcount() {
+            console.log($("[rel=BetChip]").val())
+
+        }
+
+
+        /////////先登入////////////
+        axios.get("http://localhost:3001/login").then((response) => {
+            // console.log("///////axio/////////")
+            // console.log(response)
+            if (response.data.loggedIn == true) {
+                userName = (response.data.user[0].account);
+                document.getElementById("userNameDisplay").innerText = userName
+                axios.post("http://localhost:3001/api/getBalance",
+                    { "account": userName, }
+                ).then((res) => {
+
+                    console.log(res)
+                    if (res.data.message === undefined) {
+                        // console.log(props)
+                        baccarat_balance = res.data[0].baccarat_balance;
+                        document.getElementById("balanceAmount").innerText = baccarat_balance
+                    }
+                })
+            }
+            else {
+                alert(" 請登入後再進行遊戲。");
+                window.location.href = 'http://localhost:3000/';
+            }
+        });
+
+
 
 
         function cardBoxCreate() {
@@ -984,7 +1093,7 @@
             var countBPT = 0;
             var countOddEven = 0;
             var countBigSmall = 0;
-            var totalwin = 0;
+
             var countBack = 0;
             start3 = new Date().getTime();
             console.log(start3);
@@ -1044,7 +1153,9 @@
             $('[class^="TempChips"]').remove();
             document.getElementById('betMoneyAmount').innerText = 0;
             document.getElementById('balanceAmount').innerText =
-                parseFloat(document.getElementById('balanceAmount').innerText) + totalwin + "元";
+                parseFloat(document.getElementById('balanceAmount').innerText) + totalwin;
+            
+            return totalwin
         }
 
         function startGame(boots) {
@@ -1088,18 +1199,61 @@
         async function gamestart() {
             let start = new Date().getTime();
             console.log(start)
+
             document.getElementById('PlayerPoints').innerText = 0
             document.getElementById('BankerPoints').innerText = 0
             startGame(boots); //容器
             games(); //先JS點數
-            console.log(game)
+            // console.log(game)
             pairOrNot(); //是否pair
             putCards(); //放牌隱形
-            if (giveCards()) { //放牌顯示
-                GameCount(); //記分板紀錄
-                giveGameDot(); //莊閒DOT
-                countPayout();
+            if (await giveCards()) { //放牌顯示
+                await GameCount(); //記分板紀錄
+                await giveGameDot(); //莊閒DOT
+                totalwin = await countPayout();
+                console.log("////totalwin///////")
+                console.log(totalwin)
             }
+
+            if (totalBet.length) {
+                axios.post("http://localhost:3001/baccarat/playlist",
+                    {
+                        "account": document.getElementById('userNameDisplay').innerText,
+                        "totalwin": totalwin,
+                        "balance": document.getElementById("balanceAmount").innerText,
+                        "bet": JSON.stringify(totalBet),
+                        "playerHand1": JSON.stringify(game.playerHand[0]),
+                        "playerHand2": JSON.stringify(game.playerHand[1]),
+                        "playerHand3": JSON.stringify(game.playerHand[2] ? game.playerHand[2] : ""),
+                        'bankerHand1': JSON.stringify(game.bankerHand[0]),
+                        'bankerHand2': JSON.stringify(game.bankerHand[1]),
+                        'bankerHand3': JSON.stringify(game.bankerHand[2] ? game.bankerHand[2] : ""),
+                        'playerScore': game.playerScore,
+                        'bankerScore': game.bankerScore,
+                        'isPlayerPairs': game.isPlayerPairs,
+                        'isBankPairs': game.isBankPairs,
+                        'isBig': game.isBig,
+                        'winner': game.winner,
+                    })
+                    .then((e) => { console.log(e.data) })
+                    .catch((err) => { console.log(err) })
+
+                axios.post("http://localhost:3001/baccarat/moneyUpdate",
+                    {
+                        "account": document.getElementById('userNameDisplay').innerText,
+                        "balance": document.getElementById("balanceAmount").innerText,
+                    })
+                    .then((e) => { console.log(e.data) })
+                    .catch((err) => { console.log(err) })
+
+                // 紀錄完成清空籌碼
+                if (totalwin > 0 ) alert(`恭喜你贏得 : ${totalwin} 元`) 
+                totalBet = []
+            }
+        }
+
+        function betcount() {
+            console.log(totalBet)
         }
 
         function games() {
@@ -1112,7 +1266,7 @@
 
             scoreHands();
             twoCardsValueCalc()
-                // console.log(`twoCardsValueBanker:${game.twoCardsValueBanker}`)
+            // console.log(`twoCardsValueBanker:${game.twoCardsValueBanker}`)
             if (game.playerScore >= 8 || game.bankerScore >= 8) {
                 game.isNatural = true;
                 game.isBig = false;
@@ -1296,7 +1450,7 @@
         // 選用籌碼
         // priceNum = "";
         priceNum = 0;
-        $('.chip').click(function() {
+        $('.chip').click(function () {
             // 把點到的增加)class on ,點其他的會把其他的class on 取消
             $(this).addClass('on').siblings('.chip').removeClass('on');
             priceNum = $(this).attr('value');
@@ -1335,6 +1489,8 @@
                 "top": element.offset().top + element[0].offsetHeight / 2 - (50 * Math.random()),
             });
             $('body').append(TempChips);
+
+
         }
 
         // 把籌碼總額算出來
@@ -1353,7 +1509,7 @@
             var allPrice = [];
             var wincount = 0;
 
-            $('[class^="TempChips"]').each(function(index, element) {
+            $('[class^="TempChips"]').each(function (index, element) {
                 if ($(element).attr('price')) {
                     allValues.push($(element).attr('code'));
                     allOdds.push($(element).attr('odds'));
@@ -1380,7 +1536,7 @@
             var allPrice = [];
             var wincount = 0;
 
-            $('[class^="TempChips"]').each(function(index, element) {
+            $('[class^="TempChips"]').each(function (index, element) {
                 if ($(element).attr('price')) {
                     allValues.push($(element).attr('code'));
                     allOdds.push($(element).attr('odds'));
@@ -1399,13 +1555,16 @@
         }
 
         //點TABLE
-        $(".gameSelect").click(function() {
+        $(".gameSelect").click(function () {
             let method = $(this).attr('method');
             let odds = $(this).attr('odds');
             let value = $(this).attr('value');
             var totalBalance = document.getElementById('balanceAmount').innerText;
             var totalBetmoney = document.getElementById('betMoneyAmount').innerText;
-
+            ///投注紀錄///
+            if (priceNum > 0) {
+                totalBet.push({ priceNum, odds, value })
+            }
             if ((parseInt(totalBalance) - priceNum) > 0) {
                 // 超過餘額不給下注
                 // 計算點了幾次         
@@ -1429,7 +1588,7 @@
                     times = times || 2;
                 // console.log(t)
                 // if (t) return;
-                t = setInterval(function() {
+                t = setInterval(function () {
                     i++;
                     // 為了閃爍要一次有一次沒有,非0則true別忘了
                     c = i % 2 ? o + cls : o;

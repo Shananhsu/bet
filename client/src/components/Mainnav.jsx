@@ -3,21 +3,26 @@ import $ from 'jquery';
 
 class Mainnav extends Component {
 
-    handleHover = (e) => {
-        $(document).ready(function(e) {
-            $(document).delegate('.navigation li, .nav-down-menu', 'touchstart click mouseenter', function(e) {
-                var n = $(this).index() + 1;
-                $('.nav-down-menu:nth-child(' + n + ')').stop().animate({
-                    height: 267
-                }, 300);
-            });
+    // handleHover = (e) => {
+    //     $(document).ready(function(e) {
+    //         $(document).delegate('.navigation li, .nav-down-menu', 'touchstart click mouseenter', function(e) {
+    //             var n = $(this).index() + 1;
+    //             $('.nav-down-menu:nth-child(' + n + ')').stop().animate({
+    //                 height: 267
+    //             }, 300);
+    //         });
 
-            $('.navigation li, .nav-down-menu').on('touchstart click mouseleave', function() {
-                $('.nav-down-menu').stop().animate({
-                    height: 0
-                }, 300);
-            });
-        });
+    //         $('.navigation li, .nav-down-menu').on('touchstart click mouseleave', function() {
+    //             $('.nav-down-menu').stop().animate({
+    //                 height: 0
+    //             }, 300);
+    //         });
+    //     });
+    // }
+    css = {
+        color: "#4176f8",
+        // marginTop:"5px",
+        fontSize:"1.3rem"
     }
 
 
@@ -26,32 +31,40 @@ class Mainnav extends Component {
             <React.Fragment>
                 <div className="auto_left">
                     <div className="navBox navigation collapse navbar-collapse">
-                        <ul className="nav navStyle">
+                        {/* <ul className="nav navStyle"> className="nav"會導致顯示大小超過75%時 ul不顯示，因此刪掉*/}
+                        <ul className="navStyle">
+
                             <li>
-                                <a className="on" href="/">首頁</a>
+                                <a style={this.css} className="on btn" href="/">首頁</a>
+                                {/* <a style={this.css} className="on" href="/">首頁</a> */}
                             </li>
                             <li>
-                                <a className="game" href="/gamelink" onMouseEnter={this.handleHover} > 真人一館</a>
+                                {/* 因為跳出來的連結都用不到，所以我就把onMouseEnter拿掉了，這樣就不會顯示出來
+                                若要改回來，把下面這行刪掉，下下面那行註解和上上上面的handleHover取消就好了 by阿川*/}
+                                <a style={this.css} className="game btn" href="/gamelink" > 遊戲大廳</a>
+                                {/* <a className="game" href="/gamelink" onMouseEnter={this.handleHover} > 真人一館</a> */}
                             </li>
 
+                            {/* 
                             <li>
                                 <a className="game" href="/" onMouseEnter={this.handleHover} >體育賽事</a>
-                            </li>
+                            </li> */}
 
-                            <li>
-                                <a className="game" href="/bonus">優惠活動</a>
-                            </li>
-                            <li>
+                            {/* 這二個按鈕用不到，所以我註解掉了 by阿川 */}
+                            {/* <li>
+                                <a style={this.css} className="game btn" href="/bonus">優惠活動</a>
+                            </li> */}
+                            {/* <li>
                                 <a className="game linePicture" target="game" href="">
                                     <img src="images/logo/line.png" alt="imgErr"
                                         style={{ 'width': '30px', 'marginTop': '-3px' }}
                                     />
 
                                 </a>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
-                    <div className="navigation-down">
+                    {/* <div className="navigation-down">
                         <div></div>
                         <div className="nav-down-menu" style={{ 'height': '0px' }}>
                             <ul>
@@ -109,7 +122,9 @@ class Mainnav extends Component {
                                 </li>
                             </ul>
                         </div>
+               
                     </div>
+                */}
                 </div>
 
             </React.Fragment >
