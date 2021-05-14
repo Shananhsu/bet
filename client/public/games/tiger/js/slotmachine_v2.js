@@ -208,7 +208,7 @@ var slotMachine = function (el, options, track) {
                 })
                 setTimeout(function () { //清除canvas畫布
                     ctx.clearRect(0, 0, rwdW, rwdH);
-                    $("#btn").removeAttr("disabled");
+                   $("#btnStart").removeAttr("disabled");
                 }, fp*2)
 
             }, fp*2);

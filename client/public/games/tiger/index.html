@@ -54,8 +54,8 @@
                 <span id="jackpot">0</span>
             </div>
             <div id="buttonSA">
-                <img v-on:click="handleBet" id="btnStart" src="./img/1x/Start.png">
-                <img v-on:click="handleAuto" id="btnAuto" src="./img/1x/Auto.png">
+                <input type="image" v-on:click="handleBet" id="btnStart" src="./img/1x/Start.png">
+                <input type="image" v-on:click="handleAuto" id="btnAuto" src="./img/1x/Auto.png">
                 <img v-on:click="handleResult" id="imggetresult" src="./img/1x/gameresults.png" alt="">
             </div>
         </div>
@@ -91,18 +91,20 @@
                     StartGame();
                 },
                 handleAuto() {
+                    
                     runtime++;
                     fp = 250;
                     //if()
                     if (runtime == 1) {
-
+                        $('#btnAuto').attr("src","./img/1x/Stop.png")
                         console.log(1)
                         autogame = setInterval(function () {
+                            $('#btnStart').attr("disabled","disabled");
                             StartGame()
                         }, 3000);
 
                     } else {
-
+                        $('#btnAuto').attr("src","./img/1x/Auto.png")
                         console.log("stop")
                         clearInterval(autogame);
                         runtime = 0;
@@ -134,6 +136,7 @@
         $('#myCanvas').attr("width", rwdW);
         $('#myCanvas').attr("height", rwdH)
         var ctx = myCanvas.getContext("2d");
+        //加減下注金額
         $('#less').on('click', function () {
             var bet = parseFloat($("#bet").val());
             if (bet <= 1) {
@@ -178,7 +181,7 @@
         }
         //startGame
         StartGame = () => {
-
+            $("#btnStart").attr("disabled","disabled");
             slotR = [];
             var score = parseFloat($("#result").text()).toFixed(2);
             var bet = parseFloat($('#bet').val()) * 50;
@@ -190,14 +193,16 @@
             });
             //console.log(bet)
             if (score < bet) {
-                $("#btn").attr("disabled", true);
+               // $("#btnStart").attr("disabled", true);
+               $('#btnStart').attr("disabled","disabled");
                 alert("餘額不足!");
                 clearInterval(autogame);
             } else {
                 score -= bet;
+
                 $("#result").text(score.toFixed(2));
 
-                $("#btn").attr("disabled", true);
+                $("#btnStart").attr("disabled","disabled");
                 $('.slotwrapper ul').playSpin();
                 ingSound.play();
                 let userwallet = parseFloat($("#result").text());
