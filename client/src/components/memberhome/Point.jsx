@@ -55,7 +55,7 @@ const Point = (props) => {
         datasets: [
             {
                 label: '# of Votes',
-                data: [balance, sdd_balance, blackjack_balance, niuniu_balance, fish_balance,
+                data: [main_balance, sdd_balance, blackjack_balance, niuniu_balance, fish_balance,
                     tiger_balance, billiard_balance, baccarat_balance, dicegame_balance],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -88,7 +88,7 @@ const Point = (props) => {
         console.log(`turnin_balance : ${turnin_balance}`)
         console.log(data.money)
 
-        if (parseFloat(turnout_balance) > parseFloat(data.money)) {
+        if (parseFloat(turnout_balance) >= parseFloat(data.money)) {
             await Axios.post('http://localhost:3001/api/transform',
                 {
                     "turnout": turnout,
@@ -149,9 +149,9 @@ const Point = (props) => {
                         <li class="list-group-item col-sm-6">
                             <span class="badge">{baccarat_balance.toLocaleString()}</span>
                             百家樂</li>
-                        <li class="list-group-item col-sm-6">
+                        {/* <li class="list-group-item col-sm-6">
                             <span class="badge">{dicegame_balance.toLocaleString()}</span>
-                            骰子遊戲</li>
+                            骰子遊戲</li> */}
                         {setTotal_balance(main_balance + sdd_balance + blackjack_balance + niuniu_balance + fish_balance
                             + tiger_balance + billiard_balance + baccarat_balance + dicegame_balance)}
                     </ul>
@@ -169,7 +169,7 @@ const Point = (props) => {
                                     <option name="tiger_balance" value={tiger_balance}>老虎機</option>
                                     <option name="billiard_balance" value={billiard_balance}>撞球遊戲</option>
                                     <option name="baccarat_balance" value={baccarat_balance}>百家樂</option>
-                                    <option name="dicegame_balance" value={dicegame_balance}>骰子遊戲</option>
+                                    {/* <option name="dicegame_balance" value={dicegame_balance}>骰子遊戲</option> */}
                                 </select>
                             </div>
                         </div>
@@ -186,7 +186,7 @@ const Point = (props) => {
                                     <option name="tiger_balance" value={tiger_balance}>老虎機</option>
                                     <option name="billiard_balance" value={billiard_balance}>撞球遊戲</option>
                                     <option name="baccarat_balance" value={baccarat_balance}>百家樂</option>
-                                    <option name="dicegame_balance" value={dicegame_balance}>骰子遊戲</option>
+                                    {/* <option name="dicegame_balance" value={dicegame_balance}>骰子遊戲</option> */}
                                 </select>
                             </div>
                         </div>
