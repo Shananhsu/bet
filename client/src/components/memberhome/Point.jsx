@@ -169,6 +169,7 @@ const Point = (props) => {
                                     <option name="tiger_balance" value={tiger_balance}>老虎機</option>
                                     <option name="billiard_balance" value={billiard_balance}>撞球遊戲</option>
                                     <option name="baccarat_balance" value={baccarat_balance}>百家樂</option>
+                                    <option name="blackjack_balance" value={blackjack_balance}>21點</option>
                                     {/* <option name="dicegame_balance" value={dicegame_balance}>骰子遊戲</option> */}
                                 </select>
                             </div>
@@ -186,6 +187,7 @@ const Point = (props) => {
                                     <option name="tiger_balance" value={tiger_balance}>老虎機</option>
                                     <option name="billiard_balance" value={billiard_balance}>撞球遊戲</option>
                                     <option name="baccarat_balance" value={baccarat_balance}>百家樂</option>
+                                    <option name="blackjack_balance" value={blackjack_balance}>21點</option>
                                     {/* <option name="dicegame_balance" value={dicegame_balance}>骰子遊戲</option> */}
                                 </select>
                             </div>
