@@ -6,21 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>捕魚機下注明細</title>
-<!-- jQuery -->
+    <!-- jQuery -->
     <script src="./frame/jQuery/jquery-3.4.1.js"></script>
-<!-- React -->
+    <!-- React -->
     <script crossorigin src="./frame/react/react.development.js"></script>
     <script crossorigin src="./frame/react/react-dom.development.js"></script>
     <script src="./frame/react/babel.min.js"></script>
-<!-- Bootstrap -->
-    <link rel="stylesheet" href="./frame/bootstrap/bootstrap.min.css"
-        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <script src="./frame/bootstrap/bootstrap.min.js"
-        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
-        crossorigin="anonymous"></script>
-    <script src="./frame/bootstrap/bootstrap.bundle.min.js"
-        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
-        crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="./frame/bootstrap/bootstrap.min.css">
+    <script src="./frame/bootstrap/bootstrap.min.js"></script>
+    <script src="./frame/bootstrap/bootstrap.bundle.min.js"></script>
 
     <style>
         .pageBtn {
@@ -28,14 +23,15 @@
             background: transparent;
             border: none;
         }
-        .pageBtn:hover{
+
+        .pageBtn:hover {
             background-color: #ddd;
         }
 
         #currPageBtn {
             font-weight: bolder;
             font-size: 1.2rem;
-            color:dodgerblue;
+            color: dodgerblue;
         }
 
         .searchBar {
@@ -46,12 +42,14 @@
             border: none;
             margin-left: 10px;
         }
-    table{
-        width: fit-content !important;
-    }
-    .table-responsive{
-        overflow-x: scroll !important;
-    }
+
+        table {
+            width: fit-content !important;
+        }
+
+        .table-responsive {
+            overflow-x: scroll !important;
+        }
     </style>
 
 </head>
@@ -156,22 +154,50 @@
             render() {
                 this.tdArr = []
                 for (let i = 0; i < this.state.rows.length; i++) {
+
+                    // 下注時間
+                    // 將從資料庫取得的時間字串轉為Date物件
+                    // 這時系統會自動將時區轉為客戶端時區，從而且解決時區的問題
+                    var betTime = new Date(this.state.rows[i].betTime)
+                    // 宣告變數並賦值每個時間單位，以利後續做格式排版
+                    // padStart的作用是補前導零，但是只能作用於字串，所以要先用toString將時間數值轉為字串
+                    var betYear = betTime.getFullYear();
+                    var betMonth = (betTime.getMonth() + 1).toString().padStart(2, 0);
+                    var betDate = betTime.getDate().toString().padStart(2, 0);
+                    var betHour = betTime.getHours().toString().padStart(2, 0);
+                    var betMinute = betTime.getMinutes().toString().padStart(2, 0);
+                    var betSecond = betTime.getSeconds().toString().padStart(2, 0);
+                    // 整理好要輸出的格式就可以輸出了
+                    var betTimeStr = `${betYear}-${betMonth}-${betDate} ${betHour}:${betMinute}:${betSecond}`
+
+                    // 賭局結束時間
+                    var betOverTime = new Date(this.state.rows[i].betOverTime)
+                    var betOverYear = betOverTime.getFullYear();
+                    var betOverMonth = (betOverTime.getMonth() + 1).toString().padStart(2, 0);
+                    var betOverDate = betOverTime.getDate().toString().padStart(2, 0);
+                    var betOverHour = betOverTime.getHours().toString().padStart(2, 0);
+                    var betOverMinute = betOverTime.getMinutes().toString().padStart(2, 0);
+                    var betOverSecond = betOverTime.getSeconds().toString().padStart(2, 0);
+
+                    var betOverTimeStr = `${betOverYear}-${betOverMonth}-${betOverDate} ${betOverHour}:${betOverMinute}:${betOverSecond}`
+
+
                     this.tdArr.push(
                         <tr key={i}>
                             <td nowrap="nowrap" id="memberId">{this.state.rows[i].id}</td>
                             <td nowrap="nowrap" id="memberId">{this.state.rows[i].memberId}</td>
                             <td nowrap="nowrap" id="memberName"> {this.state.rows[i].account} </td>
-                            <td nowrap="nowrap" id="betBeginTime"> {this.state.rows[i].betTime}    </td>
-                            <td nowrap="nowrap" id="betType">  {this.state.rows[i].gameType}  </td>
-                            <td nowrap="nowrap" id="betType">  {this.state.rows[i].object}  </td>
-                            <td nowrap="nowrap" id="betMoney"> {this.state.rows[i].bets}  </td>
+                            <td nowrap="nowrap" id="betBeginTime"> {betTimeStr}</td>
+                            <td nowrap="nowrap" id="betType">{this.state.rows[i].gameType}</td>
+                            <td nowrap="nowrap" id="betType">{this.state.rows[i].object}</td>
+                            <td nowrap="nowrap" id="betMoney">{this.state.rows[i].bets} </td>
                             <td nowrap="nowrap" id="memberWalletBefore">{this.state.rows[i].moneyBefore}</td>
                             <td nowrap="nowrap" id="gameIncome">{this.state.rows[i].status}</td>
                             <td nowrap="nowrap" id="betResult">{this.state.rows[i].result}</td>
                             <td nowrap="nowrap" id="memberWallet">{this.state.rows[i].moneyAfter}</td>
                             <td nowrap="nowrap" id="fishHited">{this.state.rows[i].fishHited}</td>
                             <td nowrap="nowrap" id="fishKilled">{this.state.rows[i].fishKilled}</td>
-                            <td nowrap="nowrap" id="betOverTime">{this.state.rows[i].betOverTime}</td>
+                            <td nowrap="nowrap" id="betOverTime">{betOverTimeStr}</td>
                         </tr>
                     )
                 }
@@ -202,29 +228,30 @@
                 return (
                     <React.Fragment>
                         <div className="table-responsive">
-                        <table className="table table-striped">
-                            <thead id="tableHead">
-                                <tr>
-                                    <th nowrap="nowrap">注單編號</th>
-                                    <th nowrap="nowrap">會員編號</th>
-                                    <th nowrap="nowrap">會員帳號</th>
-                                    <th nowrap="nowrap">遊戲時間</th>
-                                    <th nowrap="nowrap">投注項目</th>
-                                    <th nowrap="nowrap">投注金額</th>
-                                    <th nowrap="nowrap">錢包餘額</th>
-                                    <th nowrap="nowrap">中獎資訊</th>
-                                    <th nowrap="nowrap">輸贏結果</th>
-                                    <th nowrap="nowrap">結算餘額</th>
-                                    <th nowrap="nowrap">命中的魚</th>
-                                    <th nowrap="nowrap">擊殺的魚</th>
-                                    <th nowrap="nowrap">賭局結束時間</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {this.tdArr}
-                            </tbody>
-                        </table>
-                    </div>
+                            <table className="table table-striped">
+                                <thead id="tableHead">
+                                    <tr>
+                                        <th nowrap="nowrap">注單編號</th>
+                                        <th nowrap="nowrap">會員編號</th>
+                                        <th nowrap="nowrap">會員帳號</th>
+                                        <th nowrap="nowrap">遊戲時間</th>
+                                        <th nowrap="nowrap">遊戲名稱</th>
+                                        <th nowrap="nowrap">投注項目</th>
+                                        <th nowrap="nowrap">投注金額</th>
+                                        <th nowrap="nowrap">錢包餘額</th>
+                                        <th nowrap="nowrap">中獎資訊</th>
+                                        <th nowrap="nowrap">輸贏結果</th>
+                                        <th nowrap="nowrap">結算餘額</th>
+                                        <th nowrap="nowrap">命中的魚</th>
+                                        <th nowrap="nowrap">擊殺的魚</th>
+                                        <th nowrap="nowrap">賭局結束時間</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {this.tdArr}
+                                </tbody>
+                            </table>
+                        </div>
 
                         <button className="pageBtn" onClick={() => { this.changePage(1) }}>1 &#10094;&#10094;</button>
                         <button className="pageBtn" onClick={() => { this.changePage(this.state.currPage - 1) }}>&#10096;</button>
