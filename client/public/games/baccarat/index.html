@@ -1565,7 +1565,7 @@
             if (priceNum > 0) {
                 totalBet.push({ priceNum, odds, value })
             }
-            if ((parseInt(totalBalance) - priceNum) > 0) {
+            if ((parseInt(totalBalance) - priceNum) >= 0) {
                 // 超過餘額不給下注
                 // 計算點了幾次         
                 //持有金額隨著減少
