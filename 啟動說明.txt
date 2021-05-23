@@ -1,0 +1,9 @@
+這個git裡不包含程式所需的套件
+啟動前請先個別在client與server執行npm install指令
+
+如果只是要看網站大致的模樣與遊戲的話，在client執行npm start就可以了
+
+如果要執行與資料庫相關的網頁，
+接著請在資料庫伺服器匯入games.sql(埠號:3306)以建立名為games的資料庫
+然後在server執行 node index.js 指令
+就可以進行註冊、登入、查看下注紀錄等動作
